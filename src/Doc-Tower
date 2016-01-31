@@ -1,0 +1,48 @@
+**Documentation***
+
+Attributes of Tower
+*****************************************
+*T1:*
+Buying Cost = 50
+RefundValue = 25
+Range = 2sq
+PowerOfBullet = 10 
+RateOfFire = 1 in 2 seconds
+Health = 100
+*****************************************
+*****************************************
+*T2:*
+Buying Cost = 100
+RefundValue = 50
+Range = 3sq
+PowerOfBullet = 15
+RateOfFire = 1 per second
+Health = 150
+*****************************************
+*****************************************
+*T3:*
+Buying Cost = 150
+RefundValue = 100
+Range = 4sq
+PowerOfBullet = 30
+RateOfFire = 2 in 1 second
+Health = 250
+*****************************************
+*****************************************
+*T4:*
+Buying Cost = 300
+RefundValue = 200
+Range = 6sq
+PowerOfBullet = 40
+RateOfFire = 3 in 1 second
+Health = 250
+*****************************************
+*****************************************
+*T5:*
+Buying Cost = 500
+RefundValue = 400
+Range = 8sq
+PowerOfBullet = 60
+RateOfFire = 5 in 1 second
+Health = 400
+*****************************************
