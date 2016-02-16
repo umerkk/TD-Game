@@ -46,9 +46,9 @@ public class GameController
 	}
 	
 	/**
-	 * Method to handle the button 
+	 * Method to handle the load map button 
 	 */
-	public void loadFileBtnHandlr()
+	public void loadMapBtnHandlr()
 	{
 		
 	}
@@ -76,4 +76,16 @@ public class GameController
 	{
 		
 	}
+	
+	/**
+	 * Method to handle the tower selection and display details of the tower in the tower description space.
+	 * The towers are as follows : lblTwr1, lblTwr2, lblTwr3.
+	 * 
+	 * @param lblName Name of the label holding the tower.
+	 */
+	public void setTowerDesc(String lblName)
+	{
+		// set the txtTwrDesc object here based on label names
+	}
+	
 }

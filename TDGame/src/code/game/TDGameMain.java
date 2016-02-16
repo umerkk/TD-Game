@@ -32,6 +32,8 @@ import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 /**
@@ -111,38 +113,38 @@ public class TDGameMain {
 		m_frame.getContentPane().add(jPnlHdr, BorderLayout.NORTH);
 		jPnlHdr.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel = new JLabel("Tower Defense Game");
-		lblNewLabel.setFont(new Font("Arial Black", Font.BOLD, 34));
-		lblNewLabel.setForeground(Color.RED);
-		jPnlHdr.add(lblNewLabel, BorderLayout.WEST);
+		JLabel lblGameHdr = new JLabel("Tower Defense Game");
+		lblGameHdr.setFont(new Font("Arial Black", Font.BOLD, 34));
+		lblGameHdr.setForeground(Color.RED);
+		jPnlHdr.add(lblGameHdr, BorderLayout.WEST);
 		
 		JButton btnLoadMap = new JButton("Load Map");
 		btnLoadMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				m_ctrlrObj.loadFileBtnHandlr();
+				m_ctrlrObj.loadMapBtnHandlr();
 			}
 		});
 		jPnlHdr.add(btnLoadMap, BorderLayout.EAST);
 		
-		JPanel panel = new JPanel();
-		jPnlHdr.add(panel, BorderLayout.CENTER);
+		JPanel pnlHdrSub = new JPanel();
+		jPnlHdr.add(pnlHdrSub, BorderLayout.CENTER);
 		
 		JLabel lblAccLbl = new JLabel("\r\nAccount : $");
 		lblAccLbl.setFont(new Font("Arial", Font.PLAIN, 14));
-		panel.add(lblAccLbl);
+		pnlHdrSub.add(lblAccLbl);
 		lblAccLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblAccBal = new JLabel("0  ");
 		lblAccBal.setFont(new Font("Arial", Font.PLAIN, 14));
-		panel.add(lblAccBal);
+		pnlHdrSub.add(lblAccBal);
 		
 		JLabel lblGameLvlLbl = new JLabel("  Level :");
 		lblGameLvlLbl.setFont(new Font("Arial", Font.PLAIN, 14));
-		panel.add(lblGameLvlLbl);
+		pnlHdrSub.add(lblGameLvlLbl);
 		
 		JLabel lblGameLbl = new JLabel("1");
 		lblGameLbl.setFont(new Font("Arial", Font.PLAIN, 14));
-		panel.add(lblGameLbl);
+		pnlHdrSub.add(lblGameLbl);
 		
 		JPanel jPnlMain = new JPanel();
 		m_frame.getContentPane().add(jPnlMain, BorderLayout.CENTER);
@@ -159,73 +161,91 @@ public class TDGameMain {
 		});
 		jPnlFtr.add(btnStrtGame, BorderLayout.EAST);
 		
-		JLabel lblNewLabel_2 = new JLabel(" ");
-		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblNewLabel_2.setIcon(null);
-		jPnlFtr.add(lblNewLabel_2, BorderLayout.SOUTH);
+		JLabel lblArangFtr = new JLabel(" ");
+		lblArangFtr.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblArangFtr.setIcon(null);
+		jPnlFtr.add(lblArangFtr, BorderLayout.SOUTH);
 		
 		JPanel jPnlDesc = new JPanel();
 		m_frame.getContentPane().add(jPnlDesc, BorderLayout.EAST);
 		jPnlDesc.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Towers", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		jPnlDesc.add(panel_1, BorderLayout.NORTH);
+		JPanel pnlTwrTopLvl = new JPanel();
+		pnlTwrTopLvl.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Towers", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		jPnlDesc.add(pnlTwrTopLvl, BorderLayout.NORTH);
 		
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower3.png")));
+		JLabel lblTwr1 = new JLabel("");
+		lblTwr1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				m_ctrlrObj.setTowerDesc(lblTwr1.getName());
+			}
+		});
+		lblTwr1.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower3.png")));
 		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower4.png")));
-		panel_1.setLayout(new BorderLayout(0, 0));
-		panel_1.add(lblNewLabel_3, BorderLayout.WEST);
-		panel_1.add(lblNewLabel_4, BorderLayout.EAST);
+		JLabel lblTwr2 = new JLabel("");
+		lblTwr2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				m_ctrlrObj.setTowerDesc(lblTwr2.getName());
+			}
+		});
+		lblTwr2.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower4.png")));
+		pnlTwrTopLvl.setLayout(new BorderLayout(0, 0));
+		pnlTwrTopLvl.add(lblTwr1, BorderLayout.WEST);
+		pnlTwrTopLvl.add(lblTwr2, BorderLayout.EAST);
 		
-		JPanel panel_2 = new JPanel();
-		panel_1.add(panel_2, BorderLayout.SOUTH);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		JPanel pnlTwrSndLvl = new JPanel();
+		pnlTwrTopLvl.add(pnlTwrSndLvl, BorderLayout.SOUTH);
+		pnlTwrSndLvl.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_2.add(lblNewLabel_1, BorderLayout.WEST);
-		lblNewLabel_1.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower.png")));
+		JLabel lblTwr3 = new JLabel("");
+		lblTwr3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				m_ctrlrObj.setTowerDesc(lblTwr3.getName());
+			}
+		});
+		lblTwr3.setHorizontalAlignment(SwingConstants.LEFT);
+		pnlTwrSndLvl.add(lblTwr3, BorderLayout.WEST);
+		lblTwr3.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower.png")));
 		
-		JPanel panel_3 = new JPanel();
-		panel_3.setBorder(new TitledBorder(null, "Tower Description", TitledBorder.LEFT, TitledBorder.TOP, null, null));
-		jPnlDesc.add(panel_3, BorderLayout.CENTER);
-		panel_3.setLayout(new BorderLayout(0, 0));
+		JPanel pnlTwrDesc = new JPanel();
+		pnlTwrDesc.setBorder(new TitledBorder(null, "Tower Description", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		jPnlDesc.add(pnlTwrDesc, BorderLayout.CENTER);
+		pnlTwrDesc.setLayout(new BorderLayout(0, 0));
 		
-		JTextArea txtrAbcdefghijklDfbhkdfjhdll = new JTextArea();
-		panel_3.add(txtrAbcdefghijklDfbhkdfjhdll);
+		JTextArea txtTwrDesc = new JTextArea();
+		pnlTwrDesc.add(txtTwrDesc);
 		
-		JLabel lblNewLabel_6 = new JLabel("_____________");
-		lblNewLabel_6.setForeground(Color.WHITE);
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		panel_3.add(lblNewLabel_6, BorderLayout.SOUTH);
+		JLabel lblTwrSpcAdj = new JLabel("_____________");
+		lblTwrSpcAdj.setForeground(Color.WHITE);
+		lblTwrSpcAdj.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		pnlTwrDesc.add(lblTwrSpcAdj, BorderLayout.SOUTH);
 		
-		JPanel panel_4 = new JPanel();
-		jPnlDesc.add(panel_4, BorderLayout.SOUTH);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		JPanel pnlBtnColl = new JPanel();
+		jPnlDesc.add(pnlBtnColl, BorderLayout.SOUTH);
+		pnlBtnColl.setLayout(new BorderLayout(0, 0));
 		
-		JButton btnNewButton = new JButton("Sell");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnSellTwr = new JButton("Sell");
+		btnSellTwr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				m_ctrlrObj.selBtnHandlr();
 			}
 		});
-		panel_4.add(btnNewButton, BorderLayout.NORTH);
+		pnlBtnColl.add(btnSellTwr, BorderLayout.NORTH);
 		
-		JButton btnNewButton_1 = new JButton("Upgrade");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnUpgrdTwr = new JButton("Upgrade");
+		btnUpgrdTwr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				m_ctrlrObj.upgrdBtnHandlr();
 			}
 		});
-		panel_4.add(btnNewButton_1, BorderLayout.CENTER);
+		pnlBtnColl.add(btnUpgrdTwr, BorderLayout.CENTER);
 		
-		JLabel lblNewLabel_5 = new JLabel(" ");
-		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		panel_4.add(lblNewLabel_5, BorderLayout.SOUTH);
+		JLabel lblBtnCollSpcAdj = new JLabel(" ");
+		lblBtnCollSpcAdj.setFont(new Font("Tahoma", Font.PLAIN, 35));
+		pnlBtnColl.add(lblBtnCollSpcAdj, BorderLayout.SOUTH);
 	}
 
 }
