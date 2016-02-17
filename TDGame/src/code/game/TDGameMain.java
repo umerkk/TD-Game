@@ -23,6 +23,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
+
+import code.game.towers.TowerModel;
+
 import javax.swing.UIManager;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
@@ -62,10 +65,10 @@ public class TDGameMain implements Observer {
 	{
 		m_lblAccBal.setText(String.valueOf(((GameController)arg0).getAccountBalnc()));
 		m_txtTwrDesc.setText(null);
-		String towrdesc = ((GameController)arg0).getSelectdTwrDtls().toString();
+		TowerModel towrdesc = ((GameController)arg0).getSelectdTwr();
 		if(towrdesc == null)
 			return;
-		m_txtTwrDesc.append(towrdesc);
+		m_txtTwrDesc.append(towrdesc.getTowerDetails().toString());
 	}
 
 	
@@ -121,6 +124,11 @@ public class TDGameMain implements Observer {
 		catch(Exception ex){}
 	}
 	
+	private void selBtnHandlr()
+	{
+		// code to update ui
+		m_ctrlrObj.removeSelctdTower();
+	}
 	/**
 	 * Method to handle the load map button 
 	 */
@@ -263,7 +271,7 @@ public class TDGameMain implements Observer {
 		JButton btnSellTwr = new JButton("Sell");
 		btnSellTwr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				m_ctrlrObj.selBtnHandlr();
+				selBtnHandlr();
 			}
 		});
 		pnlBtnColl.add(btnSellTwr, BorderLayout.NORTH);

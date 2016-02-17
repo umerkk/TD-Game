@@ -11,9 +11,9 @@ public class TowerModel {
 
 	private String m_name;
 	private int m_currlevel;
-	private float m_costoftower;
-	private float m_upgradecost;
-	private float m_refundvalue;
+	private int m_costoftower;
+	private int m_upgradecost;
+	private int m_refundvalue;
 	private int m_rangeinblocks; //Range of the tower per blocks
 	private float m_powerofbullet; //Rate of Health to deduct from the target
 	private int m_rateoffire; // Interval between each fire
@@ -30,7 +30,7 @@ public class TowerModel {
 	 * @param powerofbullet Power of the bullets.
 	 * @param rateoffire Interval at which tower fires the bullet.
 	 */
-	public TowerModel(String name, float costoftower, float upgradecost, float refundvalue, 
+	public TowerModel(String name, int costoftower, int upgradecost, int refundvalue, 
 						int rangeinblocks, float powerofbullet, int rateoffire)
 	{
 		m_currlevel = 1;
@@ -89,15 +89,15 @@ public class TowerModel {
 	/**
 	 * Method returns the cost of buying the tower.
 	 */
-	public float getCostOfTower() { return m_costoftower; }
+	public int getCostOfTower() { return m_costoftower; }
 	/**
-	 * method returns the upgading cost of the tower.
+	 * method returns the upgrading cost of the tower.
 	 */
-	public float getUpgradeCost() { return m_upgradecost; }
+	public int getUpgradeCost() { return m_upgradecost; }
 	/**
 	 * method returns the refund amount while selling the tower.
 	 */
-	public float getRefundValue() { return m_refundvalue; }
+	public int getRefundValue() { return m_refundvalue; }
 	/**
 	 * method returns the range of the tower.
 	 */
