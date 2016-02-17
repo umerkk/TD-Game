@@ -3,11 +3,13 @@ package code.game;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+
+import javax.swing.JTextArea;
 
 import org.apache.commons.io.FileUtils;
 
-import code.game.towers.TowerModel;
-
+import code.game.towers.*;
 
 /**
  * This is the game controller class for handling all the user interactions with the User interface.
@@ -17,10 +19,35 @@ import code.game.towers.TowerModel;
  * @version 1.0.0.0
  * 
  */
-public class GameController 
+public class GameController extends Observable
 {
-	private int m_nooftowers;
-	private TowerModel[] m_towerobjs;
+	private List<CastleTower> m_castltwrobjarr;
+	private List<ImperialTower> m_imprltwrobjarr;
+	private List<IndustrialTower> m_indstrltwrobjarr;
+	private TowerModel m_selctdtower;
+	private int m_accbalanc;
+	
+	public StringBuilder getSelectdTwrDtls()
+	{ 
+		if(m_selctdtower == null)
+			return null;
+		else
+			return m_selctdtower.getTowerDetails(); 
+	}
+	
+	private void setSelectedTower(TowerModel value)
+	{
+		m_selctdtower = value;
+		setChanged();
+		notifyObservers(this);
+	}
+	public int getAccountBalnc(){ return m_accbalanc; }
+	private void setAccBalnc(int value)
+	{
+		m_accbalanc = value;
+		setChanged();
+		notifyObservers(this);
+	}
 	
 	/**
 	 * This file loads all the maps in the directory Map of the working class.
@@ -49,18 +76,16 @@ public class GameController
 		return mapFiles;
 	}
 	
-	public void initializeTowers()
+	public void initializeCntrolr(TDGameMain parntobj)
 	{
+		m_selctdtower = null;
+		setAccBalnc(120);
 		
+		m_castltwrobjarr = new ArrayList<CastleTower>();
+		m_imprltwrobjarr = new ArrayList<ImperialTower>();
+		m_indstrltwrobjarr = new ArrayList<IndustrialTower>();
 	}
 	
-	/**
-	 * Method to handle the load map button 
-	 */
-	public void loadMapBtnHandlr()
-	{
-		
-	}
 	
 	/**
 	 * Method to  handle the start game button click event.
@@ -94,7 +119,21 @@ public class GameController
 	 */
 	public void setTowerDesc(String lblName)
 	{
-		// set the txtTwrDesc object here based on label names
+		// set the selected tower
+		switch(lblName)
+		{
+			case "lblTwr1" : 
+				//m_selctdTower = 1;
+				break;
+			case "lblTwr2" :
+				//m_selctdTower = 2;
+				break;
+			case "lblTwr3" :
+				//m_selctdTower = 3;
+				break;
+		}
+		
+		
 	}
 	
 }
