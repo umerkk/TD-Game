@@ -21,7 +21,7 @@ public class GameController
 	/**
 	 * This file loads all the maps in the directory Map of the working class.
 	 *  
-	 *  @return A string list of maps.
+	 *  @return A string list of maps. 
 	 */
 	public List<String> readMapFiles()
 	{
@@ -54,7 +54,7 @@ public class GameController
 	}
 	
 	/**
-	 * Method to handle the start game button click event.
+	 * Method to  handle the start game button click event.
 	 */
 	public void strtGameBtnHandlr()
 	{
