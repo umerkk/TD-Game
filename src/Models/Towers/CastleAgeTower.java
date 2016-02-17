@@ -3,7 +3,7 @@ package Models.Towers;
 public class CastleAgeTower extends Tower 
 {
 
-	public void CastleAgeTower()
+	public CastleAgeTower()
 	{
 		
 		buyingCost = 100;
