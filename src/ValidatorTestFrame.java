@@ -35,6 +35,145 @@ public class ValidatorTestFrame extends JFrame {
 	}
 
 	/**
+	 * Deletes a path element from the map.
+	 * 
+	 * @param maparr the map array from which a path element has to be deleted.
+	 * @param pathnumbr the element to be deleted.
+	 */
+	private void deletePath(int[][] maparr, int pathnumbr)
+	{
+		for(int i = 0; i < maparr.length; i++)
+		{
+			for(int j = 0; j < maparr[0].length; j++)
+			{
+				if(pathnumbr < maparr[i][j])
+				{
+					maparr[i][j]--;
+				}
+				else if(pathnumbr == maparr[i][j])
+				{
+					maparr[i][j] = -1;
+				}
+			}
+		}
+	}
+	
+	private void createMap()
+	{
+		mapArray = new int[6][7];
+		for(int k=0;k<=mapArray.length-1;k++)
+		{
+			for(int i=0;i<mapArray[k].length-1;i++)
+			{
+				mapArray[k][i] =-1;
+			}
+			
+		}
+		lblStatus.setText("Array Created");
+	}
+
+	private void populateMap()
+	{
+		mapArray[1][2] = 0; //Entry
+		mapArray[1][3] = 1;
+		mapArray[1][4] = 2;
+		mapArray[1][5] = 3;
+		mapArray[2][5] = 4;
+		mapArray[3][5] = 5;
+		mapArray[3][4] = 6;
+		mapArray[3][3] = 7;
+		mapArray[3][2] = 8;
+		mapArray[3][1] = 9;
+		mapArray[4][1] = 10;
+		mapArray[5][1] = 11; //Exit Point
+		
+		lblStatus.setText("Map Populated with Dummy Data");
+	}
+	
+	private void validateMap()
+	{
+		//Map Validate Method
+		int startPointOneD=-1;
+		int startPointTwoD=-1;
+		int mapDataPoint = 0; // 0 for start and the n+1
+		int MapExtiPoint = 99;
+		int mapItemsCount = 0; //Minimum 3 to be a valid map.
+		
+		boolean validationLoop = true;
+		boolean isMapValid = false;
+		
+		String validationErrorMessage = "";
+		
+		int[][] mapArrayCopy = mapArray;
+		for(int k=0;k<=mapArrayCopy.length-1;k++)
+		{
+			for(int i=0;i<mapArrayCopy[k].length-1;i++)
+			{
+				//Do the magic
+				// what if there are 2 start points?
+				if(mapArrayCopy[k][i] == 0)
+				{
+					startPointOneD = k;
+					startPointTwoD = i;
+					mapItemsCount++;
+				}
+			}
+			
+		}
+		lblStatus.setText(String.valueOf(startPointOneD)+" - "+String.valueOf(startPointTwoD)); //Just for debugging
+		
+		
+		while(validationLoop) //Loop to follow the map path defined in the Map array for validation.		
+		{		
+			try {
+				if(mapArrayCopy[startPointOneD+1][startPointTwoD]== mapDataPoint+1)
+				{
+					mapDataPoint++;
+					startPointOneD++;
+
+				} else
+					if(mapArrayCopy[startPointOneD-1][startPointTwoD]== mapDataPoint+1)
+					{
+						mapDataPoint++;
+						startPointOneD--;
+
+					} else
+						if(mapArrayCopy[startPointOneD][startPointTwoD+1]== mapDataPoint+1)
+						{
+							mapDataPoint++;
+							startPointTwoD++;
+						} else
+							if(mapArrayCopy[startPointOneD][startPointTwoD-1]== mapDataPoint+1)
+							{
+								mapDataPoint++;
+								startPointTwoD--;
+							} 
+							/*else
+							{
+								isMapValid=false;
+								break;
+							}*/
+				if(mapDataPoint == 11)
+				{
+					isMapValid  =true;
+					validationLoop = false;
+					lblStatus.setText("Valid Map");
+				}
+				continue;
+
+
+			} catch (ArrayIndexOutOfBoundsException ea)
+			{
+				isMapValid=false;
+				validationErrorMessage = "Index Out of Bond exception.";
+				lblStatus.setText(validationErrorMessage);
+				continue;
+			}
+		}
+
+	}
+
+	/**
 	 * Create the frame.
 	 */
 	public ValidatorTestFrame() {
@@ -49,18 +188,7 @@ public class ValidatorTestFrame extends JFrame {
 		JButton btnCreateMapArray = new JButton("Create Map Array");
 		btnCreateMapArray.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				mapArray = new int[6][7];
-				for(int k=0;k<=mapArray.length-1;k++)
-				{
-					for(int i=0;i<mapArray[k].length-1;i++)
-					{
-						mapArray[k][i] =-1;
-					}
-					
-				}
-				lblStatus.setText("Array Created");
+				createMap();
 			}
 		});
 		btnCreateMapArray.setBounds(431, 115, 199, 29);
@@ -69,22 +197,7 @@ public class ValidatorTestFrame extends JFrame {
 		JButton btnPopulateWithMap = new JButton("Populate with Map Data");
 		btnPopulateWithMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				mapArray[1][2] = 0; //Entry
-				mapArray[1][3] = 1;
-				mapArray[1][4] = 2;
-				mapArray[1][5] = 3;
-				mapArray[2][5] = 4;
-				mapArray[3][5] = 5;
-				mapArray[3][4] = 6;
-				mapArray[3][3] = 7;
-				mapArray[3][2] = 8;
-				mapArray[3][1] = 9;
-				mapArray[4][1] = 10;
-				mapArray[5][1] = 11; //Exit Point
-				
-				lblStatus.setText("Map Populated with Dummy Data");
+				populateMap();
 			}
 		});
 		btnPopulateWithMap.setBounds(417, 178, 248, 29);
@@ -93,86 +206,7 @@ public class ValidatorTestFrame extends JFrame {
 		JButton btnValidateMap = new JButton("Validate Map");
 		btnValidateMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//Map Validate Method
-				int startPointOneD=-1;
-				int startPointTwoD=-1;
-				int mapDataPoint = 0; // 0 for start and the n+1
-				int MapExtiPoint = 99;
-				int mapItemsCount = 0; //Minimum 3 to be a valid map.
-				
-				boolean validationLoop = true;
-				boolean isMapValid = false;
-				
-				String validationErrorMessage = "";
-				
-				int[][] mapArrayCopy = mapArray;
-				for(int k=0;k<=mapArrayCopy.length-1;k++)
-				{
-					for(int i=0;i<mapArrayCopy[k].length-1;i++)
-					{
-						//Do the magic
-						if(mapArrayCopy[k][i] == 0)
-						{
-							startPointOneD = k;
-							startPointTwoD = i;
-							mapItemsCount++;
-							
-						}
-					}
-					
-				}
-				lblStatus.setText(String.valueOf(startPointOneD)+" - "+String.valueOf(startPointTwoD)); //Just for debugging
-				
-				
-				while(validationLoop) //Loop to follow the map path defined in the Map array for validation.		
-				{		
-					try {
-						if(mapArrayCopy[startPointOneD+1][startPointTwoD]== mapDataPoint+1)
-						{
-							mapDataPoint++;
-							startPointOneD++;
-
-						} else
-							if(mapArrayCopy[startPointOneD-1][startPointTwoD]== mapDataPoint+1)
-							{
-								mapDataPoint++;
-								startPointOneD--;
-
-							} else
-								if(mapArrayCopy[startPointOneD][startPointTwoD+1]== mapDataPoint+1)
-								{
-									mapDataPoint++;
-									startPointTwoD++;
-								} else
-									if(mapArrayCopy[startPointOneD][startPointTwoD-1]== mapDataPoint+1)
-									{
-										mapDataPoint++;
-										startPointTwoD--;
-									} 
-									/*else
-									{
-										isMapValid=false;
-										break;
-									}*/
-						if(mapDataPoint == 11)
-						{
-							isMapValid  =true;
-							validationLoop = false;
-							lblStatus.setText("Valid Map");
-						}
-						continue;
-
-
-					} catch (ArrayIndexOutOfBoundsException ea)
-					{
-						isMapValid=false;
-						validationErrorMessage = "Index Out of Bond exception.";
-						lblStatus.setText(validationErrorMessage);
-						continue;
-					}
-				}
-
+				validateMap();
 			}
 		});
 		
