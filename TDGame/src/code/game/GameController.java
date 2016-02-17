@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import code.game.towers.TowerModel;
+
 
 /**
  * This is the game controller class for handling all the user interactions with the User interface.
@@ -17,7 +19,9 @@ import org.apache.commons.io.FileUtils;
  */
 public class GameController 
 {
-
+	private int m_nooftowers;
+	private TowerModel[] m_towerobjs;
+	
 	/**
 	 * This file loads all the maps in the directory Map of the working class.
 	 *  
@@ -43,6 +47,11 @@ public class GameController
 		}
 		catch(Exception ex){}
 		return mapFiles;
+	}
+	
+	public void initializeTowers()
+	{
+		
 	}
 	
 	/**

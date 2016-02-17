@@ -1,6 +1,6 @@
-package Models.Towers;
+package code.game.towers;
 
-public class DarkAgeTower extends Tower {
+public class DarkAgeTower extends TowerModel {
 
 	public void DarkageTower()
 	{

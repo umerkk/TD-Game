@@ -1,6 +1,6 @@
-package Models.Towers;
+package code.game.towers;
 
-public class CastleAgeTower extends Tower 
+public class CastleAgeTower extends TowerModel 
 {
 
 	public CastleAgeTower()
