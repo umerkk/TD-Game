@@ -10,6 +10,8 @@ public class Tower {
 	protected int rateOfFire; // Interval between each fire
 	protected int health; //Tower health
 	
+	// Test commit
+	
 	
 	
 
