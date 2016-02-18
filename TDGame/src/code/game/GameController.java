@@ -108,7 +108,7 @@ public class GameController extends Observable
 	{
 		if(m_selctdtower == null || m_selctednewTower)
 		{
-			m_selctdtower = null;
+			setSelectedTower(null, false);
 			return;
 		}
 			
@@ -132,7 +132,7 @@ public class GameController extends Observable
 	{
 		if(m_selctdtower == null || m_selctednewTower)
 		{
-			m_selctdtower = null;
+			setSelectedTower(null, false);
 			return;
 		}
 		
