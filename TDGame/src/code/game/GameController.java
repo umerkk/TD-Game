@@ -27,16 +27,19 @@ public class GameController extends Observable
 	private List<IndustrialTower> m_indstrltwrobjarr;
 	private int m_accbalanc;
 	private TowerModel m_selctdtower;
+	private boolean m_selctednewTower;
 	
 	public TowerModel getSelectdTwr(){ return m_selctdtower; }
 	
 	private void setSelectedTower(TowerModel value, boolean isnewobj)
 	{
 		m_selctdtower = value;
+		m_selctednewTower = false;
 		setChanged();
 		notifyObservers(this);
 		if(isnewobj)
 		{
+			m_selctednewTower = true;
 			if(value.getCostOfTower() > m_accbalanc)
 			{
 				JOptionPane.showMessageDialog(null, "Not enough account balance.", "Warning:", JOptionPane.WARNING_MESSAGE);
@@ -103,9 +106,12 @@ public class GameController extends Observable
 	 */
 	public void removeSelctdTower()
 	{
-		if(m_selctdtower == null)
+		if(m_selctdtower == null || m_selctednewTower)
+		{
+			m_selctdtower = null;
 			return;
-		
+		}
+			
 		if(m_selctdtower instanceof CastleTower)
 			m_castltwrobjarr.remove(m_selctdtower);
 		else if(m_selctdtower instanceof ImperialTower)
@@ -124,8 +130,12 @@ public class GameController extends Observable
 	 */
 	public void upgrdBtnHandlr()
 	{
-		if(m_selctdtower == null)
+		if(m_selctdtower == null || m_selctednewTower)
+		{
+			m_selctdtower = null;
 			return;
+		}
+		
 		if(m_selctdtower.getUpgradeCost() > m_accbalanc)
 		{
 			JOptionPane.showMessageDialog(null, "Not enough account balance.", "Warning:", JOptionPane.WARNING_MESSAGE);
