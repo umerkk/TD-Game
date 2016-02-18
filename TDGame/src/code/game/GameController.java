@@ -8,11 +8,11 @@ import java.util.Map;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextArea;
 
-import org.apache.commons.io.FileUtils;
-
-import code.game.towers.*;
+import code.game.towers.CastleTower;
+import code.game.towers.ImperialTower;
+import code.game.towers.IndustrialTower;
+import code.game.towers.TowerModel;
 
 /**
  * This is the game controller class for handling all the user interactions with the User interface.
@@ -136,6 +136,7 @@ public class GameController extends Observable
 	
 	/**
 	 * Method to handle the sell tower button click event
+	 * @param keyval for remove remove selected tower
 	 */
 	public void removeSelctdTower(String keyval)
 	{
