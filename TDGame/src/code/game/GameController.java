@@ -31,6 +31,12 @@ public class GameController extends Observable
 	
 	public TowerModel getSelectdTwr(){ return m_selctdtower; }
 	
+	/**
+	 * set the selected tower and update the state of observable 
+	 * 
+	 * @param value new selected tower
+	 * @param isnewobj if is new tower object
+	 */
 	private void setSelectedTower(TowerModel value, boolean isnewobj)
 	{
 		m_selctdtower = value;
