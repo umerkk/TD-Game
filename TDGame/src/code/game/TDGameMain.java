@@ -62,7 +62,7 @@ import javax.swing.JMenuItem;
  * 
  * @author Alaa
  * @author lokesh
- * @version 1.0.0.0
+ * @since Build_1
  */
 
 public class TDGameMain implements Observer {
@@ -83,7 +83,11 @@ public class TDGameMain implements Observer {
 	
 	JPanel selectedCell;
 	TowerModel selectedTower;
-	
+	/**
+	 * Overriding abstract method of observer class
+	 * @param arg0 observable class status changed
+	 * @param arg1 object which sends the event
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) 
 	{
@@ -98,6 +102,7 @@ public class TDGameMain implements Observer {
 	
 	/**
 	 * Launch the application.
+	 * @param args command line arguments
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -116,7 +121,36 @@ public class TDGameMain implements Observer {
 	}
 
 	/**
-	 * Create the application.
+	 * To read the map from the file
+	 * @return map array
+	 */
+	public int[][] readMapFrmFile()
+	{
+		JFileChooser filebrwsr = new JFileChooser();
+		
+		int result = filebrwsr.showOpenDialog(m_frame);
+		if (result == JFileChooser.APPROVE_OPTION) 
+		{
+			try
+			{
+				File selectedFile = filebrwsr.getSelectedFile();
+		        FileInputStream fis = new FileInputStream(selectedFile);
+		        ObjectInputStream ois = new ObjectInputStream(fis);
+		        mapArray = (int[][]) ois.readObject();
+		        ois.close();
+		        fis.close();
+			}catch(Exception ex){}
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Please select a map file.", "Warning: File not selected.", JOptionPane.WARNING_MESSAGE);	
+		}
+		return mapArray;
+	}
+	
+	/**
+	 * Constructor of TDGameMain.
+	 * @param gamcntrlrobj gameController object
 	 */
 	public TDGameMain(GameController gamcntrlrobj) {
 		m_ctrlrObj = gamcntrlrobj;
@@ -138,15 +172,27 @@ public class TDGameMain implements Observer {
 		panel.setLayout(new MigLayout());
 		
 	}
-	
+	 /**
+	  * Method to handle sell button event
+	  */
 	private void selBtnHandlr()
 	{
 		// code to update ui
 		//m_ctrlrObj.setTowerDesc("lblTwr1");
-		m_ctrlrObj.sellTower(selectedTower);
-	
+		
+		
+		String tempName = selectedCell.getName();
+		m_ctrlrObj.removeSelctdTower(tempName);
+		selectedCell.removeAll();
+		selectedCell.setBackground(null);
+		//DrawMapItem(0, selectedCell);
 	}
 	
+	/**
+	 * To draw the map item
+	 * @param type  type of the map object
+	 * @param cell cell map object
+	 */
 	private void DrawMapItem(int type, JPanel cell)
 	{
 		
@@ -177,6 +223,10 @@ public class TDGameMain implements Observer {
 	          cell.add(t);
 	}
 	
+	/**
+	 * Draw the tower cell
+	 * @param cell selected tower cell
+	 */
 	private void DrawTower(JPanel cell)
 	{
 		
@@ -190,14 +240,14 @@ public class TDGameMain implements Observer {
 		  TowerModel m = selectedTower;
 		  if(m!=null)
 		  {
-		
-		if(mapArray[x][y] == 0) { 
+		int l = (m_ctrlrObj.getAccountBalnc() - m.getCostOfTower());
+		if(mapArray[x][y] == 0 && l >= 0) { 
 		  
 		  
 		  if(m.getName().equals("Castle Tower"))
 		  {
 			 try {
-				 BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower4.png"));
+				 BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower3.png"));
 			 
 			  t = new JLabel(new ImageIcon(myPicture));
 			 } catch (Exception e){}
@@ -206,7 +256,7 @@ public class TDGameMain implements Observer {
 		  } else if(m.getName().equals("Imperial Tower"))
 		  {
 			  try {
-					 BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower4.png"));
+					 BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower.png"));
 				 
 				  t = new JLabel(new ImageIcon(myPicture));
 				 } catch (Exception e){}
@@ -224,6 +274,7 @@ public class TDGameMain implements Observer {
 		      t.setBounds(0, 0, 80, 80);
 	          cell.add(t);
 	          
+	          m_ctrlrObj.addTower(selectedTower, tempName);
 		  }
 		  } else {
 			  
@@ -234,7 +285,12 @@ public class TDGameMain implements Observer {
 		  }
 	}
 	
-	
+	/**
+	 * Draw the user selected map
+	 * @param mapArray select the map array
+	 * @param isExisting if it exist
+	 * @param parentPanel parent panel in selected map
+	 */
 	private void DrawMap(int[][] mapArray, boolean isExisting, Panel parentPanel)
 	{
 		if(isExisting)
@@ -392,18 +448,31 @@ public class TDGameMain implements Observer {
 			}
 		}
 	}
+	
+	/**
+	 * Method to handle click event of map cell
+	 * @param e mouse event
+	 * @param cell cell to which event block 
+	 */
 		
-	public void click(MouseEvent e, JPanel cell) {
+	public void click(MouseEvent e, JPanel cell) 
+	{
 		  
 		boolean overideExisting=false;
-      String tempName = cell.getName();
-      char[] name_exploded = tempName.toCharArray();
-      int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-      int y = Integer.parseInt(String.valueOf(name_exploded[1]));
-    //1=StartPoint, 9999=End, 2=Path, 3=Delete
-      
-    	DrawTower(cell);
-    	
+	      String tempName = cell.getName();
+	      char[] name_exploded = tempName.toCharArray();
+	      int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+	      int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+	    //1=StartPoint, 9999=End, 2=Path, 3=Delete
+	      selectedCell = cell;
+	      
+	      if(!m_ctrlrObj.checkCellExist(tempName))
+	    	  DrawTower(cell);
+	      else
+	      {
+	    	  TowerModel tmpmdl = m_ctrlrObj.getTower(tempName);
+	    	  m_ctrlrObj.setSelectedTower(tmpmdl, false);
+	      }
       
     }
 	
@@ -556,24 +625,11 @@ public class TDGameMain implements Observer {
 			
 				// read a file from disk
 				
-				JFileChooser filebrwsr = new JFileChooser();
-				
-				int result = filebrwsr.showOpenDialog(m_frame);
-				if (result == JFileChooser.APPROVE_OPTION) 
-				{
-					
-				
-					  
-			        try
+				try
 			        {
-			        	File selectedFile = filebrwsr.getSelectedFile();
-			            FileInputStream fis = new FileInputStream(selectedFile);
-			            ObjectInputStream ois = new ObjectInputStream(fis);
-			            mapArray = (int[][]) ois.readObject();
-			            ois.close();
-			            fis.close();
-			           
-
+			        	
+						mapArray =  readMapFrmFile();
+			            
 			    		ArrayRow = mapArray.length;
 			    		ArrayCol = mapArray[0].length;
 			    		
@@ -582,23 +638,10 @@ public class TDGameMain implements Observer {
 			           panel.repaint();			    		
 			            
 			            
-			         }catch(IOException ioe){
+			         }catch(Exception ioe){
 			             ioe.printStackTrace();
 			             return;
-			          }catch(ClassNotFoundException c){
-			             System.out.println("Class not found");
-			             c.printStackTrace();
-			             return;
 			          }
-			       
-				    
-				    
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "Please select a map file.", "Warning: File not selected.", JOptionPane.WARNING_MESSAGE);	
-				}
-			
 			}
 			
 		});

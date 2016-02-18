@@ -24,9 +24,9 @@ import code.game.towers.*;
  */
 public class GameController extends Observable
 {
-	private Map<String, CastleTower> m_castltwrobjarr;
-	private Map<String, CastleTower> m_imprltwrobjarr;
-	private Map<String, CastleTower> m_indstrltwrobjarr;
+	private Map<String, TowerModel> m_castltwrobjarr;
+	//private Map<String, CastleTower> m_imprltwrobjarr;
+	//private Map<String, CastleTower> m_indstrltwrobjarr;
 	private int m_accbalanc;
 	public TowerModel m_selctdtower;
 	public TowerModel m2_selctdtower;
@@ -41,8 +41,12 @@ public class GameController extends Observable
 	 * @param value new selected tower
 	 * @param isnewobj if is new tower object
 	 */
-	private void setSelectedTower(TowerModel value, boolean isnewobj)
+	public void setSelectedTower(TowerModel value, boolean isnewobj)
 	{
+		m_selctdtower = value;
+		m_selctednewTower = isnewobj;
+		setChanged();
+		notifyObservers(this);
 		if(isnewobj)
 		{
 		
@@ -50,17 +54,19 @@ public class GameController extends Observable
 			{
 				JOptionPane.showMessageDialog(null, "Not enough account balance.", "Warning:", JOptionPane.WARNING_MESSAGE);
 				m_selctdtower = null;
-			} else {
-				m_selctdtower = value;
-				m_selctednewTower = false;
-				setChanged();
-				notifyObservers(this);
-			}
+			} 
 		}
 		
 		
 		
 	}
+	
+	/**
+	 * set the selected tower and update the state of observable 
+	 * 
+	 * @param value selected tower model
+	 * @param isnewobj if is new tower object
+	 */
 	private void setTheSelectedTower(TowerModel value, boolean isnewobj)
 	{
 		
@@ -68,19 +74,49 @@ public class GameController extends Observable
 				m_selctednewTower = false;
 				setChanged();
 				notifyObservers(this);
-			
-		
-		
-		
 		
 	}
+	
+	/**
+	 * 
+	 * @param modl add tower model
+	 * @param cell add to the tower
+	 */
+	public void addTower(TowerModel modl, String cell)
+	{
+		if(!m_castltwrobjarr.containsKey(cell))
+		{
+			m_castltwrobjarr.put(cell, modl);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param cell
+	 * @return cell
+	 */
+	public boolean checkCellExist(String cell) { return m_castltwrobjarr.containsKey(cell); }
+	
+	public TowerModel getTower(String cell) { return m_castltwrobjarr.get(cell);}
+	
+	/**
+	 * To reset the selected tower
+	 */
 	public void ResetTowerData()
 	{
 		m2_selctdtower = m_selctdtower;
 		m_selctdtower = null;
 		
 	}
+	/**
+	 * 
+	 * @return get current user account balance
+	 */
 	public int getAccountBalnc(){ return m_accbalanc; }
+	/**
+	 * set the user account balance
+	 * @param value new account balance
+	 */
 	public void setAccBalnc(int value)
 	{
 		m_accbalanc = value;
@@ -115,14 +151,17 @@ public class GameController extends Observable
 		return mapFiles;
 	}
 	
+	/**
+	 * To initialize the member objects
+	 */
 	public void initializeCntrolr()
 	{
 		m_selctdtower = null;
 		setAccBalnc(120);
 		
-		m_castltwrobjarr = new HashMap<String, CastleTower>();
-		m_imprltwrobjarr = new HashMap<String, CastleTower>();
-		m_indstrltwrobjarr = new HashMap<String, CastleTower>();
+		m_castltwrobjarr = new HashMap<String, TowerModel>();
+		//m_imprltwrobjarr = new HashMap<String, CastleTower>();
+		//m_indstrltwrobjarr = new HashMap<String, CastleTower>();
 	}
 	
 	
@@ -131,11 +170,12 @@ public class GameController extends Observable
 	 */
 	public void strtGameBtnHandlr()
 	{
-		
+		// to be updated for game play
 	}
 	
 	/**
 	 * Method to handle the sell tower button click event
+	 * @param keyval selected cell to be remove
 	 */
 	public void removeSelctdTower(String keyval)
 	{
@@ -146,10 +186,10 @@ public class GameController extends Observable
 			m_selctdtower = m_castltwrobjarr.get(keyval);
 			m_castltwrobjarr.remove(keyval);
 		}
-		else if(m_imprltwrobjarr.containsKey(keyval))
-			m_imprltwrobjarr.remove(keyval);
-		else if(m_indstrltwrobjarr.containsKey(keyval))
-			m_indstrltwrobjarr.remove(keyval);
+		//else if(m_imprltwrobjarr.containsKey(keyval))
+		//	m_imprltwrobjarr.remove(keyval);
+		//else if(m_indstrltwrobjarr.containsKey(keyval))
+		//	m_indstrltwrobjarr.remove(keyval);
 		
 		int newbalnc = m_accbalanc + m_selctdtower.getRefundValue(); 
 		m_selctdtower = null;
@@ -157,6 +197,10 @@ public class GameController extends Observable
 		
 	}
 	
+	/**
+	 * for selling the tower
+	 * @param tower selected tower to be sold
+	 */
 	public void sellTower(TowerModel tower)
 	{
 		//m_selctdtower = 
