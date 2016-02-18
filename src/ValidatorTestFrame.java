@@ -9,6 +9,13 @@ import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+
+/**
+ * 
+ * @author Umer
+ * @author Iftikhar
+ * @since Build 1
+ */
 public class ValidatorTestFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -58,6 +65,10 @@ public class ValidatorTestFrame extends JFrame {
 		}
 	}
 	
+	/**
+	 * create map to initialize the map.
+	 * 
+	 */
 	private void createMap()
 	{
 		mapArray = new int[6][7];
@@ -72,6 +83,10 @@ public class ValidatorTestFrame extends JFrame {
 		lblStatus.setText("Array Created");
 	}
 
+	/**
+	 * Populate the map and assign the map array entry and exit point.
+	 * 
+	 */
 	private void populateMap()
 	{
 		mapArray[1][2] = 0; //Entry
@@ -90,6 +105,10 @@ public class ValidatorTestFrame extends JFrame {
 		lblStatus.setText("Map Populated with Dummy Data");
 	}
 	
+	/**
+	 * Validate the map according to the starting point and continue n+1 till exit entry.
+	 * @return boolean
+	 */
 	private void validateMap()
 	{
 		//Map Validate Method
@@ -174,7 +193,7 @@ public class ValidatorTestFrame extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Validator ensure the test frame
 	 */
 	public ValidatorTestFrame() {
 		lblStatus.setBounds(372, 321, 359, 89);
@@ -185,8 +204,14 @@ public class ValidatorTestFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
 		JButton btnCreateMapArray = new JButton("Create Map Array");
 		btnCreateMapArray.addActionListener(new ActionListener() {
+			
+			/**
+			 * Perform the action to create the map.
+			 * 
+			 */
 			public void actionPerformed(ActionEvent e) {
 				createMap();
 			}
