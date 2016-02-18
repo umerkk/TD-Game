@@ -75,7 +75,7 @@ public class TDGameMain {
 	}
 	
 	/**
-	 * 
+	 * Initialize the frame
 	 */
 	private void custmInitializeFrm()
 	{
@@ -101,7 +101,7 @@ public class TDGameMain {
 	}
 	
 	/**
-	 * Initialize the contents of the frame.
+	 * Initialize the frame contents
 	 */
 	private void initialize() {
 		m_frame = new JFrame();
@@ -174,7 +174,7 @@ public class TDGameMain {
 		pnlTwrTopLvl.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Towers", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		jPnlDesc.add(pnlTwrTopLvl, BorderLayout.NORTH);
 		
-		JLabel lblTwr1 = new JLabel("");
+		final JLabel lblTwr1 = new JLabel("");
 		lblTwr1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -183,7 +183,7 @@ public class TDGameMain {
 		});
 		lblTwr1.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower3.png")));
 		
-		JLabel lblTwr2 = new JLabel("");
+		final JLabel lblTwr2 = new JLabel("");
 		lblTwr2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -199,7 +199,7 @@ public class TDGameMain {
 		pnlTwrTopLvl.add(pnlTwrSndLvl, BorderLayout.SOUTH);
 		pnlTwrSndLvl.setLayout(new BorderLayout(0, 0));
 		
-		JLabel lblTwr3 = new JLabel("");
+		final JLabel lblTwr3 = new JLabel("");
 		lblTwr3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
