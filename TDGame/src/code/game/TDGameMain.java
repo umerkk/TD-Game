@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -16,10 +17,15 @@ import javax.swing.border.EmptyBorder;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
+
+import code.game.towers.TowerModel;
+
 import javax.swing.UIManager;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
@@ -34,6 +40,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.Observable;
+import java.util.Observer;
 
 
 /**
@@ -44,11 +53,25 @@ import java.awt.event.MouseEvent;
  * @version 1.0.0.0
  */
 
-public class TDGameMain {
+public class TDGameMain implements Observer {
 
 	private JFrame m_frame;
 	private GameController m_ctrlrObj;
+	JTextArea m_txtTwrDesc = new JTextArea();
+	JLabel m_lblAccBal = new JLabel("0  ");
+	
+	@Override
+	public void update(Observable arg0, Object arg1) 
+	{
+		m_lblAccBal.setText(String.valueOf(((GameController)arg0).getAccountBalnc()));
+		m_txtTwrDesc.setText(null);
+		TowerModel towrdesc = ((GameController)arg0).getSelectdTwr();
+		if(towrdesc == null)
+			return;
+		m_txtTwrDesc.append(towrdesc.getTowerDetails().toString());
+	}
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -81,6 +104,7 @@ public class TDGameMain {
 	{
 		try
 		{
+			m_ctrlrObj.initializeCntrolr(this);
 			Component[] components = m_frame.getContentPane().getComponents();
 			MigLayout myGrid = new MigLayout();
 			
@@ -99,6 +123,33 @@ public class TDGameMain {
 		}
 		catch(Exception ex){}
 	}
+	
+	private void selBtnHandlr()
+	{
+		// code to update ui
+		m_ctrlrObj.removeSelctdTower();
+	}
+	/**
+	 * Method to handle the load map button 
+	 */
+	public void loadMapBtnHandlr()
+	{
+		// read a file from disk
+		File selectedFile;
+		JFileChooser filebrwsr = new JFileChooser();
+		filebrwsr.setCurrentDirectory(new File(System.getProperty("user.dir")));
+		int result = filebrwsr.showOpenDialog(m_frame);
+		if (result == JFileChooser.APPROVE_OPTION) 
+		{
+		    selectedFile = filebrwsr.getSelectedFile();
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "Please select a map file.", "Warning: File not selected.", JOptionPane.WARNING_MESSAGE);	
+		}
+		
+	}
+	
 	
 	/**
 	 * Initialize the frame contents
@@ -121,7 +172,7 @@ public class TDGameMain {
 		JButton btnLoadMap = new JButton("Load Map");
 		btnLoadMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				m_ctrlrObj.loadMapBtnHandlr();
+				loadMapBtnHandlr();
 			}
 		});
 		jPnlHdr.add(btnLoadMap, BorderLayout.EAST);
@@ -129,22 +180,13 @@ public class TDGameMain {
 		JPanel pnlHdrSub = new JPanel();
 		jPnlHdr.add(pnlHdrSub, BorderLayout.CENTER);
 		
-		JLabel lblAccLbl = new JLabel("\r\nAccount : $");
+		JLabel lblAccLbl = new JLabel("\r\nAccount Balance : $");
 		lblAccLbl.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(lblAccLbl);
 		lblAccLbl.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JLabel lblAccBal = new JLabel("0  ");
-		lblAccBal.setFont(new Font("Arial", Font.PLAIN, 14));
-		pnlHdrSub.add(lblAccBal);
-		
-		JLabel lblGameLvlLbl = new JLabel("  Level :");
-		lblGameLvlLbl.setFont(new Font("Arial", Font.PLAIN, 14));
-		pnlHdrSub.add(lblGameLvlLbl);
-		
-		JLabel lblGameLbl = new JLabel("1");
-		lblGameLbl.setFont(new Font("Arial", Font.PLAIN, 14));
-		pnlHdrSub.add(lblGameLbl);
+		m_lblAccBal.setFont(new Font("Arial", Font.PLAIN, 14));
+		pnlHdrSub.add(m_lblAccBal);
 		
 		JPanel jPnlMain = new JPanel();
 		m_frame.getContentPane().add(jPnlMain, BorderLayout.CENTER);
@@ -215,8 +257,7 @@ public class TDGameMain {
 		jPnlDesc.add(pnlTwrDesc, BorderLayout.CENTER);
 		pnlTwrDesc.setLayout(new BorderLayout(0, 0));
 		
-		JTextArea txtTwrDesc = new JTextArea();
-		pnlTwrDesc.add(txtTwrDesc);
+		pnlTwrDesc.add(m_txtTwrDesc);
 		
 		JLabel lblTwrSpcAdj = new JLabel("_____________");
 		lblTwrSpcAdj.setForeground(Color.WHITE);
@@ -230,7 +271,7 @@ public class TDGameMain {
 		JButton btnSellTwr = new JButton("Sell");
 		btnSellTwr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				m_ctrlrObj.selBtnHandlr();
+				selBtnHandlr();
 			}
 		});
 		pnlBtnColl.add(btnSellTwr, BorderLayout.NORTH);
@@ -247,5 +288,5 @@ public class TDGameMain {
 		lblBtnCollSpcAdj.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		pnlBtnColl.add(lblBtnCollSpcAdj, BorderLayout.SOUTH);
 	}
-
+	
 }

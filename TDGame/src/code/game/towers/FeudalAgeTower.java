@@ -1,6 +1,6 @@
-package Models.Towers;
+package code.game.towers;
 
-public class FeudalAgeTower extends Tower {
+public class FeudalAgeTower extends TowerModel {
 
 	public FeudalAgeTower()
 	{

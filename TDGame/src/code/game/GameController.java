@@ -3,9 +3,14 @@ package code.game;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 
 import org.apache.commons.io.FileUtils;
 
+import code.game.towers.*;
 
 /**
  * This is the game controller class for handling all the user interactions with the User interface.
@@ -15,9 +20,38 @@ import org.apache.commons.io.FileUtils;
  * @version 1.0.0.0
  * 
  */
-public class GameController 
+public class GameController extends Observable
 {
-
+	private List<CastleTower> m_castltwrobjarr;
+	private List<ImperialTower> m_imprltwrobjarr;
+	private List<IndustrialTower> m_indstrltwrobjarr;
+	private TowerModel m_selctdtower;
+	private int m_accbalanc;
+	
+	public TowerModel getSelectdTwr(){ return m_selctdtower; }
+	
+	private void setSelectedTower(TowerModel value, boolean isnewobj)
+	{
+		m_selctdtower = value;
+		setChanged();
+		notifyObservers(this);
+		if(isnewobj)
+		{
+			if(value.getCostOfTower() > m_accbalanc)
+			{
+				JOptionPane.showMessageDialog(null, "Not enough account balance.", "Warning:", JOptionPane.WARNING_MESSAGE);
+				m_selctdtower = null;
+			}
+		}
+	}
+	public int getAccountBalnc(){ return m_accbalanc; }
+	private void setAccBalnc(int value)
+	{
+		m_accbalanc = value;
+		setChanged();
+		notifyObservers(this);
+	}
+	
 	/**
 	 * This file loads all the maps in the directory Map of the working class.
 	 *  
@@ -45,13 +79,16 @@ public class GameController
 		return mapFiles;
 	}
 	
-	/**
-	 * Method to handle the load map button 
-	 */
-	public void loadMapBtnHandlr()
+	public void initializeCntrolr(TDGameMain parntobj)
 	{
+		m_selctdtower = null;
+		setAccBalnc(120);
 		
+		m_castltwrobjarr = new ArrayList<CastleTower>();
+		m_imprltwrobjarr = new ArrayList<ImperialTower>();
+		m_indstrltwrobjarr = new ArrayList<IndustrialTower>();
 	}
+	
 	
 	/**
 	 * Method to  handle the start game button click event.
@@ -64,8 +101,21 @@ public class GameController
 	/**
 	 * Method to handle the sell tower button click event
 	 */
-	public void selBtnHandlr()
+	public void removeSelctdTower()
 	{
+		if(m_selctdtower == null)
+			return;
+		
+		if(m_selctdtower instanceof CastleTower)
+			m_castltwrobjarr.remove(m_selctdtower);
+		else if(m_selctdtower instanceof ImperialTower)
+			m_imprltwrobjarr.remove(m_selctdtower);
+		else if(m_selctdtower instanceof IndustrialTower)
+			m_indstrltwrobjarr.remove(m_selctdtower);
+		
+		int newbalnc = m_accbalanc + m_selctdtower.getRefundValue(); 
+		m_selctdtower = null;
+		setAccBalnc(newbalnc);
 		
 	}
 	
@@ -74,7 +124,15 @@ public class GameController
 	 */
 	public void upgrdBtnHandlr()
 	{
-		
+		if(m_selctdtower == null)
+			return;
+		if(m_selctdtower.getUpgradeCost() > m_accbalanc)
+		{
+			JOptionPane.showMessageDialog(null, "Not enough account balance.", "Warning:", JOptionPane.WARNING_MESSAGE);
+			return;
+		}
+		m_selctdtower.upgradeCurrentLevel();
+		setAccBalnc(m_accbalanc - m_selctdtower.getUpgradeCost());
 	}
 	
 	/**
@@ -85,7 +143,24 @@ public class GameController
 	 */
 	public void setTowerDesc(String lblName)
 	{
-		// set the txtTwrDesc object here based on label names
+		// set the selected tower
+		switch(lblName)
+		{
+			case "lblTwr1" : 
+				//m_selctdTower = 1;
+				setSelectedTower(new CastleTower(), true);
+				break;
+			case "lblTwr2" :
+				//m_selctdTower = 2;
+				setSelectedTower(new ImperialTower(), true);
+				break;
+			case "lblTwr3" :
+				//m_selctdTower = 3;
+				setSelectedTower(new IndustrialTower(), true);
+				break;
+		}
+		
+		
 	}
 	
 }
