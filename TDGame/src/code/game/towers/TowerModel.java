@@ -1,5 +1,7 @@
 package code.game.towers;
 
+import java.util.Observable;
+
 /**
  * This class defines the necessary properties of the tower and exposes methods to access and modify the tower objects.
  * 
@@ -7,7 +9,7 @@ package code.game.towers;
  * @author Lokesh
  * @version 1.0.0.0
  */
-public class TowerModel {
+public class TowerModel extends Observable{
 
 	private String m_name;
 	private int m_currlevel;
@@ -119,6 +121,6 @@ public class TowerModel {
 	 * method to set the health of the tower. 
 	 * @param value new health of the tower.
 	 */
-	public void setHealth(int value) { m_health = value; } 
+	public void setHealth(int value) { m_health = value; setChanged(); notifyObservers(); } 
 		
 }

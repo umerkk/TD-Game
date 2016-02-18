@@ -3,6 +3,7 @@ package code.game;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -31,6 +32,9 @@ import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Panel;
+import java.awt.ScrollPane;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -40,9 +44,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 
 /**
@@ -59,6 +71,18 @@ public class TDGameMain implements Observer {
 	private GameController m_ctrlrObj;
 	JTextArea m_txtTwrDesc = new JTextArea();
 	JLabel m_lblAccBal = new JLabel("0  ");
+	
+	
+	int[][] mapArray;
+	ScrollPane sc_panel = new ScrollPane();
+	//Panel panel_1 = new Panel();
+	Panel panel = new Panel();
+	int ArrayRow;
+	int ArrayCol;
+	int selectedTool = 0;
+	
+	JPanel selectedCell;
+	TowerModel selectedTower;
 	
 	@Override
 	public void update(Observable arg0, Object arg1) 
@@ -82,6 +106,7 @@ public class TDGameMain implements Observer {
 					GameController gamecntrlrobj =new GameController();
 					TDGameMain window = new TDGameMain(gamecntrlrobj);
 					gamecntrlrobj.addObserver(window);
+					window.custmInitializeFrm();
 					window.m_frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -95,6 +120,7 @@ public class TDGameMain implements Observer {
 	 */
 	public TDGameMain(GameController gamcntrlrobj) {
 		m_ctrlrObj = gamcntrlrobj;
+		
 		initialize();
 		
 		custmInitializeFrm();
@@ -103,55 +129,283 @@ public class TDGameMain implements Observer {
 	/**
 	 * Initialize the frame
 	 */
-	private void custmInitializeFrm()
+	public void custmInitializeFrm()
 	{
-		try
-		{
-			m_ctrlrObj.initializeCntrolr();
-			Component[] components = m_frame.getContentPane().getComponents();
-			MigLayout myGrid = new MigLayout();
-			
-			for (int i=0; i < components.length; i++) 
-			{
-	            if(components[i].getName().equals("jPnlMain"))
-	            {
-	            	((JPanel)components[i]).setLayout(myGrid);
-	            	((JPanel)components[i]).setLayout(new MigLayout());
-	            }
-	           
-	            //componentMap.put(components[i].getName(), components[i]);
-			}
-			
-			
-		}
-		catch(Exception ex){}
+		m_ctrlrObj.initializeCntrolr();
+		
+		MigLayout myGrid = new MigLayout(); 
+		panel.setLayout(myGrid);
+		panel.setLayout(new MigLayout());
+		
 	}
 	
 	private void selBtnHandlr()
 	{
 		// code to update ui
-		m_ctrlrObj.removeSelctdTower();
+		//m_ctrlrObj.setTowerDesc("lblTwr1");
+		m_ctrlrObj.sellTower(selectedTower);
+	
 	}
-	/**
-	 * Method to handle the load map button 
-	 */
-	public void loadMapBtnHandlr()
+	
+	private void DrawMapItem(int type, JPanel cell)
 	{
-		// read a file from disk
-		File selectedFile;
-		JFileChooser filebrwsr = new JFileChooser();
-		filebrwsr.setCurrentDirectory(new File(System.getProperty("user.dir")));
-		int result = filebrwsr.showOpenDialog(m_frame);
-		if (result == JFileChooser.APPROVE_OPTION) 
+		
+		  JLabel t = new JLabel();
+		  t.setForeground(Color.WHITE);
+		  t.setFont(new Font("Arial",0,20));
+		      
+		      if(type==1)
+		      {
+		    	  t.setText("S");
+		    	  cell.setBackground(Color.blue);
+		    	
+		      } else  if(type==9999)
+		      
+		      {
+		    	  t.setText("X");
+		    	  cell.setBackground(Color.red);
+		    	
+		      } else  if(!(type==0)){
+		    	  t.setText("P");
+		    	  cell.setBackground(Color.green);
+		      }
+		      
+		      
+		      
+		      
+		      t.setBounds(20, 20, 50, 50);
+	          cell.add(t);
+	}
+	
+	private void DrawTower(JPanel cell)
+	{
+		
+		  String tempName = cell.getName();
+	      char[] name_exploded = tempName.toCharArray();
+	      int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+	      int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+	      
+		  JLabel t=null;
+		 
+		  TowerModel m = selectedTower;
+		  if(m!=null)
+		  {
+		
+		if(mapArray[x][y] == 0) { 
+		  
+		  
+		  if(m.getName().equals("Castle Tower"))
+		  {
+			 try {
+				 BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower4.png"));
+			 
+			  t = new JLabel(new ImageIcon(myPicture));
+			 } catch (Exception e){}
+			  
+			
+		  } else if(m.getName().equals("Imperial Tower"))
+		  {
+			  try {
+					 BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower4.png"));
+				 
+				  t = new JLabel(new ImageIcon(myPicture));
+				 } catch (Exception e){}
+		  }else if(m.getName().equals("Industrial Tower"))
+		  {
+			  try {
+					 BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower4.png"));
+				 
+				  t = new JLabel(new ImageIcon(myPicture));
+				 } catch (Exception e){}
+		  }
+		   cell.setBackground(Color.blue);
+		    m_ctrlrObj.setAccBalnc(m_ctrlrObj.getAccountBalnc() - m.getCostOfTower());
+		    	  m_ctrlrObj.ResetTowerData();
+		      t.setBounds(0, 0, 80, 80);
+	          cell.add(t);
+	          
+		  }
+		  } else {
+			  
+			  selectedCell = cell;
+			  m_ctrlrObj.m_selctdtower = m;
+			  
+			  
+		  }
+	}
+	
+	
+	private void DrawMap(int[][] mapArray, boolean isExisting, Panel parentPanel)
+	{
+		if(isExisting)
 		{
-		    selectedFile = filebrwsr.getSelectedFile();
-		}
+		
+			for(int k=0;k<ArrayRow;k++)
+			{
+				for(int i=0;i<ArrayCol;i++)
+				{
+				
+					
+					String _append = "";
+					if(i==ArrayCol-1)
+					{
+						_append = ", wrap";
+					} else
+					{
+						
+					}
+					JPanel temp = new JPanel();
+					temp.setName(k +""+ i);
+					temp.setBorder(BorderFactory.createEtchedBorder(1));
+					temp.addMouseListener(new MouseListener() {
+						
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mousePressed(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseExited(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							click(e,temp);
+							
+							
+						}
+					});
+					if(mapArray[k][i]==1)
+				      {
+				   
+				      
+				    	  DrawMapItem(1, temp);
+				    	 
+				    	 
+				      }  else if(mapArray[k][i]==9999)
+				      
+				      {
+				    	  DrawMapItem(9999, temp);
+				    	
+				    
+				      } else if(mapArray[k][i]==0)
+					      
+				      {
+				    	  DrawMapItem(0, temp);
+				    	 
+				      } else
+				      
+					      
+				      {
+				    	  DrawMapItem(2,temp);
+				    	
+				    	
+				    	
+				      }
+				     
+					
+					parentPanel.add(temp, "width 80, height 80" + _append);
+					
+				//	panelsHolder[k][i] = temp;
+					
+				}
+				      
+				      
+				}
+				
+			}
+			
+			
+			
+		
 		else
 		{
-			JOptionPane.showMessageDialog(null, "Please select a map file.", "Warning: File not selected.", JOptionPane.WARNING_MESSAGE);	
+			for(int k=0;k<ArrayRow;k++)
+			{
+				for(int i=0;i<ArrayCol;i++)
+				{
+					String _append = "";
+					if(i==ArrayCol-1)
+					{
+						_append = ", wrap";
+					} else
+					{
+						
+					}
+					JPanel temp = new JPanel();
+					temp.setName(k +""+ i);
+					temp.setBorder(BorderFactory.createEtchedBorder(1));
+					temp.addMouseListener(new MouseListener() {
+						
+						@Override
+						public void mouseReleased(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mousePressed(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseExited(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseEntered(MouseEvent e) {
+							// TODO Auto-generated method stub
+							
+						}
+						
+						@Override
+						public void mouseClicked(MouseEvent e) {
+							click(e,temp);
+							
+							
+						}
+					});
+					
+					parentPanel.add(temp, "width 80, height 80" + _append);
+					
+					
+					
+				}
+			}
 		}
-		
 	}
+		
+	public void click(MouseEvent e, JPanel cell) {
+		  
+		boolean overideExisting=false;
+      String tempName = cell.getName();
+      char[] name_exploded = tempName.toCharArray();
+      int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+      int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+    //1=StartPoint, 9999=End, 2=Path, 3=Delete
+      
+    	DrawTower(cell);
+    	
+      
+    }
 	
 	
 	/**
@@ -159,6 +413,7 @@ public class TDGameMain implements Observer {
 	 */
 	private void initialize() {
 		m_frame = new JFrame();
+		m_frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);		
 		m_frame.setBounds(100, 100, 1081, 547);
 		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		m_frame.getContentPane().setLayout(new BorderLayout(0, 0));
@@ -172,14 +427,6 @@ public class TDGameMain implements Observer {
 		lblGameHdr.setForeground(Color.RED);
 		jPnlHdr.add(lblGameHdr, BorderLayout.WEST);
 		
-		JButton btnLoadMap = new JButton("Load Map");
-		btnLoadMap.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				loadMapBtnHandlr();
-			}
-		});
-		jPnlHdr.add(btnLoadMap, BorderLayout.EAST);
-		
 		JPanel pnlHdrSub = new JPanel();
 		jPnlHdr.add(pnlHdrSub, BorderLayout.CENTER);
 		
@@ -191,8 +438,8 @@ public class TDGameMain implements Observer {
 		m_lblAccBal.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(m_lblAccBal);
 		
-		JPanel jPnlMain = new JPanel();
-		m_frame.getContentPane().add(jPnlMain, BorderLayout.CENTER);
+		
+		m_frame.getContentPane().add(panel, BorderLayout.CENTER);
 		
 		JPanel jPnlFtr = new JPanel();
 		m_frame.getContentPane().add(jPnlFtr, BorderLayout.SOUTH);
@@ -224,6 +471,12 @@ public class TDGameMain implements Observer {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				m_ctrlrObj.setTowerDesc("lblTwr1");
+				if(m_ctrlrObj.getSelectdTwr()!=null)
+				{
+					selectedTower = m_ctrlrObj.getSelectdTwr();
+				} else {
+					selectedTower = null;
+				}
 			}
 		});
 		lblTwr1.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower3.png")));
@@ -290,6 +543,67 @@ public class TDGameMain implements Observer {
 		JLabel lblBtnCollSpcAdj = new JLabel(" ");
 		lblBtnCollSpcAdj.setFont(new Font("Tahoma", Font.PLAIN, 35));
 		pnlBtnColl.add(lblBtnCollSpcAdj, BorderLayout.SOUTH);
+		
+		JMenuBar menuBar = new JMenuBar();
+		m_frame.setJMenuBar(menuBar);
+		
+		JMenu mnGame = new JMenu("Game");
+		menuBar.add(mnGame);
+		
+		JMenuItem mntmOpenMap = new JMenuItem("Open Map");
+		mntmOpenMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				// read a file from disk
+				
+				JFileChooser filebrwsr = new JFileChooser();
+				
+				int result = filebrwsr.showOpenDialog(m_frame);
+				if (result == JFileChooser.APPROVE_OPTION) 
+				{
+					
+				
+					  
+			        try
+			        {
+			        	File selectedFile = filebrwsr.getSelectedFile();
+			            FileInputStream fis = new FileInputStream(selectedFile);
+			            ObjectInputStream ois = new ObjectInputStream(fis);
+			            mapArray = (int[][]) ois.readObject();
+			            ois.close();
+			            fis.close();
+			           
+
+			    		ArrayRow = mapArray.length;
+			    		ArrayCol = mapArray[0].length;
+			    		
+			           DrawMap(mapArray, true, panel);
+			           panel.revalidate();
+			           panel.repaint();			    		
+			            
+			            
+			         }catch(IOException ioe){
+			             ioe.printStackTrace();
+			             return;
+			          }catch(ClassNotFoundException c){
+			             System.out.println("Class not found");
+			             c.printStackTrace();
+			             return;
+			          }
+			       
+				    
+				    
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Please select a map file.", "Warning: File not selected.", JOptionPane.WARNING_MESSAGE);	
+				}
+			
+			}
+			
+		});
+		mnGame.add(mntmOpenMap);
 	}
+	
 	
 }

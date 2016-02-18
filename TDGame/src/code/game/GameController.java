@@ -2,7 +2,9 @@ package code.game;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 
 import javax.swing.JOptionPane;
@@ -22,12 +24,14 @@ import code.game.towers.*;
  */
 public class GameController extends Observable
 {
-	private List<CastleTower> m_castltwrobjarr;
-	private List<ImperialTower> m_imprltwrobjarr;
-	private List<IndustrialTower> m_indstrltwrobjarr;
+	private Map<String, CastleTower> m_castltwrobjarr;
+	private Map<String, CastleTower> m_imprltwrobjarr;
+	private Map<String, CastleTower> m_indstrltwrobjarr;
 	private int m_accbalanc;
-	private TowerModel m_selctdtower;
+	public TowerModel m_selctdtower;
+	public TowerModel m2_selctdtower;
 	private boolean m_selctednewTower;
+	
 	
 	public TowerModel getSelectdTwr(){ return m_selctdtower; }
 	
@@ -39,22 +43,45 @@ public class GameController extends Observable
 	 */
 	private void setSelectedTower(TowerModel value, boolean isnewobj)
 	{
-		m_selctdtower = value;
-		m_selctednewTower = false;
-		setChanged();
-		notifyObservers(this);
 		if(isnewobj)
 		{
-			m_selctednewTower = true;
+		
 			if(value.getCostOfTower() > m_accbalanc)
 			{
 				JOptionPane.showMessageDialog(null, "Not enough account balance.", "Warning:", JOptionPane.WARNING_MESSAGE);
 				m_selctdtower = null;
+			} else {
+				m_selctdtower = value;
+				m_selctednewTower = false;
+				setChanged();
+				notifyObservers(this);
 			}
 		}
+		
+		
+		
+	}
+	private void setTheSelectedTower(TowerModel value, boolean isnewobj)
+	{
+		
+				m_selctdtower = value;
+				m_selctednewTower = false;
+				setChanged();
+				notifyObservers(this);
+			
+		
+		
+		
+		
+	}
+	public void ResetTowerData()
+	{
+		m2_selctdtower = m_selctdtower;
+		m_selctdtower = null;
+		
 	}
 	public int getAccountBalnc(){ return m_accbalanc; }
-	private void setAccBalnc(int value)
+	public void setAccBalnc(int value)
 	{
 		m_accbalanc = value;
 		setChanged();
@@ -93,9 +120,9 @@ public class GameController extends Observable
 		m_selctdtower = null;
 		setAccBalnc(120);
 		
-		m_castltwrobjarr = new ArrayList<CastleTower>();
-		m_imprltwrobjarr = new ArrayList<ImperialTower>();
-		m_indstrltwrobjarr = new ArrayList<IndustrialTower>();
+		m_castltwrobjarr = new HashMap<String, CastleTower>();
+		m_imprltwrobjarr = new HashMap<String, CastleTower>();
+		m_indstrltwrobjarr = new HashMap<String, CastleTower>();
 	}
 	
 	
@@ -110,25 +137,36 @@ public class GameController extends Observable
 	/**
 	 * Method to handle the sell tower button click event
 	 */
-	public void removeSelctdTower()
+	public void removeSelctdTower(String keyval)
 	{
-		if(m_selctdtower == null || m_selctednewTower)
-		{
-			setSelectedTower(null, false);
-			return;
-		}
+		//m_selctdtower = 
 			
-		if(m_selctdtower instanceof CastleTower)
-			m_castltwrobjarr.remove(m_selctdtower);
-		else if(m_selctdtower instanceof ImperialTower)
-			m_imprltwrobjarr.remove(m_selctdtower);
-		else if(m_selctdtower instanceof IndustrialTower)
-			m_indstrltwrobjarr.remove(m_selctdtower);
+		if(m_castltwrobjarr.containsKey(keyval))
+		{
+			m_selctdtower = m_castltwrobjarr.get(keyval);
+			m_castltwrobjarr.remove(keyval);
+		}
+		else if(m_imprltwrobjarr.containsKey(keyval))
+			m_imprltwrobjarr.remove(keyval);
+		else if(m_indstrltwrobjarr.containsKey(keyval))
+			m_indstrltwrobjarr.remove(keyval);
 		
 		int newbalnc = m_accbalanc + m_selctdtower.getRefundValue(); 
 		m_selctdtower = null;
 		setAccBalnc(newbalnc);
 		
+	}
+	
+	public void sellTower(TowerModel tower)
+	{
+		//m_selctdtower = 
+			
+				
+		int newbalnc = m_accbalanc + tower.getRefundValue(); 
+		m_selctdtower = null;
+		setAccBalnc(newbalnc);
+		setChanged();
+		notifyObservers();
 	}
 	
 	/**
