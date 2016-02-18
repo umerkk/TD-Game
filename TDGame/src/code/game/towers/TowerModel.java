@@ -53,14 +53,14 @@ public class TowerModel {
 	{
 		StringBuilder strBldrObj = new StringBuilder();
 		strBldrObj.append("Name : " + m_name);
-		strBldrObj.append("Level : " + m_currlevel);
-		strBldrObj.append("Cost of Tower : " + m_costoftower);
-		strBldrObj.append("Upgrade Cost : " + m_upgradecost);
-		strBldrObj.append("Refund Value : " + m_refundvalue);
-		strBldrObj.append("Range : " + m_rangeinblocks);
-		strBldrObj.append("Power : " + m_powerofbullet);
-		strBldrObj.append("Rate of Fire : " + m_rateoffire);
-		strBldrObj.append("Health : " + m_health);
+		strBldrObj.append("\nLevel : " + m_currlevel);
+		strBldrObj.append("\nCost of Tower : " + m_costoftower);
+		strBldrObj.append("\nUpgrade Cost : " + m_upgradecost);
+		strBldrObj.append("\nRefund Value : " + m_refundvalue);
+		strBldrObj.append("\nRange : " + m_rangeinblocks);
+		strBldrObj.append("\nPower : " + m_powerofbullet);
+		strBldrObj.append("\nRate of Fire : " + m_rateoffire);
+		strBldrObj.append("\nHealth : " + m_health);
 		return strBldrObj;
 	}
 	/**

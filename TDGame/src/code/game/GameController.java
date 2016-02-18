@@ -25,8 +25,8 @@ public class GameController extends Observable
 	private List<CastleTower> m_castltwrobjarr;
 	private List<ImperialTower> m_imprltwrobjarr;
 	private List<IndustrialTower> m_indstrltwrobjarr;
-	private TowerModel m_selctdtower;
 	private int m_accbalanc;
+	private TowerModel m_selctdtower;
 	
 	public TowerModel getSelectdTwr(){ return m_selctdtower; }
 	
@@ -79,7 +79,7 @@ public class GameController extends Observable
 		return mapFiles;
 	}
 	
-	public void initializeCntrolr(TDGameMain parntobj)
+	public void initializeCntrolr()
 	{
 		m_selctdtower = null;
 		setAccBalnc(120);

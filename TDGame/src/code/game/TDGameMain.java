@@ -79,7 +79,9 @@ public class TDGameMain implements Observer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TDGameMain window = new TDGameMain();
+					GameController gamecntrlrobj =new GameController();
+					TDGameMain window = new TDGameMain(gamecntrlrobj);
+					gamecntrlrobj.addObserver(window);
 					window.m_frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -91,7 +93,8 @@ public class TDGameMain implements Observer {
 	/**
 	 * Create the application.
 	 */
-	public TDGameMain() {
+	public TDGameMain(GameController gamcntrlrobj) {
+		m_ctrlrObj = gamcntrlrobj;
 		initialize();
 		
 		custmInitializeFrm();
@@ -104,7 +107,7 @@ public class TDGameMain implements Observer {
 	{
 		try
 		{
-			m_ctrlrObj.initializeCntrolr(this);
+			m_ctrlrObj.initializeCntrolr();
 			Component[] components = m_frame.getContentPane().getComponents();
 			MigLayout myGrid = new MigLayout();
 			
@@ -220,7 +223,7 @@ public class TDGameMain implements Observer {
 		lblTwr1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				m_ctrlrObj.setTowerDesc(lblTwr1.getName());
+				m_ctrlrObj.setTowerDesc("lblTwr1");
 			}
 		});
 		lblTwr1.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower3.png")));
@@ -229,7 +232,7 @@ public class TDGameMain implements Observer {
 		lblTwr2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				m_ctrlrObj.setTowerDesc(lblTwr2.getName());
+				m_ctrlrObj.setTowerDesc("lblTwr2");
 			}
 		});
 		lblTwr2.setIcon(new ImageIcon(TDGameMain.class.getResource("/images/tower4.png")));
@@ -245,7 +248,7 @@ public class TDGameMain implements Observer {
 		lblTwr3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				m_ctrlrObj.setTowerDesc(lblTwr3.getName());
+				m_ctrlrObj.setTowerDesc("lblTwr3");
 			}
 		});
 		lblTwr3.setHorizontalAlignment(SwingConstants.LEFT);
