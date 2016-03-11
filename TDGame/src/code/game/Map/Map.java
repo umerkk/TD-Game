@@ -1,5 +1,4 @@
-package Map;
-
+package code.game.Map;
 import java.util.HashMap;
 import code.game.towers.TowerModel;;
 
