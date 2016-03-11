@@ -157,7 +157,7 @@ public class GameController extends Observable
 	public void initializeCntrolr()
 	{
 		m_selctdtower = null;
-		setAccBalnc(120);
+		setAccBalnc(500);
 		
 		m_castltwrobjarr = new HashMap<String, TowerModel>();
 		//m_imprltwrobjarr = new HashMap<String, CastleTower>();

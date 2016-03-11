@@ -1,8 +1,0 @@
-**Map Validator Cases**
-
-
-1) Start with 0(n) - its the entry point | the last number is exit point.
-2) Should have 0,1,2 nodes at least to be a valid map - that means at least one entry point, one path and one exit point.
-3) Follow n+1 and throw exception is a number is skipped
-4) Cannot move diagonally - thus both indexes of array cannot be changed at once.
-5) 
