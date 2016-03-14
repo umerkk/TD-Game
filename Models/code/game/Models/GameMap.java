@@ -12,7 +12,7 @@ public class GameMap extends Observable {
 
 
 	//Constructor
-	public GameMap(String _mapName, int[][] _mapArray)
+	public void Initialize(String _mapName, int[][] _mapArray)
 	{
 		this.mapName = _mapName;
 		this.mapArray = _mapArray;
@@ -20,7 +20,7 @@ public class GameMap extends Observable {
 		this.ArrayCol = this.mapArray[0].length;
 	}
 
-	public GameMap(String _mapName, int Row, int Col)
+	public void Initialize(String _mapName, int Row, int Col)
 	{
 		this.mapName = _mapName;
 		this.mapArray = new int[Row][Col];
@@ -37,12 +37,12 @@ public class GameMap extends Observable {
 	{
 		return this.ArrayRow;
 	}
-	
+
 	public int GetArrayCol()
 	{
 		return this.ArrayCol;
 	}
-	
+
 	public int[][] GetMapArray()
 	{
 		return this.mapArray;
@@ -55,16 +55,62 @@ public class GameMap extends Observable {
 
 	public void AddTower(String location,TowerModel tower)
 	{
-		towerCollection.put(location, tower);
-		notifyObservers(this);
+		char[] name_exploded = location.toCharArray();
+		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		if(mapArray[x][y] == 0)
+		{
+			towerCollection.put(location, tower);
+			mapArray[x][y] = -5;
+			notifyObservers(this);
+		} 
+		
 	}
 	
+	public Boolean CheckMapIsEmpty(String location)
+	{
+		char[] name_exploded = location.toCharArray();
+		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		if(mapArray[x][y] == 0)
+		{
+			return true;
+		} else
+			return false;
+	}
+
 	public Boolean CheckTowerExists(String location)
 	{
 		if(towerCollection.containsKey(location))
 			return true;
 		else
+		{
+			char[] name_exploded = location.toCharArray();
+			int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+			int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+			if(mapArray[x][y] == -5)
+				return true;
+			else
+				return false;
+		}
+	}
+	
+	public Boolean DeleteTowerFromMap(String location)
+	{
+		char[] name_exploded = location.toCharArray();
+		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		if(towerCollection.containsKey(location))
+		{
+			towerCollection.remove(location);
+			mapArray[x][y] = 0;
+			return true;
+		}
+		else
+		{
 			return false;
+		}
+			
 	}
 
 	public Boolean AddToMap(String type, int Row, int Col)
@@ -101,11 +147,11 @@ public class GameMap extends Observable {
 				}
 			}
 			}
-			
+
 		}
-		
+
 	}
-	
+
 	public Boolean DeleteFromMap(int Row, int Col)
 	{
 		if(Row > mapArray.length || Col > mapArray[0].length)
@@ -118,7 +164,7 @@ public class GameMap extends Observable {
 			notifyObservers(this);
 			return true;
 		}
-		
+
 	}
 
 

@@ -27,37 +27,37 @@ import code.game.Models.*;
 public class SingleGameController {
 
 	private GameMap map=null;
-	private int accountBalance=500;
 	private TowerModel selectedTower=null;
-	private Boolean newTowerSelected;
+	private Boolean newTowerSelected=false;
 	private JPanel selectedCell;
+	public GameData gameDataModel;
 
 
 
 	//======================================================================================
-	public int GetAccountBalance()
-	{
-		return accountBalance;
-	}
-
-	public void SetAccountBalance(int money)
-	{
-		this.accountBalance = money;
-	}
-
-	public void AddMoneyToAccount(int money)
-	{
-		this.accountBalance+=money;
-	}
-
-	public void DeductMoneyFromAccount(int money)
-	{
-		this.accountBalance-=money;
-	}
-
+	
 	public JPanel GetSelectedCell()
 	{
 		return selectedCell;
+	}
+	
+	public void SetGameDataModel(GameData gf)
+	{
+		this.gameDataModel=gf;
+	}
+	
+	public String ShowSelectedTowerDesc()
+	{
+		if(selectedTower !=null)
+		{
+			return selectedTower.getTowerDetails().toString();
+		} else
+			return "";
+	}
+	
+	public void SetMap(GameMap _map)
+	{
+		this.map=_map;
 	}
 
 	public void SetSelectedCell(JPanel cell)
@@ -78,7 +78,7 @@ public class SingleGameController {
 				FileInputStream fis = new FileInputStream(selectedFile);
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				int[][] mapArray = (int[][]) ois.readObject();
-				map = new GameMap("myMap", mapArray);
+				map.Initialize("myMap", mapArray);
 
 				ois.close();
 				fis.close();
@@ -247,46 +247,110 @@ public class SingleGameController {
 		TowerModel m = selectedTower;
 		if(m!=null)
 		{
-			int l = (this.GetAccountBalance()- m.getCostOfTower());
-			if(mapArray[x][y] == 0 && l >= 0) { 
+			int l = (gameDataModel.GetAccountBalance()- m.getCostOfTower());
+			if(l>-1)
+			{
+				
+				if(mapArray[x][y] == 0) { 
 
 
-				if(m.getName().equals("Castle Tower"))
-				{
-					try {
-						BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower3.png"));
+					if(m.getName().equals("Castle Tower"))
+					{
+						try {
+							BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower3.png"));
 
-						t = new JLabel(new ImageIcon(myPicture));
-					} catch (Exception e){}
+							t = new JLabel(new ImageIcon(myPicture));
+						} catch (Exception e){}
 
 
-				} else if(m.getName().equals("Imperial Tower"))
-				{
-					try {
-						BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower.png"));
+					} else if(m.getName().equals("Imperial Tower"))
+					{
+						try {
+							BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower.png"));
 
-						t = new JLabel(new ImageIcon(myPicture));
-					} catch (Exception e){}
-				}else if(m.getName().equals("Industrial Tower"))
-				{
-					try {
-						BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower4.png"));
+							t = new JLabel(new ImageIcon(myPicture));
+						} catch (Exception e){}
+					}else if(m.getName().equals("Industrial Tower"))
+					{
+						try {
+							BufferedImage myPicture = ImageIO.read(new File("TDGame/src/images/tower4.png"));
 
-						t = new JLabel(new ImageIcon(myPicture));
-					} catch (Exception e){}
+							t = new JLabel(new ImageIcon(myPicture));
+						} catch (Exception e){}
+					}
+					cell.setBackground(Color.blue);
+					//gameDataModel.SetAccountBalance(gameDataModel.GetAccountBalance() - m.getCostOfTower());
+					SetSelectedCell(null);
+					t.setBounds(0, 0, 80, 80);
+					cell.add(t);
+
+					map.AddTower(tempName, selectedTower);
+					gameDataModel.DeductMoneyFromAccount(m.getCostOfTower());
 				}
-				cell.setBackground(Color.blue);
-				SetAccountBalance(GetAccountBalance() - m.getCostOfTower());
-				SetSelectedCell(null);
-				t.setBounds(0, 0, 80, 80);
-				cell.add(t);
 
-				map.AddTower(tempName, selectedTower);
+
+
+
+			} else {
+				JOptionPane.showMessageDialog(null, "You do not have enough money to place a new tower.", "Error:", JOptionPane.ERROR_MESSAGE);
 			}
 		} else {
 			selectedCell = cell;
 			selectedTower = m;
 		}
+	}
+
+	public void RemoveTower()
+	{
+		if(selectedCell!=null)
+		{
+			if(map.DeleteTowerFromMap(selectedCell.getName()))
+			{
+				gameDataModel.AddMoneyToAccount(selectedTower.getRefundValue());
+				selectedCell.removeAll();
+				selectedCell.setBackground(null);
+			} else {
+				JOptionPane.showMessageDialog(null, "There is no tower at this location.", "Error:", JOptionPane.ERROR_MESSAGE);
+
+			}
+		}
+	}
+	
+	public void UpgradeSelectedTower()
+	{
+		if(!(selectedTower.getUpgradeCost()>gameDataModel.GetAccountBalance()))
+		{
+			selectedTower.upgradeCurrentLevel();
+			gameDataModel.DeductMoneyFromAccount(selectedTower.getUpgradeCost());
+			gameDataModel.SetSelectedTowerDescription(selectedTower.getTowerDetails().toString());
+		} else {
+			JOptionPane.showMessageDialog(null, "You do not have enough money to upgrade this tower.", "Error:", JOptionPane.ERROR_MESSAGE);
+
+		}
+	}
+	
+	public void SetSelectedTower(String towerName)
+	{
+		// set the selected tower
+				switch(towerName)
+				{
+					case "lblTwr1" : 
+						//m_selctdTower = 1;
+						selectedTower = new CastleTower();
+						newTowerSelected = true;
+						break;
+					case "lblTwr2" :
+						//m_selctdTower = 2;
+						selectedTower = new ImperialTower();
+						newTowerSelected = true;
+						break;
+					case "lblTwr3" :
+						//m_selctdTower = 3;
+						selectedTower = new IndustrialTower();
+						newTowerSelected = true;
+						break;
+				}
+				
 	}
 
 
@@ -306,14 +370,28 @@ public class SingleGameController {
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		//1=StartPoint, 9999=End, 2=Path, 3=Delete
 		selectedCell = cell;
-
 		if(map.CheckTowerExists(tempName))
-			DrawTower(cell);
-		else
 		{
+			//Assign the variable to selected tower;
 			TowerModel tmpmdl = map.GetTower(tempName);
 			selectedTower = tmpmdl;
+			gameDataModel.SetSelectedTowerDescription(selectedTower.getTowerDetails().toString());
 			newTowerSelected=false;
+		
+		} else {
+			if(newTowerSelected)
+			{
+				if(map.CheckMapIsEmpty(tempName))
+				{
+					DrawTower(cell);
+				} else {
+					JOptionPane.showMessageDialog(null, "The slot is not empty to place a new tower.", "Warning:", JOptionPane.WARNING_MESSAGE);
+					
+				}
+				selectedTower = null;
+				newTowerSelected=false;
+				
+			}
 		}
 
 	}
