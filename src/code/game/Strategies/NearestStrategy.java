@@ -14,12 +14,26 @@ public class NearestStrategy  implements TowerStrategy {
 		
 		for(int k=1;k<=tower.getCurrentLevel();k++)
 		{
+
+			String xRight = String.valueOf(x+k);
+			String xLeft = String.valueOf(x-k);
+			String yUp = String.valueOf(y+k);
+			String yDown = String.valueOf(y-k);
 			
-			
-			
+			if(map.CheckCritterExists(xRight+name_exploded[1]))
+			{
+				
+			} else if(map.CheckCritterExists(xLeft+name_exploded[1]))
+			{
+				
+			} else if(map.CheckCritterExists(name_exploded[0]+yUp))
+			{
+				
+			} else if(map.CheckCritterExists(name_exploded[0]+yDown))
+			{
+				
+			}
 		}
-		
-		
 		
 		
 	}
