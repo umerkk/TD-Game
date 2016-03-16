@@ -40,17 +40,17 @@ public class SingleGameController {
 
 
 	//======================================================================================
-	
+
 	public JPanel GetSelectedCell()
 	{
 		return selectedCell;
 	}
-	
+
 	public void SetGameDataModel(GameData gf)
 	{
 		this.gameDataModel=gf;
 	}
-	
+
 	public String ShowSelectedTowerDesc()
 	{
 		if(selectedTower !=null)
@@ -59,7 +59,7 @@ public class SingleGameController {
 		} else
 			return "";
 	}
-	
+
 	public void SetMap(GameMap _map)
 	{
 		this.map=_map;
@@ -137,7 +137,7 @@ public class SingleGameController {
 					{
 
 					}
-					JPanel temp = new JPanel();
+					final JPanel temp = new JPanel();
 					temp.setName(k +""+ i);
 					temp.setBorder(BorderFactory.createEtchedBorder(1));
 					temp.addMouseListener(new MouseListener() {
@@ -200,7 +200,7 @@ public class SingleGameController {
 					{
 
 					}
-					JPanel temp = new JPanel();
+					final JPanel temp = new JPanel();
 					temp.setName(k +""+ i);
 					temp.setBorder(BorderFactory.createEtchedBorder(1));
 					temp.addMouseListener(new MouseListener() {
@@ -248,7 +248,7 @@ public class SingleGameController {
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		int[][] mapArray = map.GetMapArray();
 		JLabel t=null;
-		
+
 		switch(response){
 		case 0:
 		{
@@ -265,15 +265,15 @@ public class SingleGameController {
 		}
 		}
 		selectedTower.SetMyLocationOnMap(tempName);
-		
+
 		TowerModel m = selectedTower;
-		
+
 		if(m!=null)
 		{
 			int l = (gameDataModel.GetAccountBalance()- m.getCostOfTower());
 			if(l>-1)
 			{
-				
+
 				if(mapArray[x][y] == 0) { 
 
 
@@ -338,7 +338,7 @@ public class SingleGameController {
 			}
 		}
 	}
-	
+
 	public void UpgradeSelectedTower()
 	{
 		if(!(selectedTower.getUpgradeCost()>gameDataModel.GetAccountBalance()))
@@ -351,29 +351,29 @@ public class SingleGameController {
 
 		}
 	}
-	
+
 	public void SetSelectedTower(String towerName)
 	{
 		// set the selected tower
-				switch(towerName)
-				{
-					case "lblTwr1" : 
-						//m_selctdTower = 1;
-						selectedTower = new CastleTower();
-						newTowerSelected = true;
-						break;
-					case "lblTwr2" :
-						//m_selctdTower = 2;
-						selectedTower = new ImperialTower();
-						newTowerSelected = true;
-						break;
-					case "lblTwr3" :
-						//m_selctdTower = 3;
-						selectedTower = new IndustrialTower();
-						newTowerSelected = true;
-						break;
-				}
-				
+		switch(towerName)
+		{
+		case "lblTwr1" : 
+			//m_selctdTower = 1;
+			selectedTower = new CastleTower();
+			newTowerSelected = true;
+			break;
+		case "lblTwr2" :
+			//m_selctdTower = 2;
+			selectedTower = new ImperialTower();
+			newTowerSelected = true;
+			break;
+		case "lblTwr3" :
+			//m_selctdTower = 3;
+			selectedTower = new IndustrialTower();
+			newTowerSelected = true;
+			break;
+		}
+
 	}
 
 
@@ -400,7 +400,7 @@ public class SingleGameController {
 			selectedTower = tmpmdl;
 			gameDataModel.SetSelectedTowerDescription(selectedTower.getTowerDetails().toString());
 			newTowerSelected=false;
-		
+
 		} else {
 			if(newTowerSelected)
 			{
@@ -408,16 +408,16 @@ public class SingleGameController {
 				{
 					JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First"});
 					JOptionPane.showMessageDialog(
-					  null, list, "Select the tower strategy", JOptionPane.QUESTION_MESSAGE);
+							null, list, "Select the tower strategy", JOptionPane.QUESTION_MESSAGE);
 					int response = list.getSelectedIndex();
 					DrawTower(cell,response);
 				} else {
 					JOptionPane.showMessageDialog(null, "The slot is not empty to place a new tower.", "Warning:", JOptionPane.WARNING_MESSAGE);
-					
+
 				}
 				selectedTower = null;
 				newTowerSelected=false;
-				
+
 			}
 		}
 

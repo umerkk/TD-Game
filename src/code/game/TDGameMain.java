@@ -310,7 +310,7 @@ public class TDGameMain implements Observer {
 					{
 						
 					}
-					JPanel temp = new JPanel();
+					final JPanel temp = new JPanel();
 					temp.setName(k +""+ i);
 					temp.setBorder(BorderFactory.createEtchedBorder(1));
 					temp.addMouseListener(new MouseListener() {
@@ -403,7 +403,7 @@ public class TDGameMain implements Observer {
 					{
 						
 					}
-					JPanel temp = new JPanel();
+					final JPanel temp = new JPanel();
 					temp.setName(k +""+ i);
 					temp.setBorder(BorderFactory.createEtchedBorder(1));
 					temp.addMouseListener(new MouseListener() {
