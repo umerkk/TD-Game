@@ -1,4 +1,4 @@
-package Strategies;
+package code.game.Strategies;
 
 import code.game.Models.GameMap;
 import code.game.Models.TowerModel;
@@ -12,7 +12,7 @@ public class NearestStrategy  implements TowerStrategy {
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		
-		for(int k=tower.getCurrentLevel();k>0;k--)
+		for(int k=1;k<=tower.getCurrentLevel();k++)
 		{
 			
 			

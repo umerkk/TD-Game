@@ -1,4 +1,4 @@
-package Strategies;
+package code.game.Strategies;
 
 import code.game.Models.GameMap;
 import code.game.Models.TowerModel;

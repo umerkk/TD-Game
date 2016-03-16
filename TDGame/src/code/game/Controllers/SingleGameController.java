@@ -21,10 +21,10 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Strategies.NearestStrategy;
-import Strategies.StrongestStrategy;
-import Strategies.WeakestStrategy;
 import code.game.Models.*;
+import code.game.Strategies.NearestStrategy;
+import code.game.Strategies.StrongestStrategy;
+import code.game.Strategies.WeakestStrategy;
 /**
  * @author Umer-PC
  *

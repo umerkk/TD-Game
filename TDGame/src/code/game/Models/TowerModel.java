@@ -2,7 +2,7 @@ package code.game.Models;
 
 import java.util.Observable;
 
-import Strategies.TowerStrategy;
+import code.game.Strategies.TowerStrategy;
 
 /**
  * This class defines the necessary properties of the tower and exposes methods to access and modify the tower objects.
