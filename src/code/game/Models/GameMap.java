@@ -51,7 +51,12 @@ public class GameMap extends Observable {
 
 	public TowerModel GetTower(String location)
 	{
-		return towerCollection.get(location);
+		if(towerCollection.containsKey(location))
+			{
+			return towerCollection.get(location);
+			} else {
+				return null;
+			}
 	}
 
 	public void AddTower(String location,TowerModel tower)
@@ -130,7 +135,31 @@ public class GameMap extends Observable {
 				return false;
 		}
 	}
+
+
+	public Critter GetCritter(String location)
+	{
+		if(critterCollection.containsKey(location))
+			return critterCollection.get(location);
+		else
+		{
+			return null;
+		}
+	}
 	
+	public void AddCritter(String location,Critter critter)
+	{
+		char[] name_exploded = location.toCharArray();
+		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		if(mapArray[x][y] == 0)
+		{
+			critterCollection.put(location, critter);
+			mapArray[x][y] = -6;
+			notifyObservers(this);
+		} 
+		
+	}
 
 	public Boolean AddToMap(String type, int Row, int Col)
 	{

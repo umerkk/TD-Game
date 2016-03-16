@@ -422,6 +422,19 @@ public class SingleGameController {
 		}
 
 	}
+	
+	public void StartWave()
+	{
+		map.AddCritter("12",CritterFactory.getCritter(1));
+		map.AddCritter("14",CritterFactory.getCritter(1));
+		map.GetCritter("14").SetHealth(10);
+
+		
+		map.AddTower("13", new CastleTower());
+		map.GetTower("13").SetStrategy(new StrongestStrategy(), map);
+		map.GetTower("13").SetMyLocationOnMap("13");
+		map.GetTower("13").ExecuteStrategy();
+	}
 
 
 }

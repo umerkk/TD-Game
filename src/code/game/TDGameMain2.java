@@ -210,6 +210,10 @@ public class TDGameMain2 implements Observer {
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//	m_ctrlrObj.strtGameBtnHandlr();
+				myController.StartWave();
+				
+				
+				
 			}
 		});
 		jPnlFtr.add(btnStrtGame, BorderLayout.EAST);
