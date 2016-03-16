@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,6 +41,7 @@ public class SingleGameController {
 	private JPanel selectedCell;
 	public GameData gameDataModel;
 	private int waveNum=1;
+	int critterCreationInterval=2;
 
 
 
@@ -108,20 +110,35 @@ public class SingleGameController {
 
 		if(type==1)
 		{
-			t.setText("S");
-			cell.setBackground(Color.blue);
+			try {
+				BufferedImage myPicture = ImageIO.read(new File("res/start.png"));
+				 t = new JLabel(new ImageIcon(myPicture));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			t.setBounds(0, 0, 80, 80);
+			
+			
 
 		} else  if(type==9999)
 
 		{
-			t.setText("X");
-			cell.setBackground(Color.red);
+			try {
+				BufferedImage myPicture = ImageIO.read(new File("res/end.png"));
+				 t = new JLabel(new ImageIcon(myPicture));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			t.setBounds(0, 0, 80, 80);
+			
+			
 
 		} else  if(!(type==0)){
 			t.setText("P");
 			cell.setBackground(Color.green);
+			t.setBounds(0, 0, 80, 80);
 		}
-		t.setBounds(20, 20, 50, 50);
+		
 		cell.add(t);
 	}
 
@@ -244,6 +261,19 @@ public class SingleGameController {
 		}
 	}
 
+	public void RemoveCritters(Panel panel)
+	{
+		
+		for(int s=0;s<panel.getComponentCount();s++)
+		{
+			try {
+				((JPanel)panel.getComponent(s)).remove(1);
+			} catch (Exception e) {
+				continue;
+			}
+		}
+	}
+	
 	public void DrawCritter(HashMap<String,Critter> critterList, Panel panel)
 	{
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
@@ -253,13 +283,40 @@ public class SingleGameController {
 		    
 		    if(loc>0)
 		    {
-		    	String location = map.FindLocationInMap(loc);
-				char[] name_exploded = location.toCharArray();
+		    	
+		    	try {
+					String location = map.FindLocationInMap(loc);
+					char[] name_exploded = location.toCharArray();
+					
+					for(int s=0;s<panel.getComponentCount();s++)
+					{
+						if(panel.getComponent(s).getName().equalsIgnoreCase(new String(name_exploded)))
+						{
+							JLabel t=null;
+							//panel.getComponent(s).setBackground(Color.red);
+							BufferedImage myPicture;
+							try {
+								myPicture = ImageIO.read(new File("res/critter.png"));
+								 t = new JLabel(new ImageIcon(myPicture));
+								t.setBounds(0, 0, 80, 80);
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							((JPanel)panel.getComponent(s)).add(t);
+
+							
+							
+						}
+					}
+				} catch (Exception e) {
+					continue;
+					//e.printStackTrace();
+				}
+				//JPanel cell = (JPanel) panel.getComponentAt((int) name_exploded[0], (int) name_exploded[1]);
 				
-				JPanel cell = (JPanel) panel.getComponentAt((int) name_exploded[0], (int) name_exploded[1]);
-				
-				String k = cell.getName();
-				cell.removeAll();
+				//String k = cell.getName();
+				//cell.removeAll();
 				int ksd=0;
 		    }
 			
@@ -453,12 +510,12 @@ public class SingleGameController {
 
 	public void StartWave(Panel panel)
 	{
-		for(int k=0,i=0;k<=waveNum*6;k++,i--)
+		for(int k=1,i=0;k<=waveNum*6;k++,i--)
 		{
-			map.AddCritter(String.valueOf(i), CritterFactory.getCritter(1,map));
+		//	map.AddCritter(String.valueOf(i), CritterFactory.getCritter(1,map));
 		}
 		
-		IncrementWave(panel);
+		//IncrementWave(panel);
 
 		//		map.AddCritter("12",CritterFactory.getCritter(1));
 		//		map.AddCritter("14",CritterFactory.getCritter(1));
@@ -470,10 +527,16 @@ public class SingleGameController {
 		//		map.GetTower("13").SetMyLocationOnMap("13");
 		//		map.GetTower("13").ExecuteStrategy();
 	}
-	
+
 	public void IncrementWave(Panel panel)
 	{
-		HashMap<String,Critter> tempList = (HashMap<String, Critter>) map.GetCritterCollection().clone();
+		if(critterCreationInterval%2==0)
+		{
+			map.AddCritter(String.valueOf(0), CritterFactory.getCritter(1,map));
+
+		}
+		critterCreationInterval++;
+		HashMap<String,Critter> tempList = new HashMap<String, Critter>();
 	
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
 		{
@@ -482,11 +545,13 @@ public class SingleGameController {
 		    int loc = Integer.parseInt(key);
 			loc++;
 			tempList.put(String.valueOf(loc), critter);
-			tempList.remove(key);	
+			//tempList.remove(key);
 		}
-		
+		RemoveCritters(panel);
+		panel.repaint();
 		map.SetCritterCollection(tempList);
 		DrawCritter(map.GetCritterCollection(),panel);
+		
 		
 		
 	}

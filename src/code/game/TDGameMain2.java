@@ -208,7 +208,25 @@ public class TDGameMain2 implements Observer {
 		m_frame.getContentPane().add(jPnlFtr, BorderLayout.SOUTH);
 		jPnlFtr.setLayout(new BorderLayout(0, 0));
 		
+		JLabel lblArangFtr = new JLabel(" ");
+		lblArangFtr.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		lblArangFtr.setIcon(null);
+		jPnlFtr.add(lblArangFtr, BorderLayout.SOUTH);
+		
+		JPanel panel_1 = new JPanel();
+		jPnlFtr.add(panel_1, BorderLayout.EAST);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
 		JButton btnStrtGame = new JButton("Start Game");
+		panel_1.add(btnStrtGame, BorderLayout.NORTH);
+		
+		JButton btnNewButton = new JButton("Advance Game>>");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				myController.IncrementWave(panel);
+			}
+		});
+		panel_1.add(btnNewButton, BorderLayout.SOUTH);
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//	m_ctrlrObj.strtGameBtnHandlr();
@@ -218,12 +236,6 @@ public class TDGameMain2 implements Observer {
 				
 			}
 		});
-		jPnlFtr.add(btnStrtGame, BorderLayout.EAST);
-		
-		JLabel lblArangFtr = new JLabel(" ");
-		lblArangFtr.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		lblArangFtr.setIcon(null);
-		jPnlFtr.add(lblArangFtr, BorderLayout.SOUTH);
 		
 		JPanel jPnlDesc = new JPanel();
 		m_frame.getContentPane().add(jPnlDesc, BorderLayout.EAST);
