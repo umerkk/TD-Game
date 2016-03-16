@@ -7,6 +7,7 @@ public abstract class Critter {
 	private int health;
 	private int level;
 	private int speed;
+	private GameMap mapReference;
 	
 	
 	public Critter()
@@ -14,15 +15,20 @@ public abstract class Critter {
 		
 	}
 	
-	public Critter(int reward,int hitPoint, int health, int level, int speed)
+	public Critter(int reward,int hitPoint, int health, int level, int speed,GameMap map)
 	{
 		this.reward = reward;
 		this.hit_point = hitPoint;
 		this.health = health;
 		this.level= level;
 		this.speed = speed;
+		this.mapReference = map;
 	}
 	
+	public void MoveCritter()
+	{
+		
+	}
 	
 	public void SetReward(int reward)
 	{

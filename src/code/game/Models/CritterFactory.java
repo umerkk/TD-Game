@@ -5,21 +5,21 @@ public class CritterFactory {
 	public CritterFactory(){}
 
 
-	public static Critter getCritter(int level)
+	public static Critter getCritter(int level,GameMap map)
 	{
 		switch(level)
 		{
 		case 1:
 		{
-			return new BasicCritter();
+			return new BasicCritter(map);
 		}
 		case 2:
 		{
-			return new IntermediateCritter();
+			return new IntermediateCritter(map);
 		}
 		case 3:
 		{
-			return new AdvanceCritter();
+			return new AdvanceCritter(map);
 		}
 		}
 		return null;

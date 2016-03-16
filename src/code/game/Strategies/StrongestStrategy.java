@@ -22,7 +22,7 @@ public class StrongestStrategy implements TowerStrategy{
 			String xLeft = String.valueOf(x-k);
 			String yUp = String.valueOf(y+k);
 			String yDown = String.valueOf(y-k);
-			
+		try {
 				if(map.CheckCritterExists(xRight+name_exploded[1]))
 				{
 					if(weakestCritter==null)
@@ -77,6 +77,10 @@ public class StrongestStrategy implements TowerStrategy{
 					}
 
 				}
+		} catch (IndexOutOfBoundsException e)
+		{
+			continue;
+		}
 			
 		}
 	}

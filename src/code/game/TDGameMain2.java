@@ -6,6 +6,7 @@ import code.game.Controllers.SingleGameController;
 import code.game.Models.GameData;
 import code.game.Models.GameMap;
 import code.game.Models.TowerModel;
+import code.game.UIComponent.CritterPanel;
 
 import javax.swing.JFrame;
 import javax.imageio.ImageIO;
@@ -17,6 +18,7 @@ import java.awt.BorderLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 
@@ -210,8 +212,8 @@ public class TDGameMain2 implements Observer {
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			//	m_ctrlrObj.strtGameBtnHandlr();
-				myController.StartWave();
 				
+				myController.StartWave(panel);
 				
 				
 			}

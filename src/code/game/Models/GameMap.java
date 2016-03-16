@@ -6,6 +6,7 @@ public class GameMap extends Observable {
 
 	private String mapName;
 	private int[][] mapArray;
+	private int[][] critterPath;
 	private HashMap<String,TowerModel> towerCollection = new HashMap<String,TowerModel>();
 	private HashMap<String,Critter> critterCollection = new HashMap<String,Critter>();
 	private int ArrayRow;
@@ -25,6 +26,7 @@ public class GameMap extends Observable {
 	{
 		this.mapName = _mapName;
 		this.mapArray = new int[Row][Col];
+		this.critterPath = new int[Row][Col];
 		this.ArrayRow = this.mapArray.length;
 		this.ArrayCol = this.mapArray[0].length;
 	}
@@ -125,15 +127,17 @@ public class GameMap extends Observable {
 		if(critterCollection.containsKey(location))
 			return true;
 		else
-		{
-			char[] name_exploded = location.toCharArray();
-			int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-			int y = Integer.parseInt(String.valueOf(name_exploded[1]));
-			if(mapArray[x][y] == -6)
-				return true;
-			else
-				return false;
-		}
+			return false;
+//		else
+//		{
+//			char[] name_exploded = location.toCharArray();
+//			int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+//			int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+//			if(mapArray[x][y] == -6)
+//				return true;
+//			else
+//				return false;
+//		}
 	}
 
 
@@ -149,16 +153,37 @@ public class GameMap extends Observable {
 	
 	public void AddCritter(String location,Critter critter)
 	{
-		char[] name_exploded = location.toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
-		if(mapArray[x][y] == 0)
-		{
-			critterCollection.put(location, critter);
-			mapArray[x][y] = -6;
-			notifyObservers(this);
-		} 
 		
+			critterCollection.put(location, critter);
+		
+			notifyObservers(this);
+		 
+		
+	}
+	
+	
+	
+	public HashMap<String,Critter> GetCritterCollection()
+	{
+		return critterCollection;
+	}
+	
+	public void SetCritterCollection(HashMap<String,Critter> critter)
+	{
+		this.critterCollection = critter;
+	}
+	
+	public String FindLocationInMap(int value)
+	{
+		for(int k=0;k<mapArray.length;k++)
+		{
+			for(int i=0;i<mapArray[k].length;i++)
+			{
+				if(mapArray[k][i] == value)
+					return String.valueOf(k)+String.valueOf(i);
+			}
+		}
+		return null;
 	}
 
 	public Boolean AddToMap(String type, int Row, int Col)

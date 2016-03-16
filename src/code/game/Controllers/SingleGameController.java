@@ -10,6 +10,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Observable;
 
 import javax.imageio.ImageIO;
@@ -36,6 +39,7 @@ public class SingleGameController {
 	private Boolean newTowerSelected=false;
 	private JPanel selectedCell;
 	public GameData gameDataModel;
+	private int waveNum=1;
 
 
 
@@ -240,6 +244,30 @@ public class SingleGameController {
 		}
 	}
 
+	public void DrawCritter(HashMap<String,Critter> critterList, Panel panel)
+	{
+		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
+		{
+		    String key = entry.getKey();
+		    int loc = Integer.parseInt(key);
+		    
+		    if(loc>0)
+		    {
+		    	String location = map.FindLocationInMap(loc);
+				char[] name_exploded = location.toCharArray();
+				
+				JPanel cell = (JPanel) panel.getComponentAt((int) name_exploded[0], (int) name_exploded[1]);
+				
+				String k = cell.getName();
+				cell.removeAll();
+				int ksd=0;
+		    }
+			
+		}
+		
+		
+	}
+	
 	private void DrawTower(JPanel cell, int response)
 	{
 		String tempName = cell.getName();
@@ -422,18 +450,45 @@ public class SingleGameController {
 		}
 
 	}
-	
-	public void StartWave()
-	{
-		map.AddCritter("12",CritterFactory.getCritter(1));
-		map.AddCritter("14",CritterFactory.getCritter(1));
-		map.GetCritter("14").SetHealth(10);
 
+	public void StartWave(Panel panel)
+	{
+		for(int k=0,i=0;k<=waveNum*6;k++,i--)
+		{
+			map.AddCritter(String.valueOf(i), CritterFactory.getCritter(1,map));
+		}
 		
-		map.AddTower("13", new CastleTower());
-		map.GetTower("13").SetStrategy(new StrongestStrategy(), map);
-		map.GetTower("13").SetMyLocationOnMap("13");
-		map.GetTower("13").ExecuteStrategy();
+		IncrementWave(panel);
+
+		//		map.AddCritter("12",CritterFactory.getCritter(1));
+		//		map.AddCritter("14",CritterFactory.getCritter(1));
+		//		map.GetCritter("14").SetHealth(10);
+		//
+		//		
+		//		map.AddTower("13", new CastleTower());
+		//		map.GetTower("13").SetStrategy(new StrongestStrategy(), map);
+		//		map.GetTower("13").SetMyLocationOnMap("13");
+		//		map.GetTower("13").ExecuteStrategy();
+	}
+	
+	public void IncrementWave(Panel panel)
+	{
+		HashMap<String,Critter> tempList = (HashMap<String, Critter>) map.GetCritterCollection().clone();
+	
+		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
+		{
+		    String key = entry.getKey();
+		    Critter critter = (Critter) entry.getValue();
+		    int loc = Integer.parseInt(key);
+			loc++;
+			tempList.put(String.valueOf(loc), critter);
+			tempList.remove(key);	
+		}
+		
+		map.SetCritterCollection(tempList);
+		DrawCritter(map.GetCritterCollection(),panel);
+		
+		
 	}
 
 

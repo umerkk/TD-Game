@@ -21,6 +21,7 @@ public class NearestStrategy  implements TowerStrategy {
 			String yDown = String.valueOf(y-k);
 			if(!isIgnore)
 			{
+				try {
 				if(map.CheckCritterExists(xRight+name_exploded[1]))
 				{
 					map.GetCritter(xRight+name_exploded[1]).ReduceHealth((int)tower.getPowerOfBullets());
@@ -39,6 +40,10 @@ public class NearestStrategy  implements TowerStrategy {
 					map.GetCritter(name_exploded[0]+yDown).ReduceHealth((int)tower.getPowerOfBullets());
 					isIgnore = true;
 
+				}
+				} catch (IndexOutOfBoundsException e)
+				{
+					continue;
 				}
 			}
 		}
