@@ -2,6 +2,8 @@ package code.game.Models;
 
 import java.util.Observable;
 
+import Strategies.TowerStrategy;
+
 /**
  * This class defines the necessary properties of the tower and exposes methods to access and modify the tower objects.
  * 
@@ -20,6 +22,9 @@ public class TowerModel extends Observable{
 	private float m_powerofbullet; //Rate of Health to deduct from the target
 	private int m_rateoffire; // Interval between each fire
 	private int m_health; //Tower health
+	private TowerStrategy strategy;
+	private GameMap mapRefernce;
+	private String MyLocationOnMap;
 	
 	/**
 	 * Constructor for defining an object of the tower model.
@@ -63,8 +68,40 @@ public class TowerModel extends Observable{
 		strBldrObj.append("\nPower : " + m_powerofbullet);
 		strBldrObj.append("\nRate of Fire : " + m_rateoffire);
 		strBldrObj.append("\nHealth : " + m_health);
+		if(strategy!=null)
+		strBldrObj.append("\nStrategy : " + strategy.GetStrategyName());
+		else
+			strBldrObj.append("\nStrategy : Shown after placement.");
+
 		return strBldrObj;
 	}
+	
+	public void SetStrategy(TowerStrategy _strategy, GameMap map)
+	{
+		this.strategy = _strategy;
+		mapRefernce = map;
+	}
+	
+	public void SetMyLocationOnMap(String location)
+	{
+		this.MyLocationOnMap = location;
+	}
+	
+	public String GetMyLocationOnMap()
+	{
+		return this.MyLocationOnMap;
+	}
+	
+	public void ExecuteStrategy()
+	{
+		this.strategy.ShootCritters(mapRefernce,this);
+	}
+	
+	public TowerStrategy GetStrategy()
+	{
+		return this.strategy;
+	}
+	
 	/**
 	 * method which returns the current level of the tower.
 	 * 

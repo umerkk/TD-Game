@@ -7,6 +7,7 @@ public class GameMap extends Observable {
 	private String mapName;
 	private int[][] mapArray;
 	private HashMap<String,TowerModel> towerCollection = new HashMap<String,TowerModel>();
+	private HashMap<String,Critter> critterCollection = new HashMap<String,Critter>();
 	private int ArrayRow;
 	private int ArrayCol;
 
@@ -112,6 +113,24 @@ public class GameMap extends Observable {
 		}
 			
 	}
+	
+
+	public Boolean CheckCritterExists(String location)
+	{
+		if(critterCollection.containsKey(location))
+			return true;
+		else
+		{
+			char[] name_exploded = location.toCharArray();
+			int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+			int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+			if(mapArray[x][y] == -6)
+				return true;
+			else
+				return false;
+		}
+	}
+	
 
 	public Boolean AddToMap(String type, int Row, int Col)
 	{

@@ -9,6 +9,6 @@ public class IndustrialTower extends TowerModel {
 
 	public IndustrialTower()
 	{
-		super("Industrial Tower", 500, 50, 400, 8, 60, 12);
+		super("Industrial Tower", 500, 50, 400, 3, 60, 12);
 	}
 }

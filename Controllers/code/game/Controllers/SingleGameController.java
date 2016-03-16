@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.Arrays;
 import java.util.Observable;
 
 import javax.imageio.ImageIO;
@@ -16,9 +17,13 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import Strategies.NearestStrategy;
+import Strategies.StrongestStrategy;
+import Strategies.WeakestStrategy;
 import code.game.Models.*;
 /**
  * @author Umer-PC
@@ -235,7 +240,7 @@ public class SingleGameController {
 		}
 	}
 
-	private void DrawTower(JPanel cell)
+	private void DrawTower(JPanel cell, int response)
 	{
 		String tempName = cell.getName();
 		char[] name_exploded = tempName.toCharArray();
@@ -243,8 +248,26 @@ public class SingleGameController {
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		int[][] mapArray = map.GetMapArray();
 		JLabel t=null;
-
+		
+		switch(response){
+		case 0:
+		{
+			selectedTower.SetStrategy(new NearestStrategy(),map);
+			break;
+		}
+		case 1:{
+			selectedTower.SetStrategy(new StrongestStrategy(),map);
+			break;
+		}
+		case 2: {
+			selectedTower.SetStrategy(new WeakestStrategy(),map);
+			break;
+		}
+		}
+		selectedTower.SetMyLocationOnMap(tempName);
+		
 		TowerModel m = selectedTower;
+		
 		if(m!=null)
 		{
 			int l = (gameDataModel.GetAccountBalance()- m.getCostOfTower());
@@ -383,7 +406,11 @@ public class SingleGameController {
 			{
 				if(map.CheckMapIsEmpty(tempName))
 				{
-					DrawTower(cell);
+					JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First"});
+					JOptionPane.showMessageDialog(
+					  null, list, "Select the tower strategy", JOptionPane.QUESTION_MESSAGE);
+					int response = list.getSelectedIndex();
+					DrawTower(cell,response);
 				} else {
 					JOptionPane.showMessageDialog(null, "The slot is not empty to place a new tower.", "Warning:", JOptionPane.WARNING_MESSAGE);
 					

@@ -10,6 +10,6 @@ public class CastleTower extends TowerModel
 {
 	public CastleTower()
 	{
-		super("Castle Tower", 100, 10, 80, 3, 20, 10);
+		super("Castle Tower", 100, 10, 80, 1, 20, 10);
 	}
 }

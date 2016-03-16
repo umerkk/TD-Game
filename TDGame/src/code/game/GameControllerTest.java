@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import code.game.towers.CastleTower;
-import code.game.towers.TowerModel;
+import code.game.Models.CastleTower;
+import code.game.Models.TowerModel;
 import junit.framework.Assert;
 
 /**
