@@ -45,7 +45,11 @@ public class SingleGameController {
 	public GameData gameDataModel;
 	private int waveNum=1;
 	int critterCreationInterval=2;
-	private int critterMovementTime=800; 
+	private int critterMovementTime=800;
+	private boolean isGameStarted = false;
+	private Timer gameTimer=null;
+	private final int critterKillPoints=20;
+	private final int critterRunAwayPoints=20; 
 
 
 
@@ -138,7 +142,7 @@ public class SingleGameController {
 
 
 		} else  if(!(type==0)){
-			t.setText("P");
+			//t.setText("P");
 			cell.setBackground(Color.green);
 			t.setBounds(0, 0, 80, 80);
 		}
@@ -209,7 +213,7 @@ public class SingleGameController {
 					{
 						DrawMapItem(2,temp);
 					}
-					parentPanel.add(temp, "width 80, height 80" + _append);					
+					parentPanel.add(temp, "wmax 80, hmax 80, width 80, height 80" + _append);					
 				}
 			}
 		} else {
@@ -259,7 +263,7 @@ public class SingleGameController {
 							click(e,temp);
 						}
 					});
-					parentPanel.add(temp, "width 80, height 80" + _append);
+					parentPanel.add(temp, "wmax 80, hmax 80,width 80, height 80" + _append);
 				}
 			}
 		}
@@ -294,6 +298,10 @@ public class SingleGameController {
 	{
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
 		{
+			//panel.validate();
+		
+			//if(((Critter)entry.getValue()).GetMyLocationOnMap()==null)
+			//	continue;
 			String key = entry.getKey();
 			int loc = Integer.parseInt(key);
 
@@ -301,10 +309,29 @@ public class SingleGameController {
 			{
 
 				try {
-					if(((Critter)entry.getValue()).GetHealth()<0)
+					if(((Critter)entry.getValue()).GetHealth()<1)
+					{
+						map.RemoveCritter(key);
+						gameDataModel.AddMoneyToAccount(critterKillPoints);
 						continue;
+					}
+
 					else {
 						String location = map.FindLocationInMap(loc);
+						if(location==null)
+						{
+							location = map.FindLocationInMap(9999);
+						}
+						String endLoc = map.FindLocationInMap(9999);
+						if(location.equalsIgnoreCase(endLoc))
+						{
+							//Critter reached the end point.
+							gameDataModel.DeductMoneyFromAccount(critterRunAwayPoints);
+							map.AddCritter(key, null);
+							continue;
+							//((Critter)entry).SetHealth(0);
+
+						}
 						char[] name_exploded = location.toCharArray();
 
 						for(int s=0;s<panel.getComponentCount();s++)
@@ -318,7 +345,7 @@ public class SingleGameController {
 								try {
 									myPicture = ImageIO.read(new File("res/critter.png"));
 									t = new JLabel(new ImageIcon(myPicture));
-									t.setBounds(0, 0, 80, 80);
+									t.setBounds(0, 0, 40, 40);
 									t.setName("critter");
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
@@ -329,17 +356,13 @@ public class SingleGameController {
 						}
 					}
 				} catch (Exception e) {
-					continue;
-					//e.printStackTrace();
+					continue;	
 				}
-				//JPanel cell = (JPanel) panel.getComponentAt((int) name_exploded[0], (int) name_exploded[1]);
-
-				//String k = cell.getName();
-				//cell.removeAll();
-				int ksd=0;
 			}
 
 		}
+		//panel.validate();
+		//panel.repaint();
 
 
 	}
@@ -458,24 +481,27 @@ public class SingleGameController {
 
 	public void SetSelectedTower(String towerName)
 	{
-		// set the selected tower
-		switch(towerName)
+		if(isGameStarted==false)
 		{
-		case "lblTwr1" : 
-			//m_selctdTower = 1;
-			selectedTower = new CastleTower();
-			newTowerSelected = true;
-			break;
-		case "lblTwr2" :
-			//m_selctdTower = 2;
-			selectedTower = new ImperialTower();
-			newTowerSelected = true;
-			break;
-		case "lblTwr3" :
-			//m_selctdTower = 3;
-			selectedTower = new IndustrialTower();
-			newTowerSelected = true;
-			break;
+			// set the selected tower
+			switch(towerName)
+			{
+			case "lblTwr1" : 
+				//m_selctdTower = 1;
+				selectedTower = new CastleTower();
+				newTowerSelected = true;
+				break;
+			case "lblTwr2" :
+				//m_selctdTower = 2;
+				selectedTower = new ImperialTower();
+				newTowerSelected = true;
+				break;
+			case "lblTwr3" :
+				//m_selctdTower = 3;
+				selectedTower = new IndustrialTower();
+				newTowerSelected = true;
+				break;
+			}
 		}
 
 	}
@@ -497,6 +523,7 @@ public class SingleGameController {
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		//1=StartPoint, 9999=End, 2=Path, 3=Delete
 		selectedCell = cell;
+
 		if(map.CheckTowerExists(tempName))
 		{
 			//Assign the variable to selected tower;
@@ -539,20 +566,26 @@ public class SingleGameController {
 				IncrementWave(panel);
 			}};
 
-			Timer t = new Timer(critterMovementTime,GamePlay);
-			t.start();
+	
+			gameTimer = new Timer(critterMovementTime,GamePlay);
+			gameTimer.start();
+			
+			isGameStarted = true;
+			critterCreationInterval = 2;
 
 
 	}
 
 	public void IncrementWave(Panel panel)
 	{
+		
+
 		if(critterCreationInterval%2==0)
 		{
 			map.AddCritter(String.valueOf(0), CritterFactory.getCritter(1,map));
 		}
-		critterCreationInterval = 3;
-		//critterCreationInterval++;
+		//critterCreationInterval = 3;
+		critterCreationInterval++;
 		HashMap<String,Critter> tempList = new HashMap<String, Critter>();
 
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
@@ -565,10 +598,21 @@ public class SingleGameController {
 			//tempList.remove(key);
 		}
 		RemoveCritters(panel);
-		panel.repaint();
+		//panel.validate();
+		//panel.repaint();
+		
 		map.SetCritterCollection(tempList);
 		DrawCritter(map.GetCritterCollection(),panel);
+		panel.repaint();
 		map.TowerToShoot();
+
+		if(map.IsCritterCollectionEmpty() || gameDataModel.GetAccountBalance()<1)
+		{
+			isGameStarted=false;
+			gameTimer.stop();
+		
+
+		}
 	}
 
 

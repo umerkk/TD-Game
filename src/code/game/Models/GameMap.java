@@ -62,12 +62,15 @@ public class GameMap extends Observable {
 		}
 	}
 
-	public void TowerToShoot()
+	public int TowerToShoot()
 	{
+		int totalHits=0;
 		for (Map.Entry<String, TowerModel> entry : towerCollection.entrySet()) 
 		{
-			((TowerModel)entry.getValue()).ExecuteStrategy();
+			if(((TowerModel)entry.getValue()).ExecuteStrategy())
+				totalHits++;
 		}
+		return totalHits;
 	}
 
 	public void AddTower(String location,TowerModel tower)
@@ -179,6 +182,18 @@ public class GameMap extends Observable {
 		}
 		return answer;
 	}
+	
+	public Critter GetCritterFromCollection(String key)
+	{
+		if(critterCollection.containsKey(key))
+		{
+			return critterCollection.get(key);
+		}
+		else
+		{
+			return null;
+		}
+	}
 
 	public void AddCritter(String location,Critter critter)
 	{
@@ -189,7 +204,26 @@ public class GameMap extends Observable {
 
 
 	}
-
+	
+	public void RemoveCritter(String location)
+	{
+		if(critterCollection.containsKey(location))
+		{
+			critterCollection.remove(location);
+		} else {
+			
+		}
+		setChanged();
+		notifyObservers(this);
+	}
+	
+	public boolean IsCritterCollectionEmpty()
+	{
+		if(critterCollection.size()<1)
+			return true;
+		else 
+			return false;
+	}
 
 
 	public HashMap<String,Critter> GetCritterCollection()

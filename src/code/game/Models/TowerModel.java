@@ -92,9 +92,9 @@ public class TowerModel extends Observable{
 		return this.MyLocationOnMap;
 	}
 	
-	public void ExecuteStrategy()
+	public boolean ExecuteStrategy()
 	{
-		this.strategy.ShootCritters(mapRefernce,this);
+		return this.strategy.ShootCritters(mapRefernce,this);
 	}
 	
 	public TowerStrategy GetStrategy()
