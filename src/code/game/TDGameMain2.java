@@ -35,7 +35,8 @@ import net.miginfocom.swing.MigLayout;
 
 
 /**
- * This is the view class for Tower Defence Game play.
+ * This is the view class for Tower Defence Game play, containing all the UI components
+ * implementing observer
  * 
  * @author Armaghan
  * @author Lokesh

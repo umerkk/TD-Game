@@ -36,26 +36,26 @@ public class NearestStrategy  implements TowerStrategy {
 				try {
 					if(map.checkCritterExists(xRight+name_exploded[1])){
 						map.getCritter(xRight+name_exploded[1]).reduceHealth((int)tower.getPowerOfBullets());
-						SetBackgroundOfCritter(tower,map.getCritter(xRight+name_exploded[1]));
+						setBackgroundOfCritter(tower,map.getCritter(xRight+name_exploded[1]));
 						lockedCritter=map.getCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
 					} else if(map.checkCritterExists(xLeft+name_exploded[1])){
 						map.getCritter(xLeft+name_exploded[1]).reduceHealth((int)tower.getPowerOfBullets());
-						SetBackgroundOfCritter(tower,map.getCritter(xLeft+name_exploded[1]));
+						setBackgroundOfCritter(tower,map.getCritter(xLeft+name_exploded[1]));
 						lockedCritter=map.getCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
 					} else if(map.checkCritterExists(name_exploded[0]+yUp)){
 						map.getCritter(name_exploded[0]+yUp).reduceHealth((int)tower.getPowerOfBullets());
-						SetBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yUp));
+						setBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yUp));
 						lockedCritter=map.getCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
 
 					} else if(map.checkCritterExists(name_exploded[0]+yDown)){
 						map.getCritter(name_exploded[0]+yDown).reduceHealth((int)tower.getPowerOfBullets());
-						SetBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yDown));
+						setBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yDown));
 						lockedCritter=map.getCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
@@ -69,7 +69,12 @@ public class NearestStrategy  implements TowerStrategy {
 		return isHit;
 	}
 
-	private void SetBackgroundOfCritter(TowerModel tower, Critter critter){
+	/**
+	 * sets background color of critter upon hitting
+	 * @param tower type of tower
+	 * @param critter the critter to be updated
+	 */
+	private void setBackgroundOfCritter(TowerModel tower, Critter critter){
 		switch(tower.getName()){
 		case "Castle Tower":{
 			critter.setBackground("red");

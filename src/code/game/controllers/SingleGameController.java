@@ -64,6 +64,9 @@ public class SingleGameController {
 	private int numberOfCritters=0;
 
 
+	/**
+	 * empty constructor
+	 */
 	private SingleGameController(){
 	}
 

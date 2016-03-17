@@ -24,7 +24,7 @@ public class TowerModel extends Observable{
 	private int m_health; //Tower health
 	private TowerStrategy strategy;
 	private GameMap mapRefernce;
-	private String MyLocationOnMap;
+	private String myLocationOnMap;
 
 	/**
 	 * Constructor for defining an object of the tower model.
@@ -70,14 +70,18 @@ public class TowerModel extends Observable{
 			strBldrObj.append("\nStrategy : " + strategy.GetStrategyName());
 		else
 			strBldrObj.append("\nStrategy : Shown after placement.");
-		strBldrObj.append("\nMap Location : " + MyLocationOnMap);
+		strBldrObj.append("\nMap Location : " + myLocationOnMap);
 		return strBldrObj;
 	}
 
 	/**
+	 * sets strategy to a tower
+	 * - Weakest
+	 * - Strongest
+	 * - Nearest
 	 * 
-	 * @param _strategy
-	 * @param map
+	 * @param _strategy strategy type
+	 * @param map Map object to be updated
 	 */
 	public void setStrategy(TowerStrategy _strategy, GameMap map){
 		this.strategy = _strategy;
@@ -85,19 +89,19 @@ public class TowerModel extends Observable{
 	}
 
 	/**
-	 * 
-	 * @param location
+	 * set's tower's current location
+	 * @param location tower's coordinates
 	 */
 	public void setMyLocationOnMap(String location){
-		this.MyLocationOnMap = location;
+		this.myLocationOnMap = location;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * return's tower's current location on grid
+	 * @return tower's coordinates
 	 */
 	public String getMyLocationOnMap(){
-		return this.MyLocationOnMap;
+		return this.myLocationOnMap;
 	}
 
 	/**
