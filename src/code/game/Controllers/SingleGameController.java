@@ -45,7 +45,7 @@ public class SingleGameController {
 	public GameData gameDataModel;
 	private int waveNum=1;
 	int critterCreationInterval=2;
-	private int critterMovementTime=1000; 
+	private int critterMovementTime=800; 
 
 
 
@@ -268,14 +268,26 @@ public class SingleGameController {
 	public void RemoveCritters(Panel panel)
 	{
 
-		for(int s=0;s<panel.getComponentCount();s++)
+		//for(int s=0;s<panel.getComponentCount();s++)
+		//{
+		for(int k=0;k<panel.getComponentCount();k++)
 		{
 			try {
-				((JPanel)panel.getComponent(s)).remove(1);
+				Object sd = panel.getComponent(k);
+				Object sd1 = ((JPanel)panel.getComponent(k)).getComponents()[1];
+				if(((JLabel)sd1).getName().equalsIgnoreCase("critter"))
+				{
+					//panel.remove(k);
+					((JPanel)panel.getComponent(k)).remove(1);
+				}
+				//
+
 			} catch (Exception e) {
 				continue;
 			}
 		}
+
+		//}
 	}
 
 	public void DrawCritter(HashMap<String,Critter> critterList, Panel panel)
@@ -307,6 +319,7 @@ public class SingleGameController {
 									myPicture = ImageIO.read(new File("res/critter.png"));
 									t = new JLabel(new ImageIcon(myPicture));
 									t.setBounds(0, 0, 80, 80);
+									t.setName("critter");
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -537,7 +550,6 @@ public class SingleGameController {
 		if(critterCreationInterval%2==0)
 		{
 			map.AddCritter(String.valueOf(0), CritterFactory.getCritter(1,map));
-
 		}
 		critterCreationInterval = 3;
 		//critterCreationInterval++;
@@ -557,9 +569,6 @@ public class SingleGameController {
 		map.SetCritterCollection(tempList);
 		DrawCritter(map.GetCritterCollection(),panel);
 		map.TowerToShoot();
-
-
-
 	}
 
 

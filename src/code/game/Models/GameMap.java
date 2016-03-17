@@ -55,18 +55,18 @@ public class GameMap extends Observable {
 	public TowerModel GetTower(String location)
 	{
 		if(towerCollection.containsKey(location))
-			{
+		{
 			return towerCollection.get(location);
-			} else {
-				return null;
-			}
+		} else {
+			return null;
+		}
 	}
-	
+
 	public void TowerToShoot()
 	{
 		for (Map.Entry<String, TowerModel> entry : towerCollection.entrySet()) 
 		{
-		((TowerModel)entry.getValue()).ExecuteStrategy();
+			((TowerModel)entry.getValue()).ExecuteStrategy();
 		}
 	}
 
@@ -81,9 +81,9 @@ public class GameMap extends Observable {
 			mapArray[x][y] = -5;
 			notifyObservers(this);
 		} 
-		
+
 	}
-	
+
 	public Boolean CheckMapIsEmpty(String location)
 	{
 		char[] name_exploded = location.toCharArray();
@@ -111,7 +111,7 @@ public class GameMap extends Observable {
 				return false;
 		}
 	}
-	
+
 	public Boolean DeleteTowerFromMap(String location)
 	{
 		char[] name_exploded = location.toCharArray();
@@ -127,13 +127,13 @@ public class GameMap extends Observable {
 		{
 			return false;
 		}
-			
+
 	}
 	public HashMap<String,TowerModel> GetTowerCollection()
 	{
 		return towerCollection;
 	}
-	
+
 
 	public Boolean CheckCritterExists(String location)
 	{
@@ -146,27 +146,27 @@ public class GameMap extends Observable {
 				answer =  false;			
 		}
 		return answer;
-		
-//		if(critterCollection.containsKey(location))
-//			return true;
-//		else
-//			return false;
-//		else
-//		{
-//			char[] name_exploded = location.toCharArray();
-//			int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-//			int y = Integer.parseInt(String.valueOf(name_exploded[1]));
-//			if(mapArray[x][y] == -6)
-//				return true;
-//			else
-//				return false;
-//		}
+
+		//		if(critterCollection.containsKey(location))
+		//			return true;
+		//		else
+		//			return false;
+		//		else
+		//		{
+		//			char[] name_exploded = location.toCharArray();
+		//			int x = Integer.parseInt(String.valueOf(name_exploded[0]));
+		//			int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		//			if(mapArray[x][y] == -6)
+		//				return true;
+		//			else
+		//				return false;
+		//		}
 	}
 
 
 	public Critter GetCritter(String location)
 	{
-		
+
 		Critter answer=null;
 		for (Map.Entry<String, Critter> entry : critterCollection.entrySet()) 
 		{
@@ -179,29 +179,29 @@ public class GameMap extends Observable {
 		}
 		return answer;
 	}
-	
+
 	public void AddCritter(String location,Critter critter)
 	{
-		
-			critterCollection.put(location, critter);
-		
-			notifyObservers(this);
-		 
-		
+
+		critterCollection.put(location, critter);
+
+		notifyObservers(this);
+
+
 	}
-	
-	
-	
+
+
+
 	public HashMap<String,Critter> GetCritterCollection()
 	{
 		return critterCollection;
 	}
-	
+
 	public void SetCritterCollection(HashMap<String,Critter> critter)
 	{
 		this.critterCollection = critter;
 	}
-	
+
 	public String FindLocationInMap(int value)
 	{
 		for(int k=0;k<mapArray.length;k++)
