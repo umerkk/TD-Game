@@ -5,13 +5,19 @@ import java.util.Observer;
 
 public class GameData  extends Observable{
 
-	private  int accountBalance;
+	private  int accountBalance = 500;
 	private String selectedTowerDesc;
 
 	//==================================================
-	public GameData(int acctBal)
+	public GameData()
 	{
-		this.accountBalance = acctBal;
+		//this.accountBalance = acctBal;
+	}
+	public void ResetAccountBalance()
+	{
+		this.accountBalance = 500;
+		setChanged();
+		notifyObservers(this);
 	}
 	
 	public String GetSelectedTowerDescription()

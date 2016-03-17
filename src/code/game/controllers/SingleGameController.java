@@ -45,13 +45,14 @@ public class SingleGameController {
 	public GameData gameDataModel;
 	private int waveNum=1;
 	int critterCreationInterval=2;
-	private int critterMovementTime=800;
+	private int critterMovementTime=500;
 	private boolean isGameStarted = false;
 	private Timer gameTimer=null;
 	private final int critterKillPoints=20;
 	private final int critterRunAwayPoints=20; 
 	private final int POINT_ENTRY = 1;
 	private final int POINT_EXIT = 9999;
+	private int numberOfCritters=0;
 
 
 
@@ -288,9 +289,9 @@ public class SingleGameController {
 								//panel.getComponent(s).setBackground(Color.red);
 								BufferedImage myPicture;
 								try {
-									myPicture = ImageIO.read(new File("res/critter.png"));
+									myPicture = ImageIO.read(new File("res/matrix.gif"));
 									t = new JLabel(new ImageIcon(myPicture));
-									t.setBounds(0, 0, 40, 40);
+									t.setBounds(0, 0, 80, 80);
 									t.setName("critter");
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
@@ -470,10 +471,8 @@ public class SingleGameController {
 	}
 
 	public void StartWave(final Panel panel) {
-		//for(int k=1,i=0;k<=waveNum*6;k++,i--)
-		//{
-		//	map.AddCritter(String.valueOf(i), CritterFactory.getCritter(1,map));
-		//}
+
+		this.numberOfCritters = 10;
 		ActionListener GamePlay = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) 
 			{ 
@@ -489,11 +488,15 @@ public class SingleGameController {
 
 	public void IncrementWave(Panel panel) {
 
-		if(critterCreationInterval%2==0) {
-			map.AddCritter(String.valueOf(0), CritterFactory.getCritter(1,map));
+		if(!(numberOfCritters<1))
+		{	
+			if(critterCreationInterval%2==0) {
+				map.AddCritter(String.valueOf(1), CritterFactory.getCritter(1,map));
+				numberOfCritters--;
+			}
+			critterCreationInterval++;
 		}
-		//critterCreationInterval = 3;
-		critterCreationInterval++;
+		
 		HashMap<String,Critter> tempList = new HashMap<String, Critter>();
 
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
@@ -504,7 +507,7 @@ public class SingleGameController {
 			tempList.put(String.valueOf(loc), critter);
 			//tempList.remove(key);
 		}
-		
+
 		RemoveCritters(panel);
 		//panel.validate();
 		//panel.repaint();
@@ -514,10 +517,23 @@ public class SingleGameController {
 		panel.repaint();
 		map.TowerToShoot();
 
-		if(map.IsCritterCollectionEmpty() || gameDataModel.GetAccountBalance()<1) {
+		if(map.IsCritterCollectionEmpty()) {
 			isGameStarted=false;
+			numberOfCritters=0;
 			gameTimer.stop();
+			RemoveCritters(panel);
+			map.GetCritterCollection().clear();
+			JOptionPane.showMessageDialog(null, "You Won!. You've killed all the critters.", "YAY:", JOptionPane.INFORMATION_MESSAGE);
 
+		} else if(gameDataModel.GetAccountBalance()<1)
+		{
+			isGameStarted=false;
+			numberOfCritters=0;
+			gameTimer.stop();
+			RemoveCritters(panel);
+			map.GetCritterCollection().clear();
+			JOptionPane.showMessageDialog(null, "You Lose!.\r\nCritters have stolen all your money.", "Aww:", JOptionPane.ERROR_MESSAGE);
+			gameDataModel.ResetAccountBalance();
 		}
 	}
 

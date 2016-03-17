@@ -20,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
@@ -85,7 +86,7 @@ public class TDGameMain2 implements Observer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GameData gf = new GameData(500);
+					GameData gf = new GameData();
 					GameMap map = new GameMap();
 					TDGameMain2 window = new TDGameMain2(gf,map);
 
@@ -195,7 +196,7 @@ public class TDGameMain2 implements Observer {
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//	m_ctrlrObj.strtGameBtnHandlr();
-
+				//int numOfCritters = Integer.parseInt(JOptionPane.showInputDialog("Please input the number of critters for this wave? "));
 				myController.StartWave(panel);
 
 
