@@ -13,7 +13,7 @@ import code.game.models.TowerModel;
 public class NearestStrategy  implements TowerStrategy {
 
 	public String StrategyName="Nearest First";
-	Critter lockedCritter=null;
+	public Critter lockedCritter=null;
 
 	/**
 	 * Shoots critters by deciding, which critter is the nearest in the range.
@@ -43,20 +43,20 @@ public class NearestStrategy  implements TowerStrategy {
 					} else if(map.checkCritterExists(xLeft+name_exploded[1])){
 						map.getCritter(xLeft+name_exploded[1]).reduceHealth((int)tower.getPowerOfBullets());
 						setBackgroundOfCritter(tower,map.getCritter(xLeft+name_exploded[1]));
-						lockedCritter=map.getCritter(xRight+name_exploded[1]);
+						lockedCritter=map.getCritter(xLeft+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
 					} else if(map.checkCritterExists(name_exploded[0]+yUp)){
 						map.getCritter(name_exploded[0]+yUp).reduceHealth((int)tower.getPowerOfBullets());
 						setBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yUp));
-						lockedCritter=map.getCritter(xRight+name_exploded[1]);
+						lockedCritter=map.getCritter(name_exploded[0]+yUp);
 						isIgnore = true;
 						isHit=true;
 
 					} else if(map.checkCritterExists(name_exploded[0]+yDown)){
 						map.getCritter(name_exploded[0]+yDown).reduceHealth((int)tower.getPowerOfBullets());
 						setBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yDown));
-						lockedCritter=map.getCritter(xRight+name_exploded[1]);
+						lockedCritter=map.getCritter(name_exploded[0]+yDown);
 						isIgnore = true;
 						isHit=true;
 

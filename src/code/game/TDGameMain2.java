@@ -44,9 +44,9 @@ import net.miginfocom.swing.MigLayout;
  */
 public class TDGameMain2 implements Observer {
 
-	private JFrame m_frame;
-	JTextArea m_txtTwrDesc = new JTextArea();
-	JLabel m_lblAccBal = new JLabel("0  ");
+	private JFrame frame;
+	JTextArea txtTwrDesc = new JTextArea();
+	JLabel lblAccBal = new JLabel("0  ");
 	JLabel powerlbl = new JLabel("0  ");
 	JLabel wavelbl = new JLabel("0  ");
 	JButton btnStrtGame = new JButton("Start Game");
@@ -54,7 +54,7 @@ public class TDGameMain2 implements Observer {
 
 
 	int[][] mapArray;
-	ScrollPane sc_panel = new ScrollPane();
+	ScrollPane scPanel = new ScrollPane();
 	//Panel panel_1 = new Panel();
 	Panel panel = new Panel();
 	int arrayRow;
@@ -72,10 +72,10 @@ public class TDGameMain2 implements Observer {
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		m_lblAccBal.setText(String.valueOf(((GameData)arg0).getAccountBalance()));
+		lblAccBal.setText(String.valueOf(((GameData)arg0).getAccountBalance()));
 		powerlbl.setText(String.valueOf(((GameData)arg0).getPlayerPower()));
 		wavelbl.setText(String.valueOf(((GameData)arg0).getWave()));
-		m_txtTwrDesc.setText(String.valueOf(((GameData)arg0).getSelectedTowerDescription()));
+		txtTwrDesc.setText(String.valueOf(((GameData)arg0).getSelectedTowerDescription()));
 		
 		if(((GameData)arg0).getWave()>1){
 			btnStrtGame.setText("Start Next Wave");
@@ -89,6 +89,11 @@ public class TDGameMain2 implements Observer {
 		//m_txtTwrDesc.append(towrdesc.getTowerDetails().toString());
 	}
 
+	/**
+	 * Method to get the current account balance displayed to player
+	 * @return current account balance
+	 */
+	public String getAccBal() { return lblAccBal.getText(); }
 
 	/**
 	 * Launch the application.
@@ -105,7 +110,7 @@ public class TDGameMain2 implements Observer {
 					mGameData.addObserver(window);
 					//gamecntrlrobj.addObserver(window);
 					window.custmInitializeFrm();
-					window.m_frame.setVisible(true);
+					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -119,7 +124,7 @@ public class TDGameMain2 implements Observer {
 	 * @param gamcntrlrobj gameController object
 	 */
 	public TDGameMain2(GameData mGameData,GameMap mGameMap) {
-		myController.SetGameDataModel(mGameData);
+		myController.setGameDataModel(mGameData);
 		myController.setMap(mGameMap);
 
 		initialize();
@@ -161,14 +166,14 @@ public class TDGameMain2 implements Observer {
 	 * Button listeners.
 	 */
 	private void initialize() {
-		m_frame = new JFrame();
-		m_frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);		
-		m_frame.setBounds(100, 100, 1081, 547);
-		m_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		m_frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		frame = new JFrame();
+		frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);		
+		frame.setBounds(100, 100, 1081, 547);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		JPanel jPnlHdr = new JPanel();
-		m_frame.getContentPane().add(jPnlHdr, BorderLayout.NORTH);
+		frame.getContentPane().add(jPnlHdr, BorderLayout.NORTH);
 		jPnlHdr.setLayout(new BorderLayout(0, 0));
 
 		JLabel lblGameHdr = new JLabel("Tower Defense Game");
@@ -184,8 +189,8 @@ public class TDGameMain2 implements Observer {
 		pnlHdrSub.add(lblAccLbl);
 		lblAccLbl.setHorizontalAlignment(SwingConstants.CENTER);
 
-		m_lblAccBal.setFont(new Font("Arial", Font.PLAIN, 14));
-		pnlHdrSub.add(m_lblAccBal);
+		lblAccBal.setFont(new Font("Arial", Font.PLAIN, 14));
+		pnlHdrSub.add(lblAccBal);
 		
 		JLabel lblPower = new JLabel("Power");
 		lblPower.setHorizontalAlignment(SwingConstants.CENTER);
@@ -206,10 +211,10 @@ public class TDGameMain2 implements Observer {
 		pnlHdrSub.add(wavelbl);
 
 
-		m_frame.getContentPane().add(panel, BorderLayout.CENTER);
+		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
 		JPanel jPnlFtr = new JPanel();
-		m_frame.getContentPane().add(jPnlFtr, BorderLayout.SOUTH);
+		frame.getContentPane().add(jPnlFtr, BorderLayout.SOUTH);
 		jPnlFtr.setLayout(new BorderLayout(0, 0));
 
 		JLabel lblArangFtr = new JLabel(" ");
@@ -241,7 +246,7 @@ public class TDGameMain2 implements Observer {
 		});
 
 		JPanel jPnlDesc = new JPanel();
-		m_frame.getContentPane().add(jPnlDesc, BorderLayout.EAST);
+		frame.getContentPane().add(jPnlDesc, BorderLayout.EAST);
 		jPnlDesc.setLayout(new BorderLayout(0, 0));
 
 		JPanel pnlTwrTopLvl = new JPanel();
@@ -253,7 +258,7 @@ public class TDGameMain2 implements Observer {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				myController.setSelectedTower("lblTwr1");
-				m_txtTwrDesc.setText(myController.showSelectedTowerDesc());
+				txtTwrDesc.setText(myController.showSelectedTowerDesc());
 				//m_ctrlrObj.setTowerDesc("lblTwr1");
 				//if(m_ctrlrObj.getSelectdTwr()!=null)
 				//{
@@ -272,7 +277,7 @@ public class TDGameMain2 implements Observer {
 			public void mouseClicked(MouseEvent e) {
 				//m_ctrlrObj.setTowerDesc("lblTwr2");
 				myController.setSelectedTower("lblTwr2");
-				m_txtTwrDesc.setText(myController.showSelectedTowerDesc());
+				txtTwrDesc.setText(myController.showSelectedTowerDesc());
 			}
 		});
 
@@ -291,7 +296,7 @@ public class TDGameMain2 implements Observer {
 			public void mouseClicked(MouseEvent e) {
 				//m_ctrlrObj.setTowerDesc("lblTwr3");
 				myController.setSelectedTower("lblTwr3");
-				m_txtTwrDesc.setText(myController.showSelectedTowerDesc());
+				txtTwrDesc.setText(myController.showSelectedTowerDesc());
 			}
 		});
 
@@ -303,10 +308,10 @@ public class TDGameMain2 implements Observer {
 		pnlTwrDesc.setBorder(new TitledBorder(null, "Tower Description", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		jPnlDesc.add(pnlTwrDesc, BorderLayout.CENTER);
 		pnlTwrDesc.setLayout(new BorderLayout(0, 0));
-		m_txtTwrDesc.setEditable(false);
-		m_txtTwrDesc.setFont(new Font("Monospaced", Font.PLAIN, 18));
+		txtTwrDesc.setEditable(false);
+		txtTwrDesc.setFont(new Font("Monospaced", Font.PLAIN, 18));
 
-		pnlTwrDesc.add(m_txtTwrDesc);
+		pnlTwrDesc.add(txtTwrDesc);
 
 		JLabel lblTwrSpcAdj = new JLabel("_____________");
 		lblTwrSpcAdj.setForeground(Color.WHITE);
@@ -348,7 +353,7 @@ public class TDGameMain2 implements Observer {
 		pnlBtnColl.add(lblBtnCollSpcAdj);
 
 		JMenuBar menuBar = new JMenuBar();
-		m_frame.setJMenuBar(menuBar);
+		frame.setJMenuBar(menuBar);
 
 		JMenu mnGame = new JMenu("Game");
 		menuBar.add(mnGame);

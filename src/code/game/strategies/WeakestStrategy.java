@@ -13,7 +13,7 @@ import code.game.models.TowerModel;
 public class WeakestStrategy implements TowerStrategy {
 
 	public String StrategyName="Weakest First";
-	Critter weakestCritter=null;
+	public Critter weakestCritter=null;
 	
 	/**
 	 * Shoots critters by deciding, which critter is the weakest in the range.
@@ -25,7 +25,8 @@ public class WeakestStrategy implements TowerStrategy {
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		boolean isHit=false;
-
+		weakestCritter=null;
+		
 		for(int k=1;k<=tower.getCurrentLevel();k++){
 			try {
 				String xRight = String.valueOf(x+k);
@@ -89,7 +90,7 @@ public class WeakestStrategy implements TowerStrategy {
 			}
 			}
 			isHit=true;
-			weakestCritter=null;
+			//weakestCritter=null;
 		}
 		return isHit;
 	}

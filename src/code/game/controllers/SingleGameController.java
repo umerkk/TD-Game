@@ -87,15 +87,21 @@ public class SingleGameController {
 	 * getter for a currently selected cell
 	 * @return
 	 */
-	public JPanel GetSelectedCell() {
+	public JPanel getSelectedCell() {
 		return selectedCell;
 	}
+
+	/**
+	 * Method to get the currently selected tower
+	 * @return returns the currently selected tower
+	 */
+	public TowerModel getSelectedTwr() { return selectedTower; }
 
 	/**
 	 * sets the data model
 	 * @param mGameData GameData object
 	 */
-	public void SetGameDataModel(GameData mGameData) {
+	public void setGameDataModel(GameData mGameData) {
 		this.gameDataModel = mGameData;
 	}
 
@@ -127,6 +133,14 @@ public class SingleGameController {
 	}
 
 	/**
+	 * Method to get the current map model
+	 * @return current map model
+	 */
+	public GameMap getMapModl() { 
+		return map;
+	}
+	
+	/**
 	 * Gets, opens and initializes the map file from the file directory using input stream reader 
 	 */
 	public void openMap() {
@@ -134,8 +148,11 @@ public class SingleGameController {
 
 		int result = filebrwsr.showOpenDialog(null);
 		if (result == JFileChooser.APPROVE_OPTION) {
-			try {
-				File selectedFile = filebrwsr.getSelectedFile();
+
+			File selectedFile = filebrwsr.getSelectedFile();
+			readFrmFile(selectedFile);
+			/*try {
+
 				FileInputStream fis = new FileInputStream(selectedFile);
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				int[][] mapArray = (int[][]) ois.readObject();
@@ -144,9 +161,27 @@ public class SingleGameController {
 				ois.close();
 				fis.close();
 			}catch(Exception ex){}
+			 */
 		} else {
 			JOptionPane.showMessageDialog(null, "Please select a map file.", "Warning: File not selected.", JOptionPane.WARNING_MESSAGE);	
 		}
+	}
+
+	/**
+	 * Method to read file from the selected file and set the map model object.
+	 * 
+	 * @param selectedFile map file to be read. 
+	 */
+	public void readFrmFile(File selectedFile) {
+		try {
+			FileInputStream fis = new FileInputStream(selectedFile);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			int[][] mapArray = (int[][]) ois.readObject();
+			map.initialize("myMap", mapArray);
+
+			ois.close();
+			fis.close();
+		}catch(Exception ex){}
 	}
 
 	/**
@@ -409,8 +444,8 @@ public class SingleGameController {
 		//panel.repaint();
 
 	}
-	
-	
+
+
 	/**
 	 * The main method to draw the tower on the map. 
 	 * Makes sure that the player have enough coins to place that tower on the map.
@@ -513,7 +548,7 @@ public class SingleGameController {
 			gameDataModel.deductMoneyFromAccount(selectedTower.getUpgradeCost());
 			gameDataModel.setSelectedTowerDescription(selectedTower.getTowerDetails().toString());
 		} else {
-			JOptionPane.showMessageDialog(null, "You do not have enough money to upgrade this tower.", "Error:", JOptionPane.ERROR_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "You do not have enough money to upgrade this tower.", "Error:", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -682,7 +717,7 @@ public class SingleGameController {
 		removeCritters(panel);
 		map.towerToShoot();
 		drawCritter(map.GetCritterCollection(),panel);
-		
+
 		if(map.isCritterCollectionEmpty()) {
 			isGameStarted=false;
 			numberOfCritters=0;

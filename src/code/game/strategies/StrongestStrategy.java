@@ -13,7 +13,7 @@ import code.game.models.TowerModel;
 public class StrongestStrategy implements TowerStrategy{
 
 	public String StrategyName="Strongest First";
-	Critter strongestCritter=null;
+	public Critter strongestCritter=null;
 	
 	/**
 	 * Shoots critters by deciding, which critter is the strongest in the range.
@@ -25,7 +25,7 @@ public class StrongestStrategy implements TowerStrategy{
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		boolean isHit=false;
-
+		strongestCritter=null;
 
 		for(int k=1;k<=tower.getCurrentLevel();k++){
 
@@ -90,7 +90,7 @@ public class StrongestStrategy implements TowerStrategy{
 			}
 			}
 			isHit=true;
-			strongestCritter=null;
+			//strongestCritter=null;
 		}
 		return isHit;
 
