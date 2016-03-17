@@ -8,6 +8,7 @@ public abstract class Critter {
 	private int level;
 	private int speed;
 	private GameMap mapReference;
+	private String MyLocationOnMap;
 	
 	
 	public Critter()
@@ -25,10 +26,18 @@ public abstract class Critter {
 		this.mapReference = map;
 	}
 	
-	public void MoveCritter()
+
+	
+	public void SetMyLocationOnMap(String location)
 	{
-		
+		this.MyLocationOnMap = location;
 	}
+	
+	public String GetMyLocationOnMap()
+	{
+		return this.MyLocationOnMap;
+	}
+	
 	
 	public void SetReward(int reward)
 	{

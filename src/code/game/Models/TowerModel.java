@@ -72,7 +72,7 @@ public class TowerModel extends Observable{
 		strBldrObj.append("\nStrategy : " + strategy.GetStrategyName());
 		else
 			strBldrObj.append("\nStrategy : Shown after placement.");
-
+		strBldrObj.append("\nMap Location : " + MyLocationOnMap);
 		return strBldrObj;
 	}
 	

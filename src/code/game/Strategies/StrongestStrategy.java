@@ -12,17 +12,17 @@ public class StrongestStrategy implements TowerStrategy{
 		char[] name_exploded = tower.GetMyLocationOnMap().toCharArray();
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
-		
+
 		Critter weakestCritter=null;
-		
+
 		for(int k=1;k<=tower.getCurrentLevel();k++)
 		{
-			
+
 			String xRight = String.valueOf(x+k);
 			String xLeft = String.valueOf(x-k);
 			String yUp = String.valueOf(y+k);
 			String yDown = String.valueOf(y-k);
-		try {
+			try {
 				if(map.CheckCritterExists(xRight+name_exploded[1]))
 				{
 					if(weakestCritter==null)
@@ -33,12 +33,12 @@ public class StrongestStrategy implements TowerStrategy{
 					{
 						weakestCritter = map.GetCritter(xRight+name_exploded[1]);
 					}
-					
-					
+
+
 				} 
 				if(map.CheckCritterExists(xLeft+name_exploded[1]))
 				{
-					
+
 					if(weakestCritter==null)
 					{
 						weakestCritter = map.GetCritter(xLeft+name_exploded[1]);
@@ -47,9 +47,9 @@ public class StrongestStrategy implements TowerStrategy{
 					{
 						weakestCritter = map.GetCritter(xLeft+name_exploded[1]);
 					}
-					
-					
-					
+
+
+
 				} 
 				if(map.CheckCritterExists(name_exploded[0]+yUp))
 				{
@@ -61,8 +61,8 @@ public class StrongestStrategy implements TowerStrategy{
 					{
 						weakestCritter = map.GetCritter(name_exploded[0]+yUp);
 					}
-					
-					
+
+
 
 				} 
 				if(map.CheckCritterExists(name_exploded[0]+yDown))
@@ -77,14 +77,18 @@ public class StrongestStrategy implements TowerStrategy{
 					}
 
 				}
-		} catch (IndexOutOfBoundsException e)
-		{
-			continue;
+
+			} catch (IndexOutOfBoundsException e)
+			{
+				continue;
+			}
+
 		}
-			
-		}
+		if(weakestCritter!=null)
+		weakestCritter.ReduceHealth((int)tower.getPowerOfBullets());
+
 	}
-	
+
 	public String GetStrategyName(){
 		return StrategyName;
 	}

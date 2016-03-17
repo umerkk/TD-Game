@@ -3,6 +3,8 @@ package code.game.Controllers;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Panel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -24,6 +26,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import code.game.Models.*;
 import code.game.Strategies.NearestStrategy;
@@ -42,6 +45,7 @@ public class SingleGameController {
 	public GameData gameDataModel;
 	private int waveNum=1;
 	int critterCreationInterval=2;
+	private int critterMovementTime=1000; 
 
 
 
@@ -112,33 +116,33 @@ public class SingleGameController {
 		{
 			try {
 				BufferedImage myPicture = ImageIO.read(new File("res/start.png"));
-				 t = new JLabel(new ImageIcon(myPicture));
+				t = new JLabel(new ImageIcon(myPicture));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			t.setBounds(0, 0, 80, 80);
-			
-			
+
+
 
 		} else  if(type==9999)
 
 		{
 			try {
 				BufferedImage myPicture = ImageIO.read(new File("res/end.png"));
-				 t = new JLabel(new ImageIcon(myPicture));
+				t = new JLabel(new ImageIcon(myPicture));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			t.setBounds(0, 0, 80, 80);
-			
-			
+
+
 
 		} else  if(!(type==0)){
 			t.setText("P");
 			cell.setBackground(Color.green);
 			t.setBounds(0, 0, 80, 80);
 		}
-		
+
 		cell.add(t);
 	}
 
@@ -263,7 +267,7 @@ public class SingleGameController {
 
 	public void RemoveCritters(Panel panel)
 	{
-		
+
 		for(int s=0;s<panel.getComponentCount();s++)
 		{
 			try {
@@ -273,40 +277,42 @@ public class SingleGameController {
 			}
 		}
 	}
-	
+
 	public void DrawCritter(HashMap<String,Critter> critterList, Panel panel)
 	{
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
 		{
-		    String key = entry.getKey();
-		    int loc = Integer.parseInt(key);
-		    
-		    if(loc>0)
-		    {
-		    	
-		    	try {
-					String location = map.FindLocationInMap(loc);
-					char[] name_exploded = location.toCharArray();
-					
-					for(int s=0;s<panel.getComponentCount();s++)
-					{
-						if(panel.getComponent(s).getName().equalsIgnoreCase(new String(name_exploded)))
-						{
-							JLabel t=null;
-							//panel.getComponent(s).setBackground(Color.red);
-							BufferedImage myPicture;
-							try {
-								myPicture = ImageIO.read(new File("res/critter.png"));
-								 t = new JLabel(new ImageIcon(myPicture));
-								t.setBounds(0, 0, 80, 80);
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							((JPanel)panel.getComponent(s)).add(t);
+			String key = entry.getKey();
+			int loc = Integer.parseInt(key);
 
-							
-							
+			if(loc>0)
+			{
+
+				try {
+					if(((Critter)entry.getValue()).GetHealth()<0)
+						continue;
+					else {
+						String location = map.FindLocationInMap(loc);
+						char[] name_exploded = location.toCharArray();
+
+						for(int s=0;s<panel.getComponentCount();s++)
+						{
+							if(panel.getComponent(s).getName().equalsIgnoreCase(new String(name_exploded)))
+							{
+								((Critter)entry.getValue()).SetMyLocationOnMap(new String(name_exploded));
+								JLabel t=null;
+								//panel.getComponent(s).setBackground(Color.red);
+								BufferedImage myPicture;
+								try {
+									myPicture = ImageIO.read(new File("res/critter.png"));
+									t = new JLabel(new ImageIcon(myPicture));
+									t.setBounds(0, 0, 80, 80);
+								} catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+								((JPanel)panel.getComponent(s)).add(t);
+							}
 						}
 					}
 				} catch (Exception e) {
@@ -314,17 +320,17 @@ public class SingleGameController {
 					//e.printStackTrace();
 				}
 				//JPanel cell = (JPanel) panel.getComponentAt((int) name_exploded[0], (int) name_exploded[1]);
-				
+
 				//String k = cell.getName();
 				//cell.removeAll();
 				int ksd=0;
-		    }
-			
+			}
+
 		}
-		
-		
+
+
 	}
-	
+
 	private void DrawTower(JPanel cell, int response)
 	{
 		String tempName = cell.getName();
@@ -508,24 +514,22 @@ public class SingleGameController {
 
 	}
 
-	public void StartWave(Panel panel)
+	public void StartWave(final Panel panel)
 	{
-		for(int k=1,i=0;k<=waveNum*6;k++,i--)
-		{
+		//for(int k=1,i=0;k<=waveNum*6;k++,i--)
+		//{
 		//	map.AddCritter(String.valueOf(i), CritterFactory.getCritter(1,map));
-		}
-		
-		//IncrementWave(panel);
+		//}
+		ActionListener GamePlay = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) 
+			{ 
+				IncrementWave(panel);
+			}};
 
-		//		map.AddCritter("12",CritterFactory.getCritter(1));
-		//		map.AddCritter("14",CritterFactory.getCritter(1));
-		//		map.GetCritter("14").SetHealth(10);
-		//
-		//		
-		//		map.AddTower("13", new CastleTower());
-		//		map.GetTower("13").SetStrategy(new StrongestStrategy(), map);
-		//		map.GetTower("13").SetMyLocationOnMap("13");
-		//		map.GetTower("13").ExecuteStrategy();
+			Timer t = new Timer(critterMovementTime,GamePlay);
+			t.start();
+
+
 	}
 
 	public void IncrementWave(Panel panel)
@@ -535,14 +539,15 @@ public class SingleGameController {
 			map.AddCritter(String.valueOf(0), CritterFactory.getCritter(1,map));
 
 		}
-		critterCreationInterval++;
+		critterCreationInterval = 3;
+		//critterCreationInterval++;
 		HashMap<String,Critter> tempList = new HashMap<String, Critter>();
-	
+
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
 		{
-		    String key = entry.getKey();
-		    Critter critter = (Critter) entry.getValue();
-		    int loc = Integer.parseInt(key);
+			String key = entry.getKey();
+			Critter critter = (Critter) entry.getValue();
+			int loc = Integer.parseInt(key);
 			loc++;
 			tempList.put(String.valueOf(loc), critter);
 			//tempList.remove(key);
@@ -551,9 +556,10 @@ public class SingleGameController {
 		panel.repaint();
 		map.SetCritterCollection(tempList);
 		DrawCritter(map.GetCritterCollection(),panel);
-		
-		
-		
+		map.TowerToShoot();
+
+
+
 	}
 
 

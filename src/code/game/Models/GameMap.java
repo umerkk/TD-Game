@@ -1,5 +1,6 @@
 package code.game.Models;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;;
 
 public class GameMap extends Observable {
@@ -59,6 +60,14 @@ public class GameMap extends Observable {
 			} else {
 				return null;
 			}
+	}
+	
+	public void TowerToShoot()
+	{
+		for (Map.Entry<String, TowerModel> entry : towerCollection.entrySet()) 
+		{
+		((TowerModel)entry.getValue()).ExecuteStrategy();
+		}
 	}
 
 	public void AddTower(String location,TowerModel tower)
@@ -120,14 +129,28 @@ public class GameMap extends Observable {
 		}
 			
 	}
+	public HashMap<String,TowerModel> GetTowerCollection()
+	{
+		return towerCollection;
+	}
 	
 
 	public Boolean CheckCritterExists(String location)
 	{
-		if(critterCollection.containsKey(location))
-			return true;
-		else
-			return false;
+		Boolean answer=false;
+		for (Map.Entry<String, Critter> entry : critterCollection.entrySet()) 
+		{
+			if(((Critter)entry.getValue()).GetMyLocationOnMap().equalsIgnoreCase(location))
+			{	answer =  true; break; }
+			else 
+				answer =  false;			
+		}
+		return answer;
+		
+//		if(critterCollection.containsKey(location))
+//			return true;
+//		else
+//			return false;
 //		else
 //		{
 //			char[] name_exploded = location.toCharArray();
@@ -143,12 +166,18 @@ public class GameMap extends Observable {
 
 	public Critter GetCritter(String location)
 	{
-		if(critterCollection.containsKey(location))
-			return critterCollection.get(location);
-		else
+		
+		Critter answer=null;
+		for (Map.Entry<String, Critter> entry : critterCollection.entrySet()) 
 		{
-			return null;
+			if(((Critter)entry.getValue()).GetMyLocationOnMap().equalsIgnoreCase(location))
+			{	answer =  entry.getValue();
+			break;
+			}
+			else 
+				answer =  null;			
 		}
+		return answer;
 	}
 	
 	public void AddCritter(String location,Critter critter)
