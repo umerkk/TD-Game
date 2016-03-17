@@ -25,7 +25,7 @@ public class TowerModel extends Observable{
 	private TowerStrategy strategy;
 	private GameMap mapRefernce;
 	private String MyLocationOnMap;
-	
+
 	/**
 	 * Constructor for defining an object of the tower model.
 	 *  
@@ -38,8 +38,7 @@ public class TowerModel extends Observable{
 	 * @param rateoffire Interval at which tower fires the bullet.
 	 */
 	public TowerModel(String name, int costoftower, int upgradecost, int refundvalue, 
-						int rangeinblocks, float powerofbullet, int rateoffire)
-	{
+			int rangeinblocks, float powerofbullet, int rateoffire){
 		m_currlevel = 1;
 		m_health = 100;
 		m_name = name;
@@ -50,14 +49,13 @@ public class TowerModel extends Observable{
 		m_powerofbullet = powerofbullet;
 		m_rateoffire = rateoffire; 
 	}
-	
+
 	/**
 	 * method which returns the details of the tower for displaying on the tower description box.
 	 * 
 	 * @return all details of the the current tower.
 	 */
-	public StringBuilder getTowerDetails()
-	{
+	public StringBuilder getTowerDetails(){
 		StringBuilder strBldrObj = new StringBuilder();
 		strBldrObj.append("Name : " + m_name);
 		strBldrObj.append("\nLevel : " + m_currlevel);
@@ -69,58 +67,75 @@ public class TowerModel extends Observable{
 		strBldrObj.append("\nRate of Fire : " + m_rateoffire);
 		strBldrObj.append("\nHealth : " + m_health);
 		if(strategy!=null)
-		strBldrObj.append("\nStrategy : " + strategy.GetStrategyName());
+			strBldrObj.append("\nStrategy : " + strategy.GetStrategyName());
 		else
 			strBldrObj.append("\nStrategy : Shown after placement.");
 		strBldrObj.append("\nMap Location : " + MyLocationOnMap);
 		return strBldrObj;
 	}
-	
-	public void SetStrategy(TowerStrategy _strategy, GameMap map)
-	{
+
+	/**
+	 * 
+	 * @param _strategy
+	 * @param map
+	 */
+	public void setStrategy(TowerStrategy _strategy, GameMap map){
 		this.strategy = _strategy;
 		mapRefernce = map;
 	}
-	
-	public void SetMyLocationOnMap(String location)
-	{
+
+	/**
+	 * 
+	 * @param location
+	 */
+	public void setMyLocationOnMap(String location){
 		this.MyLocationOnMap = location;
 	}
-	
-	public String GetMyLocationOnMap()
-	{
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getMyLocationOnMap(){
 		return this.MyLocationOnMap;
 	}
-	
-	public boolean ExecuteStrategy()
-	{
-		return this.strategy.ShootCritters(mapRefernce,this);
+
+	/**
+	 * executes tower's strategy
+	 * @return true if the strategy has been executed successfully
+	 */
+	public boolean executeStrategy(){
+		return this.strategy.shootCritters(mapRefernce,this);
 	}
-	
-	public TowerStrategy GetStrategy()
-	{
+
+	/**
+	 * return's selected tower strategy
+	 * @return the strategy object
+	 */
+	public TowerStrategy getStrategy(){
 		return this.strategy;
 	}
-	
+
 	/**
 	 * method which returns the current level of the tower.
 	 * 
 	 * @return current level of the tower.
 	 */
-	public int getCurrentLevel() {return m_currlevel;}
-	
+	public int getCurrentLevel() {
+		return m_currlevel;
+	}
+
 	/**
 	 * method to update the details of the tower when it is upgraded by the user.
 	 */
-	public void upgradeCurrentLevel() 
-	{
+	public void upgradeCurrentLevel() {
 		m_currlevel++;
 		m_refundvalue += m_upgradecost;
 		m_rangeinblocks++;
 		m_health = 100;
 		m_powerofbullet *= 1.1;
 	}
-		
+
 	/**
 	 * Method which returns the name of the tower.
 	 */
@@ -149,7 +164,7 @@ public class TowerModel extends Observable{
 	 * method returns the rate at which the tower fires bullets.
 	 */
 	public int getRateOfFire() { return m_rateoffire; }
-		
+
 	/**
 	 * method returns the current health of the tower.
 	 */
@@ -159,5 +174,5 @@ public class TowerModel extends Observable{
 	 * @param value new health of the tower.
 	 */
 	public void setHealth(int value) { m_health = value; setChanged(); notifyObservers(); } 
-		
+
 }

@@ -4,60 +4,64 @@ import code.game.models.Critter;
 import code.game.models.GameMap;
 import code.game.models.TowerModel;
 
+/**
+ * A Strategy design pattern class implementing Tower's strategy named Nearest strategy
+ * 
+ * @author Umer
+ * 
+ */
 public class NearestStrategy  implements TowerStrategy {
 
 	public String StrategyName="Nearest First";
 	Critter lockedCritter=null;
-	
-	public boolean ShootCritters(GameMap map, TowerModel tower)
-	{
-		char[] name_exploded = tower.GetMyLocationOnMap().toCharArray();
+
+	/**
+	 * Shoots critters by deciding, which critter is the nearest in the range.
+	 * if finds two critters in the range, the tower would only shoot the critter 
+	 * which is the nearest in the range
+	 * and returns the confirmation if the intended critter has hit or not
+	 */
+	public boolean shootCritters(GameMap map, TowerModel tower){
+		char[] name_exploded = tower.getMyLocationOnMap().toCharArray();
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		Boolean isIgnore=false;
 		boolean isHit=false;
-		for(int k=1;k<=tower.getCurrentLevel();k++)
-		{
+		for(int k=1;k<=tower.getCurrentLevel();k++){
 			String xRight = String.valueOf(x+k);
 			String xLeft = String.valueOf(x-k);
 			String yUp = String.valueOf(y+k);
 			String yDown = String.valueOf(y-k);
-			if(!isIgnore)
-			{
+			if(!isIgnore){
 				try {
-					if(map.CheckCritterExists(xRight+name_exploded[1]))
-					{
-						map.GetCritter(xRight+name_exploded[1]).ReduceHealth((int)tower.getPowerOfBullets());
-						SetBackgroundOfCritter(tower,map.GetCritter(xRight+name_exploded[1]));
-						lockedCritter=map.GetCritter(xRight+name_exploded[1]);
+					if(map.checkCritterExists(xRight+name_exploded[1])){
+						map.getCritter(xRight+name_exploded[1]).reduceHealth((int)tower.getPowerOfBullets());
+						SetBackgroundOfCritter(tower,map.getCritter(xRight+name_exploded[1]));
+						lockedCritter=map.getCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
-					} else if(map.CheckCritterExists(xLeft+name_exploded[1]))
-					{
-						map.GetCritter(xLeft+name_exploded[1]).ReduceHealth((int)tower.getPowerOfBullets());
-						SetBackgroundOfCritter(tower,map.GetCritter(xLeft+name_exploded[1]));
-						lockedCritter=map.GetCritter(xRight+name_exploded[1]);
+					} else if(map.checkCritterExists(xLeft+name_exploded[1])){
+						map.getCritter(xLeft+name_exploded[1]).reduceHealth((int)tower.getPowerOfBullets());
+						SetBackgroundOfCritter(tower,map.getCritter(xLeft+name_exploded[1]));
+						lockedCritter=map.getCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
-					} else if(map.CheckCritterExists(name_exploded[0]+yUp))
-					{
-						map.GetCritter(name_exploded[0]+yUp).ReduceHealth((int)tower.getPowerOfBullets());
-						SetBackgroundOfCritter(tower,map.GetCritter(name_exploded[0]+yUp));
-						lockedCritter=map.GetCritter(xRight+name_exploded[1]);
+					} else if(map.checkCritterExists(name_exploded[0]+yUp)){
+						map.getCritter(name_exploded[0]+yUp).reduceHealth((int)tower.getPowerOfBullets());
+						SetBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yUp));
+						lockedCritter=map.getCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
 
-					} else if(map.CheckCritterExists(name_exploded[0]+yDown))
-					{
-						map.GetCritter(name_exploded[0]+yDown).ReduceHealth((int)tower.getPowerOfBullets());
-						SetBackgroundOfCritter(tower,map.GetCritter(name_exploded[0]+yDown));
-						lockedCritter=map.GetCritter(xRight+name_exploded[1]);
+					} else if(map.checkCritterExists(name_exploded[0]+yDown)){
+						map.getCritter(name_exploded[0]+yDown).reduceHealth((int)tower.getPowerOfBullets());
+						SetBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yDown));
+						lockedCritter=map.getCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
 
 					}
-				} catch (IndexOutOfBoundsException e)
-				{
+				} catch (IndexOutOfBoundsException e){
 					continue;
 				}
 			}
@@ -65,25 +69,26 @@ public class NearestStrategy  implements TowerStrategy {
 		return isHit;
 	}
 
-	private void SetBackgroundOfCritter(TowerModel tower, Critter critter)
-	{
-		switch(tower.getName())
-		{
+	private void SetBackgroundOfCritter(TowerModel tower, Critter critter){
+		switch(tower.getName()){
 		case "Castle Tower":{
-			critter.SetBackground("red");
+			critter.setBackground("red");
 			break;
 		}
 		case "Imperial Tower":{
-			critter.SetBackground("blue");
-
+			critter.setBackground("blue");
 			break;
 		}
 		case "Industrial Tower":{
-			critter.SetBackground("black");
+			critter.setBackground("black");
 			break;
 		}
 		}
 	}
+
+	/**
+	 * return's strategy's name
+	 */
 	public String GetStrategyName(){
 		return StrategyName;
 	}

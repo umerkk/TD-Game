@@ -7,8 +7,16 @@ package code.game.models;
  */
 public class IndustrialTower extends TowerModel {
 
-	public IndustrialTower()
-	{
+	/**
+	 * name Name of the tower.
+	 * costoftower Cost for buying the tower.
+	 * upgradecost Upgrading cost.
+	 * refundvalue Refund amount.
+	 * rangeinblocks Range of the tower in blocks.
+	 * powerofbullet Power of the bullets.
+	 * rateoffire Interval at which tower fires the bullet.
+	 */
+	public IndustrialTower() {
 		super("Industrial Tower", 30, 15, 15, 3, 60, 10);
 	}
 }

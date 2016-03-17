@@ -3,115 +3,168 @@ package code.game.models;
 import java.util.Observable;
 import java.util.Observer;
 
-public class GameData  extends Observable{
+/**
+ * Class responsible of updating all the data being manipulated in the game 
+ * e.g 
+ * - Player's power
+ * - Coins
+ * - Balance
+ * - Wave no.
+ * 
+ * 
+ * @author Armaghan
+ * @author Umer
+ * @author Lokesh
+ */
+public class GameData extends Observable{
 
 	private  int accountBalance = 20;
 	private int playerPower =100;
 	private int gameWave=1;
 	private String selectedTowerDesc;
 
-	//==================================================
-	public GameData()
-	{
+	/**
+	 * empty constructor
+	 */
+	public GameData() {
 		//this.accountBalance = acctBal;
 	}
-	public void ResetAccountBalance()
-	{
+	
+	/**
+	 * reset's player's account balance to initial state 20
+	 */
+	public void resetAccountBalance(){
 		this.accountBalance = 20;
 		setChanged();
 		notifyObservers(this);
 	}
-	
-	public void ResetPlayerPower()
-	{
+
+	/**
+	 * resets player's power back to initial amount 100
+	 */
+	public void resetPlayerPower(){
 		this.playerPower = 100;
 		setChanged();
 		notifyObservers(this);
 	}
-	public void ResetWave()
-	{
+	
+	/**
+	 * resets game's wave level
+	 */
+	public void resetWave(){
 		this.gameWave = 1;
 		setChanged();
 		notifyObservers(this);
 	}
 
-	public int GetPlayerPower()
-	{
+	/**
+	 * returns player's current power
+	 * @return player's current power
+	 */
+	public int getPlayerPower(){
 		return this.playerPower;	
 	}
-	public int GetWave()
-	{
+	
+	/**
+	 * returns game's current wave number
+	 * @return current wave number
+	 */
+	public int getWave(){
 		return this.gameWave;	
 	}
-	
-	public void SetPlayerPower(int power)
-	{
+
+	/**
+	 * sets player's power
+	 * @param power player's power
+	 */
+	public void setPlayerPower(int power){
 		this.playerPower = power;
 		setChanged();
 		notifyObservers(this);
 	}
-	
-	public void DeductPlayerPower(int delta)
-	{
+
+	/**
+	 * deducts player's power
+	 * @param delta power to deduct
+	 */
+	public void deductPlayerPower(int delta){
 		this.playerPower-=delta;
 		setChanged();
 		notifyObservers(this);
 	}
-	
-	public String GetSelectedTowerDescription()
-	{
+
+	/**
+	 * returns tower's description, which will later be used to display in tower inspection panel
+	 * @return tower's description
+	 */
+	public String getSelectedTowerDescription(){
 		return selectedTowerDesc;	
 	}
-	
-	
-	
-	public void SetSelectedTowerDescription(String e)
-	{
+
+	/**
+	 * modifies selected tower's description as passed in parameter
+	 * @param e description of tower
+	 */
+	public void setSelectedTowerDescription(String e){
 		selectedTowerDesc=e;	
 		setChanged();
 		notifyObservers(this);
 	}
-	
-	public int GetAccountBalance()
-	{
+
+	/**
+	 * returns player's current account balance
+	 * @return player's current account balance
+	 */
+	public int getAccountBalance(){
 		return accountBalance;
 	}
 
-	public void SetAccountBalance(int money)
-	{
+	/**
+	 * sets player's current account balance
+	 * @param money player's current account balance to set
+	 */
+	public void setAccountBalance(int money){
 		this.accountBalance = money;
 		setChanged();
 		notifyObservers(this);
 	}
-	
-	public void SetWaveIncrement()
-	{
+
+	/**
+	 * increments wave level of game and updates
+	 * all the observer's attached
+	 */
+	public void setWaveIncrement(){
 		this.gameWave++;
 		setChanged();
 		notifyObservers(this);
 	}
 
-	public void AddMoneyToAccount(int money)
-	{
+	/**
+	 * increment's players account with coins/money
+	 * @param money players coins/money
+	 */
+	public void addMoneyToAccount(int money){
 		this.accountBalance+=money;
 		setChanged();
 		notifyObservers(this);
 	}
 
-	public void DeductMoneyFromAccount(int money)
-	{
+	/**
+	 * decreases coins/balance from player's account
+	 * @param money
+	 */
+	public void deductMoneyFromAccount(int money){
 		this.accountBalance-=money;
 		setChanged();
 		notifyObservers(this);
-		
 	}
-	//Overiding default behavior of AddObservers to show Balance at initialization.
-	public void addObserver(Observer o)
-	{
-		super.addObserver(o);
+	
+	/**
+	 * adds observers's to the observable super class
+	 */
+	public void addObserver(Observer o){
+		super.addObserver(o); //Overiding default behavior of AddObservers to show Balance at initialization.
 		setChanged();
 		notifyObservers(this);
 	}
-	
-	
 }

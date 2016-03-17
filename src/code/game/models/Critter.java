@@ -1,5 +1,17 @@
 package code.game.models;
 
+/**
+ * Main model class of critter getting and setting all the characteristics of critter
+ * e.g 
+ * - Health
+ * - Speed
+ * - Hit points
+ * - Level
+ * - Player's reward
+ * @author Armaghan
+ * @author Umer
+ *
+ */
 public abstract class Critter {
 
 	private int reward;
@@ -8,16 +20,25 @@ public abstract class Critter {
 	private int level;
 	private int speed;
 	private GameMap mapReference;
-	private String MyLocationOnMap;
+	private String myLocationOnMap;
 	private String background="None";
-	
-	public Critter()
-	{
-		
+
+	/**
+	 * empty constructor
+	 */
+	public Critter(){	
 	}
-	
-	public Critter(int reward,int hitPoint, int health, int level, int speed,GameMap map)
-	{
+
+	/**
+	 * Constructor of critter model, sets the following parameters
+	 * @param reward the points , player gets by killing the critter
+	 * @param hitPoint hit point of the critter
+	 * @param health health of critter
+	 * @param level critter's level 
+	 * @param speed critter's speed
+	 * @param map game's map on which critters will be drawn
+	 */
+	public Critter(int reward,int hitPoint, int health, int level, int speed,GameMap map) {
 		this.reward = reward;
 		this.hit_point = hitPoint;
 		this.health = health;
@@ -25,83 +46,131 @@ public abstract class Critter {
 		this.speed = speed;
 		this.mapReference = map;
 	}
-	
 
-	
-	public void SetMyLocationOnMap(String location)
-	{
-		this.MyLocationOnMap = location;
+
+	/**
+	 * Critter's current location on the grid
+	 * @param location Critter's current location
+	 */
+	public void setMyLocationOnMap(String location){
+		this.myLocationOnMap = location;
 	}
-	
-	public String GetMyLocationOnMap()
-	{
-		return this.MyLocationOnMap;
+
+	/**
+	 * Returns the current location of the critter on the grid.
+	 * @return Critter's current location
+	 */
+	public String getMyLocationOnMap(){
+		return this.myLocationOnMap;
 	}
-	
-	public void SetBackground(String bg)
-	{
+
+	/**
+	 * Sets critter's background image name
+	 * @param bg critter's background
+	 */
+	public void setBackground(String bg){
 		this.background = bg;
 	}
-	
-	public String GetBackground()
-	{
+
+	/**
+	 * Gets critter's background image name
+	 * @return critter's background
+	 */
+	public String getBackground(){
 		return this.background;
 	}
-	
-	
-	public void SetReward(int reward)
-	{
+
+
+	/**
+	 * 
+	 * @param reward
+	 */
+	public void setReward(int reward){
 		this.reward = reward;
 	}
-	
-	public void SetHitPoint(int hitPoint)
-	{
+
+	/**
+	 * Sets critter's hit point
+	 * @param hitPoint
+	 */
+	public void setHitPoint(int hitPoint){
 		this.hit_point = hitPoint;
 	}
-	
-	public void SetHealth(int health)
-	{
+
+	/**
+	 * Sets critter's health
+	 * @param health critter's health
+	 */
+	public void setHealth(int health){
 		this.health = health;
 	}
-	
-	
-	public void SetLevel(int level)
-	{
+
+
+	/**
+	 * Sets critter's level 
+	 * - Advanced
+	 * - Basic
+	 * @param level critter's level
+	 */
+	public void setLevel(int level){
 		this.level = level;
 	}
-	
-	public void SetSepeed(int speed)
-	{
+
+	/**
+	 * Sets critters speed
+	 * @param speed critter's speed
+	 */
+	public void setSepeed(int speed){
 		this.speed = speed;
 	}
-	
-	public void ReduceHealth(int hitValue)
-	{
+
+	/**
+	 * Decrements critter's health as the tower's shoot at them
+	 * @param hitValue critter's hit value
+	 */
+	public void reduceHealth(int hitValue){
 		this.health -= hitValue;
 	}
-	
-	public int GetReward()
-	{
+
+	/**
+	 * Returns the reward the user gets by killing the critter
+	 * @return player's reward
+	 */
+	public int getReward(){
 		return this.reward;
 	}
-	
-	public int GetHitPoint()
-	{
+
+	/**
+	 * Returns critter's hit point
+	 * @return critter's hit point
+	 */
+	public int getHitPoint(){
 		return this.hit_point;
 	}
-	
-	public int GetHealth()
-	{
+
+	/**
+	 * Returns critter's health
+	 * @return critter's health
+	 */
+	public int getHealth(){
 		return this.health;
 	}
-	
-	public int GetLevel()
-	{
+
+	/**
+	 * Returns critter's level
+	 * - Advanced
+	 * - Basic
+	 * @return critter's level
+	 */
+	public int getLevel(){
 		return this.level;
 	}
-	
-	public int GetSpeed()
-	{
+
+	/**
+	 * Returns critter's speed
+	 * @return critter's speed
+	 */
+	public int getSpeed(){
 		return this.speed;
 	}
 }

@@ -3,6 +3,7 @@ package code.game;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Panel;
 import java.awt.ScrollPane;
@@ -20,7 +21,6 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
@@ -32,17 +32,15 @@ import code.game.models.GameData;
 import code.game.models.GameMap;
 import code.game.models.TowerModel;
 import net.miginfocom.swing.MigLayout;
-import java.awt.FlowLayout;
 
 
 /**
- * This is the view class for Tower Defance Game play.
+ * This is the view class for Tower Defence Game play.
  * 
- * @author Alaa
- * @author lokesh
+ * @author Armaghan
+ * @author Lokesh
  * @since Build_1
  */
-
 public class TDGameMain2 implements Observer {
 
 	private JFrame m_frame;
@@ -58,12 +56,14 @@ public class TDGameMain2 implements Observer {
 	ScrollPane sc_panel = new ScrollPane();
 	//Panel panel_1 = new Panel();
 	Panel panel = new Panel();
-	int ArrayRow;
-	int ArrayCol;
+	int arrayRow;
+	int arrayCol;
 	int selectedTool = 0;
 
 	JPanel selectedCell;
 	TowerModel selectedTower;
+	
+	
 	/**
 	 * Overriding abstract method of observer class
 	 * @param arg0 observable class status changed
@@ -71,16 +71,15 @@ public class TDGameMain2 implements Observer {
 	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		m_lblAccBal.setText(String.valueOf(((GameData)arg0).GetAccountBalance()));
-		powerlbl.setText(String.valueOf(((GameData)arg0).GetPlayerPower()));
-		wavelbl.setText(String.valueOf(((GameData)arg0).GetWave()));
-		m_txtTwrDesc.setText(String.valueOf(((GameData)arg0).GetSelectedTowerDescription()));
-		if(((GameData)arg0).GetWave()>1)
-		{
+		m_lblAccBal.setText(String.valueOf(((GameData)arg0).getAccountBalance()));
+		powerlbl.setText(String.valueOf(((GameData)arg0).getPlayerPower()));
+		wavelbl.setText(String.valueOf(((GameData)arg0).getWave()));
+		m_txtTwrDesc.setText(String.valueOf(((GameData)arg0).getSelectedTowerDescription()));
+		
+		if(((GameData)arg0).getWave()>1){
 			btnStrtGame.setText("Start Next Wave");
 		} else {
 			btnStrtGame.setText("Start Game");
-
 		}
 		//m_txtTwrDesc.setText(null);
 		//TowerModel towrdesc = ((SingleGameController)arg0).getSelectdTwr();
@@ -98,11 +97,11 @@ public class TDGameMain2 implements Observer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GameData gf = new GameData();
-					GameMap map = new GameMap();
-					TDGameMain2 window = new TDGameMain2(gf,map);
+					GameData mGameData = new GameData();
+					GameMap mGameMap = new GameMap();
+					TDGameMain2 window = new TDGameMain2(mGameData,mGameMap);
 
-					gf.addObserver(window);
+					mGameData.addObserver(window);
 					//gamecntrlrobj.addObserver(window);
 					window.custmInitializeFrm();
 					window.m_frame.setVisible(true);
@@ -115,23 +114,21 @@ public class TDGameMain2 implements Observer {
 
 
 	/**
-	 * Constructor of TDGameMain.
+	 * Constructor of TDGameMain, initializes the game methods to be drawn
 	 * @param gamcntrlrobj gameController object
 	 */
-	public TDGameMain2(GameData gf,GameMap map) {
-		myController.SetGameDataModel(gf);
-		myController.SetMap(map);
+	public TDGameMain2(GameData mGameData,GameMap mGameMap) {
+		myController.SetGameDataModel(mGameData);
+		myController.setMap(mGameMap);
 
 		initialize();
 		custmInitializeFrm();
 	}
 
 	/**
-	 * Initialize the frame
+	 * Initialize the frame, is responsible for setting the layout, and placing the grid on the screen
 	 */
 	public void custmInitializeFrm() {
-		//	m_ctrlrObj.initializeCntrolr();
-
 		MigLayout myGrid = new MigLayout(); 
 		panel.setLayout(myGrid);
 		panel.setLayout(new MigLayout());
@@ -144,12 +141,23 @@ public class TDGameMain2 implements Observer {
 		myController.RemoveTower();
 	}
 
+	/**
+	 * calls a method to upgrade selected tower
+	 */
 	private void upgradeBtnHandlr(){
-		myController.UpgradeSelectedTower();
+		myController.upgradeSelectedTower();
 	}
 
 	/**
-	 * Initialize the frame contents
+	 * Initialize the frame contents 
+	 * including all the UI components
+	 * - Buy/sell Buttons
+	 * - Tower inspection panel
+	 * - map layout
+	 * - Texts
+	 * - Towers to select
+	 * 
+	 * Button listeners.
 	 */
 	private void initialize() {
 		m_frame = new JFrame();
@@ -218,7 +226,7 @@ public class TDGameMain2 implements Observer {
 		JButton btnNewButton = new JButton("Advance Game>>");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myController.IncrementWave(panel);
+				myController.incrementWave(panel);
 			}
 		});
 
@@ -227,9 +235,7 @@ public class TDGameMain2 implements Observer {
 			public void actionPerformed(ActionEvent e) {
 				//	m_ctrlrObj.strtGameBtnHandlr();
 				//int numOfCritters = Integer.parseInt(JOptionPane.showInputDialog("Please input the number of critters for this wave? "));
-				myController.StartWave(panel);
-
-
+				myController.startWave(panel);
 			}
 		});
 
@@ -245,8 +251,8 @@ public class TDGameMain2 implements Observer {
 		lblTwr1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				myController.SetSelectedTower("lblTwr1");
-				m_txtTwrDesc.setText(myController.ShowSelectedTowerDesc());
+				myController.setSelectedTower("lblTwr1");
+				m_txtTwrDesc.setText(myController.showSelectedTowerDesc());
 				//m_ctrlrObj.setTowerDesc("lblTwr1");
 				//if(m_ctrlrObj.getSelectdTwr()!=null)
 				//{
@@ -264,8 +270,8 @@ public class TDGameMain2 implements Observer {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//m_ctrlrObj.setTowerDesc("lblTwr2");
-				myController.SetSelectedTower("lblTwr2");
-				m_txtTwrDesc.setText(myController.ShowSelectedTowerDesc());
+				myController.setSelectedTower("lblTwr2");
+				m_txtTwrDesc.setText(myController.showSelectedTowerDesc());
 			}
 		});
 
@@ -283,8 +289,8 @@ public class TDGameMain2 implements Observer {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//m_ctrlrObj.setTowerDesc("lblTwr3");
-				myController.SetSelectedTower("lblTwr3");
-				m_txtTwrDesc.setText(myController.ShowSelectedTowerDesc());
+				myController.setSelectedTower("lblTwr3");
+				m_txtTwrDesc.setText(myController.showSelectedTowerDesc());
 			}
 		});
 
@@ -330,7 +336,7 @@ public class TDGameMain2 implements Observer {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				myController.ChangeStrategyOfTower();
+				myController.changeStrategyOfTower();
 				
 			}
 		});
@@ -352,8 +358,8 @@ public class TDGameMain2 implements Observer {
 
 				// read a file from disk
 				try {
-					myController.OpenMap();
-					myController.DrawMap(true, panel);
+					myController.openMap();
+					myController.drawMap(true, panel);
 
 					panel.revalidate();
 					panel.repaint();			    		
