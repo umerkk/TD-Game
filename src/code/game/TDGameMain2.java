@@ -27,12 +27,12 @@ import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.TitledBorder;
 
-import code.game.controllers.Controller;
 import code.game.controllers.SingleGameController;
 import code.game.models.GameData;
 import code.game.models.GameMap;
 import code.game.models.TowerModel;
 import net.miginfocom.swing.MigLayout;
+import java.awt.FlowLayout;
 
 
 /**
@@ -48,7 +48,8 @@ public class TDGameMain2 implements Observer {
 	private JFrame m_frame;
 	JTextArea m_txtTwrDesc = new JTextArea();
 	JLabel m_lblAccBal = new JLabel("0  ");
-	SingleGameController myController = Controller.getGameControllerInstance();
+	JLabel powerlbl = new JLabel("0  ");
+	SingleGameController myController = SingleGameController.getGameControllerInstance();
 
 
 	int[][] mapArray;
@@ -69,6 +70,7 @@ public class TDGameMain2 implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		m_lblAccBal.setText(String.valueOf(((GameData)arg0).GetAccountBalance()));
+		powerlbl.setText(String.valueOf(((GameData)arg0).GetPlayerPower()));
 		m_txtTwrDesc.setText(String.valueOf(((GameData)arg0).GetSelectedTowerDescription()));
 		//m_txtTwrDesc.setText(null);
 		//TowerModel towrdesc = ((SingleGameController)arg0).getSelectdTwr();
@@ -165,6 +167,15 @@ public class TDGameMain2 implements Observer {
 
 		m_lblAccBal.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(m_lblAccBal);
+		
+		JLabel lblPower = new JLabel("Power");
+		lblPower.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPower.setFont(new Font("Arial", Font.PLAIN, 14));
+		pnlHdrSub.add(lblPower);
+		
+		
+		powerlbl.setFont(new Font("Arial", Font.PLAIN, 14));
+		pnlHdrSub.add(powerlbl);
 
 
 		m_frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -278,7 +289,6 @@ public class TDGameMain2 implements Observer {
 
 		JPanel pnlBtnColl = new JPanel();
 		jPnlDesc.add(pnlBtnColl, BorderLayout.SOUTH);
-		pnlBtnColl.setLayout(new BorderLayout(0, 0));
 
 		JButton btnSellTwr = new JButton("Sell");
 		btnSellTwr.addActionListener(new ActionListener() {
@@ -286,7 +296,8 @@ public class TDGameMain2 implements Observer {
 				selBtnHandlr();
 			}
 		});
-		pnlBtnColl.add(btnSellTwr, BorderLayout.NORTH);
+		pnlBtnColl.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		pnlBtnColl.add(btnSellTwr);
 
 		JButton btnUpgrdTwr = new JButton("Upgrade");
 		btnUpgrdTwr.addActionListener(new ActionListener() {
@@ -294,11 +305,21 @@ public class TDGameMain2 implements Observer {
 				upgradeBtnHandlr();
 			}
 		});
-		pnlBtnColl.add(btnUpgrdTwr, BorderLayout.CENTER);
+		pnlBtnColl.add(btnUpgrdTwr);
+		
+		JButton btnNewButton_1 = new JButton("Change Strategy");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				myController.ChangeStrategyOfTower();
+				
+			}
+		});
+		pnlBtnColl.add(btnNewButton_1);
 
 		JLabel lblBtnCollSpcAdj = new JLabel(" ");
 		lblBtnCollSpcAdj.setFont(new Font("Tahoma", Font.PLAIN, 35));
-		pnlBtnColl.add(lblBtnCollSpcAdj, BorderLayout.SOUTH);
+		pnlBtnColl.add(lblBtnCollSpcAdj);
 
 		JMenuBar menuBar = new JMenuBar();
 		m_frame.setJMenuBar(menuBar);

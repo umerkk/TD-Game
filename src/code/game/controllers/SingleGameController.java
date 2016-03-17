@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Observable;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
@@ -24,8 +25,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import code.game.models.*;
@@ -38,6 +42,7 @@ import code.game.strategies.WeakestStrategy;
  */
 public class SingleGameController {
 
+	private static SingleGameController instance;
 	private GameMap map=null;
 	private TowerModel selectedTower=null;
 	private Boolean newTowerSelected=false;
@@ -53,10 +58,23 @@ public class SingleGameController {
 	private final int POINT_ENTRY = 1;
 	private final int POINT_EXIT = 9999;
 	private int numberOfCritters=0;
+	private int waveOfGame=1;
 
 
 
+	private SingleGameController()
+	{
 
+	}
+
+	public static SingleGameController getGameControllerInstance() {
+		if(instance==null) {
+			instance = new SingleGameController();
+			return instance;
+		} else {
+			return instance;
+		}
+	}
 	//======================================================================================
 
 	public JPanel GetSelectedCell() {
@@ -250,17 +268,19 @@ public class SingleGameController {
 		//}
 	}
 
-	public void DrawCritter(HashMap<String,Critter> critterList, Panel panel) {
+	public void DrawCritter(ConcurrentHashMap<String,Critter> critterList, Panel panel) {
+
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
-			//panel.validate();
-			//if(((Critter)entry.getValue()).GetMyLocationOnMap()==null)
-			//	continue;
-			String key = entry.getKey();
-			int loc = Integer.parseInt(key);
+			try {
+				//panel.validate();
+				//if(((Critter)entry.getValue()).GetMyLocationOnMap()==null)
+				//	continue;
+				String key = entry.getKey();
+				int loc = Integer.parseInt(key);
 
-			if(loc>0) {
+				if(loc>0) {
 
-				try {
+
 					if(((Critter)entry.getValue()).GetHealth()<1) {
 						map.RemoveCritter(key);
 						gameDataModel.AddMoneyToAccount(critterKillPoints);
@@ -275,8 +295,9 @@ public class SingleGameController {
 						String endLoc = map.FindLocationInMap(POINT_EXIT);
 						if(location.equalsIgnoreCase(endLoc)) {
 							//Critter reached the end point.
-							gameDataModel.DeductMoneyFromAccount(critterRunAwayPoints);
-							map.AddCritter(key, null);
+							gameDataModel.DeductPlayerPower(critterRunAwayPoints);
+							//map.AddCritter(key, null);
+							map.RemoveCritter(key);
 							continue;
 							//((Critter)entry).SetHealth(0);
 						}
@@ -292,6 +313,7 @@ public class SingleGameController {
 									myPicture = ImageIO.read(new File("res/matrix.gif"));
 									t = new JLabel(new ImageIcon(myPicture));
 									t.setBounds(0, 0, 80, 80);
+
 									t.setName("critter");
 								} catch (IOException e) {
 									// TODO Auto-generated catch block
@@ -301,11 +323,14 @@ public class SingleGameController {
 							}
 						}
 					}
-				} catch (Exception e) {
-					continue;	
-				}
-			}
 
+				} else {
+					//map.RemoveCritter(key);
+					//continue;
+				}
+			} catch (Exception e) {
+				continue;	
+			}
 		}
 		//panel.validate();
 		//panel.repaint();
@@ -346,7 +371,7 @@ public class SingleGameController {
 
 					if(m.getName().equals("Castle Tower")) {
 						try {
-							BufferedImage myPicture = ImageIO.read(new File("res/tower3.png"));
+							BufferedImage myPicture = ImageIO.read(new File("res/tower_1.png"));
 
 							t = new JLabel(new ImageIcon(myPicture));
 						} catch (Exception e){}
@@ -354,16 +379,16 @@ public class SingleGameController {
 
 					} else if(m.getName().equals("Imperial Tower")) {
 						try {
-							BufferedImage myPicture = ImageIO.read(new File("res/tower.png"));
+							BufferedImage myPicture = ImageIO.read(new File("res/tower_2.png"));
 							t = new JLabel(new ImageIcon(myPicture));
 						} catch (Exception e){}
 					}else if(m.getName().equals("Industrial Tower")) {
 						try {
-							BufferedImage myPicture = ImageIO.read(new File("res/tower4.png"));
+							BufferedImage myPicture = ImageIO.read(new File("res/tower_3.png"));
 							t = new JLabel(new ImageIcon(myPicture));
 						} catch (Exception e){}
 					}
-					cell.setBackground(Color.blue);
+					cell.setBackground(Color.white);
 					//gameDataModel.SetAccountBalance(gameDataModel.GetAccountBalance() - m.getCostOfTower());
 					SetSelectedCell(null);
 					t.setBounds(0, 0, 80, 80);
@@ -437,19 +462,20 @@ public class SingleGameController {
 	public void click(MouseEvent e, JPanel cell) {
 		//JOptionPane.showMessageDialog(null, "Clicked");
 		boolean overideExisting=false;
-		String tempName = cell.getName();
-		char[] name_exploded = tempName.toCharArray();
+		final String tempName = cell.getName();
+		final char[] name_exploded = tempName.toCharArray();
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		//1=StartPoint, 9999=End, 2=Path, 3=Delete
 		selectedCell = cell;
 
 		if(map.CheckTowerExists(tempName)) {
-			//Assign the variable to selected tower;
+
 			TowerModel tmpmdl = map.GetTower(tempName);
-			selectedTower = tmpmdl;
+			selectedTower = tmpmdl; //Assign the variable to selected tower;
 			gameDataModel.SetSelectedTowerDescription(selectedTower.getTowerDetails().toString());
 			newTowerSelected=false;
+
 
 		} else {
 			if(newTowerSelected) {
@@ -470,9 +496,41 @@ public class SingleGameController {
 
 	}
 
+	public void ChangeStrategyOfTower()
+	{
+		if(selectedTower!=null)
+		{
+			JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First"});
+			JOptionPane.showMessageDialog(
+					null, list, "Select the tower strategy", JOptionPane.QUESTION_MESSAGE);
+			int response = list.getSelectedIndex();
+			switch(response){
+			case 0: {
+				selectedTower.SetStrategy(new NearestStrategy(),map);
+				break;
+			}
+			case 1: {
+				selectedTower.SetStrategy(new StrongestStrategy(),map);
+				break;
+			}
+			case 2: {
+				selectedTower.SetStrategy(new WeakestStrategy(),map);
+				break;
+			}
+			}
+			gameDataModel.SetSelectedTowerDescription(selectedTower.getTowerDetails().toString());
+
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Please select a tower first.", "Error:", JOptionPane.ERROR_MESSAGE);
+
+		}
+	}
+
 	public void StartWave(final Panel panel) {
 
-		this.numberOfCritters = 10;
+		this.numberOfCritters = waveNum*10;
+
 		ActionListener GamePlay = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) 
 			{ 
@@ -496,8 +554,8 @@ public class SingleGameController {
 			}
 			critterCreationInterval++;
 		}
-		
-		HashMap<String,Critter> tempList = new HashMap<String, Critter>();
+
+		ConcurrentHashMap<String,Critter> tempList = new ConcurrentHashMap<String, Critter>();
 
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
 			String key = entry.getKey();
@@ -522,18 +580,20 @@ public class SingleGameController {
 			numberOfCritters=0;
 			gameTimer.stop();
 			RemoveCritters(panel);
+			gameDataModel.ResetPlayerPower();
 			map.GetCritterCollection().clear();
-			JOptionPane.showMessageDialog(null, "You Won!. You've killed all the critters.", "YAY:", JOptionPane.INFORMATION_MESSAGE);
-
-		} else if(gameDataModel.GetAccountBalance()<1)
+			JOptionPane.showMessageDialog(null, "You Won!. All the critters are history and you still have some power.", "YAY:", JOptionPane.INFORMATION_MESSAGE);
+			waveNum++;
+		} else if(gameDataModel.GetPlayerPower()<1)
 		{
 			isGameStarted=false;
 			numberOfCritters=0;
 			gameTimer.stop();
 			RemoveCritters(panel);
 			map.GetCritterCollection().clear();
-			JOptionPane.showMessageDialog(null, "You Lose!.\r\nCritters have stolen all your money.", "Aww:", JOptionPane.ERROR_MESSAGE);
-			gameDataModel.ResetAccountBalance();
+			JOptionPane.showMessageDialog(null, "You Lose!.\r\nCritters has taken all of your power.", "Aww:", JOptionPane.ERROR_MESSAGE);
+			gameDataModel.ResetPlayerPower();
+			waveNum=1;
 		}
 	}
 

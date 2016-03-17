@@ -6,6 +6,7 @@ import java.util.Observer;
 public class GameData  extends Observable{
 
 	private  int accountBalance = 500;
+	private int playerPower =100;
 	private String selectedTowerDesc;
 
 	//==================================================
@@ -16,6 +17,32 @@ public class GameData  extends Observable{
 	public void ResetAccountBalance()
 	{
 		this.accountBalance = 500;
+		setChanged();
+		notifyObservers(this);
+	}
+	
+	public void ResetPlayerPower()
+	{
+		this.playerPower = 100;
+		setChanged();
+		notifyObservers(this);
+	}
+
+	public int GetPlayerPower()
+	{
+		return this.playerPower;	
+	}
+	
+	public void SetPlayerPower(int power)
+	{
+		this.playerPower = power;
+		setChanged();
+		notifyObservers(this);
+	}
+	
+	public void DeductPlayerPower(int delta)
+	{
+		this.playerPower-=delta;
 		setChanged();
 		notifyObservers(this);
 	}

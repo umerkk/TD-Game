@@ -1,7 +1,8 @@
 package code.game.models;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Observable;;
+import java.util.Observable;
+import java.util.concurrent.ConcurrentHashMap;;
 
 public class GameMap extends Observable {
 
@@ -9,7 +10,7 @@ public class GameMap extends Observable {
 	private int[][] mapArray;
 	private int[][] critterPath;
 	private HashMap<String,TowerModel> towerCollection = new HashMap<String,TowerModel>();
-	private HashMap<String,Critter> critterCollection = new HashMap<String,Critter>();
+	private ConcurrentHashMap<String,Critter> critterCollection = new ConcurrentHashMap<String,Critter>();
 	private int ArrayRow;
 	private int ArrayCol;
 
@@ -226,12 +227,12 @@ public class GameMap extends Observable {
 	}
 
 
-	public HashMap<String,Critter> GetCritterCollection()
+	public ConcurrentHashMap<String,Critter> GetCritterCollection()
 	{
 		return critterCollection;
 	}
 
-	public void SetCritterCollection(HashMap<String,Critter> critter)
+	public void SetCritterCollection(ConcurrentHashMap<String,Critter> critter)
 	{
 		this.critterCollection = critter;
 	}
