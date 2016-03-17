@@ -1,2 +1,5 @@
 code.game
-code.game.towers
+code.game.controllers
+code.game.models
+code.game.strategies
+code.game.tests

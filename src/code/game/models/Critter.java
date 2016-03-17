@@ -82,8 +82,8 @@ public abstract class Critter {
 
 
 	/**
-	 * 
-	 * @param reward
+	 * method to set reward of destroying critter
+	 * @param reward reward earned for destroying critter
 	 */
 	public void setReward(int reward){
 		this.reward = reward;
@@ -91,7 +91,7 @@ public abstract class Critter {
 
 	/**
 	 * Sets critter's hit point
-	 * @param hitPoint
+	 * @param hitPoint hit point to be set 
 	 */
 	public void setHitPoint(int hitPoint){
 		this.hit_point = hitPoint;

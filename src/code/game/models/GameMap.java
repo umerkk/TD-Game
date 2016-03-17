@@ -49,7 +49,7 @@ public class GameMap extends Observable {
 
 	/**
 	 * returns map's name
-	 * @return
+	 * @return map name
 	 */
 	public String getName(){
 		return this.mapName;
@@ -117,6 +117,7 @@ public class GameMap extends Observable {
 		if(mapArray[x][y] == 0){
 			towerCollection.put(location, tower);
 			mapArray[x][y] = -5;
+			setChanged();
 			notifyObservers(this);
 		} 
 
@@ -254,6 +255,7 @@ public class GameMap extends Observable {
 	 */
 	public void addCritter(String location,Critter critter){
 		critterCollection.put(location, critter);
+		setChanged();
 		notifyObservers(this);
 	}
 
@@ -330,15 +332,18 @@ public class GameMap extends Observable {
 			switch (type){
 			case "1":{
 				mapArray[row][col] = 1;
+				setChanged();
 				notifyObservers(this);
 				return true;
 			}case "9999":{
 				mapArray[row][col] = 9999;
+				setChanged();
 				notifyObservers(this);
 				return true;
 			}default :{
 				try {
 					mapArray[row][col] = Integer.parseInt(type);
+					setChanged();
 					notifyObservers(this);
 					return true;
 				} catch (Exception e){
@@ -360,6 +365,7 @@ public class GameMap extends Observable {
 			return false;
 		}else{
 			mapArray[row][col] = 0;
+			setChanged();
 			notifyObservers(this);
 			return true;
 		}

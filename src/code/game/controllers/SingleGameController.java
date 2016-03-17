@@ -85,7 +85,7 @@ public class SingleGameController {
 
 	/**
 	 * getter for a currently selected cell
-	 * @return
+	 * @return selected cell
 	 */
 	public JPanel getSelectedCell() {
 		return selectedCell;
@@ -126,7 +126,7 @@ public class SingleGameController {
 
 	/**
 	 * sets the clicked cell as currently selected cell.
-	 * @param cell
+	 * @param cell cell to be set
 	 */
 	public void setSelectedCell(JPanel cell) {
 		this.selectedCell = cell;
@@ -230,8 +230,8 @@ public class SingleGameController {
 	 * adds the mouse listeners for event handling
 	 * 
 	 * 
-	 * @param isExisting
-	 * @param parentPanel
+	 * @param isExisting if the map is existing
+	 * @param parentPanel parent panel on which map is to be drawn
 	 */
 	public void drawMap(boolean isExisting, Panel parentPanel) {
 		if(isExisting) {
@@ -329,7 +329,7 @@ public class SingleGameController {
 
 	/**
 	 * As soon as the critter is killed this method is called and removes it from the screen.
-	 * @param panel
+	 * @param panel panel from which critter is to be removed
 	 */
 	public void removeCritters(Panel panel) {
 
@@ -555,7 +555,7 @@ public class SingleGameController {
 	/**
 	 * When the user clicks on a certain tower, it selects that tower as current tower
 	 * takes a parameter of tower's name 
-	 * @param towerName
+	 * @param towerName name of tower
 	 */
 	public void setSelectedTower(String towerName) {
 		if(isGameStarted==false) {
@@ -662,7 +662,7 @@ public class SingleGameController {
 	/**
 	 * Starts a new wave once called, it is only called once and then the incrementWave() method takes over.
 	 * and keeps increment the waves to next level
-	 * @param panel 
+	 * @param panel map panel
 	 */
 	public void startWave(final Panel panel) {
 		this.numberOfCritters = gameDataModel.getWave()*10;

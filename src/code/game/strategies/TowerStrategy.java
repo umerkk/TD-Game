@@ -10,7 +10,7 @@ import code.game.models.TowerModel;
  */
 public interface TowerStrategy {
 
-	public String StrategyName="None";
+	//public String StrategyName="None";
 	public boolean shootCritters(GameMap map,TowerModel tower);
 	public String GetStrategyName();
 }

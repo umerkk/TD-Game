@@ -118,10 +118,10 @@ public class TDGameMain2 implements Observer {
 		});
 	}
 
-
 	/**
 	 * Constructor of TDGameMain, initializes the game methods to be drawn
-	 * @param gamcntrlrobj gameController object
+	 * @param mGameData game data model object to be used by view
+	 * @param mGameMap game map model to be used by the view
 	 */
 	public TDGameMain2(GameData mGameData,GameMap mGameMap) {
 		myController.setGameDataModel(mGameData);

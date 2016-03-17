@@ -13,15 +13,15 @@ import code.game.strategies.TowerStrategy;
  */
 public class TowerModel extends Observable{
 
-	private String m_name;
-	private int m_currlevel;
-	private int m_costoftower;
-	private int m_upgradecost;
-	private int m_refundvalue;
-	private int m_rangeinblocks; //Range of the tower per blocks
-	private float m_powerofbullet; //Rate of Health to deduct from the target
-	private int m_rateoffire; // Interval between each fire
-	private int m_health; //Tower health
+	private String mname;
+	private int mcurrlevel;
+	private int mcostoftower;
+	private int mupgradecost;
+	private int mrefundvalue;
+	private int mrangeinblocks; //Range of the tower per blocks
+	private float mpowerofbullet; //Rate of Health to deduct from the target
+	private int mrateoffire; // Interval between each fire
+	private int mhealth; //Tower health
 	private TowerStrategy strategy;
 	private GameMap mapRefernce;
 	private String myLocationOnMap;
@@ -39,15 +39,15 @@ public class TowerModel extends Observable{
 	 */
 	public TowerModel(String name, int costoftower, int upgradecost, int refundvalue, 
 			int rangeinblocks, float powerofbullet, int rateoffire){
-		m_currlevel = 1;
-		m_health = 100;
-		m_name = name;
-		m_costoftower = costoftower;
-		m_upgradecost = upgradecost;
-		m_refundvalue = refundvalue;
-		m_rangeinblocks = rangeinblocks; 
-		m_powerofbullet = powerofbullet;
-		m_rateoffire = rateoffire; 
+		mcurrlevel = 1;
+		mhealth = 100;
+		mname = name;
+		mcostoftower = costoftower;
+		mupgradecost = upgradecost;
+		mrefundvalue = refundvalue;
+		mrangeinblocks = rangeinblocks; 
+		mpowerofbullet = powerofbullet;
+		mrateoffire = rateoffire; 
 	}
 
 	/**
@@ -57,15 +57,15 @@ public class TowerModel extends Observable{
 	 */
 	public StringBuilder getTowerDetails(){
 		StringBuilder strBldrObj = new StringBuilder();
-		strBldrObj.append("Name : " + m_name);
-		strBldrObj.append("\nLevel : " + m_currlevel);
-		strBldrObj.append("\nCost of Tower : " + m_costoftower);
-		strBldrObj.append("\nUpgrade Cost : " + m_upgradecost);
-		strBldrObj.append("\nRefund Value : " + m_refundvalue);
-		strBldrObj.append("\nRange : " + m_rangeinblocks);
-		strBldrObj.append("\nPower : " + m_powerofbullet);
-		strBldrObj.append("\nRate of Fire : " + m_rateoffire);
-		strBldrObj.append("\nHealth : " + m_health);
+		strBldrObj.append("Name : " + mname);
+		strBldrObj.append("\nLevel : " + mcurrlevel);
+		strBldrObj.append("\nCost of Tower : " + mcostoftower);
+		strBldrObj.append("\nUpgrade Cost : " + mupgradecost);
+		strBldrObj.append("\nRefund Value : " + mrefundvalue);
+		strBldrObj.append("\nRange : " + mrangeinblocks);
+		strBldrObj.append("\nPower : " + mpowerofbullet);
+		strBldrObj.append("\nRate of Fire : " + mrateoffire);
+		strBldrObj.append("\nHealth : " + mhealth);
 		if(strategy!=null)
 			strBldrObj.append("\nStrategy : " + strategy.GetStrategyName());
 		else
@@ -126,57 +126,65 @@ public class TowerModel extends Observable{
 	 * @return current level of the tower.
 	 */
 	public int getCurrentLevel() {
-		return m_currlevel;
+		return mcurrlevel;
 	}
 
 	/**
 	 * method to update the details of the tower when it is upgraded by the user.
 	 */
 	public void upgradeCurrentLevel() {
-		m_currlevel++;
-		m_refundvalue += m_upgradecost;
-		m_rangeinblocks++;
-		m_health = 100;
-		m_powerofbullet *= 1.1;
+		mcurrlevel++;
+		mrefundvalue += mupgradecost;
+		mrangeinblocks++;
+		mhealth = 100;
+		mpowerofbullet *= 1.1;
 	}
 
 	/**
 	 * Method which returns the name of the tower.
+	 * @return name of tower
 	 */
-	public String getName() { return m_name;}
+	public String getName() { return mname;}
 	/**
 	 * Method returns the cost of buying the tower.
+	 * @return cost of tower
 	 */
-	public int getCostOfTower() { return m_costoftower; }
+	public int getCostOfTower() { return mcostoftower; }
 	/**
 	 * method returns the upgrading cost of the tower.
+	 * @return upgrade cost
 	 */
-	public int getUpgradeCost() { return m_upgradecost; }
+	public int getUpgradeCost() { return mupgradecost; }
 	/**
 	 * method returns the refund amount while selling the tower.
+	 * @return refund value
 	 */
-	public int getRefundValue() { return m_refundvalue; }
+	public int getRefundValue() { return mrefundvalue; }
 	/**
 	 * method returns the range of the tower.
+	 * @return range of tower
 	 */
-	public int getRangeOfTower() { return m_rangeinblocks; }
+	public int getRangeOfTower() { return mrangeinblocks; }
 	/**
 	 * method returns the power of bullets of the tower.
+	 * @return power of bullets
 	 */
-	public float getPowerOfBullets() { return m_powerofbullet; }
+	public float getPowerOfBullets() { return mpowerofbullet; }
 	/**
 	 * method returns the rate at which the tower fires bullets.
+	 * @return rate of fire
 	 */
-	public int getRateOfFire() { return m_rateoffire; }
+	public int getRateOfFire() { return mrateoffire; }
 
 	/**
 	 * method returns the current health of the tower.
+	 * @return helath
 	 */
-	public int getHealth() { return m_health; }
+	public int getHealth() { return mhealth; }
 	/**
 	 * method to set the health of the tower. 
 	 * @param value new health of the tower.
 	 */
-	public void setHealth(int value) { m_health = value; setChanged(); notifyObservers(); } 
+	public void setHealth(int value) { mhealth = value; setChanged(); notifyObservers(); } 
 
 }

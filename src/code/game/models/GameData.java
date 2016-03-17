@@ -151,7 +151,7 @@ public class GameData extends Observable{
 
 	/**
 	 * decreases coins/balance from player's account
-	 * @param money
+	 * @param money money to be deducted
 	 */
 	public void deductMoneyFromAccount(int money){
 		this.accountBalance-=money;
@@ -161,6 +161,7 @@ public class GameData extends Observable{
 	
 	/**
 	 * adds observers's to the observable super class
+	 * @param o observer to be added to this class
 	 */
 	public void addObserver(Observer o){
 		super.addObserver(o); //Overiding default behavior of AddObservers to show Balance at initialization.
