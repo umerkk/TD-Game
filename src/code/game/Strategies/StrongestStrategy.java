@@ -7,13 +7,14 @@ import code.game.Models.TowerModel;
 public class StrongestStrategy implements TowerStrategy{
 
 	public String StrategyName="Strongest First";
-	public void ShootCritters(GameMap map, TowerModel tower)
+	Critter strongestCritter=null;
+	public boolean ShootCritters(GameMap map, TowerModel tower)
 	{
 		char[] name_exploded = tower.GetMyLocationOnMap().toCharArray();
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
-
-		Critter weakestCritter=null;
+		boolean isHit=false;
+		
 
 		for(int k=1;k<=tower.getCurrentLevel();k++)
 		{
@@ -25,13 +26,13 @@ public class StrongestStrategy implements TowerStrategy{
 			try {
 				if(map.CheckCritterExists(xRight+name_exploded[1]))
 				{
-					if(weakestCritter==null)
+					if(strongestCritter==null)
 					{
-						weakestCritter = map.GetCritter(xRight+name_exploded[1]);
+						strongestCritter = map.GetCritter(xRight+name_exploded[1]);
 
-					} else if(weakestCritter.GetHealth() < map.GetCritter(xRight+name_exploded[1]).GetHealth())
+					} else if(strongestCritter.GetHealth() < map.GetCritter(xRight+name_exploded[1]).GetHealth())
 					{
-						weakestCritter = map.GetCritter(xRight+name_exploded[1]);
+						strongestCritter = map.GetCritter(xRight+name_exploded[1]);
 					}
 
 
@@ -39,13 +40,13 @@ public class StrongestStrategy implements TowerStrategy{
 				if(map.CheckCritterExists(xLeft+name_exploded[1]))
 				{
 
-					if(weakestCritter==null)
+					if(strongestCritter==null)
 					{
-						weakestCritter = map.GetCritter(xLeft+name_exploded[1]);
+						strongestCritter = map.GetCritter(xLeft+name_exploded[1]);
 
-					} else if(weakestCritter.GetHealth() < map.GetCritter(xLeft+name_exploded[1]).GetHealth())
+					} else if(strongestCritter.GetHealth() < map.GetCritter(xLeft+name_exploded[1]).GetHealth())
 					{
-						weakestCritter = map.GetCritter(xLeft+name_exploded[1]);
+						strongestCritter = map.GetCritter(xLeft+name_exploded[1]);
 					}
 
 
@@ -53,13 +54,13 @@ public class StrongestStrategy implements TowerStrategy{
 				} 
 				if(map.CheckCritterExists(name_exploded[0]+yUp))
 				{
-					if(weakestCritter==null)
+					if(strongestCritter==null)
 					{
-						weakestCritter = map.GetCritter(name_exploded[0]+yUp);
+						strongestCritter = map.GetCritter(name_exploded[0]+yUp);
 
-					} else if(weakestCritter.GetHealth() < map.GetCritter(name_exploded[0]+yUp).GetHealth())
+					} else if(strongestCritter.GetHealth() < map.GetCritter(name_exploded[0]+yUp).GetHealth())
 					{
-						weakestCritter = map.GetCritter(name_exploded[0]+yUp);
+						strongestCritter = map.GetCritter(name_exploded[0]+yUp);
 					}
 
 
@@ -67,13 +68,13 @@ public class StrongestStrategy implements TowerStrategy{
 				} 
 				if(map.CheckCritterExists(name_exploded[0]+yDown))
 				{
-					if(weakestCritter==null)
+					if(strongestCritter==null)
 					{
-						weakestCritter = map.GetCritter(name_exploded[0]+yDown);
+						strongestCritter = map.GetCritter(name_exploded[0]+yDown);
 
-					} else if(weakestCritter.GetHealth() < map.GetCritter(name_exploded[0]+yDown).GetHealth())
+					} else if(strongestCritter.GetHealth() < map.GetCritter(name_exploded[0]+yDown).GetHealth())
 					{
-						weakestCritter = map.GetCritter(name_exploded[0]+yDown);
+						strongestCritter = map.GetCritter(name_exploded[0]+yDown);
 					}
 
 				}
@@ -84,8 +85,12 @@ public class StrongestStrategy implements TowerStrategy{
 			}
 
 		}
-		if(weakestCritter!=null)
-		weakestCritter.ReduceHealth((int)tower.getPowerOfBullets());
+		if(strongestCritter!=null)
+		{
+			strongestCritter.ReduceHealth((int)tower.getPowerOfBullets());
+			isHit=true;
+		}
+		return isHit;
 
 	}
 

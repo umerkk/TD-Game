@@ -7,13 +7,14 @@ import code.game.Models.TowerModel;
 public class WeakestStrategy implements TowerStrategy {
 
 	public String StrategyName="Weakest First";
-	public void ShootCritters(GameMap map, TowerModel tower)
+	Critter weakestCritter=null;
+	public boolean ShootCritters(GameMap map, TowerModel tower)
 	{
 		char[] name_exploded = tower.GetMyLocationOnMap().toCharArray();
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
-
-		Critter weakestCritter=null;
+		boolean isHit=false;
+		
 
 		for(int k=1;k<=tower.getCurrentLevel();k++)
 		{
@@ -84,9 +85,11 @@ public class WeakestStrategy implements TowerStrategy {
 			}
 		}
 		if(weakestCritter!=null)
+		{
 			weakestCritter.ReduceHealth((int)tower.getPowerOfBullets());
-
-
+			isHit=true;
+		}
+		return isHit;
 
 	}
 
