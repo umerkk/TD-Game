@@ -7,6 +7,7 @@ public class GameData  extends Observable{
 
 	private  int accountBalance = 20;
 	private int playerPower =100;
+	private int gameWave=1;
 	private String selectedTowerDesc;
 
 	//==================================================
@@ -27,10 +28,20 @@ public class GameData  extends Observable{
 		setChanged();
 		notifyObservers(this);
 	}
+	public void ResetWave()
+	{
+		this.gameWave = 1;
+		setChanged();
+		notifyObservers(this);
+	}
 
 	public int GetPlayerPower()
 	{
 		return this.playerPower;	
+	}
+	public int GetWave()
+	{
+		return this.gameWave;	
 	}
 	
 	public void SetPlayerPower(int power)
@@ -52,6 +63,8 @@ public class GameData  extends Observable{
 		return selectedTowerDesc;	
 	}
 	
+	
+	
 	public void SetSelectedTowerDescription(String e)
 	{
 		selectedTowerDesc=e;	
@@ -67,6 +80,13 @@ public class GameData  extends Observable{
 	public void SetAccountBalance(int money)
 	{
 		this.accountBalance = money;
+		setChanged();
+		notifyObservers(this);
+	}
+	
+	public void SetWaveIncrement()
+	{
+		this.gameWave++;
 		setChanged();
 		notifyObservers(this);
 	}

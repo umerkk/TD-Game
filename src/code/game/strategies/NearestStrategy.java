@@ -28,18 +28,21 @@ public class NearestStrategy  implements TowerStrategy {
 					if(map.CheckCritterExists(xRight+name_exploded[1]))
 					{
 						map.GetCritter(xRight+name_exploded[1]).ReduceHealth((int)tower.getPowerOfBullets());
+						SetBackgroundOfCritter(tower,map.GetCritter(xRight+name_exploded[1]));
 						lockedCritter=map.GetCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
 					} else if(map.CheckCritterExists(xLeft+name_exploded[1]))
 					{
 						map.GetCritter(xLeft+name_exploded[1]).ReduceHealth((int)tower.getPowerOfBullets());
+						SetBackgroundOfCritter(tower,map.GetCritter(xLeft+name_exploded[1]));
 						lockedCritter=map.GetCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
 					} else if(map.CheckCritterExists(name_exploded[0]+yUp))
 					{
 						map.GetCritter(name_exploded[0]+yUp).ReduceHealth((int)tower.getPowerOfBullets());
+						SetBackgroundOfCritter(tower,map.GetCritter(name_exploded[0]+yUp));
 						lockedCritter=map.GetCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
@@ -47,6 +50,7 @@ public class NearestStrategy  implements TowerStrategy {
 					} else if(map.CheckCritterExists(name_exploded[0]+yDown))
 					{
 						map.GetCritter(name_exploded[0]+yDown).ReduceHealth((int)tower.getPowerOfBullets());
+						SetBackgroundOfCritter(tower,map.GetCritter(name_exploded[0]+yDown));
 						lockedCritter=map.GetCritter(xRight+name_exploded[1]);
 						isIgnore = true;
 						isHit=true;
@@ -61,6 +65,25 @@ public class NearestStrategy  implements TowerStrategy {
 		return isHit;
 	}
 
+	private void SetBackgroundOfCritter(TowerModel tower, Critter critter)
+	{
+		switch(tower.getName())
+		{
+		case "Castle Tower":{
+			critter.SetBackground("red");
+			break;
+		}
+		case "Imperial Tower":{
+			critter.SetBackground("blue");
+
+			break;
+		}
+		case "Industrial Tower":{
+			critter.SetBackground("black");
+			break;
+		}
+		}
+	}
 	public String GetStrategyName(){
 		return StrategyName;
 	}

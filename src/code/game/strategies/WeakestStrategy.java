@@ -14,7 +14,7 @@ public class WeakestStrategy implements TowerStrategy {
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		boolean isHit=false;
-		
+
 
 		for(int k=1;k<=tower.getCurrentLevel();k++)
 		{
@@ -87,6 +87,22 @@ public class WeakestStrategy implements TowerStrategy {
 		if(weakestCritter!=null)
 		{
 			weakestCritter.ReduceHealth((int)tower.getPowerOfBullets());
+			switch(tower.getName())
+			{
+			case "Castle Tower":{
+				weakestCritter.SetBackground("red");
+				break;
+			}
+			case "Imperial Tower":{
+				weakestCritter.SetBackground("blue");
+
+				break;
+			}
+			case "Industrial Tower":{
+				weakestCritter.SetBackground("black");
+				break;
+			}
+			}
 			isHit=true;
 			weakestCritter=null;
 		}

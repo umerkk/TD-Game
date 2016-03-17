@@ -9,7 +9,7 @@ public abstract class Critter {
 	private int speed;
 	private GameMap mapReference;
 	private String MyLocationOnMap;
-	
+	private String background="None";
 	
 	public Critter()
 	{
@@ -36,6 +36,16 @@ public abstract class Critter {
 	public String GetMyLocationOnMap()
 	{
 		return this.MyLocationOnMap;
+	}
+	
+	public void SetBackground(String bg)
+	{
+		this.background = bg;
+	}
+	
+	public String GetBackground()
+	{
+		return this.background;
 	}
 	
 	

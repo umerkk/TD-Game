@@ -88,6 +88,22 @@ public class StrongestStrategy implements TowerStrategy{
 		if(strongestCritter!=null)
 		{
 			strongestCritter.ReduceHealth((int)tower.getPowerOfBullets());
+			switch(tower.getName())
+			{
+			case "Castle Tower":{
+				strongestCritter.SetBackground("red");
+				break;
+			}
+			case "Imperial Tower":{
+				strongestCritter.SetBackground("blue");
+
+				break;
+			}
+			case "Industrial Tower":{
+				strongestCritter.SetBackground("black");
+				break;
+			}
+			}
 			isHit=true;
 			strongestCritter=null;
 		}

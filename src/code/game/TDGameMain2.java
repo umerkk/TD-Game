@@ -49,6 +49,8 @@ public class TDGameMain2 implements Observer {
 	JTextArea m_txtTwrDesc = new JTextArea();
 	JLabel m_lblAccBal = new JLabel("0  ");
 	JLabel powerlbl = new JLabel("0  ");
+	JLabel wavelbl = new JLabel("0  ");
+	JButton btnStrtGame = new JButton("Start Game");
 	SingleGameController myController = SingleGameController.getGameControllerInstance();
 
 
@@ -71,7 +73,15 @@ public class TDGameMain2 implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		m_lblAccBal.setText(String.valueOf(((GameData)arg0).GetAccountBalance()));
 		powerlbl.setText(String.valueOf(((GameData)arg0).GetPlayerPower()));
+		wavelbl.setText(String.valueOf(((GameData)arg0).GetWave()));
 		m_txtTwrDesc.setText(String.valueOf(((GameData)arg0).GetSelectedTowerDescription()));
+		if(((GameData)arg0).GetWave()>1)
+		{
+			btnStrtGame.setText("Start Next Wave");
+		} else {
+			btnStrtGame.setText("Start Game");
+
+		}
 		//m_txtTwrDesc.setText(null);
 		//TowerModel towrdesc = ((SingleGameController)arg0).getSelectdTwr();
 		//if(towrdesc == null)
@@ -176,6 +186,15 @@ public class TDGameMain2 implements Observer {
 		
 		powerlbl.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(powerlbl);
+		
+		JLabel lblWave = new JLabel("Wave");
+		lblWave.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWave.setFont(new Font("Arial", Font.PLAIN, 14));
+		pnlHdrSub.add(lblWave);
+		
+		
+		wavelbl.setFont(new Font("Arial", Font.PLAIN, 14));
+		pnlHdrSub.add(wavelbl);
 
 
 		m_frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -193,7 +212,7 @@ public class TDGameMain2 implements Observer {
 		jPnlFtr.add(panel_1, BorderLayout.EAST);
 		panel_1.setLayout(new BorderLayout(0, 0));
 
-		JButton btnStrtGame = new JButton("Start Game");
+		
 		panel_1.add(btnStrtGame, BorderLayout.NORTH);
 
 		JButton btnNewButton = new JButton("Advance Game>>");
@@ -238,7 +257,7 @@ public class TDGameMain2 implements Observer {
 			}
 		});
 
-		lblTwr1.setIcon(new ImageIcon("res/tower3.png"));
+		lblTwr1.setIcon(new ImageIcon("res/tower_1.png"));
 
 		final JLabel lblTwr2 = new JLabel("");
 		lblTwr2.addMouseListener(new MouseAdapter() {
@@ -250,7 +269,7 @@ public class TDGameMain2 implements Observer {
 			}
 		});
 
-		lblTwr2.setIcon(new ImageIcon("res/tower.png"));
+		lblTwr2.setIcon(new ImageIcon("res/tower_2.png"));
 		pnlTwrTopLvl.setLayout(new BorderLayout(0, 0));
 		pnlTwrTopLvl.add(lblTwr1, BorderLayout.WEST);
 		pnlTwrTopLvl.add(lblTwr2, BorderLayout.EAST);
@@ -271,7 +290,7 @@ public class TDGameMain2 implements Observer {
 
 		lblTwr3.setHorizontalAlignment(SwingConstants.LEFT);
 		pnlTwrSndLvl.add(lblTwr3, BorderLayout.WEST);
-		lblTwr3.setIcon(new ImageIcon("res/tower4.png"));
+		lblTwr3.setIcon(new ImageIcon("res/tower_3.png"));
 
 		JPanel pnlTwrDesc = new JPanel();
 		pnlTwrDesc.setBorder(new TitledBorder(null, "Tower Description", TitledBorder.LEFT, TitledBorder.TOP, null, null));

@@ -48,9 +48,8 @@ public class SingleGameController {
 	private Boolean newTowerSelected=false;
 	private JPanel selectedCell;
 	public GameData gameDataModel;
-	private int waveNum=1;
 	int critterCreationInterval=2;
-	private int critterMovementTime=500;
+	private int critterMovementTime=100;
 	private boolean isGameStarted = false;
 	private Timer gameTimer=null;
 	private final int critterKillPoints=5;
@@ -58,8 +57,6 @@ public class SingleGameController {
 	private final int POINT_ENTRY = 1;
 	private final int POINT_EXIT = 9999;
 	private int numberOfCritters=0;
-	private int waveOfGame=1;
-
 
 
 	private SingleGameController()
@@ -272,9 +269,6 @@ public class SingleGameController {
 
 		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
 			try {
-				//panel.validate();
-				//if(((Critter)entry.getValue()).GetMyLocationOnMap()==null)
-				//	continue;
 				String key = entry.getKey();
 				int loc = Integer.parseInt(key);
 
@@ -294,12 +288,12 @@ public class SingleGameController {
 						}
 						String endLoc = map.FindLocationInMap(POINT_EXIT);
 						if(location.equalsIgnoreCase(endLoc)) {
-							//Critter reached the end point.
+							//if(drawController%2==0){
 							gameDataModel.DeductPlayerPower(critterRunAwayPoints);
-							//map.AddCritter(key, null);
 							map.RemoveCritter(key);
+							//}
 							continue;
-							//((Critter)entry).SetHealth(0);
+
 						}
 						char[] name_exploded = location.toCharArray();
 
@@ -312,6 +306,28 @@ public class SingleGameController {
 								try {
 									myPicture = ImageIO.read(new File("res/critter.png"));
 									t = new JLabel(new ImageIcon(myPicture));
+									switch(((Critter)entry.getValue()).GetBackground())
+									{
+									case "red":{
+										myPicture = ImageIO.read(new File("res/critter_burning.png"));
+										t = new JLabel(new ImageIcon(myPicture));
+										//t.setBackground(Color.red);
+										break;
+									}
+									case "blue":{
+										myPicture = ImageIO.read(new File("res/critter_freezing.png"));
+										t = new JLabel(new ImageIcon(myPicture));
+
+										break;
+									}
+									case "black":{
+										t.setBackground(Color.black);
+										myPicture = ImageIO.read(new File("res/critter_splash.png"));
+										t = new JLabel(new ImageIcon(myPicture));
+									} default: {
+										
+									}
+									}
 									t.setBounds(0, 0, 80, 80);
 
 									t.setName("critter");
@@ -320,6 +336,7 @@ public class SingleGameController {
 									e.printStackTrace();
 								}
 								((JPanel)panel.getComponent(s)).add(t);
+								((Critter)entry.getValue()).SetBackground("none");
 							}
 						}
 					}
@@ -529,7 +546,7 @@ public class SingleGameController {
 
 	public void StartWave(final Panel panel) {
 
-		this.numberOfCritters = waveNum*10;
+		this.numberOfCritters = gameDataModel.GetWave()*10;
 
 		ActionListener GamePlay = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) 
@@ -546,6 +563,7 @@ public class SingleGameController {
 
 	public void IncrementWave(Panel panel) {
 
+		//drawController=1;
 		
 		if(!(numberOfCritters<1))
 		{	
@@ -572,10 +590,14 @@ public class SingleGameController {
 		panel.repaint();
 
 		map.SetCritterCollection(tempList);
-		DrawCritter(map.GetCritterCollection(),panel);
-		panel.repaint();
-		map.TowerToShoot();
 
+		panel.repaint();
+		
+		DrawCritter(map.GetCritterCollection(),panel);
+		//drawController++;
+		RemoveCritters(panel);
+		map.TowerToShoot();
+		DrawCritter(map.GetCritterCollection(),panel);
 		if(map.IsCritterCollectionEmpty()) {
 			isGameStarted=false;
 			numberOfCritters=0;
@@ -584,7 +606,7 @@ public class SingleGameController {
 			gameDataModel.ResetPlayerPower();
 			map.GetCritterCollection().clear();
 			JOptionPane.showMessageDialog(null, "You Won!. All the critters are history and you still have some power.", "YAY:", JOptionPane.INFORMATION_MESSAGE);
-			waveNum++;
+			gameDataModel.SetWaveIncrement();
 		} else if(gameDataModel.GetPlayerPower()<1)
 		{
 			isGameStarted=false;
@@ -594,7 +616,7 @@ public class SingleGameController {
 			map.GetCritterCollection().clear();
 			JOptionPane.showMessageDialog(null, "You Lose!.\r\nCritters has taken all of your power.", "Aww:", JOptionPane.ERROR_MESSAGE);
 			gameDataModel.ResetPlayerPower();
-			waveNum=1;
+			gameDataModel.ResetWave();
 		}
 	}
 
