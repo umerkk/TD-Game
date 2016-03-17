@@ -88,6 +88,7 @@ public class WeakestStrategy implements TowerStrategy {
 		{
 			weakestCritter.ReduceHealth((int)tower.getPowerOfBullets());
 			isHit=true;
+			weakestCritter=null;
 		}
 		return isHit;
 

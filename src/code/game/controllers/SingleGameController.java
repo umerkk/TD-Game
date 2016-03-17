@@ -53,7 +53,7 @@ public class SingleGameController {
 	private int critterMovementTime=500;
 	private boolean isGameStarted = false;
 	private Timer gameTimer=null;
-	private final int critterKillPoints=20;
+	private final int critterKillPoints=5;
 	private final int critterRunAwayPoints=20; 
 	private final int POINT_ENTRY = 1;
 	private final int POINT_EXIT = 9999;
@@ -310,7 +310,7 @@ public class SingleGameController {
 								//panel.getComponent(s).setBackground(Color.red);
 								BufferedImage myPicture;
 								try {
-									myPicture = ImageIO.read(new File("res/matrix.gif"));
+									myPicture = ImageIO.read(new File("res/critter.png"));
 									t = new JLabel(new ImageIcon(myPicture));
 									t.setBounds(0, 0, 80, 80);
 
@@ -546,6 +546,7 @@ public class SingleGameController {
 
 	public void IncrementWave(Panel panel) {
 
+		
 		if(!(numberOfCritters<1))
 		{	
 			if(critterCreationInterval%2==0) {
@@ -568,7 +569,7 @@ public class SingleGameController {
 
 		RemoveCritters(panel);
 		//panel.validate();
-		//panel.repaint();
+		panel.repaint();
 
 		map.SetCritterCollection(tempList);
 		DrawCritter(map.GetCritterCollection(),panel);

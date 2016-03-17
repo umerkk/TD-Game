@@ -5,7 +5,7 @@ import java.util.Observer;
 
 public class GameData  extends Observable{
 
-	private  int accountBalance = 500;
+	private  int accountBalance = 20;
 	private int playerPower =100;
 	private String selectedTowerDesc;
 
@@ -16,7 +16,7 @@ public class GameData  extends Observable{
 	}
 	public void ResetAccountBalance()
 	{
-		this.accountBalance = 500;
+		this.accountBalance = 20;
 		setChanged();
 		notifyObservers(this);
 	}

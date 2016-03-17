@@ -11,7 +11,7 @@ public class ImperialTower extends TowerModel
 
 	public ImperialTower()
 	{
-		super("Imperial Tower", 150, 15, 100, 2, 50, 10);
+		super("Imperial Tower", 20, 10, 10, 2, 40, 10);
 	}
 	
 }
