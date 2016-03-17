@@ -14,8 +14,17 @@ import code.game.models.CastleTower;
 import code.game.models.GameData;
 import code.game.models.GameMap;
 
+/**
+ * Test case class to perform tests on the SingleGameController class.
+ * 
+ * @author lokesh
+ *
+ */
 public class SingleGameControllerTest {
 
+	/**
+	 * Test to read a map from file and check if it is read properly.
+	 */
 	@Test
 	public void testReadMap() 
 	{
@@ -30,6 +39,9 @@ public class SingleGameControllerTest {
 		Assert.assertArrayEquals(mapArray, tstCntrlr.getMapModl().getMapArray());
 	}
 
+	/**
+	 * Test to check if SingleGameController is implementing Singleton design pattern.
+	 */
 	@Test
 	public void testcheckSingltn() 
 	{
@@ -39,6 +51,9 @@ public class SingleGameControllerTest {
 		assertTrue(tstCntrlr1.toString().equals(tstCntrlr2.toString()));
 	}
 	
+	/**
+	 * Test to sell a tower and get the account balance updated with refund value.
+	 */
 	@Test
 	public void testSellTower() 
 	{
@@ -67,6 +82,9 @@ public class SingleGameControllerTest {
 		assertTrue(tstCntrlr.gameDataModel.getAccountBalance() == 100 + (new CastleTower()).getRefundValue());
 	}
 
+	/**
+	 * Test to fail to upgrade a tower with low account balance.
+	 */
 	@Test
 	public void testUpgradeLowBalnc() 
 	{
@@ -95,6 +113,9 @@ public class SingleGameControllerTest {
 		assertTrue(tstCntrlr.getSelectedTwr().getCurrentLevel() == 1);
 	}
 	
+	/**
+	 * Test to upgrade a tower successfully with enough account balance.
+	 */
 	@Test
 	public void testUpgradeWithBalnc() 
 	{

@@ -8,8 +8,17 @@ import code.game.models.Critter;
 import code.game.models.CritterFactory;
 import code.game.models.GameMap;
 
+/**
+ * Test case class to test the factory design pattern of critters.
+ * 
+ * @author lokesh
+ *
+ */
 public class CritterFactoryTest {
 
+	/**
+	 * Test to check if the factory design is implemented properly and polymorphism is achieved.
+	 */
 	@Test
 	public void testcheckFactoryDesign() 
 	{

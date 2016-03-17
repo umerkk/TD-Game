@@ -11,8 +11,17 @@ import code.game.models.GameMap;
 import code.game.models.TowerModel;
 import code.game.strategies.StrongestStrategy;
 
+/**
+ * Test case class to test the strongest critter targeting strategy.
+ * 
+ * @author lokesh
+ *
+ */
 public class StrongestStrategyTest {
 
+	/**
+	 * Test to check if the strongest critter is selected by the tower strategy.
+	 */
 	@Test
 	public void testStrategy() 
 	{

@@ -11,8 +11,17 @@ import code.game.models.GameMap;
 import code.game.models.TowerModel;
 import code.game.strategies.NearestStrategy;
 
+/**
+ * Test case class to test the nearest critter targeting strategy.
+ * 
+ * @author lokesh
+ *
+ */
 public class NearestStrategyTest {
 
+	/**
+	 * Test to check if the nearest critter to tower is selected by the tower strategy.
+	 */
 	@Test
 	public void testStrategy() 
 	{

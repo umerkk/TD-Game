@@ -11,8 +11,17 @@ import code.game.models.GameMap;
 import code.game.models.TowerModel;
 import code.game.strategies.WeakestStrategy;
 
+/**
+ * Test case class to test the weakest critter targeting strategy.
+ * 
+ * @author lokesh
+ *
+ */
 public class WeakestStrategyTest {
 
+	/**
+	 * Test to check if the weakest critter is selected by the tower strategy.
+	 */
 	@Test
 	public void testStrategy() 
 	{

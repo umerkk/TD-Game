@@ -15,8 +15,17 @@ import code.game.models.Critter;
 import code.game.models.CritterFactory;
 import code.game.models.GameMap;
 
+/**
+ * Test case class to perform unit test on GameMap model class.
+ * 
+ * @author lokesh
+ *
+ */
 public class GameMapTest {
 
+	/**
+	 * Test to check if the map model object is created correctly from the map in file.
+	 */
 	@Test
 	public void testLoadMap() 
 	{
@@ -38,6 +47,9 @@ public class GameMapTest {
 		Assert.assertArrayEquals(tstMapArray, tstGameMapObj.getMapArray());  // (tstGameMapObj.CheckTowerExists("12"));
 	}
 	
+	/**
+	 * Test to check if a tower can be successfully added to the scenery.
+	 */
 	@Test
 	public void testAddTower() 
 	{
@@ -57,6 +69,9 @@ public class GameMapTest {
 		Assert.assertArrayEquals(newTstArray, tstGameMapObj.getMapArray());  // (tstGameMapObj.CheckTowerExists("12"));
 	}
 
+	/**
+	 * Test to check if a tower can be successfully deleted from the map.
+	 */
 	@Test
 	public void testDeleteTower() 
 	{
@@ -77,6 +92,9 @@ public class GameMapTest {
 		Assert.assertArrayEquals(newTstArray, tstGameMapObj.getMapArray());  // (tstGameMapObj.CheckTowerExists("12"));
 	}
 	
+	/**
+	 * Test to check if critter exist at a particular location in map.
+	 */
 	@Test
 	public void testcheckCritrExist() 
 	{
