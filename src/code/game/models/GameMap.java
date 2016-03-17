@@ -1,4 +1,4 @@
-package code.game.Models;
+package code.game.models;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;;

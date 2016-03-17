@@ -1,11 +1,12 @@
-package code.game;
+package code.game.tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import code.game.Models.CastleTower;
-import code.game.Models.TowerModel;
+import code.game.GameController;
+import code.game.models.CastleTower;
+import code.game.models.TowerModel;
 import junit.framework.Assert;
 
 /**

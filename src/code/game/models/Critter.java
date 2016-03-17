@@ -1,4 +1,4 @@
-package code.game.Models;
+package code.game.models;
 
 public abstract class Critter {
 

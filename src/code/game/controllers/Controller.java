@@ -1,26 +1,20 @@
-package code.game.Controllers;
+package code.game.controllers;
 
 public class Controller {
 
 	private static SingleGameController instance;
 
-	private Controller()
-	{
+	private Controller() {
 		//No instance
 	}
 
-
-	public static SingleGameController getGameControllerInstance()
-	{
-		if(instance==null)
-		{
+	public static SingleGameController getGameControllerInstance() {
+		if(instance==null) {
 			instance = new SingleGameController();
 			return instance;
-		} else 
-		{
+		} else {
 			return instance;
 		}
 	}
-
 
 }

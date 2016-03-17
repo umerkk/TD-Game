@@ -1,8 +1,8 @@
-package code.game.Models;
+package code.game.models;
 
 import java.util.Observable;
 
-import code.game.Strategies.TowerStrategy;
+import code.game.strategies.TowerStrategy;
 
 /**
  * This class defines the necessary properties of the tower and exposes methods to access and modify the tower objects.

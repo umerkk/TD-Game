@@ -25,7 +25,7 @@ import java.awt.Component;
 import java.awt.Font;
 import javax.swing.border.TitledBorder;
 
-import code.game.Models.TowerModel;
+import code.game.models.TowerModel;
 
 import javax.swing.UIManager;
 import java.awt.GridLayout;

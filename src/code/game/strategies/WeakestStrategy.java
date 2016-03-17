@@ -1,8 +1,8 @@
-package code.game.Strategies;
+package code.game.strategies;
 
-import code.game.Models.Critter;
-import code.game.Models.GameMap;
-import code.game.Models.TowerModel;
+import code.game.models.Critter;
+import code.game.models.GameMap;
+import code.game.models.TowerModel;
 
 public class WeakestStrategy implements TowerStrategy {
 

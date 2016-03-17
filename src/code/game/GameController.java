@@ -12,10 +12,10 @@ import javax.swing.JTextArea;
 
 import org.apache.commons.io.FileUtils;
 
-import code.game.Models.CastleTower;
-import code.game.Models.ImperialTower;
-import code.game.Models.IndustrialTower;
-import code.game.Models.TowerModel;
+import code.game.models.CastleTower;
+import code.game.models.ImperialTower;
+import code.game.models.IndustrialTower;
+import code.game.models.TowerModel;
 
 /**
  * This is the game controller class for handling all the user interactions with the User interface.

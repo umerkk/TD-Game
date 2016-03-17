@@ -1,9 +1,12 @@
-package code.game;
+package code.game.tests;
 
 import static org.junit.Assert.*;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import code.game.GameController;
+import code.game.TDGameMain;
 
 public class TDGameMainTest {
 

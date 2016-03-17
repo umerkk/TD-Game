@@ -1,4 +1,4 @@
-package code.game.Models;
+package code.game.models;
 
 /**
  * Industrial Tower extends the tower model class and is a a type of tower available in the game

@@ -1,4 +1,4 @@
-package code.game.Controllers;
+package code.game.controllers;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -28,10 +28,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import code.game.Models.*;
-import code.game.Strategies.NearestStrategy;
-import code.game.Strategies.StrongestStrategy;
-import code.game.Strategies.WeakestStrategy;
+import code.game.models.*;
+import code.game.strategies.NearestStrategy;
+import code.game.strategies.StrongestStrategy;
+import code.game.strategies.WeakestStrategy;
 /**
  * @author Umer-PC
  *
@@ -50,23 +50,23 @@ public class SingleGameController {
 	private Timer gameTimer=null;
 	private final int critterKillPoints=20;
 	private final int critterRunAwayPoints=20; 
+	private final int POINT_ENTRY = 1;
+	private final int POINT_EXIT = 9999;
+
 
 
 
 	//======================================================================================
 
-	public JPanel GetSelectedCell()
-	{
+	public JPanel GetSelectedCell() {
 		return selectedCell;
 	}
 
-	public void SetGameDataModel(GameData gf)
-	{
+	public void SetGameDataModel(GameData gf) {
 		this.gameDataModel=gf;
 	}
 
-	public String ShowSelectedTowerDesc()
-	{
+	public String ShowSelectedTowerDesc() {
 		if(selectedTower !=null)
 		{
 			return selectedTower.getTowerDetails().toString();
@@ -74,25 +74,20 @@ public class SingleGameController {
 			return "";
 	}
 
-	public void SetMap(GameMap _map)
-	{
+	public void SetMap(GameMap _map) {
 		this.map=_map;
 	}
 
-	public void SetSelectedCell(JPanel cell)
-	{
+	public void SetSelectedCell(JPanel cell) {
 		this.selectedCell = cell;
 	}
 
-	public void OpenMap()
-	{
+	public void OpenMap() {
 		JFileChooser filebrwsr = new JFileChooser();
 
 		int result = filebrwsr.showOpenDialog(null);
-		if (result == JFileChooser.APPROVE_OPTION) 
-		{
-			try
-			{
+		if (result == JFileChooser.APPROVE_OPTION) {
+			try {
 				File selectedFile = filebrwsr.getSelectedFile();
 				FileInputStream fis = new FileInputStream(selectedFile);
 				ObjectInputStream ois = new ObjectInputStream(fis);
@@ -102,22 +97,18 @@ public class SingleGameController {
 				ois.close();
 				fis.close();
 			}catch(Exception ex){}
-		}
-		else
-		{
+		} else {
 			JOptionPane.showMessageDialog(null, "Please select a map file.", "Warning: File not selected.", JOptionPane.WARNING_MESSAGE);	
 		}
 	}
 
-	private void DrawMapItem(int type, JPanel cell)
-	{
+	private void DrawMapItem(int type, JPanel cell) {
 
 		JLabel t = new JLabel();
 		t.setForeground(Color.WHITE);
 		t.setFont(new Font("Arial",0,20));
 
-		if(type==1)
-		{
+		if(type == POINT_ENTRY) {
 			try {
 				BufferedImage myPicture = ImageIO.read(new File("res/start.png"));
 				t = new JLabel(new ImageIcon(myPicture));
@@ -126,11 +117,7 @@ public class SingleGameController {
 			}
 			t.setBounds(0, 0, 80, 80);
 
-
-
-		} else  if(type==9999)
-
-		{
+		} else if(type == POINT_EXIT) {
 			try {
 				BufferedImage myPicture = ImageIO.read(new File("res/end.png"));
 				t = new JLabel(new ImageIcon(myPicture));
@@ -139,10 +126,7 @@ public class SingleGameController {
 			}
 			t.setBounds(0, 0, 80, 80);
 
-
-
-		} else  if(!(type==0)){
-			//t.setText("P");
+		} else if(!(type==0)){
 			cell.setBackground(Color.green);
 			t.setBounds(0, 0, 80, 80);
 		}
@@ -150,22 +134,18 @@ public class SingleGameController {
 		cell.add(t);
 	}
 
-	public void DrawMap(boolean isExisting, Panel parentPanel)
-	{
-		if(isExisting)
-		{
-			for(int k=0;k<map.GetArrayRow();k++)
-			{
-				for(int i=0;i<map.GetArrayCol();i++)
-				{
+	public void DrawMap(boolean isExisting, Panel parentPanel) {
+		if(isExisting) {
+			for(int k=0;k<map.GetArrayRow();k++) {
+				for(int i=0;i<map.GetArrayCol();i++) {
+
 					String _append = "";
-					if(i==map.GetArrayCol()-1)
-					{
+					if(i==map.GetArrayCol()-1) {
 						_append = ", wrap";
-					} else
-					{
+					} else {
 
 					}
+
 					final JPanel temp = new JPanel();
 					temp.setName(k +""+ i);
 					temp.setBorder(BorderFactory.createEtchedBorder(1));
@@ -173,26 +153,18 @@ public class SingleGameController {
 
 						@Override
 						public void mouseReleased(MouseEvent e) {
-							// TODO Auto-generated method stub
-
 						}
 
 						@Override
 						public void mousePressed(MouseEvent e) {
-							// TODO Auto-generated method stub
-
 						}
 
 						@Override
 						public void mouseExited(MouseEvent e) {
-							// TODO Auto-generated method stub
-
 						}
 
 						@Override
 						public void mouseEntered(MouseEvent e) {
-							// TODO Auto-generated method stub
-
 						}
 
 						@Override
@@ -200,33 +172,28 @@ public class SingleGameController {
 							click(e,temp);
 						}
 					});
-					if(map.GetMapArray()[k][i]==1)
-					{
+
+					if(map.GetMapArray()[k][i]==1) {
 						DrawMapItem(1, temp);
-					}  else if(map.GetMapArray()[k][i]==9999)
-					{
-						DrawMapItem(9999, temp);
-					} else if(map.GetMapArray()[k][i]==0)
-					{
+					}  else if(map.GetMapArray()[k][i] == POINT_EXIT) {
+						DrawMapItem(POINT_EXIT, temp);
+					} else if(map.GetMapArray()[k][i]==0) {
 						DrawMapItem(0, temp);
-					} else
-					{
+					} else {
 						DrawMapItem(2,temp);
 					}
+
 					parentPanel.add(temp, "wmax 80, hmax 80, width 80, height 80" + _append);					
 				}
 			}
+
 		} else {
-			for(int k=0;k<map.GetArrayRow();k++)
-			{
-				for(int i=0;i<map.GetArrayCol();i++)
-				{
+			for(int k=0;k<map.GetArrayRow();k++) {
+				for(int i=0;i<map.GetArrayCol();i++) {
 					String _append = "";
-					if(i==map.GetArrayCol()-1)
-					{
+					if(i==map.GetArrayCol()-1) {
 						_append = ", wrap";
-					} else
-					{
+					} else {
 
 					}
 					final JPanel temp = new JPanel();
@@ -236,26 +203,18 @@ public class SingleGameController {
 
 						@Override
 						public void mouseReleased(MouseEvent e) {
-							// TODO Auto-generated method stub
-
 						}
 
 						@Override
 						public void mousePressed(MouseEvent e) {
-							// TODO Auto-generated method stub
-
 						}
 
 						@Override
 						public void mouseExited(MouseEvent e) {
-							// TODO Auto-generated method stub
-
 						}
 
 						@Override
 						public void mouseEntered(MouseEvent e) {
-							// TODO Auto-generated method stub
-
 						}
 
 						@Override
@@ -269,22 +228,18 @@ public class SingleGameController {
 		}
 	}
 
-	public void RemoveCritters(Panel panel)
-	{
+	public void RemoveCritters(Panel panel) {
 
 		//for(int s=0;s<panel.getComponentCount();s++)
 		//{
-		for(int k=0;k<panel.getComponentCount();k++)
-		{
+		for(int k=0;k<panel.getComponentCount();k++) {
 			try {
 				Object sd = panel.getComponent(k);
 				Object sd1 = ((JPanel)panel.getComponent(k)).getComponents()[1];
-				if(((JLabel)sd1).getName().equalsIgnoreCase("critter"))
-				{
+				if(((JLabel)sd1).getName().equalsIgnoreCase("critter")) {
 					//panel.remove(k);
 					((JPanel)panel.getComponent(k)).remove(1);
 				}
-				//
 
 			} catch (Exception e) {
 				continue;
@@ -294,23 +249,18 @@ public class SingleGameController {
 		//}
 	}
 
-	public void DrawCritter(HashMap<String,Critter> critterList, Panel panel)
-	{
-		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
-		{
+	public void DrawCritter(HashMap<String,Critter> critterList, Panel panel) {
+		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
 			//panel.validate();
-		
 			//if(((Critter)entry.getValue()).GetMyLocationOnMap()==null)
 			//	continue;
 			String key = entry.getKey();
 			int loc = Integer.parseInt(key);
 
-			if(loc>0)
-			{
+			if(loc>0) {
 
 				try {
-					if(((Critter)entry.getValue()).GetHealth()<1)
-					{
+					if(((Critter)entry.getValue()).GetHealth()<1) {
 						map.RemoveCritter(key);
 						gameDataModel.AddMoneyToAccount(critterKillPoints);
 						continue;
@@ -318,26 +268,21 @@ public class SingleGameController {
 
 					else {
 						String location = map.FindLocationInMap(loc);
-						if(location==null)
-						{
-							location = map.FindLocationInMap(9999);
+						if(location==null) {
+							location = map.FindLocationInMap(POINT_EXIT);
 						}
-						String endLoc = map.FindLocationInMap(9999);
-						if(location.equalsIgnoreCase(endLoc))
-						{
+						String endLoc = map.FindLocationInMap(POINT_EXIT);
+						if(location.equalsIgnoreCase(endLoc)) {
 							//Critter reached the end point.
 							gameDataModel.DeductMoneyFromAccount(critterRunAwayPoints);
 							map.AddCritter(key, null);
 							continue;
 							//((Critter)entry).SetHealth(0);
-
 						}
 						char[] name_exploded = location.toCharArray();
 
-						for(int s=0;s<panel.getComponentCount();s++)
-						{
-							if(panel.getComponent(s).getName().equalsIgnoreCase(new String(name_exploded)))
-							{
+						for(int s=0;s<panel.getComponentCount();s++) {
+							if(panel.getComponent(s).getName().equalsIgnoreCase(new String(name_exploded))) {
 								((Critter)entry.getValue()).SetMyLocationOnMap(new String(name_exploded));
 								JLabel t=null;
 								//panel.getComponent(s).setBackground(Color.red);
@@ -364,11 +309,9 @@ public class SingleGameController {
 		//panel.validate();
 		//panel.repaint();
 
-
 	}
 
-	private void DrawTower(JPanel cell, int response)
-	{
+	private void DrawTower(JPanel cell, int response) {
 		String tempName = cell.getName();
 		char[] name_exploded = tempName.toCharArray();
 		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
@@ -377,12 +320,11 @@ public class SingleGameController {
 		JLabel t=null;
 
 		switch(response){
-		case 0:
-		{
+		case 0: {
 			selectedTower.SetStrategy(new NearestStrategy(),map);
 			break;
 		}
-		case 1:{
+		case 1: {
 			selectedTower.SetStrategy(new StrongestStrategy(),map);
 			break;
 		}
@@ -395,17 +337,13 @@ public class SingleGameController {
 
 		TowerModel m = selectedTower;
 
-		if(m!=null)
-		{
+		if(m!=null) {
 			int l = (gameDataModel.GetAccountBalance()- m.getCostOfTower());
-			if(l>-1)
-			{
+			if(l>-1) {
 
 				if(mapArray[x][y] == 0) { 
 
-
-					if(m.getName().equals("Castle Tower"))
-					{
+					if(m.getName().equals("Castle Tower")) {
 						try {
 							BufferedImage myPicture = ImageIO.read(new File("res/tower3.png"));
 
@@ -413,18 +351,14 @@ public class SingleGameController {
 						} catch (Exception e){}
 
 
-					} else if(m.getName().equals("Imperial Tower"))
-					{
+					} else if(m.getName().equals("Imperial Tower")) {
 						try {
 							BufferedImage myPicture = ImageIO.read(new File("res/tower.png"));
-
 							t = new JLabel(new ImageIcon(myPicture));
 						} catch (Exception e){}
-					}else if(m.getName().equals("Industrial Tower"))
-					{
+					}else if(m.getName().equals("Industrial Tower")) {
 						try {
 							BufferedImage myPicture = ImageIO.read(new File("res/tower4.png"));
-
 							t = new JLabel(new ImageIcon(myPicture));
 						} catch (Exception e){}
 					}
@@ -438,9 +372,6 @@ public class SingleGameController {
 					gameDataModel.DeductMoneyFromAccount(m.getCostOfTower());
 				}
 
-
-
-
 			} else {
 				JOptionPane.showMessageDialog(null, "You do not have enough money to place a new tower.", "Error:", JOptionPane.ERROR_MESSAGE);
 			}
@@ -450,42 +381,32 @@ public class SingleGameController {
 		}
 	}
 
-	public void RemoveTower()
-	{
-		if(selectedCell!=null)
-		{
-			if(map.DeleteTowerFromMap(selectedCell.getName()))
-			{
+	public void RemoveTower() {
+		if(selectedCell!=null) {
+			if(map.DeleteTowerFromMap(selectedCell.getName())) {
 				gameDataModel.AddMoneyToAccount(selectedTower.getRefundValue());
 				selectedCell.removeAll();
 				selectedCell.setBackground(null);
 			} else {
 				JOptionPane.showMessageDialog(null, "There is no tower at this location.", "Error:", JOptionPane.ERROR_MESSAGE);
-
 			}
 		}
 	}
 
-	public void UpgradeSelectedTower()
-	{
-		if(!(selectedTower.getUpgradeCost()>gameDataModel.GetAccountBalance()))
-		{
+	public void UpgradeSelectedTower() {
+		if(!(selectedTower.getUpgradeCost()>gameDataModel.GetAccountBalance())) {
 			selectedTower.upgradeCurrentLevel();
 			gameDataModel.DeductMoneyFromAccount(selectedTower.getUpgradeCost());
 			gameDataModel.SetSelectedTowerDescription(selectedTower.getTowerDetails().toString());
 		} else {
 			JOptionPane.showMessageDialog(null, "You do not have enough money to upgrade this tower.", "Error:", JOptionPane.ERROR_MESSAGE);
-
 		}
 	}
 
-	public void SetSelectedTower(String towerName)
-	{
-		if(isGameStarted==false)
-		{
+	public void SetSelectedTower(String towerName) {
+		if(isGameStarted==false) {
 			// set the selected tower
-			switch(towerName)
-			{
+			switch(towerName) {
 			case "lblTwr1" : 
 				//m_selctdTower = 1;
 				selectedTower = new CastleTower();
@@ -503,7 +424,6 @@ public class SingleGameController {
 				break;
 			}
 		}
-
 	}
 
 
@@ -513,8 +433,7 @@ public class SingleGameController {
 	 * @param cell cell to which event block 
 	 */
 
-	public void click(MouseEvent e, JPanel cell) 
-	{
+	public void click(MouseEvent e, JPanel cell) {
 		//JOptionPane.showMessageDialog(null, "Clicked");
 		boolean overideExisting=false;
 		String tempName = cell.getName();
@@ -524,8 +443,7 @@ public class SingleGameController {
 		//1=StartPoint, 9999=End, 2=Path, 3=Delete
 		selectedCell = cell;
 
-		if(map.CheckTowerExists(tempName))
-		{
+		if(map.CheckTowerExists(tempName)) {
 			//Assign the variable to selected tower;
 			TowerModel tmpmdl = map.GetTower(tempName);
 			selectedTower = tmpmdl;
@@ -533,10 +451,8 @@ public class SingleGameController {
 			newTowerSelected=false;
 
 		} else {
-			if(newTowerSelected)
-			{
-				if(map.CheckMapIsEmpty(tempName))
-				{
+			if(newTowerSelected) {
+				if(map.CheckMapIsEmpty(tempName)) {
 					JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First"});
 					JOptionPane.showMessageDialog(
 							null, list, "Select the tower strategy", JOptionPane.QUESTION_MESSAGE);
@@ -548,14 +464,12 @@ public class SingleGameController {
 				}
 				selectedTower = null;
 				newTowerSelected=false;
-
 			}
 		}
 
 	}
 
-	public void StartWave(final Panel panel)
-	{
+	public void StartWave(final Panel panel) {
 		//for(int k=1,i=0;k<=waveNum*6;k++,i--)
 		//{
 		//	map.AddCritter(String.valueOf(i), CritterFactory.getCritter(1,map));
@@ -566,30 +480,23 @@ public class SingleGameController {
 				IncrementWave(panel);
 			}};
 
-	
 			gameTimer = new Timer(critterMovementTime,GamePlay);
 			gameTimer.start();
-			
+
 			isGameStarted = true;
 			critterCreationInterval = 2;
-
-
 	}
 
-	public void IncrementWave(Panel panel)
-	{
-		
+	public void IncrementWave(Panel panel) {
 
-		if(critterCreationInterval%2==0)
-		{
+		if(critterCreationInterval%2==0) {
 			map.AddCritter(String.valueOf(0), CritterFactory.getCritter(1,map));
 		}
 		//critterCreationInterval = 3;
 		critterCreationInterval++;
 		HashMap<String,Critter> tempList = new HashMap<String, Critter>();
 
-		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) 
-		{
+		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
 			String key = entry.getKey();
 			Critter critter = (Critter) entry.getValue();
 			int loc = Integer.parseInt(key);
@@ -597,20 +504,19 @@ public class SingleGameController {
 			tempList.put(String.valueOf(loc), critter);
 			//tempList.remove(key);
 		}
+		
 		RemoveCritters(panel);
 		//panel.validate();
 		//panel.repaint();
-		
+
 		map.SetCritterCollection(tempList);
 		DrawCritter(map.GetCritterCollection(),panel);
 		panel.repaint();
 		map.TowerToShoot();
 
-		if(map.IsCritterCollectionEmpty() || gameDataModel.GetAccountBalance()<1)
-		{
+		if(map.IsCritterCollectionEmpty() || gameDataModel.GetAccountBalance()<1) {
 			isGameStarted=false;
 			gameTimer.stop();
-		
 
 		}
 	}
