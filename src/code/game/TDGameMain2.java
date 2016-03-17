@@ -63,8 +63,8 @@ public class TDGameMain2 implements Observer {
 
 	JPanel selectedCell;
 	TowerModel selectedTower;
-	
-	
+
+
 	/**
 	 * Overriding abstract method of observer class
 	 * @param arg0 observable class status changed
@@ -76,7 +76,7 @@ public class TDGameMain2 implements Observer {
 		powerlbl.setText(String.valueOf(((GameData)arg0).getPlayerPower()));
 		wavelbl.setText(String.valueOf(((GameData)arg0).getWave()));
 		txtTwrDesc.setText(String.valueOf(((GameData)arg0).getSelectedTowerDescription()));
-		
+
 		if(((GameData)arg0).getWave()>1){
 			btnStrtGame.setText("Start Next Wave");
 		} else {
@@ -191,22 +191,22 @@ public class TDGameMain2 implements Observer {
 
 		lblAccBal.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(lblAccBal);
-		
+
 		JLabel lblPower = new JLabel("Power");
 		lblPower.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPower.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(lblPower);
-		
-		
+
+
 		powerlbl.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(powerlbl);
-		
+
 		JLabel lblWave = new JLabel("Wave");
 		lblWave.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWave.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(lblWave);
-		
-		
+
+
 		wavelbl.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(wavelbl);
 
@@ -226,7 +226,7 @@ public class TDGameMain2 implements Observer {
 		jPnlFtr.add(panel_1, BorderLayout.EAST);
 		panel_1.setLayout(new BorderLayout(0, 0));
 
-		
+
 		panel_1.add(btnStrtGame, BorderLayout.NORTH);
 
 		JButton btnNewButton = new JButton("Advance Game>>");
@@ -337,13 +337,13 @@ public class TDGameMain2 implements Observer {
 			}
 		});
 		pnlBtnColl.add(btnUpgrdTwr);
-		
+
 		JButton btnNewButton_1 = new JButton("Change Strategy");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				myController.changeStrategyOfTower();
-				
+
 			}
 		});
 		pnlBtnColl.add(btnNewButton_1);

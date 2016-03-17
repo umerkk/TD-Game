@@ -54,7 +54,7 @@ public class SingleGameController {
 	private JPanel selectedCell;
 	public GameData gameDataModel;
 	int critterCreationInterval=2;
-	private int critterMovementTime=100;
+	private int critterMovementTime=500;
 	private boolean isGameStarted = false;
 	private Timer gameTimer=null;
 	private final int critterKillPoints=5;
@@ -139,7 +139,7 @@ public class SingleGameController {
 	public GameMap getMapModl() { 
 		return map;
 	}
-	
+
 	/**
 	 * Gets, opens and initializes the map file from the file directory using input stream reader 
 	 */
