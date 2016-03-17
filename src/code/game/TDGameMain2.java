@@ -51,18 +51,9 @@ public class TDGameMain2 implements Observer {
 	JLabel wavelbl = new JLabel("0  ");
 	JButton btnStrtGame = new JButton("Start Game");
 	SingleGameController myController = SingleGameController.getGameControllerInstance();
-
-
-	int[][] mapArray;
-	ScrollPane scPanel = new ScrollPane();
-	//Panel panel_1 = new Panel();
 	Panel panel = new Panel();
-	int arrayRow;
-	int arrayCol;
-	int selectedTool = 0;
+	ScrollPane scPanel = new ScrollPane();
 
-	JPanel selectedCell;
-	TowerModel selectedTower;
 
 
 	/**
@@ -82,11 +73,6 @@ public class TDGameMain2 implements Observer {
 		} else {
 			btnStrtGame.setText("Start Game");
 		}
-		//m_txtTwrDesc.setText(null);
-		//TowerModel towrdesc = ((SingleGameController)arg0).getSelectdTwr();
-		//if(towrdesc == null)
-		//return;
-		//m_txtTwrDesc.append(towrdesc.getTowerDetails().toString());
 	}
 
 	/**
@@ -239,8 +225,6 @@ public class TDGameMain2 implements Observer {
 		panel_1.add(btnNewButton, BorderLayout.SOUTH);
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//	m_ctrlrObj.strtGameBtnHandlr();
-				//int numOfCritters = Integer.parseInt(JOptionPane.showInputDialog("Please input the number of critters for this wave? "));
 				myController.startWave(panel);
 			}
 		});
@@ -259,13 +243,6 @@ public class TDGameMain2 implements Observer {
 			public void mouseClicked(MouseEvent arg0) {
 				myController.setSelectedTower("lblTwr1");
 				txtTwrDesc.setText(myController.showSelectedTowerDesc());
-				//m_ctrlrObj.setTowerDesc("lblTwr1");
-				//if(m_ctrlrObj.getSelectdTwr()!=null)
-				//{
-				//	selectedTower = m_ctrlrObj.getSelectdTwr();
-				//} else {
-				//		selectedTower = null;
-				//	}
 			}
 		});
 
