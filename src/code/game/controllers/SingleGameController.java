@@ -39,6 +39,7 @@ import code.game.models.TowerModel;
 import code.game.strategies.NearestStrategy;
 import code.game.strategies.StrongestStrategy;
 import code.game.strategies.WeakestStrategy;
+import code.game.utils.Util;
 
 
 
@@ -108,7 +109,7 @@ public class SingleGameController {
 	 * Method to get the currently selected tower
 	 * @return returns the currently selected tower
 	 */
-	public TowerModel getSelectedTwr() { return selectedTower; }
+	public TowerModel getSelectedTower() { return selectedTower; }
 
 	/**
 	 * sets the data model
@@ -534,6 +535,7 @@ public class SingleGameController {
 					gameDataModel.deductMoneyFromAccount(tModel.getCostOfTower());
 				}
 
+				Util.logTower(getCurrentTowerName(), getCurrentTowerName() + " was placed on map ");
 			} else {
 				JOptionPane.showMessageDialog(null, "You do not have enough money to place a new tower.", "Error:", JOptionPane.ERROR_MESSAGE);
 			}
@@ -552,6 +554,9 @@ public class SingleGameController {
 				gameDataModel.addMoneyToAccount(selectedTower.getRefundValue());
 				selectedCell.removeAll();
 				selectedCell.setBackground(null);
+
+				Util.logTower(getCurrentTowerName(), getCurrentTowerName() + " was sold for " + selectedTower.getRefundValue());
+
 			} else {
 				JOptionPane.showMessageDialog(null, "There is no tower at this location.", "Error:", JOptionPane.ERROR_MESSAGE);
 			}
@@ -567,6 +572,9 @@ public class SingleGameController {
 			selectedTower.upgradeCurrentLevel();
 			gameDataModel.deductMoneyFromAccount(selectedTower.getUpgradeCost());
 			gameDataModel.setSelectedTowerDescription(selectedTower.getTowerDetails().toString());
+
+			Util.logTower(getCurrentTowerName(), getCurrentTowerName() + " was upgraded to level " + selectedTower.getCurrentLevel());
+
 		} else {
 			//JOptionPane.showMessageDialog(null, "You do not have enough money to upgrade this tower.", "Error:", JOptionPane.ERROR_MESSAGE);
 		}
@@ -670,6 +678,8 @@ public class SingleGameController {
 				break;
 			}
 			}
+
+			Util.logTower(getCurrentTowerName(), "Strategy " + selectedTower.getStrategy().GetStrategyName() + " was selected for " + getCurrentTowerName());
 			gameDataModel.setSelectedTowerDescription(selectedTower.getTowerDetails().toString());
 
 
@@ -679,6 +689,13 @@ public class SingleGameController {
 		}
 	}
 
+	private int getCurrentTowerID(){
+		return selectedTower.getTowerID();
+	}
+	
+	private String getCurrentTowerName(){
+		return selectedTower.getName();
+	}
 	/**
 	 * Starts a new wave once called, it is only called once and then the incrementWave() method takes over.
 	 * and keeps increment the waves to next level
@@ -697,6 +714,8 @@ public class SingleGameController {
 
 			isGameStarted = true;
 			critterCreationInterval = 2;
+
+			Util.logWave("Critter wave was started");
 	}
 
 	/**
@@ -711,6 +730,7 @@ public class SingleGameController {
 				numberOfCritters--;
 			}
 			critterCreationInterval++;
+			Util.logWave("Critter wave was incremented");
 		}
 
 		ConcurrentHashMap<String,Critter> tempList = new ConcurrentHashMap<String, Critter>();
@@ -747,6 +767,7 @@ public class SingleGameController {
 			map.GetCritterCollection().clear();
 			JOptionPane.showMessageDialog(null, "You Won!. All the critters are history and you still have some power.", "YAY:", JOptionPane.INFORMATION_MESSAGE);
 			gameDataModel.setWaveIncrement();
+			Util.logWave("Player won the wave");
 		} else if(gameDataModel.getPlayerPower()<1) {
 			isGameStarted=false;
 			numberOfCritters=0;
@@ -756,6 +777,7 @@ public class SingleGameController {
 			JOptionPane.showMessageDialog(null, "You Lose!.\r\nCritters has taken all of your power.", "Aww:", JOptionPane.ERROR_MESSAGE);
 			gameDataModel.resetPlayerPower();
 			gameDataModel.resetWave();
+			Util.logWave("Player lost the wave");
 		}
 	}
 

@@ -13,11 +13,11 @@ import code.game.strategies.TowerStrategy;
  */
 public class TowerModel extends Observable{
 
-	private String mname;
-	private int mcurrlevel;
+	private String towerName;
+	private int mCurrentLevel;
 	private int mcostoftower;
 	private int mupgradecost;
-	private int mrefundvalue;
+	private int mRefundValue;
 	private int mrangeinblocks; //Range of the tower per blocks
 	private float mpowerofbullet; //Rate of Health to deduct from the target
 	private int mrateoffire; // Interval between each fire
@@ -39,12 +39,12 @@ public class TowerModel extends Observable{
 	 */
 	public TowerModel(String name, int costoftower, int upgradecost, int refundvalue, 
 			int rangeinblocks, float powerofbullet, int rateoffire){
-		mcurrlevel = 1;
+		mCurrentLevel = 1;
 		mhealth = 100;
-		mname = name;
+		towerName = name;
 		mcostoftower = costoftower;
 		mupgradecost = upgradecost;
-		mrefundvalue = refundvalue;
+		mRefundValue = refundvalue;
 		mrangeinblocks = rangeinblocks; 
 		mpowerofbullet = powerofbullet;
 		mrateoffire = rateoffire; 
@@ -57,11 +57,11 @@ public class TowerModel extends Observable{
 	 */
 	public StringBuilder getTowerDetails(){
 		StringBuilder strBldrObj = new StringBuilder();
-		strBldrObj.append("Name : " + mname);
-		strBldrObj.append("\nLevel : " + mcurrlevel);
+		strBldrObj.append("Name : " + towerName);
+		strBldrObj.append("\nLevel : " + mCurrentLevel);
 		strBldrObj.append("\nCost of Tower : " + mcostoftower);
 		strBldrObj.append("\nUpgrade Cost : " + mupgradecost);
-		strBldrObj.append("\nRefund Value : " + mrefundvalue);
+		strBldrObj.append("\nRefund Value : " + mRefundValue);
 		strBldrObj.append("\nRange : " + mrangeinblocks);
 		strBldrObj.append("\nPower : " + mpowerofbullet);
 		strBldrObj.append("\nRate of Fire : " + mrateoffire);
@@ -126,15 +126,15 @@ public class TowerModel extends Observable{
 	 * @return current level of the tower.
 	 */
 	public int getCurrentLevel() {
-		return mcurrlevel;
+		return mCurrentLevel;
 	}
 
 	/**
 	 * method to update the details of the tower when it is upgraded by the user.
 	 */
 	public void upgradeCurrentLevel() {
-		mcurrlevel++;
-		mrefundvalue += mupgradecost;
+		mCurrentLevel++;
+		mRefundValue += mupgradecost;
 		mrangeinblocks++;
 		mhealth = 100;
 		mpowerofbullet *= 1.1;
@@ -144,7 +144,7 @@ public class TowerModel extends Observable{
 	 * Method which returns the name of the tower.
 	 * @return name of tower
 	 */
-	public String getName() { return mname;}
+	public String getName() { return towerName;}
 	/**
 	 * Method returns the cost of buying the tower.
 	 * @return cost of tower
@@ -159,7 +159,7 @@ public class TowerModel extends Observable{
 	 * method returns the refund amount while selling the tower.
 	 * @return refund value
 	 */
-	public int getRefundValue() { return mrefundvalue; }
+	public int getRefundValue() { return mRefundValue; }
 	/**
 	 * method returns the range of the tower.
 	 * @return range of tower

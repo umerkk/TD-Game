@@ -77,6 +77,23 @@ public class TDGameMain2 implements Observer {
 		} else {
 			btnStrtGame.setText("Start Game");
 		}
+
+//		updateMapLog(globalWaveCounter);
+	}
+
+	private void updateMapLog(int globalWaveCounter){
+		System.out.println("updating map......");
+		if(globalWaveCounter>1){
+			ArrayList<String> playHistory = myController.getMapModel().getPlayHistory();
+
+			if(playHistory==null || playHistory.size()<1){
+				playHistory = new ArrayList<String>();
+			}
+			playHistory.add(Util.addDate("Played with score : 10"));
+
+			myController.getMapModel().setPlayHistory(playHistory);
+			Util.updateMapFile(myController.getMapModel());
+		}
 	}
 
 	/**
@@ -238,20 +255,7 @@ public class TDGameMain2 implements Observer {
 		JButton btnNewButton = new JButton("Advance Game>>");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//				myController.incrementWave(panel);
-
-
-				ArrayList<String> playHistory = myController.getMapModel().getPlayHistory();
-
-				if(playHistory==null || playHistory.size()<1){
-					playHistory = new ArrayList<String>();
-				}
-				playHistory.add(Util.addDate("Played with score : 10"));
-
-				myController.getMapModel().setPlayHistory(playHistory);
-				Util.updateMapFile(myController.getMapModel());
-
-
+				//myController.incrementWave(panel);
 			}
 		});
 
@@ -259,19 +263,6 @@ public class TDGameMain2 implements Observer {
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myController.startWave(panel);
-
-				if(globalWaveCounter>1){
-					ArrayList<String> playHistory = myController.getMapModel().getPlayHistory();
-
-					if(playHistory==null || playHistory.size()<1){
-						playHistory = new ArrayList<String>();
-					}else{
-						playHistory.add(Util.addDate("Played with score : 10"));
-					}
-
-					myController.getMapModel().setPlayHistory(playHistory);
-					Util.updateMapFile(myController.getMapModel());
-				}
 			}
 		});
 
@@ -378,7 +369,7 @@ public class TDGameMain2 implements Observer {
 
 				int towerID = -1;
 				try {
-					towerID = myController.getSelectedTwr().getTowerID();
+					towerID = myController.getSelectedTower().getTowerID();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -386,7 +377,7 @@ public class TDGameMain2 implements Observer {
 				if(towerID==-1){
 					Util.showDialog("Please select a tower first.");
 				}else{
-					Util.showLogTower(towerID);
+					Util.showLogTower(myController.getSelectedTower().getName());
 				}
 
 			}
@@ -415,7 +406,7 @@ public class TDGameMain2 implements Observer {
 					panel.revalidate();
 					panel.repaint();			    		
 
-					Util.logGlobal("Loaded map");
+					Util.logGlobal("Loaded map", true);
 				}catch(Exception ioe){
 					ioe.printStackTrace();
 					return;

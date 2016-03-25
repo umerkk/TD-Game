@@ -110,7 +110,7 @@ public class SingleGameControllerTest {
 		tstCntrlr.setSelectedCell(cell);
 		tstCntrlr.upgradeSelectedTower();
 		
-		assertTrue(tstCntrlr.getSelectedTwr().getCurrentLevel() == 1);
+		assertTrue(tstCntrlr.getSelectedTower().getCurrentLevel() == 1);
 	}
 	
 	/**
@@ -141,6 +141,6 @@ public class SingleGameControllerTest {
 		tstCntrlr.setSelectedCell(cell);
 		tstCntrlr.upgradeSelectedTower();
 		
-		assertTrue(tstCntrlr.getSelectedTwr().getCurrentLevel() == 2);
+		assertTrue(tstCntrlr.getSelectedTower().getCurrentLevel() == 2);
 	}
 }
