@@ -31,6 +31,7 @@ import code.game.controllers.SingleGameController;
 import code.game.models.GameData;
 import code.game.models.GameMap;
 import code.game.models.TowerModel;
+import code.game.utils.Util;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -195,6 +196,13 @@ public class TDGameMain2 implements Observer {
 
 		wavelbl.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(wavelbl);
+		
+		JButton btnNewButton_2 = new JButton("Wave Log");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		pnlHdrSub.add(btnNewButton_2);
 
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -261,7 +269,7 @@ public class TDGameMain2 implements Observer {
 		lblTwr2.setIcon(new ImageIcon("res/tower_2.png"));
 		pnlTwrTopLvl.setLayout(new BorderLayout(0, 0));
 		pnlTwrTopLvl.add(lblTwr1, BorderLayout.WEST);
-		pnlTwrTopLvl.add(lblTwr2, BorderLayout.EAST);
+		pnlTwrTopLvl.add(lblTwr2, BorderLayout.LINE_END);
 
 		JPanel pnlTwrSndLvl = new JPanel();
 		pnlTwrTopLvl.add(pnlTwrSndLvl, BorderLayout.SOUTH);
@@ -289,11 +297,14 @@ public class TDGameMain2 implements Observer {
 		txtTwrDesc.setFont(new Font("Monospaced", Font.PLAIN, 18));
 
 		pnlTwrDesc.add(txtTwrDesc);
-
-		JLabel lblTwrSpcAdj = new JLabel("_____________");
-		lblTwrSpcAdj.setForeground(Color.WHITE);
-		lblTwrSpcAdj.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		pnlTwrDesc.add(lblTwrSpcAdj, BorderLayout.SOUTH);
+		
+		JButton btnCollectiveTowerLog = new JButton("Collective tower log");
+		pnlTwrDesc.add(btnCollectiveTowerLog, BorderLayout.SOUTH);
+		btnCollectiveTowerLog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Util.showLogTowerCollective();
+			}
+		});
 
 		JPanel pnlBtnColl = new JPanel();
 		jPnlDesc.add(pnlBtnColl, BorderLayout.SOUTH);
@@ -324,6 +335,13 @@ public class TDGameMain2 implements Observer {
 			}
 		});
 		pnlBtnColl.add(btnNewButton_1);
+		
+		JButton btnTowerLog = new JButton("Tower Log");
+		btnTowerLog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		pnlBtnColl.add(btnTowerLog);
 
 		JLabel lblBtnCollSpcAdj = new JLabel(" ");
 		lblBtnCollSpcAdj.setFont(new Font("Tahoma", Font.PLAIN, 35));
@@ -335,8 +353,8 @@ public class TDGameMain2 implements Observer {
 		JMenu mnGame = new JMenu("Game");
 		menuBar.add(mnGame);
 
-		JMenuItem mntmOpenMap = new JMenuItem("Open Map");
-		mntmOpenMap.addActionListener(new ActionListener() {
+		JMenuItem mItemOpenMap = new JMenuItem("Open Map");
+		mItemOpenMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
 				// read a file from disk
@@ -353,7 +371,22 @@ public class TDGameMain2 implements Observer {
 				}
 			}
 		});
-		mnGame.add(mntmOpenMap);
+		
+		//TODO:  show global log dialog
+		JMenuItem mItemGlobalMap = new JMenuItem("Global log");
+		mItemGlobalMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				// read a file from disk
+				/// show global log dialog
+				
+				Util.showLogGlobal();
+			}
+		});
+		
+		mnGame.add(mItemOpenMap);
+		mnGame.add(mItemGlobalMap);
+		
 	}
 
 
