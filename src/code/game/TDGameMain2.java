@@ -221,6 +221,7 @@ public class TDGameMain2 implements Observer {
 		btnWaveLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Util.showLogWave();
+				Util.logGlobal("Wave log was viewed" , true);
 			}
 		});
 		pnlHdrSub.add(btnWaveLog);
@@ -229,6 +230,7 @@ public class TDGameMain2 implements Observer {
 		btnMapLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Util.showMapLog(myController.getMapModel());
+				Util.logGlobal("Map log was viewed" , true);
 			}
 		});
 		pnlHdrSub.add(btnMapLog);
@@ -332,6 +334,7 @@ public class TDGameMain2 implements Observer {
 		btnCollectiveTowerLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Util.showLogTowerCollective();
+				Util.logGlobal("Collective tower log was viewed" , true);
 			}
 		});
 
@@ -378,6 +381,7 @@ public class TDGameMain2 implements Observer {
 					Util.showDialog("Please select a tower first.");
 				}else{
 					Util.showLogTower(myController.getSelectedTower().getName());
+					Util.logGlobal(myController.getSelectedTower().getName() + "'s log was viewed", true);
 				}
 
 			}
