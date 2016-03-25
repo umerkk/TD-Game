@@ -61,36 +61,34 @@ public class Util {
 			return getLogsPath() + "log_global.txt";
 
 		default:
-			break;
+			return getDefaultPath()+"logs/";
 		}
 
-
-		return getDefaultPath()+"logs/";
 	}
-	
+
 	public static String getLogDialogTitle(int fileNo){
 
 		switch (fileNo) {
 
 		case FILE_LOG_TOWER_1:
-			return "Industrial Tower log";
+			return "Castle Tower log";
 		case FILE_LOG_TOWER_2:
-			return "Industrial Tower log";
+			return "Imperial Tower log";
 		case FILE_LOG_TOWER_3:
-			return getLogsPath() + "log_tower_3.txt";
+			return "Industrial Tower log";
 		case FILE_LOG_TOWER_COLLECTIVE:
-			return getLogsPath() + "log_tower_collective.txt";
+			return "Collective Tower log";
 		case FILE_LOG_WAVE:
-			return getLogsPath() + "log_wave.txt";
+			return "Wave log";
 		case FILE_LOG_GLOBAL:
-			return getLogsPath() + "log_global.txt";
+			return "Global log";
 
 		default:
-			break;
+			return getDefaultPath()+"logs/";
 		}
 
 
-		return getDefaultPath()+"logs/";
+
 	}
 
 
@@ -98,9 +96,9 @@ public class Util {
 		Date date = new Date();
 		return date.toString();
 	}
-	
+
 	public static String addDate(String logText){
-		return getDate() + "    " + logText;
+		return getDate() + "  ------  " + logText;
 	}
 
 
@@ -109,28 +107,40 @@ public class Util {
 		logText = addDate(logText);
 		writeLog(getLogFile(towerID), logText);
 		logTowerCollective(logText);
-		logGlobal(logText);
 	}
+	
+	public static void showLogTower(int towerID){
+		showLog(getLogDialogTitle(towerID), readLog(getLogFile(FILE_LOG_TOWER_COLLECTIVE)));
+	}
+	
 
 	public static void logTowerCollective(String logText){
+		logText = addDate(logText);
 		writeLog(getLogFile(FILE_LOG_TOWER_COLLECTIVE), logText);
+		logGlobal(logText);
 	}
 
 	public static void showLogTowerCollective(){
-		showLog(readLog(getLogFile(FILE_LOG_TOWER_COLLECTIVE)));
+		showLog(getLogDialogTitle(FILE_LOG_TOWER_COLLECTIVE), readLog(getLogFile(FILE_LOG_TOWER_COLLECTIVE)));
 	}
 
 	public static void logWave(String logText){
+		logText = addDate(logText);
 		writeLog(getLogFile(FILE_LOG_WAVE), logText);
 		logGlobal(logText);
 	}
+	
+	public static void showLogWave(){
+		showLog(getLogDialogTitle(FILE_LOG_WAVE), readLog(getLogFile(FILE_LOG_WAVE)));
+	}
 
 	public static void logGlobal(String logText){
+		logText = addDate(logText);
 		writeLog(getLogFile(FILE_LOG_GLOBAL), logText);
 	}
 
 	public static void showLogGlobal(){
-		showLog(readLog(getLogFile(FILE_LOG_GLOBAL)));
+		showLog(getLogDialogTitle(FILE_LOG_GLOBAL), readLog(getLogFile(FILE_LOG_GLOBAL)));
 	}
 
 
@@ -191,6 +201,7 @@ public class Util {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(file, true)); // append the result
 
 			bw.write(logData);
+			bw.newLine();
 			bw.flush();
 			bw.close();
 		} catch (IOException e) {
@@ -198,9 +209,9 @@ public class Util {
 		}
 	}
 
-	public static void showLog(String log){
-		JTextArea textArea = new JTextArea(log);
-		System.out.println(log);
+	public static void showLog(String dialogTitle, String logText){
+		JTextArea textArea = new JTextArea(logText);
+		System.out.println(logText);
 		textArea.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(textArea);  
 		textArea.setLineWrap(true);  
@@ -209,8 +220,12 @@ public class Util {
 		//textArea.setFont(font);
 		//textArea.setColumns(10);
 		scrollPane.setPreferredSize( new Dimension( 1000, 500 ) );
-		JOptionPane.showMessageDialog(null, scrollPane, "ggggggglog",  
-				JOptionPane.YES_NO_OPTION);
+		JOptionPane.showMessageDialog(null, scrollPane, dialogTitle, JOptionPane.YES_NO_OPTION);
+	}
+	
+	
+	public static void showDialog(String text){
+		JOptionPane.showMessageDialog(null, text, "Message", JOptionPane.WARNING_MESSAGE);	
 	}
 
 }

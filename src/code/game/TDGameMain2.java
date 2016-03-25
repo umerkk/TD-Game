@@ -197,12 +197,13 @@ public class TDGameMain2 implements Observer {
 		wavelbl.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(wavelbl);
 		
-		JButton btnNewButton_2 = new JButton("Wave Log");
-		btnNewButton_2.addActionListener(new ActionListener() {
+		JButton btnWaveLog = new JButton("Wave Log");
+		btnWaveLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Util.showLogWave();
 			}
 		});
-		pnlHdrSub.add(btnNewButton_2);
+		pnlHdrSub.add(btnWaveLog);
 
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -339,6 +340,21 @@ public class TDGameMain2 implements Observer {
 		JButton btnTowerLog = new JButton("Tower Log");
 		btnTowerLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				int towerID = -1;
+				try {
+					towerID = myController.getSelectedTwr().getTowerID();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				if(towerID==-1){
+					Util.showDialog("Please select a tower first.");
+				}else{
+					Util.showLogTower(towerID);
+				}
+				
 			}
 		});
 		pnlBtnColl.add(btnTowerLog);
@@ -365,6 +381,7 @@ public class TDGameMain2 implements Observer {
 					panel.revalidate();
 					panel.repaint();			    		
 
+					Util.logGlobal("Loaded map");
 				}catch(Exception ioe){
 					ioe.printStackTrace();
 					return;
@@ -372,14 +389,9 @@ public class TDGameMain2 implements Observer {
 			}
 		});
 		
-		//TODO:  show global log dialog
 		JMenuItem mItemGlobalMap = new JMenuItem("Global log");
 		mItemGlobalMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-				// read a file from disk
-				/// show global log dialog
-				
 				Util.showLogGlobal();
 			}
 		});

@@ -187,4 +187,22 @@ public class TowerModel extends Observable{
 	 */
 	public void setHealth(int value) { mhealth = value; setChanged(); notifyObservers(); } 
 
+	/**
+	 * returns a unique tower ID based on tower's name
+	 * @return ID of the tower
+	 */
+	public int getTowerID() { 
+		switch (getName()) {
+		case "lblTwr1":
+			return 1;
+		case "lblTwr2":
+			return 2;
+		case "lblTwr3":
+			return 3;
+		default:
+			return 1;
+		}
+	}
+
+
 }
