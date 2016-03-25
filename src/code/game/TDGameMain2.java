@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -54,6 +55,7 @@ public class TDGameMain2 implements Observer {
 	SingleGameController myController = SingleGameController.getGameControllerInstance();
 	Panel panel = new Panel();
 	ScrollPane scPanel = new ScrollPane();
+	private int globalWaveCounter = 0;
 
 
 
@@ -69,7 +71,8 @@ public class TDGameMain2 implements Observer {
 		wavelbl.setText(String.valueOf(((GameData)arg0).getWave()));
 		txtTwrDesc.setText(String.valueOf(((GameData)arg0).getSelectedTowerDescription()));
 
-		if(((GameData)arg0).getWave()>1){
+		globalWaveCounter = ((GameData)arg0).getWave();
+		if(globalWaveCounter>1){
 			btnStrtGame.setText("Start Next Wave");
 		} else {
 			btnStrtGame.setText("Start Game");
@@ -196,7 +199,7 @@ public class TDGameMain2 implements Observer {
 
 		wavelbl.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(wavelbl);
-		
+
 		JButton btnWaveLog = new JButton("Wave Log");
 		btnWaveLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -204,6 +207,14 @@ public class TDGameMain2 implements Observer {
 			}
 		});
 		pnlHdrSub.add(btnWaveLog);
+
+		JButton btnMapLog = new JButton("Map Stats log");
+		btnMapLog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Util.showMapLog(myController.getMapModel());
+			}
+		});
+		pnlHdrSub.add(btnMapLog);
 
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
@@ -227,7 +238,20 @@ public class TDGameMain2 implements Observer {
 		JButton btnNewButton = new JButton("Advance Game>>");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				myController.incrementWave(panel);
+				//				myController.incrementWave(panel);
+
+
+				ArrayList<String> playHistory = myController.getMapModel().getPlayHistory();
+
+				if(playHistory==null || playHistory.size()<1){
+					playHistory = new ArrayList<String>();
+				}
+				playHistory.add(Util.addDate("Played with score : 10"));
+
+				myController.getMapModel().setPlayHistory(playHistory);
+				Util.updateMapFile(myController.getMapModel());
+
+
 			}
 		});
 
@@ -235,6 +259,19 @@ public class TDGameMain2 implements Observer {
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myController.startWave(panel);
+
+				if(globalWaveCounter>1){
+					ArrayList<String> playHistory = myController.getMapModel().getPlayHistory();
+
+					if(playHistory==null || playHistory.size()<1){
+						playHistory = new ArrayList<String>();
+					}else{
+						playHistory.add(Util.addDate("Played with score : 10"));
+					}
+
+					myController.getMapModel().setPlayHistory(playHistory);
+					Util.updateMapFile(myController.getMapModel());
+				}
 			}
 		});
 
@@ -298,7 +335,7 @@ public class TDGameMain2 implements Observer {
 		txtTwrDesc.setFont(new Font("Monospaced", Font.PLAIN, 18));
 
 		pnlTwrDesc.add(txtTwrDesc);
-		
+
 		JButton btnCollectiveTowerLog = new JButton("Collective tower log");
 		pnlTwrDesc.add(btnCollectiveTowerLog, BorderLayout.SOUTH);
 		btnCollectiveTowerLog.addActionListener(new ActionListener() {
@@ -327,34 +364,31 @@ public class TDGameMain2 implements Observer {
 		});
 		pnlBtnColl.add(btnUpgrdTwr);
 
-		JButton btnNewButton_1 = new JButton("Change Strategy");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnChangeStrategy = new JButton("Change Strategy");
+		btnChangeStrategy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 				myController.changeStrategyOfTower();
-
 			}
 		});
-		pnlBtnColl.add(btnNewButton_1);
-		
+		pnlBtnColl.add(btnChangeStrategy);
+
 		JButton btnTowerLog = new JButton("Tower Log");
 		btnTowerLog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+
 				int towerID = -1;
 				try {
 					towerID = myController.getSelectedTwr().getTowerID();
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				if(towerID==-1){
 					Util.showDialog("Please select a tower first.");
 				}else{
 					Util.showLogTower(towerID);
 				}
-				
+
 			}
 		});
 		pnlBtnColl.add(btnTowerLog);
@@ -388,17 +422,17 @@ public class TDGameMain2 implements Observer {
 				}
 			}
 		});
-		
+
 		JMenuItem mItemGlobalMap = new JMenuItem("Global log");
 		mItemGlobalMap.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Util.showLogGlobal();
 			}
 		});
-		
+
 		mnGame.add(mItemOpenMap);
 		mnGame.add(mItemGlobalMap);
-		
+
 	}
 
 

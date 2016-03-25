@@ -5,16 +5,20 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+
+import code.game.models.MapModel;
 
 
 public class Util {
@@ -108,11 +112,11 @@ public class Util {
 		writeLog(getLogFile(towerID), logText);
 		logTowerCollective(logText);
 	}
-	
+
 	public static void showLogTower(int towerID){
 		showLog(getLogDialogTitle(towerID), readLog(getLogFile(FILE_LOG_TOWER_COLLECTIVE)));
 	}
-	
+
 
 	public static void logTowerCollective(String logText){
 		logText = addDate(logText);
@@ -129,7 +133,7 @@ public class Util {
 		writeLog(getLogFile(FILE_LOG_WAVE), logText);
 		logGlobal(logText);
 	}
-	
+
 	public static void showLogWave(){
 		showLog(getLogDialogTitle(FILE_LOG_WAVE), readLog(getLogFile(FILE_LOG_WAVE)));
 	}
@@ -222,10 +226,75 @@ public class Util {
 		scrollPane.setPreferredSize( new Dimension( 1000, 500 ) );
 		JOptionPane.showMessageDialog(null, scrollPane, dialogTitle, JOptionPane.YES_NO_OPTION);
 	}
-	
-	
+
+
 	public static void showDialog(String text){
 		JOptionPane.showMessageDialog(null, text, "Message", JOptionPane.WARNING_MESSAGE);	
 	}
+
+
+
+
+	public static void showMapLog(MapModel map){
+		String text = "";
+
+		text += "CREATION TIME : " + map.getCreationTime() + "\n\n"
+				+ "LAST EDITED : " + map.getEditTime() + "\n\n"
+				+ "TOP 5 SCORES : \n"  + getTopFiveScores(map.getPlayHistory()) + "\n\n\n"
+				+ "HISTORY : \n" + getPlayHistory(map.getPlayHistory());
+
+
+		JTextArea textArea = new JTextArea(text);
+		textArea.setEditable(false);
+		JScrollPane scrollPane = new JScrollPane(textArea);  
+		textArea.setLineWrap(true);  
+		textArea.setWrapStyleWord(true); 
+		//Font font = new Font("logFont", Font.HANGING_BASELINE , 18);
+		//textArea.setFont(font);
+		//textArea.setColumns(10);
+		scrollPane.setPreferredSize( new Dimension( 400, 600 ) );
+		JOptionPane.showMessageDialog(null, scrollPane, "Map Statistics", JOptionPane.YES_NO_OPTION);
+	}
+
+	private static String getPlayHistory(ArrayList<String> playHistory) {
+		if(playHistory!=null && playHistory.size()>0){
+			String history = "";
+			int i = 0;
+			for(String text : playHistory){
+				history += ++i + " - " + text + "\n";
+			}
+			return history;
+		}else{
+			return "No history found for this map!";
+		}
+
+	}
+
+	private static String getTopFiveScores(ArrayList<String> playHistory) {
+		if(playHistory!=null && playHistory.size()>0){
+
+		}else{
+			return "No history found for this map!";
+		}
+		return null;
+	}
+
+
+	public static boolean updateMapFile(MapModel mapModel){
+		try {
+			File file = mapModel.getFilePath();
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos); 
+			oos.writeObject(mapModel);
+			oos.close();
+			fos.close();
+	}catch(IOException ioe){
+		ioe.printStackTrace();
+		return false;
+	}
+	return true;
+}
+
+
 
 }

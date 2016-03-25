@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.nio.channels.FileChannel.MapMode;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -32,6 +33,8 @@ import code.game.models.GameData;
 import code.game.models.GameMap;
 import code.game.models.ImperialTower;
 import code.game.models.IndustrialTower;
+import code.game.models.MapLogger;
+import code.game.models.MapModel;
 import code.game.models.TowerModel;
 import code.game.strategies.NearestStrategy;
 import code.game.strategies.StrongestStrategy;
@@ -63,6 +66,16 @@ public class SingleGameController {
 	private final int POINT_EXIT = 9999;
 	private int numberOfCritters=0;
 
+	private MapModel mapModel;
+
+
+	public MapModel getMapModel() {
+		return mapModel;
+	}
+
+	public void setMapModel(MapModel newMapModel) {
+		this.mapModel = newMapModel;
+	}
 
 	/**
 	 * empty constructor
@@ -176,12 +189,19 @@ public class SingleGameController {
 		try {
 			FileInputStream fis = new FileInputStream(selectedFile);
 			ObjectInputStream ois = new ObjectInputStream(fis);
-			int[][] mapArray = (int[][]) ois.readObject();
+
+			mapModel = (MapModel) ois.readObject();
+			mapModel.setFilePath(selectedFile);
+			//int[][] mapArray = (int[][]) ois.readObject();
+			int[][] mapArray = mapModel.getMapArray();
 			map.initialize("myMap", mapArray);
+
 
 			ois.close();
 			fis.close();
-		}catch(Exception ex){}
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
 	}
 
 	/**
