@@ -730,7 +730,7 @@ public class SingleGameController {
 				numberOfCritters--;
 			}
 			critterCreationInterval++;
-			Util.logWave("Critter wave was incremented");
+//			Util.logWave("Critter wave was incremented");
 		}
 
 		ConcurrentHashMap<String,Critter> tempList = new ConcurrentHashMap<String, Critter>();
