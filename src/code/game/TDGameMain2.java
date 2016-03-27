@@ -31,7 +31,6 @@ import javax.swing.border.TitledBorder;
 import code.game.controllers.SingleGameController;
 import code.game.models.GameData;
 import code.game.models.GameMap;
-import code.game.models.TowerModel;
 import code.game.utils.Util;
 import net.miginfocom.swing.MigLayout;
 

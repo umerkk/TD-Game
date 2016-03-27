@@ -11,8 +11,6 @@ import org.junit.Test;
 
 import code.game.models.BasicCritter;
 import code.game.models.CastleTower;
-import code.game.models.Critter;
-import code.game.models.CritterFactory;
 import code.game.models.GameMap;
 import code.game.models.MapModel;
 

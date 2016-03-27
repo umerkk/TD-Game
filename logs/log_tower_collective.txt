@@ -14,3 +14,25 @@ Sun Mar 27 04:34:36 EDT 2016  ------  Sample individual tower log from test case
 Sample collective tower log from test case.
 Sun Mar 27 04:34:42 EDT 2016  ------  Sample tower log from test case.
 Sun Mar 27 04:34:42 EDT 2016  ------  Sample individual tower log from test case.
+Sample collective tower log from test case.
+Sun Mar 27 04:41:45 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 04:41:45 EDT 2016  ------  Sample individual tower log from test case.
+Sample collective tower log from test case.
+Sun Mar 27 04:41:54 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 04:41:54 EDT 2016  ------  Sample individual tower log from test case.
+Sample collective tower log from test case.
+Sun Mar 27 04:43:44 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 04:43:44 EDT 2016  ------  Sample individual tower log from test case.
+Sample collective tower log from test case.
+Sun Mar 27 04:44:29 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 04:44:29 EDT 2016  ------  Sample individual tower log from test case.
+Sample collective tower log from test case.
+Sun Mar 27 04:44:34 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 04:44:34 EDT 2016  ------  Sample individual tower log from test case.
+Sample collective tower log from test case.
+Sun Mar 27 04:51:35 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 04:51:35 EDT 2016  ------  Sample individual tower log from test case.
+Sample collective tower log from test case.
+Sun Mar 27 04:51:56 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 04:51:57 EDT 2016  ------  Sample individual tower log from test case.
+Sample collective tower log from test case.

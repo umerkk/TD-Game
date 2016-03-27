@@ -20,6 +20,24 @@ import javax.swing.JTextArea;
 
 import code.game.models.MapModel;
 
+
+
+
+/**
+ * Guys use the following methods for logging where appropriate
+ * 
+ * 
+ *      Util.logGlobal(logText, addDate)  >> used to log global events
+		Util.logTower(towerName, logText); >> used to log individual tower events
+		Util.logTowerCollective(logText, addDate); >> used to log overall tower events 
+		Util.logWave(logText) >> used to log any wave related events
+ * 
+ * 
+ * I have already used these in some places, you can see them working in their respective log files
+ * 
+ */
+
+
 /**
  * a general purpose file performing all the general functions e.g
  * - file writing
@@ -32,8 +50,7 @@ import code.game.models.MapModel;
  *
  */
 public class Util {
-
-
+	
 	public static final int TOWER_1 = 1;
 	public static final int TOWER_2 = 2;
 	public static final int TOWER_3 = 3;
@@ -71,30 +88,6 @@ public class Util {
 	public static String getMapsDirectory(){
 		return getDefaultPath()+"maps/";
 	}
-
-
-	//	public static String getLogFile(int fileNo){
-	//
-	//		switch (fileNo) {
-	//
-	//		case FILE_LOG_TOWER_1:
-	//			return getLogsPath() + "log_tower_1.txt";
-	//		case FILE_LOG_TOWER_2:
-	//			return getLogsPath() + "log_tower_2.txt";
-	//		case FILE_LOG_TOWER_3:
-	//			return getLogsPath() + "log_tower_3.txt";
-	//		case FILE_LOG_TOWER_COLLECTIVE:
-	//			return getLogsPath() + "log_tower_collective.txt";
-	//		case FILE_LOG_WAVE:
-	//			return getLogsPath() + "log_wave.txt";
-	//		case FILE_LOG_GLOBAL:
-	//			return getLogsPath() + "log_global.txt";
-	//
-	//		default:
-	//			return getDefaultPath()+"logs/";
-	//		}
-	//
-	//	}
 
 	/**
 	 * appends 'log' to a specified title
@@ -158,6 +151,7 @@ public class Util {
 		return getDate() + "  ------  " + logText;
 	}
 
+	
 	/**
 	 * returns file path based on file name
 	 * @param fName file name to be 
@@ -398,7 +392,7 @@ public class Util {
 	 * @param playHistory ArrayList object containing all the game play events
 	 * @return history converted in a single string object to be displayed in a dialog
 	 */
-	private static String getPlayHistory(ArrayList<String> playHistory) {
+	public static String getPlayHistory(ArrayList<String> playHistory) {
 		if(playHistory!=null && playHistory.size()>0){
 			String history = "";
 			int i = 0;

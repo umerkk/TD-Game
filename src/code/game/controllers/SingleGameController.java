@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.nio.channels.FileChannel.MapMode;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -33,7 +32,6 @@ import code.game.models.GameData;
 import code.game.models.GameMap;
 import code.game.models.ImperialTower;
 import code.game.models.IndustrialTower;
-import code.game.models.MapLogger;
 import code.game.models.MapModel;
 import code.game.models.TowerModel;
 import code.game.strategies.NearestStrategy;
