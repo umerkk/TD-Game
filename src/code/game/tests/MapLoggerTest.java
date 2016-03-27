@@ -104,27 +104,27 @@ public class MapLoggerTest {
 
 		Assert.assertNotEquals(topFiveScores3, topFiveScores2);
 	}
-
-	/**
-	 * reads a map file, adds a another score entry in top scores, writes it back and tests if the file was updated
-	 */
-	@Test
-	public void testMapGetTopFiveScores() {
-
-		SingleGameController testController = SingleGameController.getGameControllerInstance();
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		ArrayList<String> topFiveScores1 = testController.getMapModel().getTopFiveScores();
-
-		topFiveScores1.add(Util.getDate() + " -- Scores: 59 ");
-		testController.getMapModel().setTopFiveScores(topFiveScores1);
-
-		Util.updateMapFile(testController.getMapModel());
-
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-
-		Util util = new Util();
-//		Assert.assertNotNull(new Util().getTo);
-	}
+//
+//	/**
+//	 * reads a map file, adds a another score entry in top scores, writes it back and tests if the file was updated
+//	 */
+//	@Test
+//	public void testMapGetTopFiveScores() {
+//
+//		SingleGameController testController = SingleGameController.getGameControllerInstance();
+//		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
+//		ArrayList<String> topFiveScores1 = testController.getMapModel().getTopFiveScores();
+//
+//		topFiveScores1.add(Util.getDate() + " -- Scores: 59 ");
+//		testController.getMapModel().setTopFiveScores(topFiveScores1);
+//
+//		Util.updateMapFile(testController.getMapModel());
+//
+//		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
+//
+//		Util util = new Util();
+////		Assert.assertNotNull(new Util().getTo);
+//	}
 
 
 }

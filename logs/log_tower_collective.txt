@@ -8,3 +8,9 @@ Fri Mar 25 11:31:14 EDT 2016  ------  Strategy Nearest First was selected for Im
 Fri Mar 25 11:31:19 EDT 2016  ------  Strategy Nearest First was selected for Industrial Tower
 Fri Mar 25 11:31:21 EDT 2016  ------  Strategy Strongest First was selected for Industrial Tower
 Fri Mar 25 11:31:23 EDT 2016  ------  Strategy Weakest First was selected for Industrial Tower
+Sample collective tower log from test case.
+Sun Mar 27 04:34:36 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 04:34:36 EDT 2016  ------  Sample individual tower log from test case.
+Sample collective tower log from test case.
+Sun Mar 27 04:34:42 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 04:34:42 EDT 2016  ------  Sample individual tower log from test case.

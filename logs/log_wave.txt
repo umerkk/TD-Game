@@ -21,3 +21,7 @@ Fri Mar 25 11:29:02 EDT 2016  ------  Critter wave was incremented
 Fri Mar 25 11:29:11 EDT 2016  ------  Player lost the wave
 Sat Mar 26 23:51:20 EDT 2016  ------  Critter wave was started
 Sat Mar 26 23:51:28 EDT 2016  ------  Player lost the wave
+Sun Mar 27 04:34:36 EDT 2016  ------  Sample wave log from test case.
+Sun Mar 27 04:34:36 EDT 2016  ------  Sample wave log from test case.
+Sun Mar 27 04:34:42 EDT 2016  ------  Sample wave log from test case.
+Sun Mar 27 04:34:42 EDT 2016  ------  Sample wave log from test case.
