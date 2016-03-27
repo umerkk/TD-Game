@@ -1,7 +1,7 @@
 package code.game.models;
 
 /**
- * Class containing the basic critter setter
+ * a class defining characteristics of a critter of a basic type
  * @author Armaghan
  *
  */

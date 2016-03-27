@@ -1,7 +1,7 @@
 package code.game.models;
 
 /**
- * Class containing the advanced critter setter
+ * a class defining characteristics of a critter of an advanced type
  * @author Armaghan
  *
  */

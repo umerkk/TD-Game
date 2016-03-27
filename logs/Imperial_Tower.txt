@@ -1,0 +1,5 @@
+Fri Mar 25 11:25:57 EDT 2016  ------  Imperial Tower was upgraded to level 2
+Fri Mar 25 11:25:59 EDT 2016  ------  Imperial Tower was upgraded to level 3
+Fri Mar 25 11:31:09 EDT 2016  ------  Strategy Strongest First was selected for Imperial Tower
+Fri Mar 25 11:31:12 EDT 2016  ------  Strategy Weakest First was selected for Imperial Tower
+Fri Mar 25 11:31:14 EDT 2016  ------  Strategy Nearest First was selected for Imperial Tower

@@ -1,0 +1,30 @@
+package code.game.models;
+
+import java.io.Serializable;
+
+/**
+ * A dummy MapModel containing only attributes which will be used to hold and store 
+ * map statistics and details, hence extending MapLogger
+ * @author Armaghan
+ *
+ */
+public class MapModel extends MapLogger implements Serializable{
+	private static final long serialVersionUID = 8899;
+	private int[][] mapArray;
+	
+	/**
+	 * returns actual map grid array
+	 * @return 2-d array containing map's grid points
+	 */
+	public int[][] getMapArray() {
+		return mapArray;
+	}
+	
+	/**
+	 * sets map's array containing grid info 
+	 * @param mapArray 2-d array containing map's grid points
+	 */
+	public void setMapArray(int[][] mapArray) {
+		this.mapArray = mapArray;
+	}
+}

@@ -20,7 +20,17 @@ import javax.swing.JTextArea;
 
 import code.game.models.MapModel;
 
-
+/**
+ * a general purpose file performing all the general functions e.g
+ * - file writing
+ * - file reading
+ * - displaying dialogs
+ * - contains constants
+ * - log methods accessible globally
+ * 
+ * @author Armaghan
+ *
+ */
 public class Util {
 
 
@@ -38,10 +48,18 @@ public class Util {
 
 
 
+	/**
+	 * returns default directory's path where all the files are stored/read/written
+	 * @return string containing path to default directory folder
+	 */
 	public static String getDefaultPath(){
 		return System.getProperty("user.dir") + "/";
 	}
 
+	/**
+	 * returns default directory for logs
+	 * @return string containing path to logs folder
+	 */
 	public static String getLogsPath(){
 		return getDefaultPath()+"logs/";
 	}
@@ -70,6 +88,11 @@ public class Util {
 //
 //	}
 
+	/**
+	 * appends 'log' to a specified title
+	 * @param title a string title to be appended
+	 * @return title modified
+	 */
 	public static String getLogDialogTitle(String title){
 		switch (title) {
 //		case FILE_LOG_TOWER_1:
@@ -90,6 +113,11 @@ public class Util {
 		}
 	}
 
+	/**
+	 * return's tower's title based on tower's ID
+	 * @param towerID tower ID which distinguishes each tower uniquely
+	 * @return tower's title in string
+	 */
 	public static String getTowerTitle(int towerID){
 		switch (towerID) {
 		case FILE_LOG_TOWER_1:
@@ -104,15 +132,29 @@ public class Util {
 	}
 
 
+	/**
+	 * returns today's time date day in a string
+	 * @return today's time date day in a string fromat
+	 */
 	public static String getDate(){
 		Date date = new Date();
 		return date.toString();
 	}
 
+	/**
+	 * adds current time and date to a string provided
+	 * @param logText text string to add date to
+	 * @return modified text string with date appended
+	 */
 	public static String addDate(String logText){
 		return getDate() + "  ------  " + logText;
 	}
 
+	/**
+	 * returns file path based on file name
+	 * @param fName file name to be 
+	 * @return file path
+	 */
 	public static String getFilePath(String fName){
 		fName = fName.replaceAll(" ", "_");
 		String path = getLogsPath() + fName + ".txt";
@@ -120,6 +162,11 @@ public class Util {
 	}
 
 
+	/**
+	 * writes log information related to individual towers
+	 * @param towerName
+	 * @param logText
+	 */
 	public static void logTower(String towerName, String logText){
 		logText = addDate(logText);
 		writeLog(getFilePath(towerName), logText);
@@ -128,11 +175,20 @@ public class Util {
 		logTowerCollective(logText, false);
 	}
 
+	/**
+	 * 
+	 * @param towerName
+	 */
 	public static void showLogTower(String towerName){
 		showLog(towerName+ " log", readLog(getFilePath(towerName)));
 	}
 
 
+	/**
+	 * writes log information related to collective tower log
+	 * @param logText log info to be saved
+	 * @param addDate specifies whether or not a date should be appended in the text string
+	 */
 	public static void logTowerCollective(String logText, boolean addDate){
 		if(addDate)
 			logText = addDate(logText);
@@ -140,26 +196,48 @@ public class Util {
 		logGlobal(logText, false);
 	}
 
+	/**
+	 * calls a method to view a dialog containing collective tower log information
+	 */
 	public static void showLogTowerCollective(){
 		showLog(getLogDialogTitle(FILE_LOG_TOWER_COLLECTIVE), readLog(getFilePath(FILE_LOG_TOWER_COLLECTIVE)));
 	}
 
+	/**
+	 * writes log information related to waves
+	 * @param logText log text to be written in the file
+	 */
 	public static void logWave(String logText){
 		logText = addDate(logText);
 		writeLog(getFilePath(FILE_LOG_WAVE), logText);
 		logGlobal(logText, false);
 	}
 
+	/**
+	 *  calls a dialog to display wave log information specifies two parameters in the showLog method
+	 * - wave log title
+	 * - content read from wave log file to be displayed
+	 */
 	public static void showLogWave(){
 		showLog(getLogDialogTitle(FILE_LOG_WAVE), readLog(getFilePath(FILE_LOG_WAVE)));
 	}
 
+	/**
+	 * saves global log data in a file
+	 * @param logText log data to be saved
+	 * @param addDate specifies if a date needs to be appended in the log line
+	 */
 	public static void logGlobal(String logText, boolean addDate){
 		if(addDate)
 			logText = addDate(logText);
 		writeLog(getFilePath(FILE_LOG_GLOBAL), logText);
 	}
 
+	/**
+	 * calls a dialog to display global log information specifies two parameters in the showLog method
+	 * - global log title
+	 * - content read from global log file to be displayed
+	 */
 	public static void showLogGlobal(){
 		showLog(getLogDialogTitle(FILE_LOG_GLOBAL), readLog(getFilePath(FILE_LOG_GLOBAL)));
 	}
@@ -167,7 +245,11 @@ public class Util {
 
 
 
-
+	/**
+	 * reads log tile with the provided name
+	 * @param logFile name of log file to be read
+	 * @return returns log data of specified file
+	 */
 	public static String readLog(String logFile){
 
 		String line = null;
@@ -212,6 +294,11 @@ public class Util {
 	}
 
 
+	/**
+	 * writes/appends log information to specified file
+	 * @param logFile file to write log data
+	 * @param logData log information to be written in a file
+	 */
 	public static void writeLog(String logFile, String logData) {
 		try {
 			File file = new File(logFile);
@@ -230,6 +317,16 @@ public class Util {
 		}
 	}
 
+	/**
+	 * a general purpose dialog box used to display all kinds of logs e.g.
+	 * - Tower log
+	 * - Collective tower log
+	 * - Global log
+	 * - Wave log
+	 * 
+	 * @param dialogTitle text containing one of the above listed titles
+	 * @param logText string containing all the log info to be displayed
+	 */
 	public static void showLog(String dialogTitle, String logText){
 		JTextArea textArea = new JTextArea(logText);
 		textArea.setEditable(false);
@@ -243,14 +340,20 @@ public class Util {
 		JOptionPane.showMessageDialog(null, scrollPane, dialogTitle, JOptionPane.INFORMATION_MESSAGE);
 	}
 
-
+	/**
+	 * a general dialog box displays message containing a passed text.
+	 * @param text message to be displayed in the dialog box
+	 */
 	public static void showDialog(String text){
 		JOptionPane.showMessageDialog(null, text, "Message", JOptionPane.WARNING_MESSAGE);	
 	}
 
 
 
-
+	/**
+	 * displays history, edit date, creation date and top 5 scorers in a dialog
+	 * @param map mao object containing all the information to be displayed
+	 */
 	public static void showMapLog(MapModel map){
 		String text = "";
 
@@ -272,6 +375,12 @@ public class Util {
 		JOptionPane.showMessageDialog(null, scrollPane, "Map Statistics", JOptionPane.INFORMATION_MESSAGE);
 	}
 
+	
+	/**
+	 * returns all the game events associated with the current map file
+	 * @param playHistory ArrayList object containing all the game play events
+	 * @return history converted in a single string object to be displayed in a dialog
+	 */
 	private static String getPlayHistory(ArrayList<String> playHistory) {
 		if(playHistory!=null && playHistory.size()>0){
 			String history = "";
@@ -286,6 +395,13 @@ public class Util {
 
 	}
 
+	/**
+	 * returns the top 5 scores of a map.
+	 * gets all the history data as a parameter and extracts top five scorers
+	 * with time and date of the game played
+	 * @param playHistory ArrayList object containing the history of map'f file
+	 * @return returns only top 5 scorers sorted in an asceding order
+	 */
 	private static String getTopFiveScores(ArrayList<String> playHistory) {
 		if(playHistory!=null && playHistory.size()>0){
 
@@ -296,6 +412,17 @@ public class Util {
 	}
 
 
+	/**
+	 * updates map file when ever a wave is finished.
+	 * Updates data about :
+	 * - Top 5 scores 
+	 * - Play history with time and date
+	 * - Map edit time
+	 * 
+	 * and writes it to the map file using fileOutputStream 
+	 * @param mapModel object of MapModel class containing all the updated information.
+	 * @return true if the changes were saved successfully; false otherwise
+	 */
 	public static boolean updateMapFile(MapModel mapModel){
 		try {
 			File file = mapModel.getFilePath();

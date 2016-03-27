@@ -1,5 +1,10 @@
 package code.game.models;
 
+/**
+ * a class defining characteristics of a critter of an intermediate type
+ * @author Armaghan
+ *
+ */
 public class IntermediateCritter extends Critter {
 
 	/**
