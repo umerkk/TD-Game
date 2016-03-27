@@ -35,7 +35,7 @@ public class SingleGameControllerTest {
 		
 		
 		SingleGameController tstCntrlr = SingleGameController.getGameControllerInstance();
-		tstCntrlr.readFrmFile(new File(System.getProperty("user.dir") + "/maps/testmap.map"));
+		tstCntrlr.readFromFile(new File(System.getProperty("user.dir") + "/maps/testmap.map"));
 		Assert.assertArrayEquals(mapArray, tstCntrlr.getMapModl().getMapArray());
 	}
 

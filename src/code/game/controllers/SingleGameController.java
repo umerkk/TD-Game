@@ -164,7 +164,7 @@ public class SingleGameController {
 		if (result == JFileChooser.APPROVE_OPTION) {
 
 			File selectedFile = filebrwsr.getSelectedFile();
-			readFrmFile(selectedFile);
+			readFromFile(selectedFile);
 			/*try {
 
 				FileInputStream fis = new FileInputStream(selectedFile);
@@ -186,7 +186,7 @@ public class SingleGameController {
 	 * 
 	 * @param selectedFile map file to be read. 
 	 */
-	public void readFrmFile(File selectedFile) {
+	public void readFromFile(File selectedFile) {
 		try {
 			FileInputStream fis = new FileInputStream(selectedFile);
 			ObjectInputStream ois = new ObjectInputStream(fis);
