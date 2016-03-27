@@ -175,10 +175,12 @@ public class Util {
 	 * @param towerName
 	 * @param logText
 	 */
-	public static void logTower(String towerName, String logText){
+	public static boolean logTower(String towerName, String logText){
 		logText = addDate(logText);
-		writeLog(getFilePath(towerName), logText);
-		logTowerCollective(logText, false);
+		boolean wasWritten = false;
+		wasWritten = writeLog(getFilePath(towerName), logText);
+		wasWritten = logTowerCollective(logText, false);
+		return wasWritten;
 	}
 
 	/**
@@ -195,11 +197,13 @@ public class Util {
 	 * @param logText log info to be saved
 	 * @param addDate specifies whether or not a date should be appended in the text string
 	 */
-	public static void logTowerCollective(String logText, boolean addDate){
+	public static boolean logTowerCollective(String logText, boolean addDate){
 		if(addDate)
 			logText = addDate(logText);
-		writeLog(getFilePath(FILE_LOG_TOWER_COLLECTIVE), logText);
-		logGlobal(logText, false);
+		boolean wasWritten = false;
+		wasWritten = writeLog(getFilePath(FILE_LOG_TOWER_COLLECTIVE), logText);
+		wasWritten = logGlobal(logText, false);
+		return wasWritten;
 	}
 
 	/**
@@ -213,10 +217,13 @@ public class Util {
 	 * writes log information related to waves
 	 * @param logText log text to be written in the file
 	 */
-	public static void logWave(String logText){
+	public static boolean logWave(String logText){
 		logText = addDate(logText);
-		writeLog(getFilePath(FILE_LOG_WAVE), logText);
-		logGlobal(logText, false);
+		boolean wasWritten = false;
+		wasWritten = writeLog(getFilePath(FILE_LOG_WAVE), logText);
+		wasWritten =  logGlobal(logText, false);
+		
+		return wasWritten;
 	}
 
 	/**
@@ -233,10 +240,10 @@ public class Util {
 	 * @param logText log data to be saved
 	 * @param addDate specifies if a date needs to be appended in the log line
 	 */
-	public static void logGlobal(String logText, boolean addDate){
+	public static boolean logGlobal(String logText, boolean addDate){
 		if(addDate)
 			logText = addDate(logText);
-		writeLog(getFilePath(FILE_LOG_GLOBAL), logText);
+		return writeLog(getFilePath(FILE_LOG_GLOBAL), logText);
 	}
 
 	/**
@@ -286,12 +293,13 @@ public class Util {
 			}
 
 		}catch (IOException e1) {
-
+			return null;
 		}finally{
 			try {
 				bufferReader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
+				
 			}
 		}
 
@@ -305,7 +313,7 @@ public class Util {
 	 * @param logFile file to write log data
 	 * @param logData log information to be written in a file
 	 */
-	public static void writeLog(String logFile, String logData) {
+	public static boolean writeLog(String logFile, String logData) {
 		try {
 			File file = new File(logFile);
 			file.getParentFile().mkdirs();
@@ -320,7 +328,10 @@ public class Util {
 			bw.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
+		
+		return true;
 	}
 
 	/**
