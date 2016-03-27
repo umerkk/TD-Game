@@ -127,3 +127,31 @@ Sample global log from test case.
 Sample collective tower log from test case.
 Sample collective tower log from test case.
 Sun Mar 27 04:52:00 EDT 2016  ------  Sample wave log from test case.
+Sun Mar 27 05:07:50 EDT 2016  ------  Castle Tower was sold for 5
+Sun Mar 27 05:07:50 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sun Mar 27 05:13:40 EDT 2016  ------  Castle Tower was sold for 5
+Sun Mar 27 05:13:40 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sun Mar 27 05:15:30 EDT 2016  ------  Castle Tower was sold for 5
+Sun Mar 27 05:15:30 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sun Mar 27 05:15:58 EDT 2016  ------  Castle Tower was sold for 5
+Sun Mar 27 05:15:58 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sample collective tower log from test case.
+Sun Mar 27 05:15:58 EDT 2016  ------  Sample wave log from test case.
+Sun Mar 27 05:15:58 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 05:15:58 EDT 2016  ------  Sample wave log from test case.
+Sun Mar 27 05:15:58 EDT 2016  ------  Sample individual tower log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample collective tower log from test case.
+Sun Mar 27 05:16:52 EDT 2016  ------  Castle Tower was sold for 5
+Sun Mar 27 05:16:52 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sample collective tower log from test case.
+Sun Mar 27 05:16:52 EDT 2016  ------  Sample wave log from test case.
+Sun Mar 27 05:16:52 EDT 2016  ------  Sample tower log from test case.
+Sun Mar 27 05:16:52 EDT 2016  ------  Sample wave log from test case.
+Sun Mar 27 05:16:52 EDT 2016  ------  Sample individual tower log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample collective tower log from test case.

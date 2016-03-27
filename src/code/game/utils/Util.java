@@ -415,7 +415,8 @@ public class Util {
 	 */
 	private static String getTopFiveScores(ArrayList<String> playHistory) {
 		if(playHistory!=null && playHistory.size()>0){
-
+				// this method is to be updated as we define the scores format of each wave
+			// this method will parse those saved scores  >> sort them in ascending order >> and extract only first five elements
 		}else{
 			return "No history found for this map!";
 		}

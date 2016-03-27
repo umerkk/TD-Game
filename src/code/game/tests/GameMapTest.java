@@ -9,10 +9,12 @@ import java.io.ObjectInputStream;
 import org.junit.Assert;
 import org.junit.Test;
 
+import code.game.controllers.SingleGameController;
 import code.game.models.BasicCritter;
 import code.game.models.CastleTower;
 import code.game.models.GameMap;
 import code.game.models.MapModel;
+import code.game.utils.Util;
 
 /**
  * Test case class to perform unit test on GameMap model class.
@@ -27,19 +29,20 @@ public class GameMapTest {
 	 */
 	@Test
 	public void testLoadMap() {
-		int[][] tstMapArray =  new int[][]{ { 0, 1, 0, 0 },
-			{ 0, 2, 0, 0},
-			{ 0, 3, 4, 0},
-			{ 0, 0, 9999, 0}}; 
+		int[][] tstMapArray =  new int[][]
+				{{1, 0, 0, 0}, 
+			{2, 3, 4, 0}, 
+			{0, 0, 5, 0}, 
+			{0, 0, 6, 9999}}; 
 
 			GameMap tstGameMapObj = new GameMap();
 			try{
-				File selectedFile = new File(System.getProperty("user.dir") + "/maps/testmap.map");
+				File selectedFile = new File(System.getProperty("user.dir") + "/maps/testMap2.map");
 				FileInputStream fis = new FileInputStream(selectedFile);
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				MapModel mapModel = (MapModel) ois.readObject();
 				int[][] mapArray = mapModel.getMapArray();
-				tstGameMapObj.initialize("testmap", mapArray);
+				tstGameMapObj.initialize("testMap2", mapArray);
 			}
 			catch (Exception ex) {}
 

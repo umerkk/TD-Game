@@ -68,6 +68,7 @@ public class MapLoggerTest {
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
 		ArrayList<String> playHistory1 = testController.getMapModel().getPlayHistory();
 
+		// Umer / Lokesh please have a look whats wrong with this method
 		final ArrayList<String> playHistory3 =  playHistory1;
 
 		playHistory1.add(Util.getDate() + " -- Scores: 54 ");
@@ -79,6 +80,7 @@ public class MapLoggerTest {
 		testController2.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
 		ArrayList<String> playHistory2 = testController2.getMapModel().getPlayHistory();
 
+		// Umer / Lokesh please have a look whats wrong with this method
 		Assert.assertNotEquals(playHistory3, playHistory2);
 	}
 
@@ -92,6 +94,7 @@ public class MapLoggerTest {
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
 		ArrayList<String> topFiveScores1 = testController.getMapModel().getTopFiveScores();
 
+		// Umer / Lokesh please have a look whats wrong with this method
 		final ArrayList<String> topFiveScores3 =  topFiveScores1;
 
 		topFiveScores1.add(Util.getDate() + " -- Scores: 59 ");
@@ -102,6 +105,7 @@ public class MapLoggerTest {
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
 		ArrayList<String> topFiveScores2 = testController.getMapModel().getTopFiveScores();
 
+		// Umer / Lokesh please have a look whats wrong with this method
 		Assert.assertNotEquals(topFiveScores3, topFiveScores2);
 	}
 }
