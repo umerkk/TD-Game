@@ -23,8 +23,7 @@ public class StrongestStrategyTest {
 	 * Test to check if the strongest critter is selected by the tower strategy.
 	 */
 	@Test
-	public void testStrategy() 
-	{
+	public void testStrategy() {
 		int[][] mapArray =  new int[][]{ { 0, 1, 0, 0 },
 			{ 0, 2, -5, 0},
 			{ 0, 3, 4, 0},

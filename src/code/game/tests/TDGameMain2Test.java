@@ -21,8 +21,7 @@ public class TDGameMain2Test {
 	 * the corresponding update is made on the account balance in view.
 	 */
 	@Test
-	public void testObserverPtrn() 
-	{
+	public void testObserverPtrn() {
 		GameData tstGmDat = new GameData();
 		GameMap tstMap = new GameMap();
 		TDGameMain2 tstWindow = new TDGameMain2(tstGmDat,tstMap);

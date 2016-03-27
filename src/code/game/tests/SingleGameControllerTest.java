@@ -26,8 +26,7 @@ public class SingleGameControllerTest {
 	 * Test to read a map from file and check if it is read properly.
 	 */
 	@Test
-	public void testReadMap() 
-	{
+	public void testReadMap() {
 		int[][] mapArray =  new int[][]{ { 0, 1, 0, 0 },
 			{ 0, 2, 0, 0},
 			{ 0, 3, 4, 0},
@@ -43,8 +42,7 @@ public class SingleGameControllerTest {
 	 * Test to check if SingleGameController is implementing Singleton design pattern.
 	 */
 	@Test
-	public void testcheckSingltn() 
-	{
+	public void testcheckSingltn() {
 		SingleGameController tstCntrlr1 = SingleGameController.getGameControllerInstance();
 		SingleGameController tstCntrlr2 = SingleGameController.getGameControllerInstance();
 		
@@ -55,8 +53,7 @@ public class SingleGameControllerTest {
 	 * Test to sell a tower and get the account balance updated with refund value.
 	 */
 	@Test
-	public void testSellTower() 
-	{
+	public void testSellTower() {
 		GameData tstGmDat = new GameData();
 		tstGmDat.setAccountBalance(100);
 		
@@ -86,8 +83,7 @@ public class SingleGameControllerTest {
 	 * Test to fail to upgrade a tower with low account balance.
 	 */
 	@Test
-	public void testUpgradeLowBalnc() 
-	{
+	public void testUpgradeLowBalnc() {
 		GameData tstGmDat = new GameData();
 		tstGmDat.setAccountBalance(0);
 		
@@ -117,8 +113,7 @@ public class SingleGameControllerTest {
 	 * Test to upgrade a tower successfully with enough account balance.
 	 */
 	@Test
-	public void testUpgradeWithBalnc() 
-	{
+	public void testUpgradeWithBalnc() {
 		GameData tstGmDat = new GameData();
 		tstGmDat.setAccountBalance(20);
 		

@@ -64,29 +64,37 @@ public class Util {
 		return getDefaultPath()+"logs/";
 	}
 
+	/**
+	 * returns default directory for saved maps
+	 * @return string containing path to maps folder
+	 */
+	public static String getMapsDirectory(){
+		return getDefaultPath()+"maps/";
+	}
 
-//	public static String getLogFile(int fileNo){
-//
-//		switch (fileNo) {
-//
-//		case FILE_LOG_TOWER_1:
-//			return getLogsPath() + "log_tower_1.txt";
-//		case FILE_LOG_TOWER_2:
-//			return getLogsPath() + "log_tower_2.txt";
-//		case FILE_LOG_TOWER_3:
-//			return getLogsPath() + "log_tower_3.txt";
-//		case FILE_LOG_TOWER_COLLECTIVE:
-//			return getLogsPath() + "log_tower_collective.txt";
-//		case FILE_LOG_WAVE:
-//			return getLogsPath() + "log_wave.txt";
-//		case FILE_LOG_GLOBAL:
-//			return getLogsPath() + "log_global.txt";
-//
-//		default:
-//			return getDefaultPath()+"logs/";
-//		}
-//
-//	}
+
+	//	public static String getLogFile(int fileNo){
+	//
+	//		switch (fileNo) {
+	//
+	//		case FILE_LOG_TOWER_1:
+	//			return getLogsPath() + "log_tower_1.txt";
+	//		case FILE_LOG_TOWER_2:
+	//			return getLogsPath() + "log_tower_2.txt";
+	//		case FILE_LOG_TOWER_3:
+	//			return getLogsPath() + "log_tower_3.txt";
+	//		case FILE_LOG_TOWER_COLLECTIVE:
+	//			return getLogsPath() + "log_tower_collective.txt";
+	//		case FILE_LOG_WAVE:
+	//			return getLogsPath() + "log_wave.txt";
+	//		case FILE_LOG_GLOBAL:
+	//			return getLogsPath() + "log_global.txt";
+	//
+	//		default:
+	//			return getDefaultPath()+"logs/";
+	//		}
+	//
+	//	}
 
 	/**
 	 * appends 'log' to a specified title
@@ -95,12 +103,12 @@ public class Util {
 	 */
 	public static String getLogDialogTitle(String title){
 		switch (title) {
-//		case FILE_LOG_TOWER_1:
-//			return "Castle Tower log";
-//		case FILE_LOG_TOWER_2:
-//			return "Imperial Tower log";
-//		case FILE_LOG_TOWER_3:
-//			return "Industrial Tower log";
+		//		case FILE_LOG_TOWER_1:
+		//			return "Castle Tower log";
+		//		case FILE_LOG_TOWER_2:
+		//			return "Imperial Tower log";
+		//		case FILE_LOG_TOWER_3:
+		//			return "Industrial Tower log";
 		case FILE_LOG_TOWER_COLLECTIVE:
 			return "Collective Tower log";
 		case FILE_LOG_WAVE:
@@ -170,8 +178,6 @@ public class Util {
 	public static void logTower(String towerName, String logText){
 		logText = addDate(logText);
 		writeLog(getFilePath(towerName), logText);
-
-
 		logTowerCollective(logText, false);
 	}
 
@@ -375,7 +381,7 @@ public class Util {
 		JOptionPane.showMessageDialog(null, scrollPane, "Map Statistics", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	
+
 	/**
 	 * returns all the game events associated with the current map file
 	 * @param playHistory ArrayList object containing all the game play events
@@ -413,7 +419,7 @@ public class Util {
 
 
 	/**
-	 * updates map file when ever a wave is finished.
+	 * updates map file whenever a wave is finished.
 	 * Updates data about :
 	 * - Top 5 scores 
 	 * - Play history with time and date
