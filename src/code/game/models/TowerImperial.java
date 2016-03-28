@@ -6,7 +6,7 @@ package code.game.models;
  * @author Umer
  *
  */
-public class ImperialTower extends TowerModel {
+public class TowerImperial extends TowerModel {
 
 	/**
 	 * name Name of the tower.
@@ -17,7 +17,7 @@ public class ImperialTower extends TowerModel {
 	 * powerofbullet Power of the bullets.
 	 * rateoffire Interval at which tower fires the bullet.
 	 */
-	public ImperialTower(){
+	public TowerImperial(){
 		super("Imperial Tower", 20, 10, 10, 2, 40, 10);
 	}
 	

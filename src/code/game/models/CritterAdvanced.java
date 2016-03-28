@@ -5,7 +5,7 @@ package code.game.models;
  * @author Armaghan
  *
  */
-public class AdvanceCritter extends Critter {
+public class CritterAdvanced extends Critter {
 
 	/**
 	 * sets the characteristics of an advanced critter by the following parameters
@@ -16,7 +16,7 @@ public class AdvanceCritter extends Critter {
 	 * map game's map on which critters will be drawn
 	 * @param map Map object on which the critter will be drawn
 	 */
-	public AdvanceCritter(GameMap map) {
+	public CritterAdvanced(GameMap map) {
 		super(150,15,150,3,3,map);
 	}
 }

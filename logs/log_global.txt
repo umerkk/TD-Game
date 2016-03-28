@@ -155,3 +155,12 @@ Sample global log from test case.
 Sample global log from test case.
 Sample global log from test case.
 Sample collective tower log from test case.
+Mon Mar 28 06:20:17 EDT 2016  ------  Loaded map
+Mon Mar 28 06:20:22 EDT 2016  ------  Castle Tower's log was viewed
+Mon Mar 28 06:20:27 EDT 2016  ------  Imperial Tower's log was viewed
+Mon Mar 28 06:20:53 EDT 2016  ------  Collective tower log was viewed
+Mon Mar 28 06:21:00 EDT 2016  ------  Critter wave was started
+Mon Mar 28 06:21:07 EDT 2016  ------  Player lost the wave
+Mon Mar 28 06:21:08 EDT 2016  ------  Wave log was viewed
+Mon Mar 28 06:21:11 EDT 2016  ------  Map log was viewed
+Mon Mar 28 06:21:29 EDT 2016  ------  Wave log was viewed

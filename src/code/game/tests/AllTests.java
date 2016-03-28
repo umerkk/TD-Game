@@ -13,8 +13,8 @@ import code.game.utils.Util;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ CritterFactoryTest.class, GameMapTest.class, NearestStrategyTest.class, SingleGameControllerTest.class,
-		StrongestStrategyTest.class, TDGameMain2Test.class, WeakestStrategyTest.class, UtilTest.class, MapLoggerTest.class })
+@SuiteClasses({ CritterFactoryTest.class, GameMapTest.class, StrategyNearestTest.class, SingleGameControllerTest.class,
+		StrategyStrongestTest.class, TDGameMain2Test.class, StrategyWeakestTest.class, UtilTest.class, MapLoggerTest.class })
 public class AllTests {
 
 }

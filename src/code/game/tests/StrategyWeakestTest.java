@@ -4,12 +4,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import code.game.models.CastleTower;
+import code.game.models.TowerCastle;
 import code.game.models.Critter;
 import code.game.models.CritterFactory;
 import code.game.models.GameMap;
 import code.game.models.TowerModel;
-import code.game.strategies.WeakestStrategy;
+import code.game.strategies.StrategyWeakest;
 
 /**
  * Test case class to test the weakest critter targeting strategy.
@@ -17,7 +17,7 @@ import code.game.strategies.WeakestStrategy;
  * @author lokesh
  *
  */
-public class WeakestStrategyTest {
+public class StrategyWeakestTest {
 
 	/**
 	 * Test to check if the weakest critter is selected by the tower strategy.
@@ -31,7 +31,7 @@ public class WeakestStrategyTest {
 		
 		GameMap tstGameMapObj = new GameMap();
 		tstGameMapObj.initialize("testmap", mapArray);
-		TowerModel tstTwr = new CastleTower(); 
+		TowerModel tstTwr = new TowerCastle(); 
 		tstTwr.setMyLocationOnMap("12");
 		tstGameMapObj.addTower("12", tstTwr);
 		
@@ -42,7 +42,7 @@ public class WeakestStrategyTest {
 		tstGameMapObj.addCritter("11", tstCrtr1);
 		tstGameMapObj.addCritter("22", tstCrtr2);
 		
-		WeakestStrategy tstStrtgy = new WeakestStrategy();
+		StrategyWeakest tstStrtgy = new StrategyWeakest();
 		tstStrtgy.shootCritters(tstGameMapObj, tstTwr);
 		
 		assertTrue(tstStrtgy.weakestCritter.getMyLocationOnMap().equals("11"));

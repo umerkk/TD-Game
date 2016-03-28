@@ -10,7 +10,7 @@ import code.game.models.TowerModel;
  * @author Umer
  * 
  */
-public class StrongestStrategy implements TowerStrategy{
+public class StrategyStrongest implements TowerStrategy{
 
 	public String StrategyName="Strongest First";
 	public Critter strongestCritter=null;
@@ -99,7 +99,7 @@ public class StrongestStrategy implements TowerStrategy{
 	/**
 	 * return's strategy's name
 	 */
-	public String GetStrategyName(){
+	public String getStrategyName(){
 		return StrategyName;
 	}
 }

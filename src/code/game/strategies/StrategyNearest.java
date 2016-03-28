@@ -10,7 +10,7 @@ import code.game.models.TowerModel;
  * @author Umer
  * 
  */
-public class NearestStrategy  implements TowerStrategy {
+public class StrategyNearest  implements TowerStrategy {
 
 	public String StrategyName="Nearest First";
 	public Critter lockedCritter=null;
@@ -94,7 +94,7 @@ public class NearestStrategy  implements TowerStrategy {
 	/**
 	 * return's strategy's name
 	 */
-	public String GetStrategyName(){
+	public String getStrategyName(){
 		return StrategyName;
 	}
 }

@@ -4,12 +4,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import code.game.models.CastleTower;
+import code.game.models.TowerCastle;
 import code.game.models.Critter;
 import code.game.models.CritterFactory;
 import code.game.models.GameMap;
 import code.game.models.TowerModel;
-import code.game.strategies.StrongestStrategy;
+import code.game.strategies.StrategyStrongest;
 
 /**
  * Test case class to test the strongest critter targeting strategy.
@@ -17,7 +17,7 @@ import code.game.strategies.StrongestStrategy;
  * @author lokesh
  *
  */
-public class StrongestStrategyTest {
+public class StrategyStrongestTest {
 
 	/**
 	 * Test to check if the strongest critter is selected by the tower strategy.
@@ -31,7 +31,7 @@ public class StrongestStrategyTest {
 		
 		GameMap tstGameMapObj = new GameMap();
 		tstGameMapObj.initialize("testmap", mapArray);
-		TowerModel tstTwr = new CastleTower(); 
+		TowerModel tstTwr = new TowerCastle(); 
 		tstTwr.setMyLocationOnMap("12");
 		tstGameMapObj.addTower("12", tstTwr);
 		
@@ -42,7 +42,7 @@ public class StrongestStrategyTest {
 		tstGameMapObj.addCritter("11", tstCrtr1);
 		tstGameMapObj.addCritter("22", tstCrtr2);
 		
-		StrongestStrategy tstStrtgy = new StrongestStrategy();
+		StrategyStrongest tstStrtgy = new StrategyStrongest();
 		tstStrtgy.shootCritters(tstGameMapObj, tstTwr);
 		
 		assertTrue(tstStrtgy.strongestCritter.getMyLocationOnMap().equals("22"));

@@ -25,18 +25,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import code.game.models.CastleTower;
+import code.game.models.TowerCastle;
 import code.game.models.Critter;
 import code.game.models.CritterFactory;
 import code.game.models.GameData;
 import code.game.models.GameMap;
-import code.game.models.ImperialTower;
-import code.game.models.IndustrialTower;
+import code.game.models.TowerImperial;
+import code.game.models.TowerIndustrial;
 import code.game.models.MapModel;
 import code.game.models.TowerModel;
-import code.game.strategies.NearestStrategy;
-import code.game.strategies.StrongestStrategy;
-import code.game.strategies.WeakestStrategy;
+import code.game.strategies.StrategyNearest;
+import code.game.strategies.StrategyStrongest;
+import code.game.strategies.StrategyWeakest;
 import code.game.utils.Util;
 
 
@@ -482,15 +482,15 @@ public class SingleGameController {
 
 		switch(response){
 		case 0: {
-			selectedTower.setStrategy(new NearestStrategy(),map);
+			selectedTower.setStrategy(new StrategyNearest(),map);
 			break;
 		}
 		case 1: {
-			selectedTower.setStrategy(new StrongestStrategy(),map);
+			selectedTower.setStrategy(new StrategyStrongest(),map);
 			break;
 		}
 		case 2: {
-			selectedTower.setStrategy(new WeakestStrategy(),map);
+			selectedTower.setStrategy(new StrategyWeakest(),map);
 			break;
 		}
 		}
@@ -589,17 +589,17 @@ public class SingleGameController {
 			switch(towerName) {
 			case "lblTwr1" : 
 				//m_selctdTower = 1;
-				selectedTower = new CastleTower();
+				selectedTower = new TowerCastle();
 				newTowerSelected = true;
 				break;
 			case "lblTwr2" :
 				//m_selctdTower = 2;
-				selectedTower = new ImperialTower();
+				selectedTower = new TowerImperial();
 				newTowerSelected = true;
 				break;
 			case "lblTwr3" :
 				//m_selctdTower = 3;
-				selectedTower = new IndustrialTower();
+				selectedTower = new TowerIndustrial();
 				newTowerSelected = true;
 				break;
 			}
@@ -664,20 +664,20 @@ public class SingleGameController {
 			int response = list.getSelectedIndex();
 			switch(response){
 			case 0: {
-				selectedTower.setStrategy(new NearestStrategy(),map);
+				selectedTower.setStrategy(new StrategyNearest(),map);
 				break;
 			}
 			case 1: {
-				selectedTower.setStrategy(new StrongestStrategy(),map);
+				selectedTower.setStrategy(new StrategyStrongest(),map);
 				break;
 			}
 			case 2: {
-				selectedTower.setStrategy(new WeakestStrategy(),map);
+				selectedTower.setStrategy(new StrategyWeakest(),map);
 				break;
 			}
 			}
 
-			Util.logTower(getCurrentTowerName(), "Strategy " + selectedTower.getStrategy().GetStrategyName() + " was selected for " + getCurrentTowerName());
+			Util.logTower(getCurrentTowerName(), "Strategy " + selectedTower.getStrategy().getStrategyName() + " was selected for " + getCurrentTowerName());
 			gameDataModel.setSelectedTowerDescription(selectedTower.getTowerDetails().toString());
 
 

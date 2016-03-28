@@ -11,7 +11,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import code.game.controllers.SingleGameController;
-import code.game.models.CastleTower;
+import code.game.models.TowerCastle;
 import code.game.models.GameData;
 import code.game.models.GameMap;
 import code.game.utils.Util;
@@ -67,7 +67,7 @@ public class SingleGameControllerTest {
 			{ 0, 0, 9999, 0}}; 
 
 			tstMap.initialize("testmap", mapArray);
-			tstMap.addTower("12", new CastleTower());
+			tstMap.addTower("12", new TowerCastle());
 
 			JPanel cell = new JPanel();
 			cell.setName("12");
@@ -79,7 +79,7 @@ public class SingleGameControllerTest {
 			tstCntrlr.setSelectedCell(cell);
 			tstCntrlr.RemoveTower();
 
-			assertTrue(tstCntrlr.gameDataModel.getAccountBalance() == 100 + (new CastleTower()).getRefundValue());
+			assertTrue(tstCntrlr.gameDataModel.getAccountBalance() == 100 + (new TowerCastle()).getRefundValue());
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class SingleGameControllerTest {
 			{ 0, 0, 9999, 0}}; 
 
 			tstMap.initialize("testmap", mapArray);
-			tstMap.addTower("12", new CastleTower());
+			tstMap.addTower("12", new TowerCastle());
 
 			JPanel cell = new JPanel();
 			cell.setName("12");
@@ -127,7 +127,7 @@ public class SingleGameControllerTest {
 			{ 0, 0, 9999, 0}}; 
 
 			tstMap.initialize("testmap", mapArray);
-			tstMap.addTower("12", new CastleTower());
+			tstMap.addTower("12", new TowerCastle());
 
 			JPanel cell = new JPanel();
 			cell.setName("12");

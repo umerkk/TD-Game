@@ -44,3 +44,5 @@ Sun Mar 27 05:15:58 EDT 2016  ------  Sample wave log from test case.
 Sun Mar 27 05:15:58 EDT 2016  ------  Sample wave log from test case.
 Sun Mar 27 05:16:52 EDT 2016  ------  Sample wave log from test case.
 Sun Mar 27 05:16:52 EDT 2016  ------  Sample wave log from test case.
+Mon Mar 28 06:21:00 EDT 2016  ------  Critter wave was started
+Mon Mar 28 06:21:07 EDT 2016  ------  Player lost the wave

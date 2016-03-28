@@ -4,12 +4,12 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import code.game.models.CastleTower;
+import code.game.models.TowerCastle;
 import code.game.models.Critter;
 import code.game.models.CritterFactory;
 import code.game.models.GameMap;
 import code.game.models.TowerModel;
-import code.game.strategies.NearestStrategy;
+import code.game.strategies.StrategyNearest;
 
 /**
  * Test case class to test the nearest critter targeting strategy.
@@ -17,7 +17,7 @@ import code.game.strategies.NearestStrategy;
  * @author lokesh
  *
  */
-public class NearestStrategyTest {
+public class StrategyNearestTest {
 
 	/**
 	 * Test to check if the nearest critter to tower is selected by the tower strategy.
@@ -33,7 +33,7 @@ public class NearestStrategyTest {
 		
 		GameMap tstGameMapObj = new GameMap();
 		tstGameMapObj.initialize("testmap", mapArray);
-		TowerModel tstTwr = new CastleTower(); 
+		TowerModel tstTwr = new TowerCastle(); 
 		tstTwr.setMyLocationOnMap("12");
 		tstTwr.upgradeCurrentLevel();
 		tstGameMapObj.addTower("12", tstTwr);
@@ -45,7 +45,7 @@ public class NearestStrategyTest {
 		tstGameMapObj.addCritter("11", tstCrtr1);
 		tstGameMapObj.addCritter("32", tstCrtr2);
 		
-		NearestStrategy tstStrtgy = new NearestStrategy();
+		StrategyNearest tstStrtgy = new StrategyNearest();
 		tstStrtgy.shootCritters(tstGameMapObj, tstTwr);
 		
 		assertTrue(tstStrtgy.lockedCritter.getMyLocationOnMap().equals("11"));

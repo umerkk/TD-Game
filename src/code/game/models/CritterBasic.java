@@ -1,14 +1,14 @@
 package code.game.models;
 
 /**
- * a class defining characteristics of a critter of an intermediate type
+ * a class defining characteristics of a critter of a basic type
  * @author Armaghan
  *
  */
-public class IntermediateCritter extends Critter {
+public class CritterBasic extends Critter {
 
 	/**
-	 * sets the characteristics of an intermediate critter by the following parameters
+	 * sets the characteristics of an basic critter
 	 * 
 	 * reward the points , player gets by killing the critterhitPoint hit point of the critter
 	 * health health of critter
@@ -16,7 +16,7 @@ public class IntermediateCritter extends Critter {
 	 * map game's map on which critters will be drawn
 	 * @param map Map object on which the critter will be drawn
 	 */
-	public IntermediateCritter(GameMap map){
-		super(100,10,100,2,2,map);
+	public CritterBasic(GameMap map) {
+		super(50,5,50,1,1,map);
 	}
 }

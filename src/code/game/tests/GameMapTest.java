@@ -10,8 +10,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import code.game.controllers.SingleGameController;
-import code.game.models.BasicCritter;
-import code.game.models.CastleTower;
+import code.game.models.CritterBasic;
+import code.game.models.TowerCastle;
 import code.game.models.GameMap;
 import code.game.models.MapModel;
 import code.game.utils.Util;
@@ -61,7 +61,7 @@ public class GameMapTest {
 
 			GameMap tstGameMapObj = new GameMap();
 			tstGameMapObj.initialize("testmap", mapArray);
-			tstGameMapObj.addTower("12", new CastleTower());
+			tstGameMapObj.addTower("12", new TowerCastle());
 			int[][] newTstArray =  new int[][]{ { 0, 1, 0, 0 },
 				{ 0, 2, -5, 0},
 				{ 0, 3, 4, 0},
@@ -82,7 +82,7 @@ public class GameMapTest {
 
 			GameMap tstGameMapObj = new GameMap();
 			tstGameMapObj.initialize("testmap", mapArray);
-			tstGameMapObj.getTowerCollection().put("12", new CastleTower());
+			tstGameMapObj.getTowerCollection().put("12", new TowerCastle());
 			tstGameMapObj.deleteTowerFromMap("12");
 			int[][] newTstArray =  new int[][]{ { 0, 1, 0, 0 },
 				{ 0, 2, 0, 0},
@@ -104,7 +104,7 @@ public class GameMapTest {
 
 			GameMap tstGameMapObj = new GameMap();
 			tstGameMapObj.initialize("testmap", mapArray);
-			tstGameMapObj.addCritter("11", new BasicCritter(tstGameMapObj));
+			tstGameMapObj.addCritter("11", new CritterBasic(tstGameMapObj));
 			tstGameMapObj.getCritterFromCollection("11").setMyLocationOnMap("11");
 			assertTrue(tstGameMapObj.checkCritterExists("11"));
 	}
