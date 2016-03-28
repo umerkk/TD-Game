@@ -50,6 +50,7 @@ public class TDGameMain2 implements Observer {
 	JLabel lblAccBal = new JLabel("0  ");
 	JLabel powerlbl = new JLabel("0  ");
 	JLabel wavelbl = new JLabel("0  ");
+	JButton btnNewButton = new JButton("Pause");
 	JButton btnStrtGame = new JButton("Start Game");
 	SingleGameController myController = SingleGameController.getGameControllerInstance();
 	Panel panel = new Panel();
@@ -253,17 +254,33 @@ public class TDGameMain2 implements Observer {
 
 		panel_1.add(btnStrtGame, BorderLayout.NORTH);
 
-		JButton btnNewButton = new JButton("Advance Game>>");
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//myController.incrementWave(panel);
-			}
+				
+				if(btnNewButton.getText().equalsIgnoreCase("Pause"))
+					{
+					myController.PauseGame(false);
+					btnNewButton.setText("Resume");
+					} else {
+						myController.PauseGame(true);
+						btnNewButton.setText("Pause");
+					}
+				}
 		});
 
+		btnNewButton.setEnabled(false);
+		
+		
+		
+		
 		panel_1.add(btnNewButton, BorderLayout.SOUTH);
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myController.startWave(panel);
+				btnNewButton.setEnabled(true);
+				
 			}
 		});
 

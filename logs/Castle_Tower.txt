@@ -32,3 +32,11 @@ Sun Mar 27 05:16:52 EDT 2016  ------  Castle Tower was sold for 5
 Sun Mar 27 05:16:52 EDT 2016  ------  Castle Tower was upgraded to level 2
 Sun Mar 27 05:16:52 EDT 2016  ------  Sample tower log from test case.
 Sun Mar 27 05:16:52 EDT 2016  ------  Sample individual tower log from test case.
+Mon Mar 28 17:11:16 EDT 2016  ------  Castle Tower was placed on map 
+Mon Mar 28 17:53:07 EDT 2016  ------  Castle Tower was placed on map 
+Mon Mar 28 17:53:49 EDT 2016  ------  Castle Tower was placed on map 
+Mon Mar 28 17:55:39 EDT 2016  ------  Castle Tower was placed on map 
+Mon Mar 28 17:58:35 EDT 2016  ------  Castle Tower was placed on map 
+Mon Mar 28 17:59:49 EDT 2016  ------  Castle Tower was placed on map 
+Mon Mar 28 18:00:24 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
+Mon Mar 28 18:01:45 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First

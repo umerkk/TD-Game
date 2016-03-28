@@ -38,6 +38,7 @@ import code.game.strategies.StrategyNearest;
 import code.game.strategies.StrategyStrongest;
 import code.game.strategies.StrategyWeakest;
 import code.game.utils.Util;
+import net.miginfocom.swing.MigLayout;
 
 
 
@@ -254,6 +255,11 @@ public class SingleGameController {
 	 */
 	public void drawMap(boolean isExisting, Panel parentPanel) {
 		if(isExisting) {
+			parentPanel.removeAll();
+			parentPanel.setLayout(new MigLayout());
+			parentPanel.revalidate();
+			parentPanel.repaint();
+			
 			for(int k=0;k<map.getArrayRow();k++) {
 				for(int i=0;i<map.getArrayCol();i++) {
 
@@ -533,7 +539,7 @@ public class SingleGameController {
 					gameDataModel.deductMoneyFromAccount(tModel.getCostOfTower());
 				}
 
-				Util.logTower(getCurrentTowerName(), getCurrentTowerName() + " was placed on map ");
+				Util.logTower(getCurrentTowerName(), getCurrentTowerName() + " was placed on map with Strategy = "+selectedTower.getStrategy().getStrategyName());
 			} else {
 				JOptionPane.showMessageDialog(null, "You do not have enough money to place a new tower.", "Error:", JOptionPane.ERROR_MESSAGE);
 			}
@@ -716,12 +722,23 @@ public class SingleGameController {
 			Util.logWave("Critter wave was started");
 	}
 
+	
+	public void PauseGame(boolean b)
+	{
+		isGameStarted=b;
+		if(b)
+		Util.logWave("Game is resumed");
+		else
+			Util.logWave("Game is paused");
+	}
 	/**
 	 * Responsible for incrementing wave level, takes a parameter
 	 * @param panel used to repaint/invalidate used panel
 	 */
 	public void incrementWave(Panel panel) {
 
+		if(isGameStarted)
+		{
 		if(!(numberOfCritters<1)){	
 			if(critterCreationInterval%2==0) {
 				map.addCritter(String.valueOf(1), CritterFactory.getCritter(1,map));
@@ -776,6 +793,7 @@ public class SingleGameController {
 			gameDataModel.resetPlayerPower();
 			gameDataModel.resetWave();
 			Util.logWave("Player lost the wave");
+		}
 		}
 	}
 
