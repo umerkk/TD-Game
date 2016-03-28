@@ -60,3 +60,5 @@ Mon Mar 28 17:58:35 EDT 2016  ------  Castle Tower was placed on map
 Mon Mar 28 17:59:49 EDT 2016  ------  Castle Tower was placed on map 
 Mon Mar 28 18:00:24 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
 Mon Mar 28 18:01:45 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Mon Mar 28 18:10:28 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Mon Mar 28 18:12:42 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First

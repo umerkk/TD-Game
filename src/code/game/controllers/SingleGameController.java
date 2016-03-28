@@ -53,6 +53,7 @@ public class SingleGameController {
 	private static SingleGameController instance;
 	private GameMap map=null;
 	private TowerModel selectedTower=null;
+	private Critter selectedCritter=null;
 	private Boolean newTowerSelected=false;
 	private JPanel selectedCell;
 	public GameData gameDataModel;
@@ -636,7 +637,13 @@ public class SingleGameController {
 			newTowerSelected=false;
 
 
-		} else {
+		} else if(map.checkCritterExists(tempName))
+		{
+			selectedCritter = map.getCritter(tempName);
+			gameDataModel.setSelectedTowerDescription(selectedCritter.getCritterDetails().toString());
+		}
+		else
+		{
 			if(newTowerSelected) {
 				if(map.checkMapIsEmpty(tempName)) {
 					JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First"});

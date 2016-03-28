@@ -337,7 +337,7 @@ public class TDGameMain2 implements Observer {
 		lblTwr3.setIcon(new ImageIcon("res/tower_3.png"));
 
 		JPanel pnlTwrDesc = new JPanel();
-		pnlTwrDesc.setBorder(new TitledBorder(null, "Tower Description", TitledBorder.LEFT, TitledBorder.TOP, null, null));
+		pnlTwrDesc.setBorder(new TitledBorder(null, "Console", TitledBorder.LEFT, TitledBorder.TOP, null, null));
 		jPnlDesc.add(pnlTwrDesc, BorderLayout.CENTER);
 		pnlTwrDesc.setLayout(new BorderLayout(0, 0));
 		txtTwrDesc.setEditable(false);

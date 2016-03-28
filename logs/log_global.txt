@@ -228,3 +228,11 @@ Mon Mar 28 18:00:29 EDT 2016  ------  Collective tower log was viewed
 Mon Mar 28 18:01:41 EDT 2016  ------  Loaded map
 Mon Mar 28 18:01:45 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
 Mon Mar 28 18:01:51 EDT 2016  ------  Collective tower log was viewed
+Mon Mar 28 18:10:25 EDT 2016  ------  Loaded map
+Mon Mar 28 18:10:28 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Mon Mar 28 18:10:31 EDT 2016  ------  Critter wave was started
+Mon Mar 28 18:10:36 EDT 2016  ------  Game is paused
+Mon Mar 28 18:12:39 EDT 2016  ------  Loaded map
+Mon Mar 28 18:12:42 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Mon Mar 28 18:12:43 EDT 2016  ------  Critter wave was started
+Mon Mar 28 18:12:49 EDT 2016  ------  Game is paused

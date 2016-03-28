@@ -47,7 +47,19 @@ public abstract class Critter {
 		this.mapReference = map;
 	}
 
+	public StringBuilder getCritterDetails(){
+		StringBuilder strBldrObj = new StringBuilder();
+		strBldrObj.append("Name : Critter");
+		strBldrObj.append("\nLevel : " + level);
+		strBldrObj.append("\nHealth : " + health);
+		strBldrObj.append("\nKill Reward : " + reward);
+		strBldrObj.append("\nHit Point : " + hit_point);
+		strBldrObj.append("\nSpeed : " + speed);
+		strBldrObj.append("\nCurrent Location : " + myLocationOnMap);
 
+		return strBldrObj;
+	}
+	
 	/**
 	 * Critter's current location on the grid
 	 * @param location Critter's current location

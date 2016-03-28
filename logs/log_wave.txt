@@ -60,3 +60,7 @@ Mon Mar 28 17:58:36 EDT 2016  ------  Critter wave was started
 Mon Mar 28 17:58:38 EDT 2016  ------  Game is paused
 Mon Mar 28 17:58:43 EDT 2016  ------  Game is resumed
 Mon Mar 28 17:58:44 EDT 2016  ------  Game is paused
+Mon Mar 28 18:10:31 EDT 2016  ------  Critter wave was started
+Mon Mar 28 18:10:36 EDT 2016  ------  Game is paused
+Mon Mar 28 18:12:43 EDT 2016  ------  Critter wave was started
+Mon Mar 28 18:12:49 EDT 2016  ------  Game is paused
