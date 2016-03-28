@@ -33,6 +33,7 @@ import code.game.models.GameData;
 import code.game.models.GameMap;
 import code.game.utils.Util;
 import net.miginfocom.swing.MigLayout;
+import javax.swing.JSeparator;
 
 
 /**
@@ -69,16 +70,18 @@ public class TDGameMain2 implements Observer {
 		lblAccBal.setText(String.valueOf(((GameData)arg0).getAccountBalance()));
 		powerlbl.setText(String.valueOf(((GameData)arg0).getPlayerPower()));
 		wavelbl.setText(String.valueOf(((GameData)arg0).getWave()));
-		txtTwrDesc.setText(String.valueOf(((GameData)arg0).getSelectedTowerDescription()));
-
+		if(String.valueOf(((GameData)arg0).getSelectedTowerDescription()).equalsIgnoreCase("null"))
+		{
+			txtTwrDesc.setText("Nothing to display at the moment.");
+		}else {
+			txtTwrDesc.setText(String.valueOf(((GameData)arg0).getSelectedTowerDescription()));
+		}
 		globalWaveCounter = ((GameData)arg0).getWave();
 		if(globalWaveCounter>1){
 			btnStrtGame.setText("Start Next Wave");
 		} else {
 			btnStrtGame.setText("Start Game");
 		}
-
-//		updateMapLog(globalWaveCounter);
 	}
 
 	private void updateMapLog(int globalWaveCounter){
@@ -192,7 +195,7 @@ public class TDGameMain2 implements Observer {
 		jPnlHdr.add(pnlHdrSub, BorderLayout.CENTER);
 
 		JLabel lblAccLbl = new JLabel("\r\nAccount Balance : $");
-		lblAccLbl.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblAccLbl.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlHdrSub.add(lblAccLbl);
 		lblAccLbl.setHorizontalAlignment(SwingConstants.CENTER);
 
@@ -201,7 +204,7 @@ public class TDGameMain2 implements Observer {
 
 		JLabel lblPower = new JLabel("Power");
 		lblPower.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPower.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblPower.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlHdrSub.add(lblPower);
 
 
@@ -210,7 +213,7 @@ public class TDGameMain2 implements Observer {
 
 		JLabel lblWave = new JLabel("Wave");
 		lblWave.setHorizontalAlignment(SwingConstants.CENTER);
-		lblWave.setFont(new Font("Arial", Font.PLAIN, 14));
+		lblWave.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlHdrSub.add(lblWave);
 
 
@@ -254,33 +257,33 @@ public class TDGameMain2 implements Observer {
 
 		panel_1.add(btnStrtGame, BorderLayout.NORTH);
 
-		
+
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//myController.incrementWave(panel);
-				
+
 				if(btnNewButton.getText().equalsIgnoreCase("Pause"))
-					{
+				{
 					myController.PauseGame(false);
 					btnNewButton.setText("Resume");
-					} else {
-						myController.PauseGame(true);
-						btnNewButton.setText("Pause");
-					}
+				} else {
+					myController.PauseGame(true);
+					btnNewButton.setText("Pause");
 				}
+			}
 		});
 
 		btnNewButton.setEnabled(false);
-		
-		
-		
-		
+
+
+
+
 		panel_1.add(btnNewButton, BorderLayout.SOUTH);
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myController.startWave(panel);
 				btnNewButton.setEnabled(true);
-				
+
 			}
 		});
 
@@ -357,7 +360,7 @@ public class TDGameMain2 implements Observer {
 		JPanel pnlBtnColl = new JPanel();
 		jPnlDesc.add(pnlBtnColl, BorderLayout.SOUTH);
 
-		JButton btnSellTwr = new JButton("Sell");
+		JButton btnSellTwr = new JButton("($) Sell");
 		btnSellTwr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				selBtnHandlr();
@@ -366,7 +369,7 @@ public class TDGameMain2 implements Observer {
 		pnlBtnColl.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		pnlBtnColl.add(btnSellTwr);
 
-		JButton btnUpgrdTwr = new JButton("Upgrade");
+		JButton btnUpgrdTwr = new JButton("(\u25B2) Upgrade");
 		btnUpgrdTwr.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				upgradeBtnHandlr();
@@ -374,7 +377,7 @@ public class TDGameMain2 implements Observer {
 		});
 		pnlBtnColl.add(btnUpgrdTwr);
 
-		JButton btnChangeStrategy = new JButton("Change Strategy");
+		JButton btnChangeStrategy = new JButton("(\u058E)Change Strategy");
 		btnChangeStrategy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myController.changeStrategyOfTower();
@@ -442,6 +445,9 @@ public class TDGameMain2 implements Observer {
 		});
 
 		mnGame.add(mItemOpenMap);
+		
+		JSeparator separator = new JSeparator();
+		mnGame.add(separator);
 		mnGame.add(mItemGlobalMap);
 
 	}

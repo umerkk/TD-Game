@@ -15,6 +15,7 @@ package code.game.models;
 public abstract class Critter {
 
 	private int reward;
+	private String name;
 	private int hit_point;
 	private int health;
 	private int level;
@@ -38,7 +39,8 @@ public abstract class Critter {
 	 * @param speed critter's speed
 	 * @param map game's map on which critters will be drawn
 	 */
-	public Critter(int reward,int hitPoint, int health, int level, int speed,GameMap map) {
+	public Critter(String name, int reward,int hitPoint, int health, int level, int speed,GameMap map) {
+		this.name = name;
 		this.reward = reward;
 		this.hit_point = hitPoint;
 		this.health = health;
@@ -49,7 +51,7 @@ public abstract class Critter {
 
 	public StringBuilder getCritterDetails(){
 		StringBuilder strBldrObj = new StringBuilder();
-		strBldrObj.append("Name : Critter");
+		strBldrObj.append("Name : "+name);
 		strBldrObj.append("\nLevel : " + level);
 		strBldrObj.append("\nHealth : " + health);
 		strBldrObj.append("\nKill Reward : " + reward);

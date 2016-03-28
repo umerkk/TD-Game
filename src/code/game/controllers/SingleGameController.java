@@ -260,7 +260,7 @@ public class SingleGameController {
 			parentPanel.setLayout(new MigLayout());
 			parentPanel.revalidate();
 			parentPanel.repaint();
-			
+
 			for(int k=0;k<map.getArrayRow();k++) {
 				for(int i=0;i<map.getArrayCol();i++) {
 
@@ -703,7 +703,7 @@ public class SingleGameController {
 	private int getCurrentTowerID(){
 		return selectedTower.getTowerID();
 	}
-	
+
 	private String getCurrentTowerName(){
 		return selectedTower.getName();
 	}
@@ -713,7 +713,15 @@ public class SingleGameController {
 	 * @param panel map panel
 	 */
 	public void startWave(final Panel panel) {
-		this.numberOfCritters = gameDataModel.getWave()*10;
+		if(gameDataModel.getWave() < 5) {
+			this.numberOfCritters = gameDataModel.getWave()*5;
+		} else if(gameDataModel.getWave() >= 5 && gameDataModel.getWave() < 10) {
+			this.numberOfCritters = gameDataModel.getWave()*7;
+		} else if(gameDataModel.getWave() >= 10) {
+			this.numberOfCritters = gameDataModel.getWave()*10;
+		} else {
+			this.numberOfCritters = gameDataModel.getWave()*10;
+		}
 
 		ActionListener gamePlay = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) { 
@@ -729,12 +737,12 @@ public class SingleGameController {
 			Util.logWave("Critter wave was started");
 	}
 
-	
+
 	public void PauseGame(boolean b)
 	{
 		isGameStarted=b;
 		if(b)
-		Util.logWave("Game is resumed");
+			Util.logWave("Game is resumed");
 		else
 			Util.logWave("Game is paused");
 	}
@@ -746,61 +754,69 @@ public class SingleGameController {
 
 		if(isGameStarted)
 		{
-		if(!(numberOfCritters<1)){	
-			if(critterCreationInterval%2==0) {
-				map.addCritter(String.valueOf(1), CritterFactory.getCritter(1,map));
-				numberOfCritters--;
+			if(!(numberOfCritters<1)){	
+				if(critterCreationInterval%2==0) {
+					if(gameDataModel.getWave() < 5) {
+						map.addCritter(String.valueOf(1), CritterFactory.getCritter(1,map));
+					} else if(gameDataModel.getWave() >= 5 && gameDataModel.getWave() < 10) {
+						map.addCritter(String.valueOf(1), CritterFactory.getCritter(2,map));
+					} else if(gameDataModel.getWave() >= 10) {
+						map.addCritter(String.valueOf(1), CritterFactory.getCritter(3,map));
+					} else {
+						map.addCritter(String.valueOf(1), CritterFactory.getCritter(3,map));
+					}
+					numberOfCritters--;
+				}
+				critterCreationInterval++;
 			}
-			critterCreationInterval++;
-//			Util.logWave("Critter wave was incremented");
-		}
 
-		ConcurrentHashMap<String,Critter> tempList = new ConcurrentHashMap<String, Critter>();
+			ConcurrentHashMap<String,Critter> tempList = new ConcurrentHashMap<String, Critter>();
 
-		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
-			String key = entry.getKey();
-			Critter critter = (Critter) entry.getValue();
-			int loc = Integer.parseInt(key);
-			loc++;
-			tempList.put(String.valueOf(loc), critter);
-			//tempList.remove(key);
-		}
+			for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
+				String key = entry.getKey();
+				Critter critter = (Critter) entry.getValue();
+				int loc = Integer.parseInt(key);
+				loc+=critter.getSpeed();
+				tempList.put(String.valueOf(loc), critter);
+				//tempList.remove(key);
+			}
 
-		removeCritters(panel);
-		//panel.validate();
-		panel.repaint();
-
-		map.setCritterCollection(tempList);
-
-		panel.repaint();
-
-		drawCritter(map.GetCritterCollection(),panel);
-		//drawController++;
-		removeCritters(panel);
-		map.towerToShoot();
-		drawCritter(map.GetCritterCollection(),panel);
-
-		if(map.isCritterCollectionEmpty()) {
-			isGameStarted=false;
-			numberOfCritters=0;
-			gameTimer.stop();
 			removeCritters(panel);
-			gameDataModel.resetPlayerPower();
-			map.GetCritterCollection().clear();
-			JOptionPane.showMessageDialog(null, "You Won!. All the critters are history and you still have some power.", "YAY:", JOptionPane.INFORMATION_MESSAGE);
-			gameDataModel.setWaveIncrement();
-			Util.logWave("Player won the wave");
-		} else if(gameDataModel.getPlayerPower()<1) {
-			isGameStarted=false;
-			numberOfCritters=0;
-			gameTimer.stop();
+			//panel.validate();
+			panel.repaint();
+
+			map.setCritterCollection(tempList);
+
+			panel.repaint();
+
+			drawCritter(map.GetCritterCollection(),panel);
+			//drawController++;
 			removeCritters(panel);
-			map.GetCritterCollection().clear();
-			JOptionPane.showMessageDialog(null, "You Lose!.\r\nCritters has taken all of your power.", "Aww:", JOptionPane.ERROR_MESSAGE);
-			gameDataModel.resetPlayerPower();
-			gameDataModel.resetWave();
-			Util.logWave("Player lost the wave");
-		}
+			map.towerToShoot();
+			drawCritter(map.GetCritterCollection(),panel);
+			Util.logWave("Game timer was incremented - Critters were advanced and Towers shot within their range.");
+
+			if(map.isCritterCollectionEmpty()) {
+				isGameStarted=false;
+				numberOfCritters=0;
+				gameTimer.stop();
+				removeCritters(panel);
+				gameDataModel.resetPlayerPower();
+				map.GetCritterCollection().clear();
+				JOptionPane.showMessageDialog(null, "You Won!. All the critters are history and you still have some power.", "YAY:", JOptionPane.INFORMATION_MESSAGE);
+				gameDataModel.setWaveIncrement();
+				Util.logWave("Player won the wave");
+			} else if(gameDataModel.getPlayerPower()<1) {
+				isGameStarted=false;
+				numberOfCritters=0;
+				gameTimer.stop();
+				removeCritters(panel);
+				map.GetCritterCollection().clear();
+				JOptionPane.showMessageDialog(null, "You Lose!.\r\nCritters has taken all of your power.", "Aww:", JOptionPane.ERROR_MESSAGE);
+				gameDataModel.resetPlayerPower();
+				gameDataModel.resetWave();
+				Util.logWave("Player lost the wave");
+			}
 		}
 	}
 

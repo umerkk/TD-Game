@@ -17,6 +17,6 @@ public class CritterIntermediate extends Critter {
 	 * @param map Map object on which the critter will be drawn
 	 */
 	public CritterIntermediate(GameMap map){
-		super(100,10,100,2,2,map);
+		super("Sproadic Killer",100,10,100,2,2,map);
 	}
 }

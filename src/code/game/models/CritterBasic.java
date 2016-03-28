@@ -17,6 +17,6 @@ public class CritterBasic extends Critter {
 	 * @param map Map object on which the critter will be drawn
 	 */
 	public CritterBasic(GameMap map) {
-		super(50,5,50,1,1,map);
+		super("Mobster Critter",50,5,50,1,1,map);
 	}
 }
