@@ -1,11 +1,13 @@
 package code.game.models;
 
+import java.io.Serializable;
+
 /**
  * a class defining characteristics of a critter of an advanced type
  * @author Armaghan
  *
  */
-public class CritterAdvanced extends Critter {
+public class CritterAdvanced extends Critter implements Serializable{
 
 	/**
 	 * sets the characteristics of an advanced critter by the following parameters

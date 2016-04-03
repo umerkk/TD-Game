@@ -1,5 +1,6 @@
 package code.game.models;
 
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -16,7 +17,7 @@ import java.util.Observer;
  * @author Umer
  * @author Lokesh
  */
-public class GameData extends Observable{
+public class GameData extends Observable implements Serializable{
 
 	private  int accountBalance = 20;
 	private int playerPower =100;

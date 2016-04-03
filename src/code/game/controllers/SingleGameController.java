@@ -10,8 +10,14 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -48,7 +54,7 @@ import net.miginfocom.swing.MigLayout;
  * 
  *
  */
-public class SingleGameController {
+public class SingleGameController implements Serializable {
 
 	private static SingleGameController instance;
 	private GameMap map=null;
@@ -65,8 +71,11 @@ public class SingleGameController {
 	private final int critterRunAwayPoints=20; 
 	private final int POINT_ENTRY = 1;
 	private final int POINT_EXIT = 9999;
+	private final int CASTLE_TOWER_ENTRY = -7;
+	private final int IMPERIAL_TOWER_ENTRY = -8;
+	private final int INDUSTRIAL_TOWER_ENTRY = -9;
 	private int numberOfCritters=0;
-
+	private boolean saveGameFlag=false;
 	private MapModel mapModel;
 
 
@@ -76,6 +85,10 @@ public class SingleGameController {
 
 	public void setMapModel(MapModel newMapModel) {
 		this.mapModel = newMapModel;
+	}
+
+	public void setSaveGameFlag(boolean b) {
+		this.saveGameFlag =b;
 	}
 
 	/**
@@ -165,17 +178,7 @@ public class SingleGameController {
 
 			File selectedFile = filebrwsr.getSelectedFile();
 			readFromFile(selectedFile);
-			/*try {
 
-				FileInputStream fis = new FileInputStream(selectedFile);
-				ObjectInputStream ois = new ObjectInputStream(fis);
-				int[][] mapArray = (int[][]) ois.readObject();
-				map.initialize("myMap", mapArray);
-
-				ois.close();
-				fis.close();
-			}catch(Exception ex){}
-			 */
 		} else {
 			JOptionPane.showMessageDialog(null, "Please select a map file.", "Warning: File not selected.", JOptionPane.WARNING_MESSAGE);	
 		}
@@ -193,7 +196,6 @@ public class SingleGameController {
 
 			mapModel = (MapModel) ois.readObject();
 			mapModel.setFilePath(selectedFile);
-			//int[][] mapArray = (int[][]) ois.readObject();
 			int[][] mapArray = mapModel.getMapArray();
 			map.initialize("myMap", mapArray);
 
@@ -258,7 +260,7 @@ public class SingleGameController {
 		if(isExisting) {
 			parentPanel.removeAll();
 			parentPanel.setLayout(new MigLayout());
-			parentPanel.revalidate();
+			//parentPanel.revalidate();
 			parentPanel.repaint();
 
 			for(int k=0;k<map.getArrayRow();k++) {
@@ -304,6 +306,12 @@ public class SingleGameController {
 						drawMapItem(POINT_EXIT, temp);
 					} else if(map.getMapArray()[k][i]==0) {
 						drawMapItem(0, temp);
+					} else if(map.getMapArray()[k][i]==CASTLE_TOWER_ENTRY) {
+						drawTowerFromLoadGame(CASTLE_TOWER_ENTRY,temp);
+					} else if(map.getMapArray()[k][i]==IMPERIAL_TOWER_ENTRY) {
+						drawTowerFromLoadGame(IMPERIAL_TOWER_ENTRY,temp);
+					} else if(map.getMapArray()[k][i]==INDUSTRIAL_TOWER_ENTRY) {
+						drawTowerFromLoadGame(INDUSTRIAL_TOWER_ENTRY,temp);
 					} else {
 						drawMapItem(2,temp);
 					}
@@ -351,6 +359,57 @@ public class SingleGameController {
 				}
 			}
 		}
+	}
+
+	private void drawTowerFromLoadGame(int type, JPanel cell) {
+
+		BufferedImage myPicture=null;
+		JLabel t=null;
+
+		switch(type){
+		case CASTLE_TOWER_ENTRY: {
+			try {
+				myPicture = ImageIO.read(new File("res/tower_1.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			t = new JLabel(new ImageIcon(myPicture));
+			break;
+		} case IMPERIAL_TOWER_ENTRY: {
+			try {
+				myPicture = ImageIO.read(new File("res/tower_2.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			t = new JLabel(new ImageIcon(myPicture));
+			break;
+		} case INDUSTRIAL_TOWER_ENTRY: {
+			try {
+				myPicture = ImageIO.read(new File("res/tower_3.png"));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			t = new JLabel(new ImageIcon(myPicture));
+			break;
+		}
+		}
+		cell.setBackground(Color.white);
+		setSelectedCell(null);
+		t.setBounds(0, 0, 80, 80);
+		cell.add(t);
+
+
+
+
+
+
+
+
+
+
 	}
 
 	/**
@@ -470,6 +529,7 @@ public class SingleGameController {
 		//panel.repaint();
 
 	}
+
 
 
 	/**
@@ -713,16 +773,18 @@ public class SingleGameController {
 	 * @param panel map panel
 	 */
 	public void startWave(final Panel panel) {
-		if(gameDataModel.getWave() < 5) {
-			this.numberOfCritters = gameDataModel.getWave()*5;
-		} else if(gameDataModel.getWave() >= 5 && gameDataModel.getWave() < 10) {
-			this.numberOfCritters = gameDataModel.getWave()*7;
-		} else if(gameDataModel.getWave() >= 10) {
-			this.numberOfCritters = gameDataModel.getWave()*10;
-		} else {
-			this.numberOfCritters = gameDataModel.getWave()*10;
+		if(this.numberOfCritters<1)
+		{
+			if(gameDataModel.getWave() < 5) {
+				this.numberOfCritters = gameDataModel.getWave()*5;
+			} else if(gameDataModel.getWave() >= 5 && gameDataModel.getWave() < 10) {
+				this.numberOfCritters = gameDataModel.getWave()*7;
+			} else if(gameDataModel.getWave() >= 10) {
+				this.numberOfCritters = gameDataModel.getWave()*10;
+			} else {
+				this.numberOfCritters = gameDataModel.getWave()*10;
+			}
 		}
-
 		ActionListener gamePlay = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) { 
 				incrementWave(panel);
@@ -746,12 +808,65 @@ public class SingleGameController {
 		else
 			Util.logWave("Game is paused");
 	}
+
+
+	public void NotifyViewAboutEverything()
+	{
+		gameDataModel.notifyObservers();
+		map.notifyObservers();
+
+	}
 	/**
 	 * Responsible for incrementing wave level, takes a parameter
 	 * @param panel used to repaint/invalidate used panel
 	 */
 	public void incrementWave(Panel panel) {
 
+		if(saveGameFlag)
+		{
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
+			java.util.Date date = new java.util.Date();
+			File file = new File("SavedGames//"+dateFormat.format(date)+".gameData");
+			File fileView = new File("SavedGames//"+dateFormat.format(date)+".gameView");
+
+			if(!file.exists())
+			{
+				try {
+					file.createNewFile();
+				} catch (Exception e){
+
+				}
+			}
+
+			if(!fileView.exists())
+			{
+				try {
+					fileView.createNewFile();
+				} catch (Exception e){
+
+				}
+			}
+			try {
+				saveGameFlag=false;
+				FileOutputStream fos= new FileOutputStream(file);
+				ObjectOutputStream oos= new ObjectOutputStream(fos); 
+				oos.writeObject(this);
+				oos.close();
+				fos.close();
+
+				FileOutputStream foss= new FileOutputStream(fileView);
+				ObjectOutputStream ooss= new ObjectOutputStream(foss); 
+				ooss.writeObject(panel);
+				ooss.close();
+				foss.close();
+				JOptionPane.showMessageDialog(null, "Game Saved !");
+
+			} catch (Exception e)
+			{
+				JOptionPane.showMessageDialog(null, "The game could not be saved at this time. please try again later.");
+
+			}
+		}
 		if(isGameStarted)
 		{
 			if(!(numberOfCritters<1)){	
@@ -792,7 +907,7 @@ public class SingleGameController {
 			drawCritter(map.GetCritterCollection(),panel);
 			//drawController++;
 			removeCritters(panel);
-			map.towerToShoot();
+			gameDataModel.addMoneyToAccount(map.towerToShoot()*3);
 			drawCritter(map.GetCritterCollection(),panel);
 			Util.logWave("Game timer was incremented - Critters were advanced and Towers shot within their range.");
 
@@ -805,6 +920,7 @@ public class SingleGameController {
 				map.GetCritterCollection().clear();
 				JOptionPane.showMessageDialog(null, "You Won!. All the critters are history and you still have some power.", "YAY:", JOptionPane.INFORMATION_MESSAGE);
 				gameDataModel.setWaveIncrement();
+				gameDataModel.addMoneyToAccount(20);
 				Util.logWave("Player won the wave");
 			} else if(gameDataModel.getPlayerPower()<1) {
 				isGameStarted=false;

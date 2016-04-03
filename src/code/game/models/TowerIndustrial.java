@@ -1,11 +1,13 @@
 package code.game.models;
 
+import java.io.Serializable;
+
 /**
  * Industrial Tower extends the tower model class and is a a type of tower available in the game
  * 
  * @author Umer
  */
-public class TowerIndustrial extends TowerModel {
+public class TowerIndustrial extends TowerModel implements Serializable{
 
 	/**
 	 * name Name of the tower.

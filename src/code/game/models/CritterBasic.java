@@ -1,11 +1,13 @@
 package code.game.models;
 
+import java.io.Serializable;
+
 /**
  * a class defining characteristics of a critter of a basic type
  * @author Armaghan
  *
  */
-public class CritterBasic extends Critter {
+public class CritterBasic extends Critter implements Serializable {
 
 	/**
 	 * sets the characteristics of an basic critter

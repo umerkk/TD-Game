@@ -1,4 +1,5 @@
 package code.game.models;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
@@ -10,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;;
  * @author Umer
  *
  */
-public class GameMap extends Observable {
+public class GameMap extends Observable implements Serializable {
 
 	private String mapName;
 	private int[][] mapArray;
@@ -116,7 +117,17 @@ public class GameMap extends Observable {
 		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
 		if(mapArray[x][y] == 0){
 			towerCollection.put(location, tower);
-			mapArray[x][y] = -5;
+			if(tower.getName().equalsIgnoreCase("Castle Tower"))
+			{
+				mapArray[x][y] = -7;	
+			} else if(tower.getName().equalsIgnoreCase("Imperial Tower"))
+			{
+				mapArray[x][y] = -8;	
+			} else if(tower.getName().equalsIgnoreCase("Industrial Tower"))
+			{
+				mapArray[x][y] = -9;	
+			}
+			
 			setChanged();
 			notifyObservers(this);
 		} 

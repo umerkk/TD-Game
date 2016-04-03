@@ -1,5 +1,7 @@
 package code.game.models;
 
+import java.io.Serializable;
+
 /**
  * Main model class of critter getting and setting all the characteristics of critter
  * e.g 
@@ -12,7 +14,7 @@ package code.game.models;
  * @author Umer
  *
  */
-public abstract class Critter {
+public abstract class Critter implements Serializable {
 
 	private int reward;
 	private String name;

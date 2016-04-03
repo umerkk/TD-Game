@@ -1,5 +1,7 @@
 package code.game.models;
 
+import java.io.Serializable;
+
 /**
  * Critter's Factory pattern which generates different types of critters
  * based on the parameter passed
@@ -9,7 +11,7 @@ package code.game.models;
  * @author Lokesh
  *
  */
-public class CritterFactory {
+public class CritterFactory implements Serializable{
 
 	/**
 	 * empty constructor

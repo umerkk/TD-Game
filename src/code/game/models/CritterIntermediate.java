@@ -1,11 +1,13 @@
 package code.game.models;
 
+import java.io.Serializable;
+
 /**
  * a class defining characteristics of a critter of an intermediate type
  * @author Armaghan
  *
  */
-public class CritterIntermediate extends Critter {
+public class CritterIntermediate extends Critter implements Serializable{
 
 	/**
 	 * sets the characteristics of an intermediate critter by the following parameters

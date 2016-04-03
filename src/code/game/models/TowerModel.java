@@ -1,5 +1,6 @@
 package code.game.models;
 
+import java.io.Serializable;
 import java.util.Observable;
 
 import code.game.strategies.TowerStrategy;
@@ -11,7 +12,7 @@ import code.game.strategies.TowerStrategy;
  * @author Lokesh
  * @version 1.0.0.0
  */
-public class TowerModel extends Observable{
+public class TowerModel extends Observable implements Serializable{
 
 	private String towerName;
 	private int mCurrentLevel;

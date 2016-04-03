@@ -1,5 +1,7 @@
 package code.game.strategies;
 
+import java.io.Serializable;
+
 import code.game.models.GameMap;
 import code.game.models.TowerModel;
 
@@ -8,7 +10,7 @@ import code.game.models.TowerModel;
  * @author Armaghan
  *
  */
-public interface TowerStrategy {
+public interface TowerStrategy extends Serializable {
 	public boolean shootCritters(GameMap map, TowerModel tower);
 	public String getStrategyName();
 }

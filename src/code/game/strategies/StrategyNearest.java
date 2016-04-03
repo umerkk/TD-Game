@@ -1,5 +1,7 @@
 package code.game.strategies;
 
+import java.io.Serializable;
+
 import code.game.models.Critter;
 import code.game.models.GameMap;
 import code.game.models.TowerModel;
@@ -10,7 +12,7 @@ import code.game.models.TowerModel;
  * @author Umer
  * 
  */
-public class StrategyNearest  implements TowerStrategy {
+public class StrategyNearest  implements TowerStrategy, Serializable {
 
 	public String StrategyName="Nearest First";
 	public Critter lockedCritter=null;

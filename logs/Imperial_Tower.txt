@@ -3,3 +3,7 @@ Fri Mar 25 11:25:59 EDT 2016  ------  Imperial Tower was upgraded to level 3
 Fri Mar 25 11:31:09 EDT 2016  ------  Strategy Strongest First was selected for Imperial Tower
 Fri Mar 25 11:31:12 EDT 2016  ------  Strategy Weakest First was selected for Imperial Tower
 Fri Mar 25 11:31:14 EDT 2016  ------  Strategy Nearest First was selected for Imperial Tower
+Sun Apr 03 02:40:11 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 02:48:16 EDT 2016  ------  Imperial Tower was sold for 10
+Sun Apr 03 03:00:01 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 03:01:42 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Weakest First
