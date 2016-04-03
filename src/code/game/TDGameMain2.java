@@ -153,6 +153,8 @@ public class TDGameMain2 implements Observer {
 
 		initialize();
 		custmInitializeFrm();
+		
+		
 	}
 
 	/**
@@ -504,6 +506,8 @@ public class TDGameMain2 implements Observer {
 						myController.drawCritter(myController.getMapModl().GetCritterCollection(), panel);
 						panel.revalidate();
 						panel.repaint();
+						Util.logWave("Saved Game is loaded and now playable.");
+
 						
 						
 

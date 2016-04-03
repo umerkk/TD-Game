@@ -65,7 +65,7 @@ public class SingleGameController implements Serializable {
 	public GameData gameDataModel;
 	int critterCreationInterval=2;
 	private int critterMovementTime=500;
-	private boolean isGameStarted = false;
+	public boolean isGameStarted = false;
 	private Timer gameTimer=null;
 	private final int critterKillPoints=5;
 	private final int critterRunAwayPoints=20; 
@@ -78,11 +78,17 @@ public class SingleGameController implements Serializable {
 	private boolean saveGameFlag=false;
 	private MapModel mapModel;
 
-
+	/**
+	 * getter for a the MapModeler
+	 * @return MapModel
+	 */
 	public MapModel getMapModel() {
 		return mapModel;
 	}
-
+	
+	/**
+	 * setter for a MapModeler
+	 */
 	public void setMapModel(MapModel newMapModel) {
 		this.mapModel = newMapModel;
 	}
@@ -485,6 +491,7 @@ public class SingleGameController implements Serializable {
 									switch(((Critter)entry.getValue()).getBackground())
 									{
 									case "red":{
+										
 										myPicture = ImageIO.read(new File("res/critter_burning.png"));
 										t = new JLabel(new ImageIcon(myPicture));
 										//t.setBackground(Color.red);
@@ -493,13 +500,14 @@ public class SingleGameController implements Serializable {
 									case "blue":{
 										myPicture = ImageIO.read(new File("res/critter_freezing.png"));
 										t = new JLabel(new ImageIcon(myPicture));
-
+										((Critter)entry.getValue()).setBackground("none");
 										break;
 									}
 									case "black":{
 										t.setBackground(Color.black);
 										myPicture = ImageIO.read(new File("res/critter_splash.png"));
 										t = new JLabel(new ImageIcon(myPicture));
+										((Critter)entry.getValue()).setBackground("none");
 									} default: {
 
 									}
@@ -512,7 +520,7 @@ public class SingleGameController implements Serializable {
 									e.printStackTrace();
 								}
 								((JPanel)panel.getComponent(s)).add(t);
-								((Critter)entry.getValue()).setBackground("none");
+								
 							}
 						}
 					}
@@ -891,6 +899,28 @@ public class SingleGameController implements Serializable {
 				String key = entry.getKey();
 				Critter critter = (Critter) entry.getValue();
 				int loc = Integer.parseInt(key);
+				if(critter.getDamageTime()==1)
+				{
+					if(critter.getLastHitBy().equalsIgnoreCase("Castle Tower"))
+					{
+						critter.setBackground("red");
+						critter.reduceHealth(10);
+					} else if(critter.getLastHitBy().equalsIgnoreCase("Imperial Tower"))
+					{
+						critter.setBackground("blue");
+						critter.reduceSpeed(1);
+					}
+					
+					
+				} else if(critter.getDamageTime()==0){
+					critter.resetSpeed();
+					critter.setBackground("none");
+					
+				}
+				if(critter.getDamageTime()>0)
+				{
+					critter.setDamageTime(critter.getDamageTime()-1);
+				}
 				loc+=critter.getSpeed();
 				tempList.put(String.valueOf(loc), critter);
 				//tempList.remove(key);

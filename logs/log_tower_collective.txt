@@ -108,3 +108,72 @@ Sun Apr 03 02:59:39 EDT 2016  ------  Castle Tower was placed on map with Strate
 Sun Apr 03 03:00:01 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Weakest First
 Sun Apr 03 03:00:29 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
 Sun Apr 03 03:01:42 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 05:02:56 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 05:03:29 EDT 2016  ------  Imperial Tower was sold for 10
+Sun Apr 03 05:03:35 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 05:04:40 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 05:10:14 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 05:12:55 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 05:17:00 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 05:18:47 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 05:22:39 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 16:14:06 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest First
+Sun Apr 03 16:19:03 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:19:41 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:26:01 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:26:22 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:27:39 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:28:14 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:28:53 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:32:24 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:34:41 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:36:00 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:36:44 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:36:54 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 16:37:06 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 16:39:01 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:10:20 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:10:33 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:10:41 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Nearest First
+Sun Apr 03 17:14:01 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 17:14:17 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:14:23 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:14:29 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:14:46 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:15:03 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Nearest First
+Sun Apr 03 17:15:54 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:16:16 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:17:59 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 17:19:10 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 17:21:44 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 17:22:21 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:23:06 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:23:54 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 17:24:11 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest First
+Sun Apr 03 17:24:34 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:24:35 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:24:39 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:25:28 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:25:58 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:26:07 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:27:15 EDT 2016  ------  Industrial Tower was sold for 15
+Sun Apr 03 17:27:34 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Nearest First
+Sun Apr 03 17:27:53 EDT 2016  ------  Industrial Tower was sold for 15
+Sun Apr 03 17:28:00 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 17:28:32 EDT 2016  ------  Strategy Strongest First was selected for Industrial Tower
+Sun Apr 03 17:29:13 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:29:20 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:29:27 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:29:41 EDT 2016  ------  Strategy Weakest First was selected for Industrial Tower
+Sun Apr 03 17:32:25 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:32:32 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:32:50 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:32:57 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:33:02 EDT 2016  ------  Industrial Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 17:34:15 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Nearest First
+Sun Apr 03 17:34:38 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 17:34:54 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest First
+Sun Apr 03 17:35:59 EDT 2016  ------  Castle Tower was sold for 5
+Sun Apr 03 17:36:04 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Strongest First
+Sun Apr 03 17:43:02 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Sun Apr 03 17:43:45 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Nearest First

@@ -19,6 +19,6 @@ public class CritterAdvanced extends Critter implements Serializable{
 	 * @param map Map object on which the critter will be drawn
 	 */
 	public CritterAdvanced(GameMap map) {
-		super("BigBoss Critter",150,15,150,3,3,map);
+		super("BigBoss Critter",150,15,150,3,1,map);
 	}
 }

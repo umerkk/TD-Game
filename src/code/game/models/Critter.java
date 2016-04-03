@@ -22,15 +22,13 @@ public abstract class Critter implements Serializable {
 	private int health;
 	private int level;
 	private int speed;
+	private final int constSpeed;
 	private GameMap mapReference;
 	private String myLocationOnMap;
 	private String background="None";
+	private int damageTime=0;
+	private String lastHitBy;
 
-	/**
-	 * empty constructor
-	 */
-	public Critter(){	
-	}
 
 	/**
 	 * Constructor of critter model, sets the following parameters
@@ -49,6 +47,7 @@ public abstract class Critter implements Serializable {
 		this.level= level;
 		this.speed = speed;
 		this.mapReference = map;
+		this.constSpeed = speed;
 	}
 
 	public StringBuilder getCritterDetails(){
@@ -60,10 +59,38 @@ public abstract class Critter implements Serializable {
 		strBldrObj.append("\nHit Point : " + hit_point);
 		strBldrObj.append("\nSpeed : " + speed);
 		strBldrObj.append("\nCurrent Location : " + myLocationOnMap);
+		strBldrObj.append("\nLast Hit By: " + lastHitBy);
+		strBldrObj.append("\nDamage Time : " + damageTime);
 
 		return strBldrObj;
 	}
 	
+	public void resetSpeed()
+	{
+		this.speed = this.constSpeed;
+	}
+	public void reduceSpeed(int amount)
+	{
+		this.speed-=amount;
+	}
+	public void setLastHitBy(String tower)
+	{
+		this.lastHitBy = tower;
+	}
+	public String getLastHitBy()
+	{
+		return this.lastHitBy;
+		
+	}
+	public void setDamageTime(int time)
+	{
+		this.damageTime = time;
+	}
+	
+	public int getDamageTime()
+	{
+		return this.damageTime;
+	}
 	/**
 	 * Critter's current location on the grid
 	 * @param location Critter's current location
