@@ -12,6 +12,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 import javax.swing.JOptionPane;
@@ -50,7 +51,7 @@ import code.game.models.MapModel;
  *
  */
 public class Util {
-	
+
 	public static final int TOWER_1 = 1;
 	public static final int TOWER_2 = 2;
 	public static final int TOWER_3 = 3;
@@ -151,7 +152,7 @@ public class Util {
 		return getDate() + "  ------  " + logText;
 	}
 
-	
+
 	/**
 	 * returns file path based on file name
 	 * @param fName file name to be 
@@ -178,7 +179,7 @@ public class Util {
 	}
 
 	/**
-	 * 
+	 * calls a dialog to view individual tower log
 	 * @param towerName
 	 */
 	public static void showLogTower(String towerName){
@@ -216,7 +217,7 @@ public class Util {
 		boolean wasWritten = false;
 		wasWritten = writeLog(getFilePath(FILE_LOG_WAVE), logText);
 		wasWritten =  logGlobal(logText, false);
-		
+
 		return wasWritten;
 	}
 
@@ -293,7 +294,7 @@ public class Util {
 				bufferReader.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-				
+
 			}
 		}
 
@@ -324,7 +325,7 @@ public class Util {
 			e.printStackTrace();
 			return false;
 		}
-		
+
 		return true;
 	}
 
@@ -356,16 +357,29 @@ public class Util {
 	 * @param text message to be displayed in the dialog box
 	 */
 	public static void showDialog(String text){
-		JOptionPane.showMessageDialog(null, text, "Message", JOptionPane.WARNING_MESSAGE);	
+		JOptionPane.showMessageDialog(null, text, "Message", JOptionPane.INFORMATION_MESSAGE);	
 	}
 
+	/**
+	 * a general dialog box displays message containing a passed text.
+	 * @param text message to be displayed in the dialog box
+	 */
+	public static void showDialog(String title, String text){
+		JOptionPane.showMessageDialog(null, text, title, JOptionPane.INFORMATION_MESSAGE);	
+	}
 
 
 	/**
 	 * displays history, edit date, creation date and top 5 scorers in a dialog
-	 * @param map mao object containing all the information to be displayed
+	 * @param map map object containing all the information to be displayed
 	 */
 	public static void showMapLog(MapModel map){
+
+		if(map==null){
+			showDialog("Please load a map first!");
+			return;
+		}
+
 		String text = "";
 
 		text += "CREATION TIME : " + map.getCreationTime() + "\n\n"
@@ -413,14 +427,34 @@ public class Util {
 	 * @param playHistory ArrayList object containing the history of map'f file
 	 * @return returns only top 5 scorers sorted in an asceding order
 	 */
-	private static String getTopFiveScores(ArrayList<String> playHistory) {
+	public static String getTopFiveScores(ArrayList<String> playHistory) {
 		if(playHistory!=null && playHistory.size()>0){
-				// this method is to be updated as we define the scores format of each wave
-			// this method will parse those saved scores  >> sort them in ascending order >> and extract only first five elements
+			ArrayList<Double> tempScores = new ArrayList<Double>();
+			for(int i = 0; i<playHistory.size(); i++){
+				if(playHistory.get(i).contains("::")){
+					String score = playHistory.get(i).split("::")[1] + "." + i;
+					tempScores.add(Double.parseDouble(score.trim()));
+				}
+			}
+			Collections.sort(tempScores);
+			Collections.reverse(tempScores);
+			String topFiveScores = "";
+			for(int i = 0; i<tempScores.size(); i++){
+				if(i>=5){
+					break;
+				}
+
+				String score = Double.toString(tempScores.get(i));
+				if(score.contains(".")){
+					score = score.split("\\.")[1];
+					topFiveScores+= (i+1) + " - " + playHistory.get(Integer.parseInt(score)) + "\n";
+				}
+			}
+			return topFiveScores;
 		}else{
 			return "No history found for this map!";
 		}
-		return null;
+
 	}
 
 

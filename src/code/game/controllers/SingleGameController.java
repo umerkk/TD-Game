@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Map;
@@ -31,14 +30,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-import code.game.models.TowerCastle;
 import code.game.models.Critter;
 import code.game.models.CritterFactory;
 import code.game.models.GameData;
 import code.game.models.GameMap;
+import code.game.models.MapModel;
+import code.game.models.TowerCastle;
 import code.game.models.TowerImperial;
 import code.game.models.TowerIndustrial;
-import code.game.models.MapModel;
 import code.game.models.TowerModel;
 import code.game.strategies.StrategyNearest;
 import code.game.strategies.StrategyStrongest;
@@ -952,6 +951,8 @@ public class SingleGameController implements Serializable {
 				gameDataModel.setWaveIncrement();
 				gameDataModel.addMoneyToAccount(20);
 				Util.logWave("Player won the wave");
+				calculateAndUpdateScores();
+				Util.showDialog("Top 5 Scores", Util.getTopFiveScores(mapModel.getPlayHistory()));
 			} else if(gameDataModel.getPlayerPower()<1) {
 				isGameStarted=false;
 				numberOfCritters=0;
@@ -962,8 +963,19 @@ public class SingleGameController implements Serializable {
 				gameDataModel.resetPlayerPower();
 				gameDataModel.resetWave();
 				Util.logWave("Player lost the wave");
+				calculateAndUpdateScores();
+				Util.showDialog("Top 5 Scores", Util.getTopFiveScores(mapModel.getPlayHistory()));
 			}
 		}
+	}
+
+	private void calculateAndUpdateScores() {
+		int money = gameDataModel.getAccountBalance();
+		int power = gameDataModel.getPlayerPower();
+		int score = money*power;
+		mapModel.getPlayHistory().add(Util.addDate("Gameplay score:: " + score));
+		Util.updateMapFile(mapModel);
+		
 	}
 
 

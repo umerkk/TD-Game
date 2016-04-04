@@ -448,6 +448,7 @@ public class TDGameMain2 implements Observer {
 				// read a file from disk
 				try {
 					myController.openMap();
+					Util.showDialog("Top 5 Scores", Util.getTopFiveScores(myController.getMapModel().getPlayHistory()));
 					myController.drawMap(true, panel);
 
 					panel.revalidate();
