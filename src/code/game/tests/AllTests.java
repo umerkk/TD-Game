@@ -10,7 +10,7 @@ import code.game.utils.Util;
  * Test suite class for testing all the test cases
  * @author lokesh
  * @author Armaghan
- *
+ * @version 1.0.0
  */
 @RunWith(Suite.class)
 @SuiteClasses({ CritterFactoryTest.class, GameMapTest.class, StrategyNearestTest.class, SingleGameControllerTest.class,

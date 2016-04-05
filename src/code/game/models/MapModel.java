@@ -6,7 +6,7 @@ import java.io.Serializable;
  * A dummy MapModel containing only attributes which will be used to hold and store 
  * map statistics and details, hence extending MapLogger
  * @author Armaghan
- *
+ * @version 1.0.0
  */
 public class MapModel extends MapLogger implements Serializable{
 	

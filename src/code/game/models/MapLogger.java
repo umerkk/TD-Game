@@ -11,7 +11,8 @@ import java.util.ArrayList;
  * - Map play history
  * - 
  * @author Armaghan
- *
+ * @author Umer
+ * @version 1.0.0
  */
 
 public class MapLogger implements Serializable{

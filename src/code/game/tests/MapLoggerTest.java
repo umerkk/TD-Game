@@ -12,7 +12,8 @@ import code.game.utils.Util;
  * Test case class to test all the logging methods of map logging
  * 
  * @author Armaghan
- *
+ * @author Iftikhar
+ * @version 1.0.0
  */
 public class MapLoggerTest {
 

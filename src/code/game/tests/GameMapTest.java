@@ -20,7 +20,8 @@ import code.game.utils.Util;
  * Test case class to perform unit test on GameMap model class.
  * 
  * @author lokesh
- *
+ * @author Iftikhar
+ * @version 1.0.0
  */
 public class GameMapTest {
 

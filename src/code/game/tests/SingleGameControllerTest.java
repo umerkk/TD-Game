@@ -19,7 +19,9 @@ import code.game.utils.Util;
 /**
  * Test case class to perform tests on the SingleGameController class.
  * 
+ * @author Iftikhar
  * @author lokesh
+ * @version 1.0.0
  *
  */
 public class SingleGameControllerTest {

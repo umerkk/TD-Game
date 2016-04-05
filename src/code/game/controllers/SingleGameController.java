@@ -87,6 +87,7 @@ public class SingleGameController implements Serializable {
 	
 	/**
 	 * setter for a MapModeler
+	 * @param newMapModel to set the map
 	 */
 	public void setMapModel(MapModel newMapModel) {
 		this.mapModel = newMapModel;

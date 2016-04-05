@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Imperial tower extends the tower model class and is a a type of tower available in the game
  * 
  * @author Umer
+ * @version 1.0.0
  *
  */
 public class TowerImperial extends TowerModel implements Serializable {

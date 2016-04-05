@@ -48,7 +48,8 @@ import code.game.models.MapModel;
  * - log methods accessible globally
  * 
  * @author Armaghan
- *
+ * @author Iftikhar
+ * @version 1.0.0
  */
 public class Util {
 
@@ -167,8 +168,9 @@ public class Util {
 
 	/**
 	 * writes log information related to individual towers
-	 * @param towerName
-	 * @param logText
+	 * @param towerName for selected tower
+	 * @param logText for game
+	 * @return logtower
 	 */
 	public static boolean logTower(String towerName, String logText){
 		logText = addDate(logText);
@@ -180,7 +182,7 @@ public class Util {
 
 	/**
 	 * calls a dialog to view individual tower log
-	 * @param towerName
+	 * @param towerName of selected tower
 	 */
 	public static void showLogTower(String towerName){
 		showLog(towerName+ " log", readLog(getFilePath(towerName)));
@@ -191,6 +193,7 @@ public class Util {
 	 * writes log information related to collective tower log
 	 * @param logText log info to be saved
 	 * @param addDate specifies whether or not a date should be appended in the text string
+	 * @return log file
 	 */
 	public static boolean logTowerCollective(String logText, boolean addDate){
 		if(addDate)
@@ -211,6 +214,7 @@ public class Util {
 	/**
 	 * writes log information related to waves
 	 * @param logText log text to be written in the file
+	 * @return log text
 	 */
 	public static boolean logWave(String logText){
 		logText = addDate(logText);
@@ -234,6 +238,7 @@ public class Util {
 	 * saves global log data in a file
 	 * @param logText log data to be saved
 	 * @param addDate specifies if a date needs to be appended in the log line
+	 * @return file log
 	 */
 	public static boolean logGlobal(String logText, boolean addDate){
 		if(addDate)
@@ -307,6 +312,7 @@ public class Util {
 	 * writes/appends log information to specified file
 	 * @param logFile file to write log data
 	 * @param logData log information to be written in a file
+	 * @return boolean
 	 */
 	public static boolean writeLog(String logFile, String logData) {
 		try {
@@ -362,6 +368,7 @@ public class Util {
 
 	/**
 	 * a general dialog box displays message containing a passed text.
+	 * @param title display in the dialog box
 	 * @param text message to be displayed in the dialog box
 	 */
 	public static void showDialog(String title, String text){

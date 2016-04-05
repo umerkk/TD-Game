@@ -7,9 +7,8 @@ import java.io.Serializable;
  * based on the parameter passed
  * 
  * @author Umer
- * @author Armaghan
  * @author Lokesh
- *
+ * @version 1.0.0.0
  */
 public class CritterFactory implements Serializable{
 
@@ -38,6 +37,4 @@ public class CritterFactory implements Serializable{
 		}
 		return null;
 	}
-
-
 }

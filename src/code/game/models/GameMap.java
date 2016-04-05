@@ -9,7 +9,8 @@ import java.util.concurrent.ConcurrentHashMap;;
  * the main class of game's map, performing essential tasks about map
  * acts as an observable
  * @author Umer
- *
+ * @author Lokesh
+ * @version 1.0.0
  */
 public class GameMap extends Observable implements Serializable {
 
@@ -55,7 +56,7 @@ public class GameMap extends Observable implements Serializable {
 	public String getName(){
 		return this.mapName;
 	}
-
+	
 	/**
 	 * returns only row's array 
 	 * @return row's array 

@@ -12,10 +12,10 @@ import java.util.Observer;
  * - Balance
  * - Wave no.
  * 
- * 
- * @author Armaghan
  * @author Umer
- * @author Lokesh
+ * @author Armaghan
+ * @version 1.0.0
+ * 
  */
 public class GameData extends Observable implements Serializable{
 

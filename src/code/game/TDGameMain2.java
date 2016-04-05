@@ -98,6 +98,7 @@ public class TDGameMain2 implements Observer {
 		}
 	}
 
+	// Update the map log when global wave counter increasing
 	private void updateMapLog(int globalWaveCounter){
 		System.out.println("updating map......");
 		if(globalWaveCounter>1){

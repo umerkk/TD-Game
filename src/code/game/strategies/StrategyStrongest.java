@@ -10,7 +10,8 @@ import code.game.models.TowerModel;
  * A Strategy design pattern class implementing Tower's strategy named Strongest strategy
  * 
  * @author Umer
- * 
+ * @author Armaghan
+ * @version 1.0.0
  */
 public class StrategyStrongest implements TowerStrategy, Serializable{
 

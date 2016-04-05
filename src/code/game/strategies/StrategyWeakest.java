@@ -10,7 +10,8 @@ import code.game.models.TowerModel;
  * A Strategy design pattern class implementing Tower's strategy named Weakest strategy
  * 
  * @author Umer
- * 
+ * @author Lokesh
+ * @version 1.0.0
  */
 public class StrategyWeakest implements TowerStrategy, Serializable{
 

@@ -123,7 +123,6 @@ public class TowerModel extends Observable implements Serializable{
 
 	/**
 	 * method which returns the current level of the tower.
-	 * 
 	 * @return current level of the tower.
 	 */
 	public int getCurrentLevel() {
@@ -204,6 +203,4 @@ public class TowerModel extends Observable implements Serializable{
 			return 1;
 		}
 	}
-
-
 }

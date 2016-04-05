@@ -10,7 +10,8 @@ import code.game.models.TowerModel;
  * A Strategy design pattern class implementing Tower's strategy named Nearest strategy
  * 
  * @author Umer
- * 
+ * @author Iftikhar
+ * @version 1.0.0
  */
 public class StrategyNearest  implements TowerStrategy, Serializable {
 

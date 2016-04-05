@@ -5,7 +5,8 @@ import java.io.Serializable;
 /**
  * a class defining characteristics of a critter of an intermediate type
  * @author Armaghan
- *
+ * @author Umer
+ * @version 1.0.0.0
  */
 public class CritterIntermediate extends Critter implements Serializable{
 

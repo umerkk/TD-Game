@@ -15,7 +15,8 @@ import code.game.strategies.StrategyNearest;
  * Test case class to test the nearest critter targeting strategy.
  * 
  * @author lokesh
- *
+ * @author Umer
+ * @version 1.0.0
  */
 public class StrategyNearestTest {
 

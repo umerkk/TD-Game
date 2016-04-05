@@ -12,7 +12,8 @@ import code.game.models.GameMap;
  * Test case class to check if the observer pattern is implemented correctly.
  * 
  * @author lokesh
- *
+ * @author Umer
+ * @version 1.0.0
  */
 public class TDGameMain2Test {
 

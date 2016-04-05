@@ -12,7 +12,7 @@ import code.game.models.GameMap;
  * Test case class to test the factory design pattern of critters.
  * 
  * @author lokesh
- *
+ * @version 1.0.0
  */
 public class CritterFactoryTest {
 

@@ -12,7 +12,8 @@ import code.game.utils.Util;
  * Test case class to test all the logging methods of game logging
  * 
  * @author Armaghan
- *
+ * @author Lokesh
+ * @version 1.0.0
  */
 public class UtilTest {
 

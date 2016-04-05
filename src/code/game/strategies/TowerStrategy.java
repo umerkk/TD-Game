@@ -8,7 +8,7 @@ import code.game.models.TowerModel;
 /**
  * an interface to implement tower's strategy pattern
  * @author Armaghan
- *
+ * @version 1.0.0
  */
 public interface TowerStrategy extends Serializable {
 	public boolean shootCritters(GameMap map, TowerModel tower);

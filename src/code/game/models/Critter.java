@@ -32,6 +32,7 @@ public abstract class Critter implements Serializable {
 
 	/**
 	 * Constructor of critter model, sets the following parameters
+	 * @param name for Critter
 	 * @param reward the points , player gets by killing the critter
 	 * @param hitPoint hit point of the critter
 	 * @param health health of critter
@@ -50,6 +51,7 @@ public abstract class Critter implements Serializable {
 		this.constSpeed = speed;
 	}
 
+	// add the critter details
 	public StringBuilder getCritterDetails(){
 		StringBuilder strBldrObj = new StringBuilder();
 		strBldrObj.append("Name : "+name);
@@ -79,9 +81,9 @@ public abstract class Critter implements Serializable {
 	}
 	public String getLastHitBy()
 	{
-		return this.lastHitBy;
-		
+		return this.lastHitBy;	
 	}
+	// set the time for critters' damage
 	public void setDamageTime(int time)
 	{
 		this.damageTime = time;
