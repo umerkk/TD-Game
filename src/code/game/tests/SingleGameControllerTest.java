@@ -38,14 +38,13 @@ public class SingleGameControllerTest {
 	 */
 	@Test
 	public void testReadMap() {
-		int[][] tstMapArray =  new int[][]
-				{{1, 0, 0, 0}, 
-			{2, 3, 4, 0}, 
-			{0, 0, 5, 0}, 
-			{0, 0, 6, 9999}}; 
+		int[][] tstMapArray =  new int[][]{ { 0, 1, 0, 0 },
+			{ 0, 2, 0, 0},
+			{ 0, 3, 4, 0},
+			{ 0, 0, 9999, 0}}; 
 
 			SingleGameController testController = SingleGameController.getGameControllerInstance();
-			testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
+			testController.readFromFile(new File(Util.getMapsDirectory() + "testmap2.map"));
 
 			Assert.assertArrayEquals(tstMapArray, testController.getMapModel().getMapArray());
 	}
@@ -217,12 +216,15 @@ public class SingleGameControllerTest {
 		tstGmDat.setPlayerPower(5);
 
 		SingleGameController tstCntrlr = SingleGameController.getGameControllerInstance();
-		tstCntrlr.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
+		tstCntrlr.setMap(new GameMap());
+		tstCntrlr.readFromFile(new File(Util.getMapsDirectory() + "testmap2.map"));
+		tstCntrlr.setGameDataModel(tstGmDat);
 		tstCntrlr.calculateAndUpdateScores();
 
-		tstCntrlr.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		assertTrue(tstCntrlr.getMapModel().getPlayHistory().get(tstCntrlr.getMapModel().getPlayHistory().size() 
-				- 1).equals(""));
+		tstCntrlr.readFromFile(new File(Util.getMapsDirectory() + "testmap2.map"));
+		String lastLog = tstCntrlr.getMapModel().getPlayHistory().get(tstCntrlr.getMapModel().getPlayHistory().size() - 1);
+		CharSequence charSeq = "Gameplay score:: 500";
+		assertTrue(lastLog.contains(charSeq));
 	}
 
 	/**

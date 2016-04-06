@@ -130,9 +130,11 @@ public class GameMapTest {
 		tstGameMapObj.initialize("testmap", mapArray);
 		TowerModel tstTwr1 = new TowerCastle(); 
 		tstTwr1.setMyLocationOnMap("12");
+		tstTwr1.setStrategy(new StrategyNearest(), tstGameMapObj);
+		tstGameMapObj.addTower("12", tstTwr1);
 		tstTwr1.upgradeCurrentLevel();
-		tstGameMapObj.addTower("41", tstTwr1);
 		TowerModel tstTwr2 = new TowerCastle(); 
+		tstTwr2.setStrategy(new StrategyNearest(), tstGameMapObj);
 		tstTwr2.setMyLocationOnMap("41");
 		tstGameMapObj.addTower("41", tstTwr2);
 		

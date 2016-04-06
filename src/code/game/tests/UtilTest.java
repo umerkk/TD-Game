@@ -149,13 +149,13 @@ public class UtilTest {
 	public void testGetPlayHistory() {
 
 		SingleGameController testController = SingleGameController.getGameControllerInstance();
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
+		testController.readFromFile(new File(Util.getMapsDirectory() + "testmap2.map"));
 
 		String testStr = Util.getDate() + " -- Scores: 54 ";
 		testController.getMapModel().getPlayHistory().add(testStr);
 		Util.updateMapFile(testController.getMapModel());
 
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
+		testController.readFromFile(new File(Util.getMapsDirectory() + "testmap2.map"));
 
 		String history = Util.getPlayHistory(testController.getMapModel().getPlayHistory());
 
