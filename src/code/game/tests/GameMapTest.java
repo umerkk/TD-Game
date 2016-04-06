@@ -10,8 +10,12 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import code.game.controllers.SingleGameController;
+import code.game.models.Critter;
 import code.game.models.CritterBasic;
+import code.game.models.CritterFactory;
 import code.game.models.TowerCastle;
+import code.game.models.TowerModel;
+import code.game.strategies.StrategyNearest;
 import code.game.models.GameMap;
 import code.game.models.MapModel;
 import code.game.utils.Util;
@@ -30,15 +34,14 @@ public class GameMapTest {
 	 */
 	@Test
 	public void testLoadMap() {
-		int[][] tstMapArray =  new int[][]
-				{{1, 0, 0, 0}, 
-			{2, 3, 4, 0}, 
-			{0, 0, 5, 0}, 
-			{0, 0, 6, 9999}}; 
+		int[][] tstMapArray =  new int[][]{ { 0, 1, 0, 0 },
+			{ 0, 2, 0, 0},
+			{ 0, 3, 4, 0},
+			{ 0, 0, 9999, 0}};
 
 			GameMap tstGameMapObj = new GameMap();
 			try{
-				File selectedFile = new File(System.getProperty("user.dir") + "/maps/testMap2.map");
+				File selectedFile = new File(System.getProperty("user.dir") + "/maps/testmap.map");
 				FileInputStream fis = new FileInputStream(selectedFile);
 				ObjectInputStream ois = new ObjectInputStream(fis);
 				MapModel mapModel = (MapModel) ois.readObject();
@@ -64,7 +67,7 @@ public class GameMapTest {
 			tstGameMapObj.initialize("testmap", mapArray);
 			tstGameMapObj.addTower("12", new TowerCastle());
 			int[][] newTstArray =  new int[][]{ { 0, 1, 0, 0 },
-				{ 0, 2, -5, 0},
+				{ 0, 2, -7, 0},
 				{ 0, 3, 4, 0},
 				{ 0, 0, 9999, 0}}; 
 
@@ -77,7 +80,7 @@ public class GameMapTest {
 	@Test
 	public void testDeleteTower() {
 		int[][] mapArray =  new int[][]{ { 0, 1, 0, 0 },
-			{ 0, 2, -5, 0},
+			{ 0, 2, -7, 0},
 			{ 0, 3, 4, 0},
 			{ 0, 0, 9999, 0}}; 
 
@@ -99,7 +102,7 @@ public class GameMapTest {
 	@Test
 	public void testcheckCritrExist() {
 		int[][] mapArray =  new int[][]{ { 0, 1, 0, 0 },
-			{ 0, 2, -5, 0},
+			{ 0, 2, -7, 0},
 			{ 0, 3, 4, 0},
 			{ 0, 0, 9999, 0}}; 
 
@@ -110,4 +113,39 @@ public class GameMapTest {
 			assertTrue(tstGameMapObj.checkCritterExists("11"));
 	}
 
+	/**
+	 * Check if all the towers in the map shoots some critter in its visibility based on its strategy.
+	 * (Integration test)
+	 */
+	@Test
+	public void testTowrShoot() {
+		int[][] mapArray =  new int[][]{ { 0, 1, 0, 0, 0, 0},
+			{ 0, 2, 0, 0, 0, 0},
+			{ 0, 3, 4, 0, 0, 0},
+			{ 0, 0, 5, 0, 0, 0},
+			{ 0, 0, 6, 0, 0, 0},
+			{ 0, 0, 9999, 0, 0, 0}}; 
+		
+		GameMap tstGameMapObj = new GameMap();
+		tstGameMapObj.initialize("testmap", mapArray);
+		TowerModel tstTwr1 = new TowerCastle(); 
+		tstTwr1.setMyLocationOnMap("12");
+		tstTwr1.upgradeCurrentLevel();
+		tstGameMapObj.addTower("41", tstTwr1);
+		TowerModel tstTwr2 = new TowerCastle(); 
+		tstTwr2.setMyLocationOnMap("41");
+		tstGameMapObj.addTower("41", tstTwr2);
+		
+		Critter tstCrtr1 = CritterFactory.getCritter(1, tstGameMapObj);
+		tstCrtr1.setMyLocationOnMap("11");
+		Critter tstCrtr2 = CritterFactory.getCritter(2, tstGameMapObj);
+		tstCrtr2.setMyLocationOnMap("32");
+		Critter tstCrtr3 = CritterFactory.getCritter(2, tstGameMapObj);
+		tstCrtr3.setMyLocationOnMap("42");
+		tstGameMapObj.addCritter("11", tstCrtr1);
+		tstGameMapObj.addCritter("32", tstCrtr2);
+		tstGameMapObj.addCritter("42", tstCrtr3);
+		
+		assertTrue(tstGameMapObj.towerToShoot() == 2);
+	}
 }

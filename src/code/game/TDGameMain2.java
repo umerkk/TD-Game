@@ -13,11 +13,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -30,8 +27,8 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
@@ -40,11 +37,8 @@ import javax.swing.border.TitledBorder;
 import code.game.controllers.SingleGameController;
 import code.game.models.GameData;
 import code.game.models.GameMap;
-import code.game.models.MapModel;
 import code.game.utils.Util;
-
 import net.miginfocom.swing.MigLayout;
-import javax.swing.JSeparator;
 
 
 /**
@@ -99,7 +93,7 @@ public class TDGameMain2 implements Observer {
 	}
 
 	// Update the map log when global wave counter increasing
-	private void updateMapLog(int globalWaveCounter){
+	private void updateMapLog(int globalWaveCounter) {
 		System.out.println("updating map......");
 		if(globalWaveCounter>1){
 			ArrayList<String> playHistory = myController.getMapModel().getPlayHistory();
@@ -154,8 +148,8 @@ public class TDGameMain2 implements Observer {
 
 		initialize();
 		custmInitializeFrm();
-		
-		
+
+
 	}
 
 	/**
@@ -177,6 +171,32 @@ public class TDGameMain2 implements Observer {
 	 */
 	private void upgradeBtnHandlr(){
 		myController.upgradeSelectedTower();
+	}
+
+	public SingleGameController loadSavedGame(File file) {
+
+		try {
+			String k = file.getName();
+			String[] sp = k.split("\\.");
+			File viewFile = new File(file.getParent()+"\\"+sp[0]+".gameView");
+
+			FileInputStream fis = new FileInputStream(file);
+			ObjectInputStream ois = new ObjectInputStream(fis);
+
+			FileInputStream fisV = new FileInputStream(viewFile);
+			ObjectInputStream oisV = new ObjectInputStream(fisV);
+
+
+			SingleGameController cont = (SingleGameController) ois.readObject();
+			ois.close();
+			fis.close();
+			oisV.close();
+			fisV.close();
+
+			return cont;
+
+		} 
+		catch (Exception ex) { return null;} 
 	}
 
 	/**
@@ -274,36 +294,36 @@ public class TDGameMain2 implements Observer {
 		SaveGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				myController.setSaveGameFlag(true);
-		
+
 			}
 		});
-		
-		
-		
+
+
+
 		panel_1.add(SaveGameBtn, BorderLayout.WEST);
-		
-		
-				btnNewButton.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent arg0) {
-						//myController.incrementWave(panel);
-		
-						if(btnNewButton.getText().equalsIgnoreCase("Pause"))
-						{
-							myController.PauseGame(false);
-							btnNewButton.setText("Resume");
-						} else {
-							myController.PauseGame(true);
-							btnNewButton.setText("Pause");
-						}
-					}
-				});
-				
-						btnNewButton.setEnabled(false);
-						
-						
-						
-						
-								panel_1.add(btnNewButton, BorderLayout.SOUTH);
+
+
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//myController.incrementWave(panel);
+
+				if(btnNewButton.getText().equalsIgnoreCase("Pause"))
+				{
+					myController.PauseGame(false);
+					btnNewButton.setText("Resume");
+				} else {
+					myController.PauseGame(true);
+					btnNewButton.setText("Pause");
+				}
+			}
+		});
+
+		btnNewButton.setEnabled(false);
+
+
+
+
+		panel_1.add(btnNewButton, BorderLayout.SOUTH);
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myController.startWave(panel);
@@ -464,69 +484,39 @@ public class TDGameMain2 implements Observer {
 		});
 
 		mnGame.add(mItemOpenMap);
-		
+
 		JSeparator separator = new JSeparator();
 		mnGame.add(separator);
-		
+
 		JMenuItem mntmLoadASaved = new JMenuItem("Load a Saved Game");
 		mntmLoadASaved.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setCurrentDirectory(new File(DEFAULT_FILE_PATH));
 				if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
 					File file = fileChooser.getSelectedFile();
 
-					try {
-						String k = file.getName();
-						String[] sp = k.split("\\.");
-						File viewFile = new File(file.getParent()+"\\"+sp[0]+".gameView");
-						
-						FileInputStream fis = new FileInputStream(file);
-						ObjectInputStream ois = new ObjectInputStream(fis);
-						
-						FileInputStream fisV = new FileInputStream(viewFile);
-						ObjectInputStream oisV = new ObjectInputStream(fisV);
+					myController = loadSavedGame(file);
+					//panel = serializedPanel;
 
+					//Serailizing the pnale but not working while deserializing;
+					//Attach the Model to this class as it is being attached in StaticMain. 
+					//this is causing much problem.
+					myController.gameDataModel.addObserver(TDGameMain2.this);
+					myController.NotifyViewAboutEverything();
+					myController.drawMap(true, panel);
+					myController.drawCritter(myController.getMapModl().GetCritterCollection(), panel);
+					panel.revalidate();
+					panel.repaint();
+					Util.logWave("Saved Game is loaded and now playable.");
 
-						SingleGameController cont = (SingleGameController) ois.readObject();
-						Panel serializedPanel = (Panel) oisV.readObject();
-						ois.close();
-						fis.close();
-						oisV.close();
-						fisV.close();
-						
-						myController = cont;
-						//panel = serializedPanel;
-						
-						//Serailizing the pnale but not working while deserializing;
-						//Attach the Model to this class as it is being attached in StaticMain. 
-						//this is causing much problem.
-						myController.gameDataModel.addObserver(TDGameMain2.this);
-						myController.NotifyViewAboutEverything();
-						myController.drawMap(true, panel);
-						myController.drawCritter(myController.getMapModl().GetCritterCollection(), panel);
-						panel.revalidate();
-						panel.repaint();
-						Util.logWave("Saved Game is loaded and now playable.");
-
-						
-						
-
-					}catch(IOException ioe){
-						ioe.printStackTrace();
-						return;
-					}catch(ClassNotFoundException c){
-						System.out.println("Class not found");
-						c.printStackTrace();
-						return;
-					}
 				}
-				
+
 			}
 		});
 		mnGame.add(mntmLoadASaved);
-		
+
 		JMenuItem mntmSaveGame = new JMenuItem("Save game");
 		mntmSaveGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -534,17 +524,17 @@ public class TDGameMain2 implements Observer {
 			}
 		});
 		mnGame.add(mntmSaveGame);
-		
+
 		JMenu mnLogs = new JMenu("Logs");
 		menuBar.add(mnLogs);
-		
-				JMenuItem mItemGlobalMap = new JMenuItem("Global log");
-				mnLogs.add(mItemGlobalMap);
-				mItemGlobalMap.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						Util.showLogGlobal();
-					}
-				});
+
+		JMenuItem mItemGlobalMap = new JMenuItem("Global log");
+		mnLogs.add(mItemGlobalMap);
+		mItemGlobalMap.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Util.showLogGlobal();
+			}
+		});
 
 	}
 

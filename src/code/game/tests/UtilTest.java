@@ -25,7 +25,7 @@ public class UtilTest {
 
 		MapModel mapModel = null;
 		SingleGameController testController = SingleGameController.getGameControllerInstance();
-		testController.readFromFile(new File(Util.getDefaultPath() + "maps/testMap3.map"));
+		testController.readFromFile(new File(Util.getDefaultPath() + "maps/testmap.map"));
 		mapModel = testController.getMapModel();
 
 		Assert.assertNotNull(mapModel);
@@ -55,9 +55,7 @@ public class UtilTest {
 	@Test
 	public void tesWaveLog() {
 
-		boolean wasLoggedSuccessfully = Util.logWave("Sample wave log from test case.");
-
-		Assert.assertTrue(wasLoggedSuccessfully);
+		Assert.assertTrue(Util.logWave("Sample wave log from test case."));
 	}
 
 	/**
@@ -66,9 +64,7 @@ public class UtilTest {
 	@Test
 	public void testTowerLog() {
 
-		boolean wasLoggedSuccessfully = Util.logTower("Castle Tower", "Sample individual tower log from test case.");
-
-		Assert.assertTrue(wasLoggedSuccessfully);
+		Assert.assertTrue(Util.logTower("Castle Tower", "Sample individual tower log from test case."));
 	}
 
 	/**
@@ -77,9 +73,7 @@ public class UtilTest {
 	@Test
 	public void testCollectiveTowerLog() {
 
-		boolean wasLoggedSuccessfully = Util.logTowerCollective("Sample collective tower log from test case.", false);
-
-		Assert.assertTrue(wasLoggedSuccessfully);
+		Assert.assertTrue(Util.logTowerCollective("Sample collective tower log from test case.", false));
 	}
 
 	/**
@@ -88,9 +82,7 @@ public class UtilTest {
 	@Test
 	public void testGlobalLog() {
 
-		boolean wasLoggedSuccessfully = Util.logGlobal("Sample global log from test case.", false);
-
-		Assert.assertTrue(wasLoggedSuccessfully);
+		Assert.assertTrue(Util.logGlobal("Sample global log from test case.", false));
 	}
 
 	/**
@@ -100,14 +92,11 @@ public class UtilTest {
 	public void testReadGlobalLog() {
 
 		String readLog = null;
-		Util.logGlobal("Sample global log from test case.", false); // generating a log file
+		String testStr = "Sample global log from test case.";
+		Util.logGlobal(testStr, false); // generating a log file
 		readLog = Util.readLog(Util.getFilePath(Util.FILE_LOG_GLOBAL));
 
-		if(readLog.length()<1){ // makes sure that the read content is not empty
-			readLog = null;
-		}
-
-		Assert.assertNotNull(readLog);
+		Assert.assertTrue(readLog.contains(testStr));
 	}
 
 	/**
@@ -117,14 +106,11 @@ public class UtilTest {
 	public void testReadWaveLog() {
 
 		String readLog = null;
-		Util.logWave("Sample wave log from test case."); // generating a log file
+		String testStr = "Sample wave log from test case.";
+		Util.logWave(testStr); // generating a log file
 		readLog = Util.readLog(Util.getFilePath(Util.FILE_LOG_WAVE));
 
-		if(readLog.length()<1){ // makes sure that the read content is not empty
-			readLog = null;
-		}
-
-		Assert.assertNotNull(readLog);
+		Assert.assertTrue(readLog.contains(testStr));
 	}
 
 	/**
@@ -134,14 +120,11 @@ public class UtilTest {
 	public void testReadTowerLog() {
 
 		String readLog = null;
-		Util.logTower("Castle Tower", "Sample tower log from test case."); // generating a log file
+		String testStr = "Sample tower log from test case.";
+		Util.logTower("Castle Tower", testStr); // generating a log file
 		readLog = Util.readLog(Util.getFilePath("Castle Tower"));
 
-		if(readLog.length()<1){ // makes sure that the read content is not empty
-			readLog = null;
-		}
-
-		Assert.assertNotNull(readLog);
+		Assert.assertTrue(readLog.contains(testStr));
 	}
 
 	/**
@@ -151,14 +134,11 @@ public class UtilTest {
 	public void testReadCollectiveTowerLog() {
 
 		String readLog = null;
-		Util.logGlobal("Sample collective tower log from test case.", false); // generating a log file
+		String testStr = "Sample collective tower log from test case.";
+		Util.logGlobal(testStr, false); // generating a log file
 		readLog = Util.readLog(Util.getFilePath(Util.FILE_LOG_TOWER_COLLECTIVE));
 
-		if(readLog.length()<1){ // makes sure that the read content is not empty
-			readLog = null;
-		}
-
-		Assert.assertNotNull(readLog);
+		Assert.assertTrue(readLog.contains(testStr));
 	}
 
 	/**
@@ -170,19 +150,16 @@ public class UtilTest {
 
 		SingleGameController testController = SingleGameController.getGameControllerInstance();
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		ArrayList<String> playHistory1 = testController.getMapModel().getPlayHistory();
-		playHistory1.add(Util.getDate() + " -- Scores: 54 ");
-		testController.getMapModel().setPlayHistory(playHistory1);
+
+		String testStr = Util.getDate() + " -- Scores: 54 ";
+		testController.getMapModel().getPlayHistory().add(testStr);
 		Util.updateMapFile(testController.getMapModel());
+
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		String history = null;
-		history = Util.getPlayHistory(testController.getMapModel().getPlayHistory());
 
-		if(history.length()<1){
-			history = null;
-		}
+		String history = Util.getPlayHistory(testController.getMapModel().getPlayHistory());
 
-		Assert.assertNotNull(history);
+		Assert.assertTrue(history.contains(testStr));
 	}
 
 }

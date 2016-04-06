@@ -138,3 +138,13 @@ Sun Apr 03 19:05:07 EDT 2016  ------  Castle Tower was placed on map with Strate
 Sun Apr 03 19:05:20 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
 Sun Apr 03 19:19:58 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest First
 Sun Apr 03 19:20:04 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Wed Apr 06 14:58:41 EDT 2016  ------  Castle Tower was sold for 5
+Wed Apr 06 14:58:41 EDT 2016  ------  Strategy Strongest First was selected for Castle Tower
+Wed Apr 06 14:58:41 EDT 2016  ------  Castle Tower was upgraded to level 2
+Wed Apr 06 14:58:41 EDT 2016  ------  Sample tower log from test case.
+Wed Apr 06 14:58:45 EDT 2016  ------  Sample individual tower log from test case.
+Wed Apr 06 15:02:17 EDT 2016  ------  Castle Tower was sold for 5
+Wed Apr 06 15:02:17 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
+Wed Apr 06 15:02:17 EDT 2016  ------  Castle Tower was upgraded to level 2
+Wed Apr 06 15:02:17 EDT 2016  ------  Sample tower log from test case.
+Wed Apr 06 15:02:22 EDT 2016  ------  Sample individual tower log from test case.

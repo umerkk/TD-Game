@@ -21,9 +21,6 @@ import javax.swing.JTextArea;
 
 import code.game.models.MapModel;
 
-
-
-
 /**
  * Guys use the following methods for logging where appropriate
  * 

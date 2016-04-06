@@ -20,7 +20,7 @@ public class CritterFactoryTest {
 	 * Test to check if the factory design is implemented properly and polymorphism is achieved.
 	 */
 	@Test
-	public void testcheckFactoryDesign() {
+	public void testCheckFactoryDesign() {
 		int[][] mapArray =  new int[][]{ { 0, 1, 0, 0 },
 			{ 0, 2, -5, 0},
 			{ 0, 3, 4, 0},

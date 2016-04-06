@@ -84,7 +84,7 @@ public class SingleGameController implements Serializable {
 	public MapModel getMapModel() {
 		return mapModel;
 	}
-	
+
 	/**
 	 * setter for a MapModeler
 	 * @param newMapModel to set the map
@@ -491,7 +491,7 @@ public class SingleGameController implements Serializable {
 									switch(((Critter)entry.getValue()).getBackground())
 									{
 									case "red":{
-										
+
 										myPicture = ImageIO.read(new File("res/critter_burning.png"));
 										t = new JLabel(new ImageIcon(myPicture));
 										//t.setBackground(Color.red);
@@ -520,7 +520,7 @@ public class SingleGameController implements Serializable {
 									e.printStackTrace();
 								}
 								((JPanel)panel.getComponent(s)).add(t);
-								
+
 							}
 						}
 					}
@@ -730,6 +730,27 @@ public class SingleGameController implements Serializable {
 
 	}
 
+	public boolean setNewStrategy(int response)
+	{
+		switch(response){
+		case 0: {
+			selectedTower.setStrategy(new StrategyNearest(),map);
+			break;
+		}
+		case 1: {
+			selectedTower.setStrategy(new StrategyStrongest(),map);
+			break;
+		}
+		case 2: {
+			selectedTower.setStrategy(new StrategyWeakest(),map);
+			break;
+		}
+		}
+
+		return Util.logTower(getCurrentTowerName(), "Strategy " 
+				+ selectedTower.getStrategy().getStrategyName() + " was selected for " + getCurrentTowerName());
+	}
+
 	/**
 	 * Shows a dialog containing the list of all the available strategies for the tower being placed
 	 * on the map. 
@@ -742,27 +763,12 @@ public class SingleGameController implements Serializable {
 			JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First"});
 			JOptionPane.showMessageDialog(
 					null, list, "Select the tower strategy", JOptionPane.QUESTION_MESSAGE);
-			int response = list.getSelectedIndex();
-			switch(response){
-			case 0: {
-				selectedTower.setStrategy(new StrategyNearest(),map);
-				break;
-			}
-			case 1: {
-				selectedTower.setStrategy(new StrategyStrongest(),map);
-				break;
-			}
-			case 2: {
-				selectedTower.setStrategy(new StrategyWeakest(),map);
-				break;
-			}
-			}
 
-			Util.logTower(getCurrentTowerName(), "Strategy " + selectedTower.getStrategy().getStrategyName() + " was selected for " + getCurrentTowerName());
+			setNewStrategy(list.getSelectedIndex());
+
 			gameDataModel.setSelectedTowerDescription(selectedTower.getTowerDetails().toString());
-
-
-		} else {
+		} 
+		else {
 			JOptionPane.showMessageDialog(null, "Please select a tower first.", "Error:", JOptionPane.ERROR_MESSAGE);
 
 		}
@@ -824,6 +830,47 @@ public class SingleGameController implements Serializable {
 		map.notifyObservers();
 
 	}
+
+	public void saveGameData(Panel panel, File file, File fileView)
+	{
+		if(!file.exists())
+		{
+			try {
+				file.createNewFile();
+			} catch (Exception e){
+
+			}
+		}
+
+		if(!fileView.exists())
+		{
+			try {
+				fileView.createNewFile();
+			} catch (Exception e){
+
+			}
+		}
+		try {
+			saveGameFlag=false;
+			FileOutputStream fos= new FileOutputStream(file);
+			ObjectOutputStream oos= new ObjectOutputStream(fos); 
+			oos.writeObject(this);
+			oos.close();
+			fos.close();
+
+			FileOutputStream foss= new FileOutputStream(fileView);
+			ObjectOutputStream ooss= new ObjectOutputStream(foss); 
+			ooss.writeObject(panel);
+			ooss.close();
+			foss.close();
+
+		} catch (Exception e)
+		{
+			//JOptionPane.showMessageDialog(null, "The game could not be saved at this time. please try again later.");
+
+		}
+	}
+
 	/**
 	 * Responsible for incrementing wave level, takes a parameter
 	 * @param panel used to repaint/invalidate used panel
@@ -837,43 +884,8 @@ public class SingleGameController implements Serializable {
 			File file = new File("SavedGames//"+dateFormat.format(date)+".gameData");
 			File fileView = new File("SavedGames//"+dateFormat.format(date)+".gameView");
 
-			if(!file.exists())
-			{
-				try {
-					file.createNewFile();
-				} catch (Exception e){
-
-				}
-			}
-
-			if(!fileView.exists())
-			{
-				try {
-					fileView.createNewFile();
-				} catch (Exception e){
-
-				}
-			}
-			try {
-				saveGameFlag=false;
-				FileOutputStream fos= new FileOutputStream(file);
-				ObjectOutputStream oos= new ObjectOutputStream(fos); 
-				oos.writeObject(this);
-				oos.close();
-				fos.close();
-
-				FileOutputStream foss= new FileOutputStream(fileView);
-				ObjectOutputStream ooss= new ObjectOutputStream(foss); 
-				ooss.writeObject(panel);
-				ooss.close();
-				foss.close();
-				JOptionPane.showMessageDialog(null, "Game Saved !");
-
-			} catch (Exception e)
-			{
-				JOptionPane.showMessageDialog(null, "The game could not be saved at this time. please try again later.");
-
-			}
+			saveGameData(panel, file, fileView);
+			JOptionPane.showMessageDialog(null, "Game Saved !");
 		}
 		if(isGameStarted)
 		{
@@ -910,12 +922,12 @@ public class SingleGameController implements Serializable {
 						critter.setBackground("blue");
 						critter.reduceSpeed(1);
 					}
-					
-					
+
+
 				} else if(critter.getDamageTime()==0){
 					critter.resetSpeed();
 					critter.setBackground("none");
-					
+
 				}
 				if(critter.getDamageTime()>0)
 				{
@@ -970,13 +982,13 @@ public class SingleGameController implements Serializable {
 		}
 	}
 
-	private void calculateAndUpdateScores() {
+	public void calculateAndUpdateScores() {
 		int money = gameDataModel.getAccountBalance();
 		int power = gameDataModel.getPlayerPower();
 		int score = money*power;
 		mapModel.getPlayHistory().add(Util.addDate("Gameplay score:: " + score));
 		Util.updateMapFile(mapModel);
-		
+
 	}
 
 

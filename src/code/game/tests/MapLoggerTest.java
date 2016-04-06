@@ -1,5 +1,7 @@
 package code.game.tests;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import org.junit.Assert;
@@ -19,47 +21,6 @@ public class MapLoggerTest {
 
 
 	/**
-	 * creates a new map file, adds a creation date, writes it and tests if the creation time was updated
-	 */
-	@Test
-	public void testMapFileCreationDate() {
-
-		MapModel mapModel = new MapModel();
-
-		mapModel.setFilePath(new File(Util.getMapsDirectory() + "testMap3.map"));
-		mapModel.setCreationTime(Util.getDate());
-
-		Util.updateMapFile(mapModel);
-
-		SingleGameController testController = SingleGameController.getGameControllerInstance();
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap3.map"));
-		String creationDate = testController.getMapModel().getCreationTime();
-
-		Assert.assertNotNull(creationDate);
-	}
-
-
-	/**
-	 * reads a map file, modifies its edit time, writes it back and tests if the file was updated
-	 */
-	@Test
-	public void testMapEditHistory() {
-
-		SingleGameController testController = SingleGameController.getGameControllerInstance();
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		final ArrayList<String> editHistory1 = testController.getMapModel().getEditHistory();
-
-		testController.getMapModel().addEditHistory(Util.getDate());
-
-		Util.updateMapFile(testController.getMapModel());
-
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		final ArrayList<String> editHistory2 = testController.getMapModel().getEditHistory();
-		
-		Assert.assertNotEquals(editHistory1, editHistory2);
-	}
-
-	/**
 	 * reads a map file, adds a gameplay event, writes it back and tests if the file was updated
 	 */
 	@Test
@@ -69,12 +30,10 @@ public class MapLoggerTest {
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
 		ArrayList<String> playHistory1 = testController.getMapModel().getPlayHistory();
 
+		String playHist = Util.getDate() + " -- Scores: 54 ";
+		testController.getMapModel().getPlayHistory().add(playHist);
+		
 		// Umer / Lokesh please have a look whats wrong with this method
-		final ArrayList<String> playHistory3 =  playHistory1;
-
-		playHistory1.add(Util.getDate() + " -- Scores: 54 ");
-		testController.getMapModel().setPlayHistory(playHistory1);
-
 		Util.updateMapFile(testController.getMapModel());
 
 		SingleGameController testController2 = SingleGameController.getGameControllerInstance();
@@ -82,7 +41,7 @@ public class MapLoggerTest {
 		ArrayList<String> playHistory2 = testController2.getMapModel().getPlayHistory();
 
 		// Umer / Lokesh please have a look whats wrong with this method
-		Assert.assertNotEquals(playHistory3, playHistory2);
+		assertTrue(testController.getMapModel().getPlayHistory().contains(playHist));
 	}
 
 	/**
@@ -91,22 +50,19 @@ public class MapLoggerTest {
 	@Test
 	public void testMapTopFiveScores() {
 
+		String topScore = "";
 		SingleGameController testController = SingleGameController.getGameControllerInstance();
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		ArrayList<String> topFiveScores1 = testController.getMapModel().getTopFiveScores();
-
+		
+		topScore = Util.getDate() + " -- Scores: 59 ";
+		testController.getMapModel().getTopFiveScores().add(topScore);
+		
 		// Umer / Lokesh please have a look whats wrong with this method
-		final ArrayList<String> topFiveScores3 =  topFiveScores1;
-
-		topFiveScores1.add(Util.getDate() + " -- Scores: 59 ");
-		testController.getMapModel().setTopFiveScores(topFiveScores1);
-
 		Util.updateMapFile(testController.getMapModel());
 
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
 		ArrayList<String> topFiveScores2 = testController.getMapModel().getTopFiveScores();
 
-		// Umer / Lokesh please have a look whats wrong with this method
-		Assert.assertNotEquals(topFiveScores3, topFiveScores2);
+		assertTrue(testController.getMapModel().getTopFiveScores().contains(topScore));
 	}
 }

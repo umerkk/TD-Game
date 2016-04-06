@@ -3782,3 +3782,27 @@ Tue Apr 05 22:20:14 EDT 2016  ------  Loaded map
 Tue Apr 05 22:20:22 EDT 2016  ------  Map log was viewed
 Tue Apr 05 22:21:26 EDT 2016  ------  Loaded map
 Tue Apr 05 22:21:52 EDT 2016  ------  Map log was viewed
+Wed Apr 06 14:58:41 EDT 2016  ------  Castle Tower was sold for 5
+Wed Apr 06 14:58:41 EDT 2016  ------  Strategy Strongest First was selected for Castle Tower
+Wed Apr 06 14:58:41 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sample collective tower log from test case.
+Wed Apr 06 14:58:41 EDT 2016  ------  Sample wave log from test case.
+Wed Apr 06 14:58:41 EDT 2016  ------  Sample tower log from test case.
+Wed Apr 06 14:58:41 EDT 2016  ------  Sample wave log from test case.
+Wed Apr 06 14:58:45 EDT 2016  ------  Sample individual tower log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample collective tower log from test case.
+Wed Apr 06 15:02:17 EDT 2016  ------  Castle Tower was sold for 5
+Wed Apr 06 15:02:17 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
+Wed Apr 06 15:02:17 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sample collective tower log from test case.
+Wed Apr 06 15:02:17 EDT 2016  ------  Sample wave log from test case.
+Wed Apr 06 15:02:17 EDT 2016  ------  Sample tower log from test case.
+Wed Apr 06 15:02:17 EDT 2016  ------  Sample wave log from test case.
+Wed Apr 06 15:02:22 EDT 2016  ------  Sample individual tower log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample collective tower log from test case.
