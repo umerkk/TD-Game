@@ -3775,3 +3775,10 @@ Sun Apr 03 20:25:04 EDT 2016  ------  Game timer was incremented - Critters were
 Sun Apr 03 20:25:04 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
 Sun Apr 03 20:25:05 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
 Sun Apr 03 20:25:06 EDT 2016  ------  Player lost the wave
+Tue Apr 05 22:17:52 EDT 2016  ------  Loaded map
+Tue Apr 05 22:18:01 EDT 2016  ------  Loaded map
+Tue Apr 05 22:18:25 EDT 2016  ------  Map log was viewed
+Tue Apr 05 22:20:14 EDT 2016  ------  Loaded map
+Tue Apr 05 22:20:22 EDT 2016  ------  Map log was viewed
+Tue Apr 05 22:21:26 EDT 2016  ------  Loaded map
+Tue Apr 05 22:21:52 EDT 2016  ------  Map log was viewed

@@ -389,10 +389,10 @@ public class Util {
 
 		String text = "";
 
-		text += "CREATION TIME : " + map.getCreationTime() + "\n\n"
-				+ "LAST EDITED : " + map.getEditTime() + "\n\n"
-				+ "TOP 5 SCORES : \n"  + getTopFiveScores(map.getPlayHistory()) + "\n\n\n"
-				+ "HISTORY : \n" + getPlayHistory(map.getPlayHistory());
+		text += "CREATION TIME :\n" + map.getCreationTime() + "\n\n"
+				+ "LAST EDITED :\n" + getEditHistory(map.getEditHistory()) + "\n\n"
+				+ "TOP 5 SCORES :\n"  + getTopFiveScores(map.getPlayHistory()) + "\n\n\n"
+				+ "GAMEPLAY HISTORY :\n" + getPlayHistory(map.getPlayHistory());
 
 
 		JTextArea textArea = new JTextArea(text);
@@ -423,6 +423,20 @@ public class Util {
 			return history;
 		}else{
 			return "No history found for this map!";
+		}
+
+	}
+	
+	public static String getEditHistory(ArrayList<String> EditHistory) {
+		if(EditHistory!=null && EditHistory.size()>0){
+			String history = "";
+			int i = 0;
+			for(String text : EditHistory){
+				history += ++i + " - " + text + "\n";
+			}
+			return history;
+		}else{
+			return "No edits found for this map!";
 		}
 
 	}

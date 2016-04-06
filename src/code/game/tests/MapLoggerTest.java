@@ -43,20 +43,20 @@ public class MapLoggerTest {
 	 * reads a map file, modifies its edit time, writes it back and tests if the file was updated
 	 */
 	@Test
-	public void testMapEditTime() {
+	public void testMapEditHistory() {
 
 		SingleGameController testController = SingleGameController.getGameControllerInstance();
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		String editTime1 = testController.getMapModel().getEditTime();
+		final ArrayList<String> editHistory1 = testController.getMapModel().getEditHistory();
 
-		testController.getMapModel().setEditTime(Util.getDate());
+		testController.getMapModel().addEditHistory(Util.getDate());
 
 		Util.updateMapFile(testController.getMapModel());
 
 		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		String editTime2 = testController.getMapModel().getEditTime();
-
-		Assert.assertNotEquals(editTime1, editTime2);
+		final ArrayList<String> editHistory2 = testController.getMapModel().getEditHistory();
+		
+		Assert.assertNotEquals(editHistory1, editHistory2);
 	}
 
 	/**
