@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @version 1.0.0
  *
  */
+
 public class TowerCastle extends TowerModel implements Serializable {
 	
 	/**
@@ -23,6 +24,7 @@ public class TowerCastle extends TowerModel implements Serializable {
 	 * powerofbullet Power of the bullets.
 	 * rateoffire Interval at which tower fires the bullet.
 	 */
+	
 	public TowerCastle() {
 		super("Castle Tower", 10, 5, 5, 1, 20, 10);
 	}

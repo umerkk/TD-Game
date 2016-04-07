@@ -7,7 +7,6 @@ import java.io.Serializable;
  * 
  * @author Umer
  * @version 1.0.0
- *
  */
 public class TowerImperial extends TowerModel implements Serializable {
 

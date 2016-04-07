@@ -19,6 +19,7 @@ import code.game.strategies.StrategyNearest;
  * @author Umer
  * @version 1.0.0
  */
+
 public class StrategyNearestTest {
 
 	/**

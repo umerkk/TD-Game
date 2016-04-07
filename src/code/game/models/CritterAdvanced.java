@@ -8,7 +8,6 @@ import java.io.Serializable;
  * @version 1.0.0
  */
 public class CritterAdvanced extends Critter implements Serializable{
-
 	/**
 	 * sets the characteristics of an advanced critter by the following parameters
 	 * 

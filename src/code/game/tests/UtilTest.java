@@ -11,8 +11,8 @@ import code.game.utils.Util;
 /**
  * Test case class to test all the logging methods of game logging
  * 
- * @author Armaghan
  * @author Lokesh
+ * @author Armaghan
  * @version 1.0.0
  */
 public class UtilTest {
@@ -161,5 +161,4 @@ public class UtilTest {
 
 		Assert.assertTrue(history.contains(testStr));
 	}
-
 }

@@ -15,7 +15,7 @@ import code.game.strategies.StrategyWeakest;
  * Test case class to test the weakest critter targeting strategy.
  * 
  * @author lokesh
- * @author Iftikhar
+ * @author Armaghan
  * @version 1.0.0 
  */
 public class StrategyWeakestTest {

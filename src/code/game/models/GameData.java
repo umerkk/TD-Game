@@ -17,6 +17,7 @@ import java.util.Observer;
  * @version 1.0.0
  * 
  */
+
 public class GameData extends Observable implements Serializable{
 
 	private  int accountBalance = 20;

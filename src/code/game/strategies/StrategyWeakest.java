@@ -21,8 +21,9 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 	
 	/**
 	 * Shoots critters by deciding, which critter is the weakest in the range.
-	 * if finds a weak critter in the range, it open's fire
-	 * and returns the confirmation if the intended critter has hit or not
+	 * if weak in the range, it open's fire and returns the confirmation if the intended critter has hit or not
+	 * @param map for game map
+	 * @param tower for type of tower model
 	 */
 	public boolean shootCritters(GameMap map, TowerModel tower){
 		this.mapReference = map;
@@ -111,6 +112,8 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 	 * Shoot the nearby critters through Splash effect of Industrial tower.
 	 * It finds the critter in adjacent position and deduct 10 health from those critters,
 	 * making a soft damage to them.
+	 * @param baseCritter type of critter
+	 * @param map for game map
 	 */
 	private void hitSplashToCritters(Critter baseCritter, GameMap map){
 		char[] nameExploded = baseCritter.getMyLocationOnMap().toCharArray();
@@ -161,7 +164,7 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 	}
 	
 	/**
-	 * return's strategy's name
+	 * @return return's strategy's name
 	 */
 	public String getStrategyName(){
 		return strategyName;

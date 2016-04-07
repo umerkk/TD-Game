@@ -12,6 +12,12 @@ import code.game.models.TowerModel;
 import code.game.strategies.StrategyNearest;
 import code.game.strategies.StrategyNearestToEndPoint;
 
+/**
+ * 
+ * @author Iftikhar
+ * @author Lokesh
+ * @version 1.0.0
+ */
 public class StrategyNearestToEndPointTest {
 
 	/**

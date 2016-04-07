@@ -24,6 +24,8 @@ public class StrategyNearest implements TowerStrategy, Serializable {
 	 * if finds two critters in the range, the tower would only shoot the critter 
 	 * which is the nearest in the range
 	 * and returns the confirmation if the intended critter has hit or not
+	 * @param map for current game
+	 * @param tower to shoot critters 
 	 */
 	public boolean shootCritters(GameMap map, TowerModel tower){
 		this.mapReference = map;
@@ -164,5 +166,3 @@ public class StrategyNearest implements TowerStrategy, Serializable {
 		return strategyName;
 	}
 }
-
-

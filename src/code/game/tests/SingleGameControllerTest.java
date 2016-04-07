@@ -203,7 +203,6 @@ public class SingleGameControllerTest {
 		tstCntrlr = tstWindow.loadSavedGame(file);
 
 		assertTrue(tstCntrlr.gameDataModel.getAccountBalance() == 99);
-
 	}
 
 	/**

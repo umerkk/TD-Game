@@ -20,7 +20,8 @@ public class CritterFactory implements Serializable{
 	/**
 	 * returns the critter type based on the parameter passed
 	 * @param level basic, intermediate, advanced critter level
-	 * @param map will be used to draw critter 
+	 * @param map will be used to draw critter
+	 *  
 	 * @return type of critter class
 	 */
 	public static Critter getCritter(int level, GameMap map){

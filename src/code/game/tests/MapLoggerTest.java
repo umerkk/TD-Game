@@ -19,7 +19,6 @@ import code.game.utils.Util;
  */
 public class MapLoggerTest {
 
-
 	/**
 	 * reads a map file, adds a gameplay event, writes it back and tests if the file was updated
 	 */

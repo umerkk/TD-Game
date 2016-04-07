@@ -252,9 +252,6 @@ public class Util {
 		showLog(getLogDialogTitle(FILE_LOG_GLOBAL), readLog(getFilePath(FILE_LOG_GLOBAL)));
 	}
 
-
-
-
 	/**
 	 * reads log tile with the provided name
 	 * @param logFile name of log file to be read
@@ -303,7 +300,6 @@ public class Util {
 		return logData;
 
 	}
-
 
 	/**
 	 * writes/appends log information to specified file
@@ -424,6 +420,11 @@ public class Util {
 
 	}
 	
+	/**
+	 * 
+	 * @param EditHistory to save the game record 
+	 * @return history
+	 */
 	public static String getEditHistory(ArrayList<String> EditHistory) {
 		if(EditHistory!=null && EditHistory.size()>0){
 			String history = "";
@@ -510,7 +511,5 @@ public class Util {
 		}
 		return true;
 	}
-
-
 
 }

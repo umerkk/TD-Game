@@ -23,11 +23,12 @@ public class MapModel extends MapLogger implements Serializable{
 	public int[][] getMapArray() {
 		return mapArray;
 	}
-	
+
 	/**
 	 * sets map's array containing grid info 
 	 * @param mapArray 2-d array containing map's grid points
 	 */
+	
 	public void setMapArray(int[][] mapArray) {
 		this.mapArray = mapArray;
 	}

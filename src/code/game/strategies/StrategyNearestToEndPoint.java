@@ -24,6 +24,9 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 	/**
 	 * Shoots critters by deciding, which critter is the nearest to the end point in the range.
 	 * if finds two critters in the range, the tower would only shoot the critter nearest to the end point.
+	 * @param map for game map
+	 * @param tower for tower model
+	 * 	 
 	 */
 	public boolean shootCritters(GameMap map, TowerModel tower){
 		this.mapReference = map;
@@ -93,7 +96,7 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 	}
 
 	/**
-	 * sets background color of critter upon hitting
+	 * sets background colour of critter upon hitting
 	 * @param tower type of tower
 	 * @param critter the critter to be updated
 	 */
@@ -125,6 +128,9 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 	 * Shoot the nearby critters through Splash effect of Industrial tower.
 	 * It finds the critter in adjacent position and deduct 10 health from those critters,
 	 * making a soft damage to them.
+	 * @param baseCritter type of critter
+	 * @param map for game map
+	 * 
 	 */
 	private void hitSplashToCritters(Critter baseCritter, GameMap map){
 		char[] nameExploded = baseCritter.getMyLocationOnMap().toCharArray();
@@ -176,7 +182,7 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 	
 	
 	/**
-	 * return's strategy's name
+	 * @return return's strategy's name
 	 */
 	public String getStrategyName(){
 		return strategyName;

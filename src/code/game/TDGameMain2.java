@@ -44,7 +44,7 @@ import net.miginfocom.swing.MigLayout;
 /**
  * This is the view class for Tower Defence Game play, containing all the UI components
  * implementing observer
- * 
+ * @author Umer
  * @author Armaghan
  * @author Lokesh
  * @version 1.0.2.0
@@ -164,12 +164,16 @@ public class TDGameMain2 implements Observer {
 	}
 
 	/**
-	 * calls a method to upgrade selected tower
+	 * To upgrade selected tower
 	 */
 	private void upgradeBtnHandlr(){
 		myController.upgradeSelectedTower();
 	}
-
+/**
+ * To load the saved game
+ * @param file save the game file
+ * @return count the number of files
+ */
 	public SingleGameController loadSavedGame(File file) {
 
 		try {
@@ -479,7 +483,7 @@ public class TDGameMain2 implements Observer {
 				}
 			}
 		});
-
+		
 		mnGame.add(mItemOpenMap);
 
 		JSeparator separator = new JSeparator();
@@ -532,8 +536,5 @@ public class TDGameMain2 implements Observer {
 				Util.showLogGlobal();
 			}
 		});
-
 	}
-
-
 }

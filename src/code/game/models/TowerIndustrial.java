@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @author Umer
  * @version 1.0.0
  */
+
 public class TowerIndustrial extends TowerModel implements Serializable{
 
 	/**

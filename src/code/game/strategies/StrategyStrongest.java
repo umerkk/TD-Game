@@ -113,6 +113,8 @@ public class StrategyStrongest implements TowerStrategy, Serializable{
 	 * Shoot the nearby critters through Splash effect of Industrial tower.
 	 * It finds the critter in adjacent position and deduct 10 health from those critters,
 	 * making a soft damage to them.
+	 * @param baseCritter type of critter
+	 * @param map for game map
 	 */
 	private void hitSplashToCritters(Critter baseCritter, GameMap map){
 		char[] nameExploded = baseCritter.getMyLocationOnMap().toCharArray();
@@ -163,7 +165,7 @@ public class StrategyStrongest implements TowerStrategy, Serializable{
 	}
 
 	/**
-	 * return's strategy's name
+	 * @return return's strategy's name
 	 */
 	public String getStrategyName(){
 		return strategyName;

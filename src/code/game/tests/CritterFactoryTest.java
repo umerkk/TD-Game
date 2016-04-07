@@ -34,7 +34,5 @@ public class CritterFactoryTest {
 		
 		assertTrue(tstCrtr1.getClass() != tstCrtr2.getClass());
 	}
-	
-	
 
 }

@@ -51,7 +51,10 @@ public abstract class Critter implements Serializable {
 		this.constSpeed = speed;
 	}
 
-	// add the critter details
+	/**
+	 * Add the critter details
+	 * @return object
+	 */
 	public StringBuilder getCritterDetails(){
 		StringBuilder strBldrObj = new StringBuilder();
 		strBldrObj.append("Name : "+name);
@@ -66,29 +69,50 @@ public abstract class Critter implements Serializable {
 
 		return strBldrObj;
 	}
-	
+	/**
+	 * To set the critters speed
+	 */
 	public void resetSpeed()
 	{
 		this.speed = this.constSpeed;
 	}
+	/**
+	 * To reduce the critter's speed
+	 * @param amount for critter's speed
+	 */
 	public void reduceSpeed(int amount)
 	{
 		this.speed-=amount;
 	}
+	/**
+	 * 
+	 * @param tower to hit the last critter
+	 */
 	public void setLastHitBy(String tower)
 	{
 		this.lastHitBy = tower;
 	}
+	/**
+	 * 
+	 * @return last hit
+	 */
 	public String getLastHitBy()
 	{
 		return this.lastHitBy;	
 	}
-	// set the time for critters' damage
+	
+	/**
+	 * Set the time for critters' damage
+	 * @param time for damage
+	 */
 	public void setDamageTime(int time)
 	{
 		this.damageTime = time;
 	}
-	
+	/**
+	 * 
+	 * @return damage time
+	 */
 	public int getDamageTime()
 	{
 		return this.damageTime;

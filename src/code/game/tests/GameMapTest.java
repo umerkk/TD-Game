@@ -77,6 +77,7 @@ public class GameMapTest {
 	/**
 	 * Test to check if a tower can be successfully deleted from the map.
 	 */
+	
 	@Test
 	public void testDeleteTower() {
 		int[][] mapArray =  new int[][]{ { 0, 1, 0, 0 },

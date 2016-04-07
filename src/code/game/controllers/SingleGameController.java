@@ -51,7 +51,7 @@ import net.miginfocom.swing.MigLayout;
 /**This class is the main controller of the project and act as a singleton controller
  * i.e is being used as a Single Pattern.
  * @author Umer
- * 
+ * @author Iftikhar
  *
  */
 public class SingleGameController implements Serializable {
@@ -152,7 +152,7 @@ public class SingleGameController implements Serializable {
 
 	/**
 	 * sets the map 
-	 * @param _map gameMap object
+	 * @param map gameMap object
 	 */
 	public void setMap(GameMap map) {
 		this.gameMap=map;
@@ -259,7 +259,6 @@ public class SingleGameController implements Serializable {
 	 * Draws the whole map on the screen, gets parent panel as a parameter
 	 * adds the mouse listeners for event handling
 	 * 
-	 * 
 	 * @param isExisting if the map is existing
 	 * @param parentPanel parent panel on which map is to be drawn
 	 */
@@ -284,7 +283,9 @@ public class SingleGameController implements Serializable {
 					temp.setName(k +""+ i);
 					temp.setBorder(BorderFactory.createEtchedBorder(1));
 					temp.addMouseListener(new MouseListener() {
-
+						/**
+						 * Override methods for MouseEvent
+						 */
 						@Override
 						public void mouseReleased(MouseEvent e) {
 						}
@@ -367,7 +368,11 @@ public class SingleGameController implements Serializable {
 			}
 		}
 	}
-
+/**
+ * Load game and draw the tower
+ * @param type type of tower
+ * @param cell tower's placement area
+ */
 	private void drawTowerFromLoadGame(int type, JPanel cell) {
 
 		BufferedImage myPicture=null;
@@ -529,8 +534,6 @@ public class SingleGameController implements Serializable {
 		//panel.repaint();
 
 	}
-
-
 
 	/**
 	 * The main method to draw the tower on the map. 
@@ -726,6 +729,11 @@ public class SingleGameController implements Serializable {
 
 	}
 
+	/**
+	 * To set the new strategy
+	 * @param response to select new strategy
+	 * @return tower log
+	 */
 	public boolean setNewStrategy(int response)
 	{
 		switch(response){
@@ -769,11 +777,17 @@ public class SingleGameController implements Serializable {
 
 		}
 	}
-
+/**
+ * To get tower ID
+ * @return tower
+ */
 	private int getCurrentTowerID(){
 		return selectedTower.getTowerID();
 	}
-
+/**
+ * To get name of current tower
+ * @return name
+ */
 	private String getCurrentTowerName(){
 		return selectedTower.getName();
 	}
@@ -809,7 +823,10 @@ public class SingleGameController implements Serializable {
 			Util.logWave("Critter wave was started");
 	}
 
-
+/**
+ * To pause the game in any stage
+ * @param b boolean value
+ */
 	public void pauseGame(boolean b)
 	{
 		isGameStarted=b;
@@ -819,14 +836,21 @@ public class SingleGameController implements Serializable {
 			Util.logWave("Game is paused");
 	}
 
-
+/**
+ * Notify observers
+ */
 	public void notifyViewAboutEverything()
 	{
 		gameDataModel.notifyObservers();
 		gameMap.notifyObservers();
 
 	}
-
+/**
+ * To save all the game data
+ * @param panel for save game
+ * @param file for game log
+ * @param fileView for save game log
+ */
 	public void saveGameData(Panel panel, File file, File fileView)
 	{
 		if(!file.exists())
@@ -977,7 +1001,9 @@ public class SingleGameController implements Serializable {
 			}
 		}
 	}
-
+/**
+ * To calculate and update the score
+ */
 	public void calculateAndUpdateScores() {
 		int money = gameDataModel.getAccountBalance();
 		int power = gameDataModel.getPlayerPower();

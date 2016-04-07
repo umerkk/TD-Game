@@ -15,12 +15,14 @@ import code.game.models.GameMap;
  * @author Umer
  * @version 1.0.0
  */
+
 public class TDGameMain2Test {
 
 	/**
 	 * Test to check if when the game data model account balance is updated, 
 	 * the corresponding update is made on the account balance in view.
 	 */
+	
 	@Test
 	public void testObserverPtrn() {
 		GameData tstGmDat = new GameData();

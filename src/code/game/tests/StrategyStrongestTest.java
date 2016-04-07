@@ -15,7 +15,7 @@ import code.game.strategies.StrategyStrongest;
  * Test case class to test the strongest critter targeting strategy.
  * 
  * @author lokesh
- * @author Armaghan
+ * @author Iftikhar
  * @version 1.0.0
  */
 public class StrategyStrongestTest {

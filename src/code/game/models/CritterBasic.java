@@ -16,6 +16,7 @@ public class CritterBasic extends Critter implements Serializable {
 	 * health health of critter
 	 * level critter's level speed critter's speed
 	 * map game's map on which critters will be drawn
+	 * 
 	 * @param map Map object on which the critter will be drawn
 	 */
 	public CritterBasic(GameMap map) {
