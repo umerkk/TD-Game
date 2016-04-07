@@ -4105,3 +4105,15 @@ Wed Apr 06 23:23:00 EDT 2016  ------  Game timer was incremented - Critters were
 Wed Apr 06 23:23:00 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
 Wed Apr 06 23:23:01 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
 Wed Apr 06 23:23:02 EDT 2016  ------  Player won the wave
+Thu Apr 07 00:02:24 EDT 2016  ------  Castle Tower was sold for 5
+Thu Apr 07 00:02:26 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
+Thu Apr 07 00:02:26 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sample collective tower log from test case.
+Thu Apr 07 00:02:26 EDT 2016  ------  Sample wave log from test case.
+Thu Apr 07 00:02:26 EDT 2016  ------  Sample tower log from test case.
+Thu Apr 07 00:02:26 EDT 2016  ------  Sample wave log from test case.
+Thu Apr 07 00:02:27 EDT 2016  ------  Sample individual tower log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample collective tower log from test case.

@@ -190,3 +190,8 @@ Wed Apr 06 23:16:59 EDT 2016  ------  Castle Tower was placed on map with Strate
 Wed Apr 06 23:19:21 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
 Wed Apr 06 23:20:00 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
 Wed Apr 06 23:22:47 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
+Thu Apr 07 00:02:24 EDT 2016  ------  Castle Tower was sold for 5
+Thu Apr 07 00:02:26 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
+Thu Apr 07 00:02:26 EDT 2016  ------  Castle Tower was upgraded to level 2
+Thu Apr 07 00:02:26 EDT 2016  ------  Sample tower log from test case.
+Thu Apr 07 00:02:27 EDT 2016  ------  Sample individual tower log from test case.
