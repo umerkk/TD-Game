@@ -23,6 +23,8 @@ public class StrategyStrongest implements TowerStrategy, Serializable{
 	 * Shoots critters by deciding, which critter is the strongest in the range.
 	 * if finds a strong critter (i.e having 100% health) in the range, it open's fire
 	 * and returns the confirmation if the intended critter has hit or not
+	 * @param map for game map
+	 * @param tower for tower model
 	 */
 	public boolean shootCritters(GameMap map, TowerModel tower){
 		this.mapReference=map;

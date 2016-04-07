@@ -48,14 +48,20 @@ import net.miginfocom.swing.MigLayout;
 
 
 
-/**This class is the main controller of the project and act as a singleton controller
- * i.e is being used as a Single Pattern.
+/**
+ * This is the controller of the game application whcih stores 
+ * the model objects of the map, game, towers, critter and other 
+ * game objects. It is implemented as a singleton controller so 
+ * as to prevent multiple instantation of the controller class.  
+ * 
  * @author Umer
  * @author Iftikhar
- *
+ * @version 1.0.3.0
  */
 public class SingleGameController implements Serializable {
 
+	// attributes of the controller which also includes the model
+	// object used in the game application.
 	private static SingleGameController instance;
 	private GameMap gameMap=null;
 	private TowerModel selectedTower=null;
@@ -79,27 +85,32 @@ public class SingleGameController implements Serializable {
 	private MapModel mapModel;
 
 	/**
-	 * getter for a the MapModeler
-	 * @return MapModel
+	 * Method to expose the map model object loaded in game.
+	 * @return map model object loaded in the game.
 	 */
 	public MapModel getMapModel() {
 		return mapModel;
 	}
 
 	/**
-	 * setter for a MapModeler
-	 * @param newMapModel to set the map
+	 * Method to set the map model object to be used in the game.
+	 * @param newMapModel the map model object to be set.
 	 */
 	public void setMapModel(MapModel newMapModel) {
 		this.mapModel = newMapModel;
 	}
 
+	/**
+	 * Method to notify the controller that the save game event has been triggered by the user.
+	 * @param b flag which is set if the user has clicked the save game button.
+	 */
 	public void setSaveGameFlag(boolean b) {
 		this.saveGameFlag =b;
 	}
 
 	/**
-	 * empty constructor
+	 * Empty private constructor to prevent the instantiation of the controller class 
+	 * from outside the class to make it singleton.
 	 */
 	private SingleGameController(){
 	}
@@ -365,6 +376,7 @@ public class SingleGameController implements Serializable {
 			}
 		}
 	}
+
 	/**
 	 * Load game and draw the tower
 	 * @param type type of tower
@@ -724,9 +736,11 @@ public class SingleGameController implements Serializable {
 	}
 
 	/**
-	 * To set the new strategy
-	 * @param response to select new strategy
-	 * @return tower log
+	 * Method to set the new strategy for the tower which is currently selected
+	 * by the user.
+	 *  
+	 * @param response the new strategy to be selected.
+	 * @return true if the strategy has been set succefully and a log entry is recorded.
 	 */
 	public boolean setNewStrategy(int response) {
 		switch(response){
@@ -770,23 +784,26 @@ public class SingleGameController implements Serializable {
 
 		}
 	}
+
 	/**
-	 * To get tower ID
-	 * @return tower
+	 * Method to get the tower id of currently selected tower.
+	 * @return tower id of the selected tower.
 	 */
 	private int getCurrentTowerID(){
 		return selectedTower.getTowerID();
 	}
+
 	/**
 	 * To get name of current tower
-	 * @return name
+	 * @return name of the current tower
 	 */
 	private String getCurrentTowerName(){
 		return selectedTower.getName();
 	}
+
 	/**
 	 * Starts a new wave once called, it is only called once and then the incrementWave() method takes over.
-	 * and keeps increment the waves to next level
+	 * and keeps increment the waves to next level.
 	 * @param panel map panel
 	 */
 	public void startWave(final Panel panel) {
@@ -816,8 +833,8 @@ public class SingleGameController implements Serializable {
 	}
 
 	/**
-	 * To pause the game in any stage
-	 * @param b boolean value
+	 * Method to produce log entry each the game is paused or resumed.
+	 * @param b set if the game is resumed
 	 */
 	public void pauseGame(boolean b) {
 		isGameStarted=b;
@@ -828,18 +845,20 @@ public class SingleGameController implements Serializable {
 	}
 
 	/**
-	 * Notify observers
+	 * Method to notify the observer classes of the game data model and the map model
 	 */
 	public void notifyViewAboutEverything() {
 		gameDataModel.notifyObservers();
 		gameMap.notifyObservers();
 
 	}
+
 	/**
-	 * To save all the game data
-	 * @param panel for save game
-	 * @param file for game log
-	 * @param fileView for save game log
+	 * Method to save the current game into a game data and game view file.
+	 * 
+	 * @param the panel containing the game view to be saved.
+	 * @param file target file in which game data is to be saved.
+	 * @param fileView taget file in which game view is to be saved.
 	 */
 	public void saveGameData(Panel panel, File file, File fileView) {
 		if(!file.exists()) {
@@ -878,8 +897,9 @@ public class SingleGameController implements Serializable {
 	}
 
 	/**
-	 * Responsible for incrementing wave level, takes a parameter
-	 * @param panel used to repaint/invalidate used panel
+	 * Method which controllers the critter waves during the game play.
+	 * 
+	 * @param panel panel container on which the critter wave is to be updated
 	 */
 	public void incrementWave(Panel panel) {
 
@@ -982,7 +1002,8 @@ public class SingleGameController implements Serializable {
 	}
 
 	/**
-	 * To calculate and update the score
+	 * Method to calculate the game play score of the user and 
+	 * add it to the map file.
 	 */
 	public void calculateAndUpdateScores() {
 		int money = gameDataModel.getAccountBalance();

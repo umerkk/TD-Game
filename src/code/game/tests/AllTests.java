@@ -5,7 +5,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * Suit test for TD-Game
+ * Test suite for all the 35 test cases of the main game. 
  * @author Iftikhar
  *
  */

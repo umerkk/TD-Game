@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;;
  */
 public class GameMap extends Observable implements Serializable {
 
+	// attribute which store the data in the map model 
 	private String mapName;
 	private int[][] mapArray;
 	private int[][] critterPath;
@@ -24,9 +25,10 @@ public class GameMap extends Observable implements Serializable {
 
 
 	/**
-	 * acts as class' constructor having 2 parameters
+	 * Constructor to initialize the map model object with the map array.
+	 * 
 	 * @param tmpMapName map's name in string
-	 * @param tmpMapArray containing rows and columns in an array
+	 * @param tmpMapArray map array of the model
 	 */
 	public void initialize(String tmpMapName, int[][] tmpMapArray) {
 		this.mapName = tmpMapName;
@@ -36,7 +38,8 @@ public class GameMap extends Observable implements Serializable {
 	}
 
 	/**
-	 * acts as class' constructor having 3 parameters
+	 * Constructor to initialize the map model object with the map name and map dimension
+	 * 
 	 * @param tmpMapName map's name in string
 	 * @param row no. of rows (4-9)
 	 * @param col no. of columns (4-9)
@@ -48,43 +51,49 @@ public class GameMap extends Observable implements Serializable {
 		this.arrayRow = this.mapArray.length;
 		this.arrayCol = this.mapArray[0].length;
 	}
+
 	/**
+	 * Method to get the map object from a specific map grid.
 	 * 
-	 * @param x value1
-	 * @param y value2
-	 * @return array of map
+	 * @param x row position of the element
+	 * @param y column position of the element
+	 * @return map object in the position
 	 */
 	public int getValueFromMap(int x, int y) {
 		return mapArray[x][y];
 	}
 
 	/**
-	 * returns map's name
-	 * @return map name
+	 * Method to get the name of the game map object
+	 *  
+	 * @return game map name
 	 */
 	public String getName() {
 		return this.mapName;
 	}
 
 	/**
-	 * returns only row's array 
-	 * @return row's array 
+	 * Method to get the number of rows in the game map. 
+	 * 
+	 * @return number of rows in the map 
 	 */
 	public int getArrayRow() {
 		return this.arrayRow;
 	}
 
 	/**
-	 * returns only column's array 
-	 * @return column's array 
+	 * Method to get the number of columns in the game map. 
+	 * 
+	 * @return number of columns in the map 
 	 */
 	public int getArrayCol() {
 		return this.arrayCol;
 	}
 
 	/**
-	 * returns grid of map
-	 * @return grid array of map
+	 * Method to get the map array of the game map object.
+	 * 
+	 * @return map array of game map
 	 */
 	public int[][] getMapArray() {
 		return this.mapArray;

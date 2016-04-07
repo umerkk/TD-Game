@@ -42,8 +42,10 @@ import net.miginfocom.swing.MigLayout;
 
 
 /**
- * This is the view class for Tower Defence Game play, containing all the UI components
- * implementing observer
+ * This is the view class for Tower Defence Game play, containing all the UI components.
+ * It implements the observer interface and interacts with the user. The events generated 
+ * from the user interactions are transferred to the controller class. 
+ * 
  * @author Umer
  * @author Armaghan
  * @author Lokesh
@@ -51,6 +53,7 @@ import net.miginfocom.swing.MigLayout;
  */
 public class TDGameMain2 implements Observer {
 
+	// attributes which contains UI classes for easy access and modification of UI.
 	private JFrame frame;
 	JTextArea txtTwrDesc = new JTextArea();
 	JLabel lblAccBal = new JLabel("0  ");
@@ -66,7 +69,9 @@ public class TDGameMain2 implements Observer {
 	private final String DEFAULT_FILE_PATH = System.getProperty("user.dir") + "/SavedGames";
 
 	/**
-	 * Overriding abstract method of observer class
+	 * Update method of the observer interface overrided to update the account 
+	 * and other game data details in UI.
+	 *  
 	 * @param arg0 observable class status changed
 	 * @param arg1 object which sends the event
 	 */
@@ -90,7 +95,11 @@ public class TDGameMain2 implements Observer {
 		}
 	}
 
-	// Update the map log when global wave counter increasing
+	/**
+	 * Method to update the map log when global wave counter is increasing.
+	 * 
+	 * @param globalWaveCounter current value of wave counter.
+	 */
 	private void updateMapLog(int globalWaveCounter) {
 		System.out.println("updating map......");
 		if(globalWaveCounter>1){
@@ -113,7 +122,9 @@ public class TDGameMain2 implements Observer {
 	public String getAccBal() { return lblAccBal.getText(); }
 
 	/**
-	 * Launch the application.
+	 * The main method of the application where the game data, map and controller classes 
+	 * are declared and initialized.
+	 * 
 	 * @param args command line arguments
 	 */
 	public static void main(String[] args) {
@@ -137,7 +148,7 @@ public class TDGameMain2 implements Observer {
 	}
 
 	/**
-	 * Constructor of TDGameMain, initializes the game methods to be drawn
+	 * Constructor of TDGameMain, initializes the game methods to be drawn.
 	 * @param mGameData game data model object to be used by view
 	 * @param mGameMap game map model to be used by the view
 	 */
@@ -156,23 +167,28 @@ public class TDGameMain2 implements Observer {
 
 		panel.setLayout(new MigLayout());
 	}
+
 	/**
-	 * Method to handle sell button event
+	 * Method to handle sell button event.
 	 */
 	private void selBtnHandlr(){
 		myController.removeTower();
 	}
 
 	/**
-	 * To upgrade selected tower
+	 * Method to handle the upgrade button event handler, which 
+	 * transfer the call to the controller class.
 	 */
 	private void upgradeBtnHandlr(){
 		myController.upgradeSelectedTower();
 	}
+	
 	/**
-	 * To load the saved game
-	 * @param file save the game file
-	 * @return count the number of files
+	 * Method to read the game file and load it to the application. The controller
+	 * class is set by the data read from the file.
+	 *  
+	 * @param file The file to be loaded into the game application
+	 * @return The game controller read from the file.
 	 */
 	public SingleGameController loadSavedGame(File file) {
 
@@ -256,6 +272,9 @@ public class TDGameMain2 implements Observer {
 
 		JButton btnWaveLog = new JButton("Wave Log");
 		btnWaveLog.addActionListener(new ActionListener() {
+			/**
+			 * Action listener for the wave log button
+			 */
 			public void actionPerformed(ActionEvent e) {
 				Util.showLogWave();
 				Util.logGlobal("Wave log was viewed" , true);
@@ -265,6 +284,9 @@ public class TDGameMain2 implements Observer {
 
 		JButton btnMapLog = new JButton("Map Stats log");
 		btnMapLog.addActionListener(new ActionListener() {
+			/**
+			 * Action listener for the map statistics log button
+			 */
 			public void actionPerformed(ActionEvent e) {
 				Util.showMapLog(myController.getMapModel());
 				Util.logGlobal("Map log was viewed" , true);
@@ -290,6 +312,9 @@ public class TDGameMain2 implements Observer {
 
 		panel1.add(btnStrtGame, BorderLayout.NORTH);
 		saveGameBtn.addActionListener(new ActionListener() {
+			/**
+			 * Action listener for the save game button
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				myController.setSaveGameFlag(true);
 
@@ -299,6 +324,10 @@ public class TDGameMain2 implements Observer {
 		panel1.add(saveGameBtn, BorderLayout.WEST);
 
 		btnNewButton.addActionListener(new ActionListener() {
+			/**
+			 * Action listener for the Pause / Resume button for pausing 
+			 * and resuming the critter movement in game.
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 				//myController.incrementWave(panel);
 
@@ -317,6 +346,9 @@ public class TDGameMain2 implements Observer {
 
 		panel1.add(btnNewButton, BorderLayout.SOUTH);
 		btnStrtGame.addActionListener(new ActionListener() {
+			/**
+			 * Action listener for the start game button
+			 */
 			public void actionPerformed(ActionEvent e) {
 				myController.startWave(panel);
 				btnNewButton.setEnabled(true);
@@ -334,6 +366,9 @@ public class TDGameMain2 implements Observer {
 
 		final JLabel lblTwr1 = new JLabel("");
 		lblTwr1.addMouseListener(new MouseAdapter() {
+			/**
+			 * Action listener for the Castle tower label
+			 */
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				myController.setSelectedTower("lblTwr1");
@@ -345,6 +380,9 @@ public class TDGameMain2 implements Observer {
 
 		final JLabel lblTwr2 = new JLabel("");
 		lblTwr2.addMouseListener(new MouseAdapter() {
+			/**
+			 * Action listener for the Imperial tower label
+			 */
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//m_ctrlrObj.setTowerDesc("lblTwr2");
@@ -365,6 +403,9 @@ public class TDGameMain2 implements Observer {
 		final JLabel lblTwr3 = new JLabel("");
 		lblTwr3.addMouseListener(new MouseAdapter() {
 			@Override
+			/**
+			 * Action listener for the Industrial tower label
+			 */
 			public void mouseClicked(MouseEvent e) {
 				//m_ctrlrObj.setTowerDesc("lblTwr3");
 				myController.setSelectedTower("lblTwr3");
@@ -388,6 +429,9 @@ public class TDGameMain2 implements Observer {
 		JButton btnCollectiveTowerLog = new JButton("Collective tower log");
 		pnlTwrDesc.add(btnCollectiveTowerLog, BorderLayout.SOUTH);
 		btnCollectiveTowerLog.addActionListener(new ActionListener() {
+			/**
+			 * Action listener for the the collective log for the tower.
+			 */
 			public void actionPerformed(ActionEvent e) {
 				Util.showLogTowerCollective();
 				Util.logGlobal("Collective tower log was viewed" , true);
@@ -424,6 +468,9 @@ public class TDGameMain2 implements Observer {
 
 		JButton btnTowerLog = new JButton("Tower Log");
 		btnTowerLog.addActionListener(new ActionListener() {
+			/**
+			 * Action listener for the tower log button
+			 */
 			public void actionPerformed(ActionEvent arg0) {
 
 				int towerID = -1;
@@ -457,6 +504,9 @@ public class TDGameMain2 implements Observer {
 
 		JMenuItem mItemOpenMap = new JMenuItem("Open Map");
 		mItemOpenMap.addActionListener(new ActionListener() {
+			/**
+			 * Action listener for the open map menu item
+			 */
 			public void actionPerformed(ActionEvent e) {
 
 				// read a file from disk
@@ -491,7 +541,7 @@ public class TDGameMain2 implements Observer {
 					File file = fileChooser.getSelectedFile();
 
 					myController = loadSavedGame(file);
-					
+
 					//Attach the Model to this class as it is being attached in StaticMain. 
 					//this is causing much problem.
 					myController.gameDataModel.addObserver(TDGameMain2.this);

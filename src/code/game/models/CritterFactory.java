@@ -13,16 +13,11 @@ import java.io.Serializable;
 public class CritterFactory implements Serializable{
 
 	/**
-	 * empty constructor
-	 */
-	public CritterFactory() { }
-
-	/**
-	 * returns the critter type based on the parameter passed
-	 * @param level basic, intermediate, advanced critter level
-	 * @param map will be used to draw critter
-	 *  
-	 * @return type of critter class
+	 * Method which returns the critter model based on the level.
+	 *
+	 * @param level the stage level of the critter to be created in map
+	 * @param map map model on which critter is to be created.
+	 * @return the critter model to be created on the map
 	 */
 	public static Critter getCritter(int level, GameMap map) {
 		switch(level) {

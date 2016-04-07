@@ -52,8 +52,8 @@ public abstract class Critter implements Serializable {
 	}
 
 	/**
-	 * Add the critter details
-	 * @return object
+	 * Method to get the complete critter details of the current critter object
+	 * @return details of the critter object
 	 */
 	public StringBuilder getCritterDetails(){
 		StringBuilder strBldrObj = new StringBuilder();
@@ -71,54 +71,54 @@ public abstract class Critter implements Serializable {
 	}
 
 	/**
-	 * To set the critters speed
+	 * To reset the critters speed to normal
 	 */
 	public void resetSpeed() {
 		this.speed = this.constSpeed;
 	}
 
 	/**
-	 * To reduce the critter's speed
-	 * @param amount for critter's speed
+	 * To reduce the critter's speed by a specified speed.
+	 * @param amount the speed that needs to be reduced from the original speed.
 	 */
 	public void reduceSpeed(int amount) {
 		this.speed-=amount;
 	}
 
 	/**
-	 * 
-	 * @param tower to hit the last critter
+	 * Method to set the last hit by tower of the critter object.
+	 * @param tower last tower to hit the critter.
 	 */
 	public void setLastHitBy(String tower) {
 		this.lastHitBy = tower;
 	}
 
 	/**
-	 * 
-	 * @return last hit by tower
+	 * Method to get the last tower which hit the critter.
+	 * @return tower which last hit the tower.
 	 */
 	public String getLastHitBy() {
 		return this.lastHitBy;	
 	}
 
 	/**
-	 * Set the time for critters' damage
-	 * @param time for damage
+	 * Method to set the damage time of the critter hit by a tower.
+	 * @param damage time for the critter
 	 */
 	public void setDamageTime(int time) {
 		this.damageTime = time;
 	}
 
 	/**
-	 * 
-	 * @return damage time
+	 * Method to get the damage time of the critter.
+	 * @return damage time of the critter
 	 */
 	public int getDamageTime() {
 		return this.damageTime;
 	}
 
 	/**
-	 * Critter's current location on the grid
+	 * Method to set the critter's current location on the map.
 	 * @param location Critter's current location
 	 */
 	public void setMyLocationOnMap(String location) {
@@ -126,7 +126,7 @@ public abstract class Critter implements Serializable {
 	}
 
 	/**
-	 * Returns the current location of the critter on the grid.
+	 * Method to get the current location of the critter on the map.
 	 * @return Critter's current location
 	 */
 	public String getMyLocationOnMap() {
@@ -134,15 +134,15 @@ public abstract class Critter implements Serializable {
 	}
 
 	/**
-	 * Sets critter's background image name
-	 * @param bg critter's background
+	 * Method to set the current background of the critter.
+	 * @param bg critter's background to be set
 	 */
 	public void setBackground(String bg) {
 		this.background = bg;
 	}
 
 	/**
-	 * Gets critter's background image name
+	 * Method to get the current background of th critter 
 	 * @return critter's background
 	 */
 	public String getBackground() {
@@ -150,15 +150,15 @@ public abstract class Critter implements Serializable {
 	}
 
 	/**
-	 * method to set reward of destroying critter
-	 * @param reward reward earned for destroying critter
+	 * Method to set the reward to be awarded when the critter is destroyed.
+	 * @param reward reward to be set
 	 */
 	public void setReward(int reward) {
 		this.reward = reward;
 	}
 
 	/**
-	 * Sets critter's hit point
+	 * Method to set the critter's hit point
 	 * @param hitPoint hit point to be set 
 	 */
 	public void setHitPoint(int hitPoint) {
@@ -166,15 +166,15 @@ public abstract class Critter implements Serializable {
 	}
 
 	/**
-	 * Sets critter's health
-	 * @param health critter's health
+	 * Method to set the current health of the critter
+	 * @param health critter's health to be set
 	 */
 	public void setHealth(int health) {
 		this.health = health;
 	}
 
 	/**
-	 * Sets critter's level 
+	 * Sets the critter's level 
 	 * - Advanced
 	 * - Basic
 	 * @param level critter's level
@@ -184,7 +184,7 @@ public abstract class Critter implements Serializable {
 	}
 
 	/**
-	 * Sets critters speed
+	 * Sets critters current speed
 	 * @param speed critter's speed
 	 */
 	public void setSepeed(int speed) {

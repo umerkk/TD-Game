@@ -13,6 +13,7 @@ import code.game.strategies.StrategyNearest;
 import code.game.strategies.StrategyNearestToEndPoint;
 
 /**
+ * Test case class to test the nearest critter to end point targeting strategy.
  * 
  * @author Iftikhar
  * @author Lokesh

@@ -413,7 +413,7 @@ public class Util {
 	}
 
 	/**
-	 * 
+	 * Get the edit history of the current map which is loaded to the game.
 	 * @param editHistory to save the game record 
 	 * @return history
 	 */

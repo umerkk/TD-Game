@@ -26,13 +26,6 @@ public class GameData extends Observable implements Serializable {
 	private String selectedTowerDesc;
 
 	/**
-	 * empty constructor
-	 */
-	public GameData() {
-		//this.accountBalance = acctBal;
-	}
-
-	/**
 	 * reset's player's account balance to initial state 20
 	 */
 	public void resetAccountBalance() {

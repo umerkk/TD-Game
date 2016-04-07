@@ -77,8 +77,9 @@ public class StrategyNearest implements TowerStrategy, Serializable {
 	}
 
 	/**
-	 * sets background color of critter upon hitting
-	 * @param tower type of tower
+	 * sets background color of critter depending on which tower hit the critter.
+	 * 
+	 * @param tower type of tower which hit the critter
 	 * @param critter the critter to be updated
 	 */
 	public void setBackgroundOfCritter(TowerModel tower, Critter critter) {
