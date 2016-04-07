@@ -15,7 +15,7 @@ import code.game.models.TowerModel;
  */
 public class StrategyWeakest implements TowerStrategy, Serializable{
 
-	public String StrategyName="Weakest First";
+	public String strategyName="Weakest First";
 	public Critter weakestCritter=null;
 	private GameMap mapReference=null;
 	
@@ -26,9 +26,9 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 	 */
 	public boolean shootCritters(GameMap map, TowerModel tower){
 		this.mapReference = map;
-		char[] name_exploded = tower.getMyLocationOnMap().toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		char[] nameExploded = tower.getMyLocationOnMap().toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		boolean isHit=false;
 		weakestCritter=null;
 		
@@ -39,38 +39,38 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 				String yUp = String.valueOf(y+k);
 				String yDown = String.valueOf(y-k);
 
-				if(map.checkCritterExists(xRight+name_exploded[1])){
+				if(map.checkCritterExists(xRight+nameExploded[1])){
 					if(weakestCritter==null){
-						weakestCritter = map.getCritter(xRight+name_exploded[1]);
-					} else if(weakestCritter.getHealth() > map.getCritter(xRight+name_exploded[1]).getHealth())
+						weakestCritter = map.getCritter(xRight+nameExploded[1]);
+					} else if(weakestCritter.getHealth() > map.getCritter(xRight+nameExploded[1]).getHealth())
 					{
-						weakestCritter = map.getCritter(xRight+name_exploded[1]);
+						weakestCritter = map.getCritter(xRight+nameExploded[1]);
 					}
 				} 
 
-				if(map.checkCritterExists(xLeft+name_exploded[1])){
+				if(map.checkCritterExists(xLeft+nameExploded[1])){
 					if(weakestCritter==null){
-						weakestCritter = map.getCritter(xLeft+name_exploded[1]);
+						weakestCritter = map.getCritter(xLeft+nameExploded[1]);
 
-					} else if(weakestCritter.getHealth() > map.getCritter(xLeft+name_exploded[1]).getHealth()){
-						weakestCritter = map.getCritter(xLeft+name_exploded[1]);
+					} else if(weakestCritter.getHealth() > map.getCritter(xLeft+nameExploded[1]).getHealth()){
+						weakestCritter = map.getCritter(xLeft+nameExploded[1]);
 					}
 				} 
 
-				if(map.checkCritterExists(name_exploded[0]+yUp)){
+				if(map.checkCritterExists(nameExploded[0]+yUp)){
 					if(weakestCritter==null){
-						weakestCritter = map.getCritter(name_exploded[0]+yUp);
+						weakestCritter = map.getCritter(nameExploded[0]+yUp);
 
-					} else if(weakestCritter.getHealth() > map.getCritter(name_exploded[0]+yUp).getHealth()){
-						weakestCritter = map.getCritter(name_exploded[0]+yUp);
+					} else if(weakestCritter.getHealth() > map.getCritter(nameExploded[0]+yUp).getHealth()){
+						weakestCritter = map.getCritter(nameExploded[0]+yUp);
 					}
 				} 
 
-				if(map.checkCritterExists(name_exploded[0]+yDown)){
+				if(map.checkCritterExists(nameExploded[0]+yDown)){
 					if(weakestCritter==null){
-						weakestCritter = map.getCritter(name_exploded[0]+yDown);
-					} else if(weakestCritter.getHealth() > map.getCritter(name_exploded[0]+yDown).getHealth()){
-						weakestCritter = map.getCritter(name_exploded[0]+yDown);
+						weakestCritter = map.getCritter(nameExploded[0]+yDown);
+					} else if(weakestCritter.getHealth() > map.getCritter(nameExploded[0]+yDown).getHealth()){
+						weakestCritter = map.getCritter(nameExploded[0]+yDown);
 					}
 				}
 			} catch (IndexOutOfBoundsException e){
@@ -113,9 +113,9 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 	 * making a soft damage to them.
 	 */
 	private void hitSplashToCritters(Critter baseCritter, GameMap map){
-		char[] name_exploded = baseCritter.getMyLocationOnMap().toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		char[] nameExploded = baseCritter.getMyLocationOnMap().toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		boolean isHit=false;
 		
 		
@@ -125,31 +125,31 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 		String yDown = String.valueOf(y-2);
 		
 		try {
-			if(map.checkCritterExists(xRight+name_exploded[1])){
+			if(map.checkCritterExists(xRight+nameExploded[1])){
 				
-					map.getCritter(xRight+name_exploded[1]).reduceHealth(10);
-					map.getCritter(xRight+name_exploded[1]).setBackground("black");
-				
-			} 
-
-			if(map.checkCritterExists(xLeft+name_exploded[1])){
-				
-					map.getCritter(xLeft+name_exploded[1]).reduceHealth(10);
-					map.getCritter(xLeft+name_exploded[1]).setBackground("black");
+					map.getCritter(xRight+nameExploded[1]).reduceHealth(10);
+					map.getCritter(xRight+nameExploded[1]).setBackground("black");
 				
 			} 
 
-			if(map.checkCritterExists(name_exploded[0]+yUp)){
+			if(map.checkCritterExists(xLeft+nameExploded[1])){
 				
-				map.getCritter(name_exploded[0]+yUp).reduceHealth(10);
-				map.getCritter(name_exploded[0]+yUp).setBackground("black");
+					map.getCritter(xLeft+nameExploded[1]).reduceHealth(10);
+					map.getCritter(xLeft+nameExploded[1]).setBackground("black");
 				
 			} 
 
-			if(map.checkCritterExists(name_exploded[0]+yDown)){
+			if(map.checkCritterExists(nameExploded[0]+yUp)){
+				
+				map.getCritter(nameExploded[0]+yUp).reduceHealth(10);
+				map.getCritter(nameExploded[0]+yUp).setBackground("black");
+				
+			} 
+
+			if(map.checkCritterExists(nameExploded[0]+yDown)){
 			
-				map.getCritter(name_exploded[0]+yDown).reduceHealth(10);
-				map.getCritter(name_exploded[0]+yDown).setBackground("black");
+				map.getCritter(nameExploded[0]+yDown).reduceHealth(10);
+				map.getCritter(nameExploded[0]+yDown).setBackground("black");
 				
 			
 			}
@@ -164,6 +164,6 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 	 * return's strategy's name
 	 */
 	public String getStrategyName(){
-		return StrategyName;
+		return strategyName;
 	}
 }

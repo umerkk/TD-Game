@@ -13,9 +13,9 @@ import code.game.models.TowerModel;
  * @author Iftikhar
  * @version 1.0.0
  */
-public class StrategyNearest  implements TowerStrategy, Serializable {
+public class StrategyNearest implements TowerStrategy, Serializable {
 
-	public String StrategyName="Nearest First";
+	public String strategyName="Nearest First";
 	public Critter lockedCritter=null;
 	private GameMap mapReference=null;
 
@@ -27,9 +27,9 @@ public class StrategyNearest  implements TowerStrategy, Serializable {
 	 */
 	public boolean shootCritters(GameMap map, TowerModel tower){
 		this.mapReference = map;
-		char[] name_exploded = tower.getMyLocationOnMap().toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		char[] nameExploded = tower.getMyLocationOnMap().toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		Boolean isIgnore=false;
 		boolean isHit=false;
 		for(int k=1;k<=tower.getRangeOfTower();k++){
@@ -39,29 +39,29 @@ public class StrategyNearest  implements TowerStrategy, Serializable {
 			String yDown = String.valueOf(y-k);
 			if(!isIgnore){
 				try {
-					if(map.checkCritterExists(xRight+name_exploded[1])){
-						map.getCritter(xRight+name_exploded[1]).reduceHealth((int)tower.getPowerOfBullets());
-						setBackgroundOfCritter(tower,map.getCritter(xRight+name_exploded[1]));
-						lockedCritter=map.getCritter(xRight+name_exploded[1]);
+					if(map.checkCritterExists(xRight+nameExploded[1])){
+						map.getCritter(xRight+nameExploded[1]).reduceHealth((int)tower.getPowerOfBullets());
+						setBackgroundOfCritter(tower,map.getCritter(xRight+nameExploded[1]));
+						lockedCritter=map.getCritter(xRight+nameExploded[1]);
 						isIgnore = true;
 						isHit=true;
-					} else if(map.checkCritterExists(xLeft+name_exploded[1])){
-						map.getCritter(xLeft+name_exploded[1]).reduceHealth((int)tower.getPowerOfBullets());
-						setBackgroundOfCritter(tower,map.getCritter(xLeft+name_exploded[1]));
-						lockedCritter=map.getCritter(xLeft+name_exploded[1]);
+					} else if(map.checkCritterExists(xLeft+nameExploded[1])){
+						map.getCritter(xLeft+nameExploded[1]).reduceHealth((int)tower.getPowerOfBullets());
+						setBackgroundOfCritter(tower,map.getCritter(xLeft+nameExploded[1]));
+						lockedCritter=map.getCritter(xLeft+nameExploded[1]);
 						isIgnore = true;
 						isHit=true;
-					} else if(map.checkCritterExists(name_exploded[0]+yUp)){
-						map.getCritter(name_exploded[0]+yUp).reduceHealth((int)tower.getPowerOfBullets());
-						setBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yUp));
-						lockedCritter=map.getCritter(name_exploded[0]+yUp);
+					} else if(map.checkCritterExists(nameExploded[0]+yUp)){
+						map.getCritter(nameExploded[0]+yUp).reduceHealth((int)tower.getPowerOfBullets());
+						setBackgroundOfCritter(tower,map.getCritter(nameExploded[0]+yUp));
+						lockedCritter=map.getCritter(nameExploded[0]+yUp);
 						isIgnore = true;
 						isHit=true;
 
-					} else if(map.checkCritterExists(name_exploded[0]+yDown)){
-						map.getCritter(name_exploded[0]+yDown).reduceHealth((int)tower.getPowerOfBullets());
-						setBackgroundOfCritter(tower,map.getCritter(name_exploded[0]+yDown));
-						lockedCritter=map.getCritter(name_exploded[0]+yDown);
+					} else if(map.checkCritterExists(nameExploded[0]+yDown)){
+						map.getCritter(nameExploded[0]+yDown).reduceHealth((int)tower.getPowerOfBullets());
+						setBackgroundOfCritter(tower,map.getCritter(nameExploded[0]+yDown));
+						lockedCritter=map.getCritter(nameExploded[0]+yDown);
 						isIgnore = true;
 						isHit=true;
 
@@ -109,9 +109,9 @@ public class StrategyNearest  implements TowerStrategy, Serializable {
 	 * making a soft damage to them.
 	 */
 	private void hitSplashToCritters(Critter baseCritter, GameMap map){
-		char[] name_exploded = baseCritter.getMyLocationOnMap().toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		char[] nameExploded = baseCritter.getMyLocationOnMap().toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		boolean isHit=false;
 		
 		
@@ -121,31 +121,31 @@ public class StrategyNearest  implements TowerStrategy, Serializable {
 		String yDown = String.valueOf(y-2);
 		
 		try {
-			if(map.checkCritterExists(xRight+name_exploded[1])){
+			if(map.checkCritterExists(xRight+nameExploded[1])){
 				
-					map.getCritter(xRight+name_exploded[1]).reduceHealth(10);
-					map.getCritter(xRight+name_exploded[1]).setBackground("black");
-				
-			} 
-
-			if(map.checkCritterExists(xLeft+name_exploded[1])){
-				
-					map.getCritter(xLeft+name_exploded[1]).reduceHealth(10);
-					map.getCritter(xLeft+name_exploded[1]).setBackground("black");
+					map.getCritter(xRight+nameExploded[1]).reduceHealth(10);
+					map.getCritter(xRight+nameExploded[1]).setBackground("black");
 				
 			} 
 
-			if(map.checkCritterExists(name_exploded[0]+yUp)){
+			if(map.checkCritterExists(xLeft+nameExploded[1])){
 				
-				map.getCritter(name_exploded[0]+yUp).reduceHealth(10);
-				map.getCritter(name_exploded[0]+yUp).setBackground("black");
+					map.getCritter(xLeft+nameExploded[1]).reduceHealth(10);
+					map.getCritter(xLeft+nameExploded[1]).setBackground("black");
 				
 			} 
 
-			if(map.checkCritterExists(name_exploded[0]+yDown)){
+			if(map.checkCritterExists(nameExploded[0]+yUp)){
+				
+				map.getCritter(nameExploded[0]+yUp).reduceHealth(10);
+				map.getCritter(nameExploded[0]+yUp).setBackground("black");
+				
+			} 
+
+			if(map.checkCritterExists(nameExploded[0]+yDown)){
 			
-				map.getCritter(name_exploded[0]+yDown).reduceHealth(10);
-				map.getCritter(name_exploded[0]+yDown).setBackground("black");
+				map.getCritter(nameExploded[0]+yDown).reduceHealth(10);
+				map.getCritter(nameExploded[0]+yDown).setBackground("black");
 				
 			
 			}
@@ -161,7 +161,7 @@ public class StrategyNearest  implements TowerStrategy, Serializable {
 	 * return's strategy's name
 	 */
 	public String getStrategyName(){
-		return StrategyName;
+		return strategyName;
 	}
 }
 

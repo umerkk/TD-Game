@@ -18,7 +18,7 @@ public abstract class Critter implements Serializable {
 
 	private int reward;
 	private String name;
-	private int hit_point;
+	private int hitPoint;
 	private int health;
 	private int level;
 	private int speed;
@@ -43,7 +43,7 @@ public abstract class Critter implements Serializable {
 	public Critter(String name, int reward,int hitPoint, int health, int level, int speed,GameMap map) {
 		this.name = name;
 		this.reward = reward;
-		this.hit_point = hitPoint;
+		this.hitPoint = hitPoint;
 		this.health = health;
 		this.level= level;
 		this.speed = speed;
@@ -58,7 +58,7 @@ public abstract class Critter implements Serializable {
 		strBldrObj.append("\nLevel : " + level);
 		strBldrObj.append("\nHealth : " + health);
 		strBldrObj.append("\nKill Reward : " + reward);
-		strBldrObj.append("\nHit Point : " + hit_point);
+		strBldrObj.append("\nHit Point : " + hitPoint);
 		strBldrObj.append("\nSpeed : " + speed);
 		strBldrObj.append("\nCurrent Location : " + myLocationOnMap);
 		strBldrObj.append("\nLast Hit By: " + lastHitBy);
@@ -139,7 +139,7 @@ public abstract class Critter implements Serializable {
 	 * @param hitPoint hit point to be set 
 	 */
 	public void setHitPoint(int hitPoint){
-		this.hit_point = hitPoint;
+		this.hitPoint = hitPoint;
 	}
 
 	/**
@@ -190,7 +190,7 @@ public abstract class Critter implements Serializable {
 	 * @return critter's hit point
 	 */
 	public int getHitPoint(){
-		return this.hit_point;
+		return this.hitPoint;
 	}
 
 	/**

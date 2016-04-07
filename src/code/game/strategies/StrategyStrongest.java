@@ -15,7 +15,7 @@ import code.game.models.TowerModel;
  */
 public class StrategyStrongest implements TowerStrategy, Serializable{
 
-	public String StrategyName="Strongest First";
+	public String strategyName="Strongest First";
 	public Critter strongestCritter=null;
 	private GameMap mapReference=null;
 	
@@ -26,9 +26,9 @@ public class StrategyStrongest implements TowerStrategy, Serializable{
 	 */
 	public boolean shootCritters(GameMap map, TowerModel tower){
 		this.mapReference=map;
-		char[] name_exploded = tower.getMyLocationOnMap().toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		char[] nameExploded = tower.getMyLocationOnMap().toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		boolean isHit=false;
 		strongestCritter=null;
 
@@ -39,37 +39,37 @@ public class StrategyStrongest implements TowerStrategy, Serializable{
 			String yUp = String.valueOf(y+k);
 			String yDown = String.valueOf(y-k);
 			try {
-				if(map.checkCritterExists(xRight+name_exploded[1])){
+				if(map.checkCritterExists(xRight+nameExploded[1])){
 					if(strongestCritter==null){
-						strongestCritter = map.getCritter(xRight+name_exploded[1]);
-					} else if(strongestCritter.getHealth() < map.getCritter(xRight+name_exploded[1]).getHealth()){
-						strongestCritter = map.getCritter(xRight+name_exploded[1]);
+						strongestCritter = map.getCritter(xRight+nameExploded[1]);
+					} else if(strongestCritter.getHealth() < map.getCritter(xRight+nameExploded[1]).getHealth()){
+						strongestCritter = map.getCritter(xRight+nameExploded[1]);
 					}
 				} 
 
-				if(map.checkCritterExists(xLeft+name_exploded[1])){
+				if(map.checkCritterExists(xLeft+nameExploded[1])){
 					if(strongestCritter==null){
-						strongestCritter = map.getCritter(xLeft+name_exploded[1]);
+						strongestCritter = map.getCritter(xLeft+nameExploded[1]);
 
-					} else if(strongestCritter.getHealth() < map.getCritter(xLeft+name_exploded[1]).getHealth()){
-						strongestCritter = map.getCritter(xLeft+name_exploded[1]);
+					} else if(strongestCritter.getHealth() < map.getCritter(xLeft+nameExploded[1]).getHealth()){
+						strongestCritter = map.getCritter(xLeft+nameExploded[1]);
 					}
 				} 
 
-				if(map.checkCritterExists(name_exploded[0]+yUp)){
+				if(map.checkCritterExists(nameExploded[0]+yUp)){
 					if(strongestCritter==null){
-						strongestCritter = map.getCritter(name_exploded[0]+yUp);
+						strongestCritter = map.getCritter(nameExploded[0]+yUp);
 
-					} else if(strongestCritter.getHealth() < map.getCritter(name_exploded[0]+yUp).getHealth()){
-						strongestCritter = map.getCritter(name_exploded[0]+yUp);
+					} else if(strongestCritter.getHealth() < map.getCritter(nameExploded[0]+yUp).getHealth()){
+						strongestCritter = map.getCritter(nameExploded[0]+yUp);
 					}
 				} 
 
-				if(map.checkCritterExists(name_exploded[0]+yDown)){
+				if(map.checkCritterExists(nameExploded[0]+yDown)){
 					if(strongestCritter==null){
-						strongestCritter = map.getCritter(name_exploded[0]+yDown);
-					} else if(strongestCritter.getHealth() < map.getCritter(name_exploded[0]+yDown).getHealth()){
-						strongestCritter = map.getCritter(name_exploded[0]+yDown);
+						strongestCritter = map.getCritter(nameExploded[0]+yDown);
+					} else if(strongestCritter.getHealth() < map.getCritter(nameExploded[0]+yDown).getHealth()){
+						strongestCritter = map.getCritter(nameExploded[0]+yDown);
 					}
 				}
 
@@ -115,9 +115,9 @@ public class StrategyStrongest implements TowerStrategy, Serializable{
 	 * making a soft damage to them.
 	 */
 	private void hitSplashToCritters(Critter baseCritter, GameMap map){
-		char[] name_exploded = baseCritter.getMyLocationOnMap().toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		char[] nameExploded = baseCritter.getMyLocationOnMap().toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		boolean isHit=false;
 		
 		
@@ -127,31 +127,31 @@ public class StrategyStrongest implements TowerStrategy, Serializable{
 		String yDown = String.valueOf(y-2);
 		
 		try {
-			if(map.checkCritterExists(xRight+name_exploded[1])){
+			if(map.checkCritterExists(xRight+nameExploded[1])){
 				
-					map.getCritter(xRight+name_exploded[1]).reduceHealth(10);
-					map.getCritter(xRight+name_exploded[1]).setBackground("black");
-				
-			} 
-
-			if(map.checkCritterExists(xLeft+name_exploded[1])){
-				
-					map.getCritter(xLeft+name_exploded[1]).reduceHealth(10);
-					map.getCritter(xLeft+name_exploded[1]).setBackground("black");
+					map.getCritter(xRight+nameExploded[1]).reduceHealth(10);
+					map.getCritter(xRight+nameExploded[1]).setBackground("black");
 				
 			} 
 
-			if(map.checkCritterExists(name_exploded[0]+yUp)){
+			if(map.checkCritterExists(xLeft+nameExploded[1])){
 				
-				map.getCritter(name_exploded[0]+yUp).reduceHealth(10);
-				map.getCritter(name_exploded[0]+yUp).setBackground("black");
+					map.getCritter(xLeft+nameExploded[1]).reduceHealth(10);
+					map.getCritter(xLeft+nameExploded[1]).setBackground("black");
 				
 			} 
 
-			if(map.checkCritterExists(name_exploded[0]+yDown)){
+			if(map.checkCritterExists(nameExploded[0]+yUp)){
+				
+				map.getCritter(nameExploded[0]+yUp).reduceHealth(10);
+				map.getCritter(nameExploded[0]+yUp).setBackground("black");
+				
+			} 
+
+			if(map.checkCritterExists(nameExploded[0]+yDown)){
 			
-				map.getCritter(name_exploded[0]+yDown).reduceHealth(10);
-				map.getCritter(name_exploded[0]+yDown).setBackground("black");
+				map.getCritter(nameExploded[0]+yDown).reduceHealth(10);
+				map.getCritter(nameExploded[0]+yDown).setBackground("black");
 				
 			
 			}
@@ -166,6 +166,6 @@ public class StrategyStrongest implements TowerStrategy, Serializable{
 	 * return's strategy's name
 	 */
 	public String getStrategyName(){
-		return StrategyName;
+		return strategyName;
 	}
 }

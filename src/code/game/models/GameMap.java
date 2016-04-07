@@ -25,24 +25,24 @@ public class GameMap extends Observable implements Serializable {
 
 	/**
 	 * acts as class' constructor having 2 parameters
-	 * @param _mapName map's name in string
-	 * @param _mapArray containing rows and columns in an array
+	 * @param tmpMapName map's name in string
+	 * @param tmpMapArray containing rows and columns in an array
 	 */
-	public void initialize(String _mapName, int[][] _mapArray) {
-		this.mapName = _mapName;
-		this.mapArray = _mapArray;
+	public void initialize(String tmpMapName, int[][] tmpMapArray) {
+		this.mapName = tmpMapName;
+		this.mapArray = tmpMapArray;
 		this.arrayRow = this.mapArray.length;
 		this.arrayCol = this.mapArray[0].length;
 	}
 
 	/**
 	 * acts as class' constructor having 3 parameters
-	 * @param _mapName map's name in string
+	 * @param tmpMapName map's name in string
 	 * @param row no. of rows (4-9)
 	 * @param col no. of columns (4-9)
 	 */
-	public void initialize(String _mapName, int row, int col){
-		this.mapName = _mapName;
+	public void initialize(String tmpMapName, int row, int col){
+		this.mapName = tmpMapName;
 		this.mapArray = new int[row][col];
 		this.critterPath = new int[row][col];
 		this.arrayRow = this.mapArray.length;
@@ -113,9 +113,9 @@ public class GameMap extends Observable implements Serializable {
 	 * @param tower the tower object to be placed on map
 	 */
 	public void addTower(String location,TowerModel tower){
-		char[] name_exploded = location.toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		char[] nameExploded = location.toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		if(mapArray[x][y] == 0){
 			towerCollection.put(location, tower);
 			if(tower.getName().equalsIgnoreCase("Castle Tower"))
@@ -141,9 +141,9 @@ public class GameMap extends Observable implements Serializable {
 	 * @return true if the location doesn't contain any item
 	 */
 	public Boolean checkMapIsEmpty(String location){
-		char[] name_exploded = location.toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		char[] nameExploded = location.toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		if(mapArray[x][y] == 0){
 			return true;
 		} else
@@ -159,9 +159,9 @@ public class GameMap extends Observable implements Serializable {
 		if(towerCollection.containsKey(location))
 			return true;
 		else{
-			char[] name_exploded = location.toCharArray();
-			int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-			int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+			char[] nameExploded = location.toCharArray();
+			int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+			int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 			if(mapArray[x][y] == -5)
 				return true;
 			else
@@ -175,9 +175,9 @@ public class GameMap extends Observable implements Serializable {
 	 * @return true if the tower has been deleted, false otherwise
 	 */
 	public Boolean deleteTowerFromMap(String location){
-		char[] name_exploded = location.toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		char[] nameExploded = location.toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		if(towerCollection.containsKey(location)){
 			towerCollection.remove(location);
 			mapArray[x][y] = 0;
@@ -211,21 +211,7 @@ public class GameMap extends Observable implements Serializable {
 				answer =  false;			
 		}
 		return answer;
-
-		//		if(critterCollection.containsKey(location))
-		//			return true;
-		//		else
-		//			return false;
-		//		else
-		//		{
-		//			char[] name_exploded = location.toCharArray();
-		//			int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		//			int y = Integer.parseInt(String.valueOf(name_exploded[1]));
-		//			if(mapArray[x][y] == -6)
-		//				return true;
-		//			else
-		//				return false;
-		//		}
+		
 	}
 
 
@@ -299,7 +285,7 @@ public class GameMap extends Observable implements Serializable {
 	 * Returns all the critters generated in a hash map
 	 * @return a ConcurrentHashMap containing all the critte'r information
 	 */
-	public ConcurrentHashMap<String,Critter> GetCritterCollection(){
+	public ConcurrentHashMap<String,Critter> getCritterCollection(){
 		return critterCollection;
 	}
 

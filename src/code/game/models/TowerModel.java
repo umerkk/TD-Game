@@ -81,11 +81,11 @@ public class TowerModel extends Observable implements Serializable{
 	 * - Strongest
 	 * - Nearest
 	 * 
-	 * @param _strategy strategy type
+	 * @param tmpStrategy strategy type
 	 * @param map Map object to be updated
 	 */
-	public void setStrategy(TowerStrategy _strategy, GameMap map){
-		this.strategy = _strategy;
+	public void setStrategy(TowerStrategy tmpStrategy, GameMap map){
+		this.strategy = tmpStrategy;
 		mapRefernce = map;
 	}
 

@@ -56,7 +56,7 @@ import net.miginfocom.swing.MigLayout;
 public class SingleGameController implements Serializable {
 
 	private static SingleGameController instance;
-	private GameMap map=null;
+	private GameMap gameMap=null;
 	private TowerModel selectedTower=null;
 	private Critter selectedCritter=null;
 	private Boolean newTowerSelected=false;
@@ -66,8 +66,8 @@ public class SingleGameController implements Serializable {
 	private int critterMovementTime=500;
 	public boolean isGameStarted = false;
 	private Timer gameTimer=null;
-	private final int critterKillPoints=5;
-	private final int critterRunAwayPoints=20; 
+	private final int CRITTER_KILL_POINTS =5;
+	private final int CRITTER_RUN_AWAY_POINTS =20; 
 	private final int POINT_ENTRY = 1;
 	private final int POINT_EXIT = 9999;
 	private final int CASTLE_TOWER_ENTRY = -7;
@@ -153,8 +153,8 @@ public class SingleGameController implements Serializable {
 	 * sets the map 
 	 * @param _map gameMap object
 	 */
-	public void setMap(GameMap _map) {
-		this.map=_map;
+	public void setMap(GameMap map) {
+		this.gameMap=map;
 	}
 
 	/**
@@ -170,19 +170,19 @@ public class SingleGameController implements Serializable {
 	 * @return current map model
 	 */
 	public GameMap getMapModl() { 
-		return map;
+		return gameMap;
 	}
 
 	/**
 	 * Gets, opens and initializes the map file from the file directory using input stream reader 
 	 */
 	public void openMap() {
-		JFileChooser filebrwsr = new JFileChooser();
+		JFileChooser fileBrwsr = new JFileChooser();
 
-		int result = filebrwsr.showOpenDialog(null);
+		int result = fileBrwsr.showOpenDialog(null);
 		if (result == JFileChooser.APPROVE_OPTION) {
 
-			File selectedFile = filebrwsr.getSelectedFile();
+			File selectedFile = fileBrwsr.getSelectedFile();
 			readFromFile(selectedFile);
 
 		} else {
@@ -203,7 +203,7 @@ public class SingleGameController implements Serializable {
 			mapModel = (MapModel) ois.readObject();
 			mapModel.setFilePath(selectedFile);
 			int[][] mapArray = mapModel.getMapArray();
-			map.initialize("myMap", mapArray);
+			gameMap.initialize("myMap", mapArray);
 
 
 			ois.close();
@@ -269,11 +269,11 @@ public class SingleGameController implements Serializable {
 			//parentPanel.revalidate();
 			parentPanel.repaint();
 
-			for(int k=0;k<map.getArrayRow();k++) {
-				for(int i=0;i<map.getArrayCol();i++) {
+			for(int k=0;k<gameMap.getArrayRow();k++) {
+				for(int i=0;i<gameMap.getArrayCol();i++) {
 
 					String append = "";
-					if(i==map.getArrayCol()-1) {
+					if(i==gameMap.getArrayCol()-1) {
 						append = ", wrap";
 					} else {
 
@@ -306,17 +306,17 @@ public class SingleGameController implements Serializable {
 						}
 					});
 
-					if(map.getMapArray()[k][i]==1) {
+					if(gameMap.getMapArray()[k][i]==1) {
 						drawMapItem(1, temp);
-					}  else if(map.getMapArray()[k][i] == POINT_EXIT) {
+					}  else if(gameMap.getMapArray()[k][i] == POINT_EXIT) {
 						drawMapItem(POINT_EXIT, temp);
-					} else if(map.getMapArray()[k][i]==0) {
+					} else if(gameMap.getMapArray()[k][i]==0) {
 						drawMapItem(0, temp);
-					} else if(map.getMapArray()[k][i]==CASTLE_TOWER_ENTRY) {
+					} else if(gameMap.getMapArray()[k][i]==CASTLE_TOWER_ENTRY) {
 						drawTowerFromLoadGame(CASTLE_TOWER_ENTRY,temp);
-					} else if(map.getMapArray()[k][i]==IMPERIAL_TOWER_ENTRY) {
+					} else if(gameMap.getMapArray()[k][i]==IMPERIAL_TOWER_ENTRY) {
 						drawTowerFromLoadGame(IMPERIAL_TOWER_ENTRY,temp);
-					} else if(map.getMapArray()[k][i]==INDUSTRIAL_TOWER_ENTRY) {
+					} else if(gameMap.getMapArray()[k][i]==INDUSTRIAL_TOWER_ENTRY) {
 						drawTowerFromLoadGame(INDUSTRIAL_TOWER_ENTRY,temp);
 					} else {
 						drawMapItem(2,temp);
@@ -327,11 +327,11 @@ public class SingleGameController implements Serializable {
 			}
 
 		} else {
-			for(int k=0;k<map.getArrayRow();k++) {
-				for(int i=0;i<map.getArrayCol();i++) {
-					String _append = "";
-					if(i==map.getArrayCol()-1) {
-						_append = ", wrap";
+			for(int k=0;k<gameMap.getArrayRow();k++) {
+				for(int i=0;i<gameMap.getArrayCol();i++) {
+					String appendStr = "";
+					if(i==gameMap.getArrayCol()-1) {
+						appendStr = ", wrap";
 					} else {
 
 					}
@@ -361,7 +361,7 @@ public class SingleGameController implements Serializable {
 							click(e,temp);
 						}
 					});
-					parentPanel.add(temp, "wmax 80, hmax 80,width 80, height 80" + _append);
+					parentPanel.add(temp, "wmax 80, hmax 80,width 80, height 80" + appendStr);
 				}
 			}
 		}
@@ -407,15 +407,6 @@ public class SingleGameController implements Serializable {
 		t.setBounds(0, 0, 80, 80);
 		cell.add(t);
 
-
-
-
-
-
-
-
-
-
 	}
 
 	/**
@@ -450,7 +441,7 @@ public class SingleGameController implements Serializable {
 	 */
 	public void drawCritter(ConcurrentHashMap<String,Critter> critterList, Panel panel) {
 
-		for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
+		for (Map.Entry<String, Critter> entry : gameMap.getCritterCollection().entrySet()) {
 			try {
 				String key = entry.getKey();
 				int loc = Integer.parseInt(key);
@@ -458,30 +449,30 @@ public class SingleGameController implements Serializable {
 				if(loc>0) {
 
 					if(((Critter)entry.getValue()).getHealth()<1) {
-						map.removeCritter(key);
-						gameDataModel.addMoneyToAccount(critterKillPoints);
+						gameMap.removeCritter(key);
+						gameDataModel.addMoneyToAccount(CRITTER_KILL_POINTS);
 						continue;
 					}
 
 					else {
-						String location = map.findLocationInMap(loc);
+						String location = gameMap.findLocationInMap(loc);
 						if(location==null) {
-							location = map.findLocationInMap(POINT_EXIT);
+							location = gameMap.findLocationInMap(POINT_EXIT);
 						}
-						String endLoc = map.findLocationInMap(POINT_EXIT);
+						String endLoc = gameMap.findLocationInMap(POINT_EXIT);
 						if(location.equalsIgnoreCase(endLoc)) {
 							//if(drawController%2==0){
-							gameDataModel.deductPlayerPower(critterRunAwayPoints);
-							map.removeCritter(key);
+							gameDataModel.deductPlayerPower(CRITTER_RUN_AWAY_POINTS);
+							gameMap.removeCritter(key);
 							//}
 							continue;
 
 						}
-						char[] name_exploded = location.toCharArray();
+						char[] nameExploded = location.toCharArray();
 
 						for(int s=0;s<panel.getComponentCount();s++) {
-							if(panel.getComponent(s).getName().equalsIgnoreCase(new String(name_exploded))) {
-								((Critter)entry.getValue()).setMyLocationOnMap(new String(name_exploded));
+							if(panel.getComponent(s).getName().equalsIgnoreCase(new String(nameExploded))) {
+								((Critter)entry.getValue()).setMyLocationOnMap(new String(nameExploded));
 								JLabel t=null;
 								//panel.getComponent(s).setBackground(Color.red);
 								BufferedImage myPicture;
@@ -549,23 +540,23 @@ public class SingleGameController implements Serializable {
 	 */
 	private void drawTower(JPanel cell, int response) {
 		String tempName = cell.getName();
-		char[] name_exploded = tempName.toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
-		int[][] mapArray = map.getMapArray();
+		char[] nameExploded = tempName.toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
+		int[][] mapArray = gameMap.getMapArray();
 		JLabel t=null;
 
 		switch(response){
 		case 0: {
-			selectedTower.setStrategy(new StrategyNearest(),map);
+			selectedTower.setStrategy(new StrategyNearest(),gameMap);
 			break;
 		}
 		case 1: {
-			selectedTower.setStrategy(new StrategyStrongest(),map);
+			selectedTower.setStrategy(new StrategyStrongest(),gameMap);
 			break;
 		}
 		case 2: {
-			selectedTower.setStrategy(new StrategyWeakest(),map);
+			selectedTower.setStrategy(new StrategyWeakest(),gameMap);
 			break;
 		}
 		}
@@ -604,7 +595,7 @@ public class SingleGameController implements Serializable {
 					t.setBounds(0, 0, 80, 80);
 					cell.add(t);
 
-					map.addTower(tempName, selectedTower);
+					gameMap.addTower(tempName, selectedTower);
 					gameDataModel.deductMoneyFromAccount(tModel.getCostOfTower());
 				}
 
@@ -621,9 +612,9 @@ public class SingleGameController implements Serializable {
 	/**
 	 * Removes the selected tower from the map and updates the coin balance with refund rate of tower.
 	 */
-	public void RemoveTower() {
+	public void removeTower() {
 		if(selectedCell!=null) {
-			if(map.deleteTowerFromMap(selectedCell.getName())) {
+			if(gameMap.deleteTowerFromMap(selectedCell.getName())) {
 				gameDataModel.addMoneyToAccount(selectedTower.getRefundValue());
 				selectedCell.removeAll();
 				selectedCell.setBackground(null);
@@ -691,29 +682,29 @@ public class SingleGameController implements Serializable {
 		//JOptionPane.showMessageDialog(null, "Clicked");
 		boolean overideExisting=false;
 		final String tempName = cell.getName();
-		final char[] name_exploded = tempName.toCharArray();
-		int x = Integer.parseInt(String.valueOf(name_exploded[0]));
-		int y = Integer.parseInt(String.valueOf(name_exploded[1]));
+		final char[] nameExploded = tempName.toCharArray();
+		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
+		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		//1=StartPoint, 9999=End, 2=Path, 3=Delete
 		selectedCell = cell;
 
-		if(map.checkTowerExists(tempName)) {
+		if(gameMap.checkTowerExists(tempName)) {
 
-			TowerModel tmpmdl = map.getTower(tempName);
-			selectedTower = tmpmdl; //Assign the variable to selected tower;
+			TowerModel tmpMdl = gameMap.getTower(tempName);
+			selectedTower = tmpMdl; //Assign the variable to selected tower;
 			gameDataModel.setSelectedTowerDescription(selectedTower.getTowerDetails().toString());
 			newTowerSelected=false;
 
 
-		} else if(map.checkCritterExists(tempName))
+		} else if(gameMap.checkCritterExists(tempName))
 		{
-			selectedCritter = map.getCritter(tempName);
+			selectedCritter = gameMap.getCritter(tempName);
 			gameDataModel.setSelectedTowerDescription(selectedCritter.getCritterDetails().toString());
 		}
 		else
 		{
 			if(newTowerSelected) {
-				if(map.checkMapIsEmpty(tempName)) {
+				if(gameMap.checkMapIsEmpty(tempName)) {
 					JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First"});
 					JOptionPane.showMessageDialog(
 							null, list, "Select the tower strategy", JOptionPane.QUESTION_MESSAGE);
@@ -734,15 +725,15 @@ public class SingleGameController implements Serializable {
 	{
 		switch(response){
 		case 0: {
-			selectedTower.setStrategy(new StrategyNearest(),map);
+			selectedTower.setStrategy(new StrategyNearest(),gameMap);
 			break;
 		}
 		case 1: {
-			selectedTower.setStrategy(new StrategyStrongest(),map);
+			selectedTower.setStrategy(new StrategyStrongest(),gameMap);
 			break;
 		}
 		case 2: {
-			selectedTower.setStrategy(new StrategyWeakest(),map);
+			selectedTower.setStrategy(new StrategyWeakest(),gameMap);
 			break;
 		}
 		}
@@ -814,7 +805,7 @@ public class SingleGameController implements Serializable {
 	}
 
 
-	public void PauseGame(boolean b)
+	public void pauseGame(boolean b)
 	{
 		isGameStarted=b;
 		if(b)
@@ -824,10 +815,10 @@ public class SingleGameController implements Serializable {
 	}
 
 
-	public void NotifyViewAboutEverything()
+	public void notifyViewAboutEverything()
 	{
 		gameDataModel.notifyObservers();
-		map.notifyObservers();
+		gameMap.notifyObservers();
 
 	}
 
@@ -892,13 +883,13 @@ public class SingleGameController implements Serializable {
 			if(!(numberOfCritters<1)){	
 				if(critterCreationInterval%2==0) {
 					if(gameDataModel.getWave() < 5) {
-						map.addCritter(String.valueOf(1), CritterFactory.getCritter(1,map));
+						gameMap.addCritter(String.valueOf(1), CritterFactory.getCritter(1,gameMap));
 					} else if(gameDataModel.getWave() >= 5 && gameDataModel.getWave() < 10) {
-						map.addCritter(String.valueOf(1), CritterFactory.getCritter(2,map));
+						gameMap.addCritter(String.valueOf(1), CritterFactory.getCritter(2,gameMap));
 					} else if(gameDataModel.getWave() >= 10) {
-						map.addCritter(String.valueOf(1), CritterFactory.getCritter(3,map));
+						gameMap.addCritter(String.valueOf(1), CritterFactory.getCritter(3,gameMap));
 					} else {
-						map.addCritter(String.valueOf(1), CritterFactory.getCritter(3,map));
+						gameMap.addCritter(String.valueOf(1), CritterFactory.getCritter(3,gameMap));
 					}
 					numberOfCritters--;
 				}
@@ -907,7 +898,7 @@ public class SingleGameController implements Serializable {
 
 			ConcurrentHashMap<String,Critter> tempList = new ConcurrentHashMap<String, Critter>();
 
-			for (Map.Entry<String, Critter> entry : map.GetCritterCollection().entrySet()) {
+			for (Map.Entry<String, Critter> entry : gameMap.getCritterCollection().entrySet()) {
 				String key = entry.getKey();
 				Critter critter = (Critter) entry.getValue();
 				int loc = Integer.parseInt(key);
@@ -942,24 +933,24 @@ public class SingleGameController implements Serializable {
 			//panel.validate();
 			panel.repaint();
 
-			map.setCritterCollection(tempList);
+			gameMap.setCritterCollection(tempList);
 
 			panel.repaint();
 
-			drawCritter(map.GetCritterCollection(),panel);
+			drawCritter(gameMap.getCritterCollection(),panel);
 			//drawController++;
 			removeCritters(panel);
-			gameDataModel.addMoneyToAccount(map.towerToShoot()*3);
-			drawCritter(map.GetCritterCollection(),panel);
+			gameDataModel.addMoneyToAccount(gameMap.towerToShoot()*3);
+			drawCritter(gameMap.getCritterCollection(),panel);
 			Util.logWave("Game timer was incremented - Critters were advanced and Towers shot within their range.");
 
-			if(map.isCritterCollectionEmpty()) {
+			if(gameMap.isCritterCollectionEmpty()) {
 				isGameStarted=false;
 				numberOfCritters=0;
 				gameTimer.stop();
 				removeCritters(panel);
 				gameDataModel.resetPlayerPower();
-				map.GetCritterCollection().clear();
+				gameMap.getCritterCollection().clear();
 				JOptionPane.showMessageDialog(null, "You Won!. All the critters are history and you still have some power.", "YAY:", JOptionPane.INFORMATION_MESSAGE);
 				gameDataModel.setWaveIncrement();
 				gameDataModel.addMoneyToAccount(20);
@@ -971,7 +962,7 @@ public class SingleGameController implements Serializable {
 				numberOfCritters=0;
 				gameTimer.stop();
 				removeCritters(panel);
-				map.GetCritterCollection().clear();
+				gameMap.getCritterCollection().clear();
 				JOptionPane.showMessageDialog(null, "You Lose!.\r\nCritters has taken all of your power.", "Aww:", JOptionPane.ERROR_MESSAGE);
 				gameDataModel.resetPlayerPower();
 				gameDataModel.resetWave();

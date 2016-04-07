@@ -47,26 +47,23 @@ import net.miginfocom.swing.MigLayout;
  * 
  * @author Armaghan
  * @author Lokesh
- * @since Build_1
+ * @version 1.0.2.0
  */
 public class TDGameMain2 implements Observer {
 
 	private JFrame frame;
 	JTextArea txtTwrDesc = new JTextArea();
 	JLabel lblAccBal = new JLabel("0  ");
-	JLabel powerlbl = new JLabel("0  ");
-	JLabel wavelbl = new JLabel("0  ");
+	JLabel powerLbl = new JLabel("0  ");
+	JLabel waveLbl = new JLabel("0  ");
 	JButton btnNewButton = new JButton("Pause");
 	JButton btnStrtGame = new JButton("Start Game");
-	JButton SaveGameBtn = new JButton("Save Game");
+	JButton saveGameBtn = new JButton("Save Game");
 	SingleGameController myController = SingleGameController.getGameControllerInstance();
 	public Panel panel = new Panel();
 	ScrollPane scPanel = new ScrollPane();
 	private int globalWaveCounter = 0;
 	private final String DEFAULT_FILE_PATH = System.getProperty("user.dir") + "/SavedGames";
-
-
-
 
 	/**
 	 * Overriding abstract method of observer class
@@ -76,8 +73,8 @@ public class TDGameMain2 implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		lblAccBal.setText(String.valueOf(((GameData)arg0).getAccountBalance()));
-		powerlbl.setText(String.valueOf(((GameData)arg0).getPlayerPower()));
-		wavelbl.setText(String.valueOf(((GameData)arg0).getWave()));
+		powerLbl.setText(String.valueOf(((GameData)arg0).getPlayerPower()));
+		waveLbl.setText(String.valueOf(((GameData)arg0).getWave()));
 		if(String.valueOf(((GameData)arg0).getSelectedTowerDescription()).equalsIgnoreCase("null"))
 		{
 			txtTwrDesc.setText("Nothing to display at the moment.");
@@ -163,7 +160,7 @@ public class TDGameMain2 implements Observer {
 	 * Method to handle sell button event
 	 */
 	private void selBtnHandlr(){
-		myController.RemoveTower();
+		myController.removeTower();
 	}
 
 	/**
@@ -243,8 +240,8 @@ public class TDGameMain2 implements Observer {
 		pnlHdrSub.add(lblPower);
 
 
-		powerlbl.setFont(new Font("Arial", Font.PLAIN, 14));
-		pnlHdrSub.add(powerlbl);
+		powerLbl.setFont(new Font("Arial", Font.PLAIN, 14));
+		pnlHdrSub.add(powerLbl);
 
 		JLabel lblWave = new JLabel("Wave");
 		lblWave.setHorizontalAlignment(SwingConstants.CENTER);
@@ -252,8 +249,8 @@ public class TDGameMain2 implements Observer {
 		pnlHdrSub.add(lblWave);
 
 
-		wavelbl.setFont(new Font("Arial", Font.PLAIN, 14));
-		pnlHdrSub.add(wavelbl);
+		waveLbl.setFont(new Font("Arial", Font.PLAIN, 14));
+		pnlHdrSub.add(waveLbl);
 
 		JButton btnWaveLog = new JButton("Wave Log");
 		btnWaveLog.addActionListener(new ActionListener() {
@@ -285,13 +282,13 @@ public class TDGameMain2 implements Observer {
 		lblArangFtr.setIcon(null);
 		jPnlFtr.add(lblArangFtr, BorderLayout.SOUTH);
 
-		JPanel panel_1 = new JPanel();
-		jPnlFtr.add(panel_1, BorderLayout.EAST);
-		panel_1.setLayout(new BorderLayout(0, 0));
+		JPanel panel1 = new JPanel();
+		jPnlFtr.add(panel1, BorderLayout.EAST);
+		panel1.setLayout(new BorderLayout(0, 0));
 
 
-		panel_1.add(btnStrtGame, BorderLayout.NORTH);
-		SaveGameBtn.addActionListener(new ActionListener() {
+		panel1.add(btnStrtGame, BorderLayout.NORTH);
+		saveGameBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				myController.setSaveGameFlag(true);
 
@@ -300,7 +297,7 @@ public class TDGameMain2 implements Observer {
 
 
 
-		panel_1.add(SaveGameBtn, BorderLayout.WEST);
+		panel1.add(saveGameBtn, BorderLayout.WEST);
 
 
 		btnNewButton.addActionListener(new ActionListener() {
@@ -309,10 +306,10 @@ public class TDGameMain2 implements Observer {
 
 				if(btnNewButton.getText().equalsIgnoreCase("Pause"))
 				{
-					myController.PauseGame(false);
+					myController.pauseGame(false);
 					btnNewButton.setText("Resume");
 				} else {
-					myController.PauseGame(true);
+					myController.pauseGame(true);
 					btnNewButton.setText("Pause");
 				}
 			}
@@ -323,7 +320,7 @@ public class TDGameMain2 implements Observer {
 
 
 
-		panel_1.add(btnNewButton, BorderLayout.SOUTH);
+		panel1.add(btnNewButton, BorderLayout.SOUTH);
 		btnStrtGame.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				myController.startWave(panel);
@@ -504,9 +501,9 @@ public class TDGameMain2 implements Observer {
 					//Attach the Model to this class as it is being attached in StaticMain. 
 					//this is causing much problem.
 					myController.gameDataModel.addObserver(TDGameMain2.this);
-					myController.NotifyViewAboutEverything();
+					myController.notifyViewAboutEverything();
 					myController.drawMap(true, panel);
-					myController.drawCritter(myController.getMapModl().GetCritterCollection(), panel);
+					myController.drawCritter(myController.getMapModl().getCritterCollection(), panel);
 					panel.revalidate();
 					panel.repaint();
 					Util.logWave("Saved Game is loaded and now playable.");

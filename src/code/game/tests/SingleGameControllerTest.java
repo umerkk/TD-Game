@@ -85,7 +85,7 @@ public class SingleGameControllerTest {
 			tstCntrlr.setMap(tstMap);
 			tstCntrlr.setSelectedTower("lblTwr1");
 			tstCntrlr.setSelectedCell(cell);
-			tstCntrlr.RemoveTower();
+			tstCntrlr.removeTower();
 
 			assertTrue(tstCntrlr.gameDataModel.getAccountBalance() == 100 + (new TowerCastle()).getRefundValue());
 	}
