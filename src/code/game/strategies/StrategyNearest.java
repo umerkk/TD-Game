@@ -79,7 +79,7 @@ public class StrategyNearest implements TowerStrategy, Serializable {
 	 * @param tower type of tower
 	 * @param critter the critter to be updated
 	 */
-	private void setBackgroundOfCritter(TowerModel tower, Critter critter){
+	public void setBackgroundOfCritter(TowerModel tower, Critter critter){
 		switch(tower.getName()){
 		case "Castle Tower":{
 			critter.setBackground("red");

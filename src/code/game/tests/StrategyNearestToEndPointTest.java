@@ -15,7 +15,7 @@ import code.game.strategies.StrategyNearestToEndPoint;
 public class StrategyNearestToEndPointTest {
 
 	/**
-	 * Test to check if the nearest critter to tower is selected by the tower strategy.
+	 * Test to check if the nearest critter to end point is selected by the tower strategy.
 	 */
 	@Test
 	public void testStrategy() {
