@@ -44,6 +44,7 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 					{
 						lastPath = map.getValueFromMap(Integer.parseInt(xRight), y);
 						lastIndex = xRight+nameExploded[1];
+						lockedCritter=map.getCritter(xRight+nameExploded[1]);
 					}
 				
 
@@ -51,6 +52,7 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 					{
 						lastPath = map.getValueFromMap(Integer.parseInt(xLeft), y);
 						lastIndex = xLeft+nameExploded[1];
+						lockedCritter=map.getCritter(xLeft+nameExploded[1]);
 					}
 				 
 
@@ -58,6 +60,7 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 					{
 						lastPath = map.getValueFromMap(x, Integer.parseInt(yUp));
 						lastIndex = nameExploded[0]+yUp;
+						lockedCritter=map.getCritter(nameExploded[0]+yUp);
 					}
 				
 
@@ -65,6 +68,7 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 					{
 						lastPath = map.getValueFromMap(x, Integer.parseInt(yDown));
 						lastIndex = nameExploded[0]+yDown;
+						lockedCritter=map.getCritter(nameExploded[0]+yDown);
 					}
 				
 
