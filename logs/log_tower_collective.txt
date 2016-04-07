@@ -237,3 +237,11 @@ Wed Apr 06 15:41:47 EDT 2016  ------  Castle Tower was upgraded to level 2
 Sample collective tower log from test case.
 Wed Apr 06 15:41:47 EDT 2016  ------  Sample tower log from test case.
 Wed Apr 06 15:41:52 EDT 2016  ------  Sample individual tower log from test case.
+Wed Apr 06 22:46:17 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Wed Apr 06 22:46:47 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Weakest First
+Wed Apr 06 23:15:47 EDT 2016  ------  Castle Tower was sold for 5
+Wed Apr 06 23:15:54 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest First
+Wed Apr 06 23:16:59 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
+Wed Apr 06 23:19:21 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
+Wed Apr 06 23:20:00 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
+Wed Apr 06 23:22:47 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point

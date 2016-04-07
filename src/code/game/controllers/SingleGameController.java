@@ -40,6 +40,7 @@ import code.game.models.TowerImperial;
 import code.game.models.TowerIndustrial;
 import code.game.models.TowerModel;
 import code.game.strategies.StrategyNearest;
+import code.game.strategies.StrategyNearestToEndPoint;
 import code.game.strategies.StrategyStrongest;
 import code.game.strategies.StrategyWeakest;
 import code.game.utils.Util;
@@ -559,6 +560,10 @@ public class SingleGameController implements Serializable {
 			selectedTower.setStrategy(new StrategyWeakest(),gameMap);
 			break;
 		}
+		case 3: {
+			selectedTower.setStrategy(new StrategyNearestToEndPoint(),gameMap);
+			break;
+		}
 		}
 		selectedTower.setMyLocationOnMap(tempName);
 
@@ -705,7 +710,7 @@ public class SingleGameController implements Serializable {
 		{
 			if(newTowerSelected) {
 				if(gameMap.checkMapIsEmpty(tempName)) {
-					JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First"});
+					JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First", "Nearest to End Point"});
 					JOptionPane.showMessageDialog(
 							null, list, "Select the tower strategy", JOptionPane.QUESTION_MESSAGE);
 					int response = list.getSelectedIndex();
@@ -751,7 +756,7 @@ public class SingleGameController implements Serializable {
 	 */
 	public void changeStrategyOfTower(){
 		if(selectedTower!=null){
-			JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First"});
+			JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First","Nearest to End Point"});
 			JOptionPane.showMessageDialog(
 					null, list, "Select the tower strategy", JOptionPane.QUESTION_MESSAGE);
 

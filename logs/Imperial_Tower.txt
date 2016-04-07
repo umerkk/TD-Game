@@ -14,3 +14,4 @@ Sun Apr 03 16:36:54 EDT 2016  ------  Imperial Tower was placed on map with Stra
 Sun Apr 03 17:34:15 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Nearest First
 Sun Apr 03 17:36:04 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Strongest First
 Sun Apr 03 17:43:45 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Nearest First
+Wed Apr 06 22:46:47 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Weakest First

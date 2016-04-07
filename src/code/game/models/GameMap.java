@@ -48,6 +48,11 @@ public class GameMap extends Observable implements Serializable {
 		this.arrayRow = this.mapArray.length;
 		this.arrayCol = this.mapArray[0].length;
 	}
+	
+	public int getValueFromMap(int x, int y)
+	{
+		return mapArray[x][y];
+	}
 
 	/**
 	 * returns map's name

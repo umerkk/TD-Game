@@ -489,6 +489,15 @@ public class Util {
 	 */
 	public static boolean updateMapFile(MapModel mapModel){
 		try {
+			int[][] map = mapModel.getMapArray();
+			for(int i = 0; i < map.length; i++) {
+				for(int j = 0; j < map[i].length; j++) {
+					if(map[i][j] <0 ) {
+						map[i][j] = 0;
+					}
+				}
+			}
+			
 			File file = mapModel.getFilePath();
 			FileOutputStream fos = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fos); 

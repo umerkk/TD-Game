@@ -3876,3 +3876,232 @@ Sample global log from test case.
 Sample global log from test case.
 Sample global log from test case.
 Sample collective tower log from test case.
+Wed Apr 06 22:40:22 EDT 2016  ------  Critter wave was started
+Wed Apr 06 22:40:23 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:23 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:24 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:24 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:25 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:25 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:26 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:26 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:27 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:27 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:28 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:28 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:29 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:29 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:30 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:30 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:31 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:31 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:32 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:32 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:33 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:33 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:34 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:34 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:35 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:35 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:36 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:36 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:40:37 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:45:53 EDT 2016  ------  Loaded map
+Wed Apr 06 22:46:17 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Wed Apr 06 22:46:23 EDT 2016  ------  Critter wave was started
+Wed Apr 06 22:46:24 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:24 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:25 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:25 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:26 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:26 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:27 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:27 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:28 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:28 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:29 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:29 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:30 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:30 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:31 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:31 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:32 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:32 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:33 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:33 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:34 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:34 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:35 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:35 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:36 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:38 EDT 2016  ------  Player won the wave
+Wed Apr 06 22:46:47 EDT 2016  ------  Imperial Tower was placed on map with Strategy = Weakest First
+Wed Apr 06 22:46:48 EDT 2016  ------  Critter wave was started
+Wed Apr 06 22:46:49 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:49 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:50 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:50 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:51 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:51 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:52 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:52 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:53 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:53 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:54 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:54 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:55 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:55 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:56 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:56 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:57 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:57 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:58 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:58 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:59 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:46:59 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:47:00 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:47:00 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 22:47:01 EDT 2016  ------  Player won the wave
+Wed Apr 06 23:15:38 EDT 2016  ------  Loaded map
+Wed Apr 06 23:15:47 EDT 2016  ------  Castle Tower was sold for 5
+Wed Apr 06 23:15:54 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest First
+Wed Apr 06 23:16:04 EDT 2016  ------  Critter wave was started
+Wed Apr 06 23:16:05 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:05 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:06 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:06 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:07 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:07 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:08 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:09 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:09 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:10 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:10 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:11 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:11 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:12 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:12 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:13 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:13 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:14 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:14 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:15 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:15 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:15 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:16 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:16 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:17 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:16:18 EDT 2016  ------  Player won the wave
+Wed Apr 06 23:16:52 EDT 2016  ------  Loaded map
+Wed Apr 06 23:16:59 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
+Wed Apr 06 23:17:01 EDT 2016  ------  Critter wave was started
+Wed Apr 06 23:17:01 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:02 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:02 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:03 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:03 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:04 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:05 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:05 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:06 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:06 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:07 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:07 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:08 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:08 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:09 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:09 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:10 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:10 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:10 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:11 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:12 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:12 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:12 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:13 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:13 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:17:16 EDT 2016  ------  Player won the wave
+Wed Apr 06 23:19:17 EDT 2016  ------  Loaded map
+Wed Apr 06 23:19:21 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
+Wed Apr 06 23:19:22 EDT 2016  ------  Critter wave was started
+Wed Apr 06 23:19:22 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:23 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:23 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:24 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:24 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:25 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:25 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:26 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:26 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:27 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:27 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:28 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:28 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:29 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:29 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:30 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:30 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:31 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:31 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:32 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:32 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:33 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:33 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:34 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:34 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:19:35 EDT 2016  ------  Player won the wave
+Wed Apr 06 23:19:57 EDT 2016  ------  Loaded map
+Wed Apr 06 23:20:00 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
+Wed Apr 06 23:20:01 EDT 2016  ------  Critter wave was started
+Wed Apr 06 23:20:02 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:02 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:03 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:03 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:04 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:04 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:05 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:05 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:06 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:06 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:07 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:07 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:08 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:08 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:09 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:09 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:10 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:10 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:11 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:11 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:12 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:12 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:20:13 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:45 EDT 2016  ------  Loaded map
+Wed Apr 06 23:22:47 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
+Wed Apr 06 23:22:48 EDT 2016  ------  Critter wave was started
+Wed Apr 06 23:22:49 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:49 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:50 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:50 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:51 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:51 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:52 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:52 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:53 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:53 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:54 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:54 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:55 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:55 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:56 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:56 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:57 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:57 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:58 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:58 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:59 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:22:59 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:23:00 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:23:00 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:23:01 EDT 2016  ------  Game timer was incremented - Critters were advanced and Towers shot within their range.
+Wed Apr 06 23:23:02 EDT 2016  ------  Player won the wave
