@@ -263,3 +263,6 @@ Thu Apr 07 13:32:47 EDT 2016  ------  Castle Tower was upgraded to level 2
 Sample collective tower log from test case.
 Thu Apr 07 13:32:47 EDT 2016  ------  Sample tower log from test case.
 Thu Apr 07 13:32:52 EDT 2016  ------  Sample individual tower log from test case.
+Thu Apr 07 17:19:00 EDT 2016  ------  Castle Tower was placed on map with Strategy = Nearest to End Point
+Thu Apr 07 17:19:16 EDT 2016  ------  Castle Tower was placed on map with Strategy = Weakest First
+Thu Apr 07 17:24:47 EDT 2016  ------  Castle Tower was placed on map with Strategy = Strongest First
