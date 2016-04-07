@@ -40,7 +40,7 @@ public abstract class Critter implements Serializable {
 	 * @param speed critter's speed
 	 * @param map game's map on which critters will be drawn
 	 */
-	public Critter(String name, int reward,int hitPoint, int health, int level, int speed,GameMap map) {
+	public Critter(String name, int reward, int hitPoint, int health, int level, int speed,GameMap map) {
 		this.name = name;
 		this.reward = reward;
 		this.hitPoint = hitPoint;
@@ -69,59 +69,59 @@ public abstract class Critter implements Serializable {
 
 		return strBldrObj;
 	}
+
 	/**
 	 * To set the critters speed
 	 */
-	public void resetSpeed()
-	{
+	public void resetSpeed() {
 		this.speed = this.constSpeed;
 	}
+
 	/**
 	 * To reduce the critter's speed
 	 * @param amount for critter's speed
 	 */
-	public void reduceSpeed(int amount)
-	{
+	public void reduceSpeed(int amount) {
 		this.speed-=amount;
 	}
+
 	/**
 	 * 
 	 * @param tower to hit the last critter
 	 */
-	public void setLastHitBy(String tower)
-	{
+	public void setLastHitBy(String tower) {
 		this.lastHitBy = tower;
 	}
+
 	/**
 	 * 
-	 * @return last hit
+	 * @return last hit by tower
 	 */
-	public String getLastHitBy()
-	{
+	public String getLastHitBy() {
 		return this.lastHitBy;	
 	}
-	
+
 	/**
 	 * Set the time for critters' damage
 	 * @param time for damage
 	 */
-	public void setDamageTime(int time)
-	{
+	public void setDamageTime(int time) {
 		this.damageTime = time;
 	}
+
 	/**
 	 * 
 	 * @return damage time
 	 */
-	public int getDamageTime()
-	{
+	public int getDamageTime() {
 		return this.damageTime;
 	}
+
 	/**
 	 * Critter's current location on the grid
 	 * @param location Critter's current location
 	 */
-	public void setMyLocationOnMap(String location){
+	public void setMyLocationOnMap(String location) {
 		this.myLocationOnMap = location;
 	}
 
@@ -129,7 +129,7 @@ public abstract class Critter implements Serializable {
 	 * Returns the current location of the critter on the grid.
 	 * @return Critter's current location
 	 */
-	public String getMyLocationOnMap(){
+	public String getMyLocationOnMap() {
 		return this.myLocationOnMap;
 	}
 
@@ -137,7 +137,7 @@ public abstract class Critter implements Serializable {
 	 * Sets critter's background image name
 	 * @param bg critter's background
 	 */
-	public void setBackground(String bg){
+	public void setBackground(String bg) {
 		this.background = bg;
 	}
 
@@ -145,16 +145,15 @@ public abstract class Critter implements Serializable {
 	 * Gets critter's background image name
 	 * @return critter's background
 	 */
-	public String getBackground(){
+	public String getBackground() {
 		return this.background;
 	}
-
 
 	/**
 	 * method to set reward of destroying critter
 	 * @param reward reward earned for destroying critter
 	 */
-	public void setReward(int reward){
+	public void setReward(int reward) {
 		this.reward = reward;
 	}
 
@@ -162,7 +161,7 @@ public abstract class Critter implements Serializable {
 	 * Sets critter's hit point
 	 * @param hitPoint hit point to be set 
 	 */
-	public void setHitPoint(int hitPoint){
+	public void setHitPoint(int hitPoint) {
 		this.hitPoint = hitPoint;
 	}
 
@@ -170,10 +169,9 @@ public abstract class Critter implements Serializable {
 	 * Sets critter's health
 	 * @param health critter's health
 	 */
-	public void setHealth(int health){
+	public void setHealth(int health) {
 		this.health = health;
 	}
-
 
 	/**
 	 * Sets critter's level 
@@ -181,7 +179,7 @@ public abstract class Critter implements Serializable {
 	 * - Basic
 	 * @param level critter's level
 	 */
-	public void setLevel(int level){
+	public void setLevel(int level) {
 		this.level = level;
 	}
 
@@ -189,7 +187,7 @@ public abstract class Critter implements Serializable {
 	 * Sets critters speed
 	 * @param speed critter's speed
 	 */
-	public void setSepeed(int speed){
+	public void setSepeed(int speed) {
 		this.speed = speed;
 	}
 
@@ -197,7 +195,7 @@ public abstract class Critter implements Serializable {
 	 * Decrements critter's health as the tower's shoot at them
 	 * @param hitValue critter's hit value
 	 */
-	public void reduceHealth(int hitValue){
+	public void reduceHealth(int hitValue) {
 		this.health -= hitValue;
 	}
 
@@ -205,7 +203,7 @@ public abstract class Critter implements Serializable {
 	 * Returns the reward the user gets by killing the critter
 	 * @return player's reward
 	 */
-	public int getReward(){
+	public int getReward() {
 		return this.reward;
 	}
 
@@ -213,7 +211,7 @@ public abstract class Critter implements Serializable {
 	 * Returns critter's hit point
 	 * @return critter's hit point
 	 */
-	public int getHitPoint(){
+	public int getHitPoint() {
 		return this.hitPoint;
 	}
 
@@ -221,7 +219,7 @@ public abstract class Critter implements Serializable {
 	 * Returns critter's health
 	 * @return critter's health
 	 */
-	public int getHealth(){
+	public int getHealth() {
 		return this.health;
 	}
 
@@ -231,7 +229,7 @@ public abstract class Critter implements Serializable {
 	 * - Basic
 	 * @return critter's level
 	 */
-	public int getLevel(){
+	public int getLevel() {
 		return this.level;
 	}
 
@@ -239,7 +237,7 @@ public abstract class Critter implements Serializable {
 	 * Returns critter's speed
 	 * @return critter's speed
 	 */
-	public int getSpeed(){
+	public int getSpeed() {
 		return this.speed;
 	}
 }

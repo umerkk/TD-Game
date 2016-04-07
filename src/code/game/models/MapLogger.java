@@ -15,10 +15,12 @@ import java.util.ArrayList;
  * @version 1.0.0.0
  */
 
-public class MapLogger implements Serializable{
+public class MapLogger implements Serializable {
 
 	/**
-	 * a unique ID used for serialization when reading writing a class object
+	 * a unique ID used for serialization when reading writing a class object.
+	 * This attribute does not need to comply with coding standard due to serialization
+	 * dependency.
 	 */
 	private static final long serialVersionUID = 8899;
 	// attributes of the class goes here

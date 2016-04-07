@@ -4117,3 +4117,28 @@ Sample global log from test case.
 Sample global log from test case.
 Sample global log from test case.
 Sample collective tower log from test case.
+Thu Apr 07 11:09:22 EDT 2016  ------  Loaded map
+Thu Apr 07 13:25:41 EDT 2016  ------  Castle Tower was sold for 5
+Thu Apr 07 13:25:41 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
+Thu Apr 07 13:25:41 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sample collective tower log from test case.
+Thu Apr 07 13:25:41 EDT 2016  ------  Sample wave log from test case.
+Thu Apr 07 13:25:41 EDT 2016  ------  Sample tower log from test case.
+Thu Apr 07 13:25:41 EDT 2016  ------  Sample wave log from test case.
+Thu Apr 07 13:25:47 EDT 2016  ------  Sample individual tower log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample collective tower log from test case.
+Thu Apr 07 13:32:47 EDT 2016  ------  Castle Tower was sold for 5
+Thu Apr 07 13:32:47 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
+Thu Apr 07 13:32:47 EDT 2016  ------  Castle Tower was upgraded to level 2
+Sample collective tower log from test case.
+Thu Apr 07 13:32:47 EDT 2016  ------  Sample wave log from test case.
+Thu Apr 07 13:32:47 EDT 2016  ------  Sample tower log from test case.
+Thu Apr 07 13:32:47 EDT 2016  ------  Sample wave log from test case.
+Thu Apr 07 13:32:52 EDT 2016  ------  Sample individual tower log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample global log from test case.
+Sample collective tower log from test case.

@@ -275,8 +275,6 @@ public class SingleGameController implements Serializable {
 					String append = "";
 					if(i==gameMap.getArrayCol()-1) {
 						append = ", wrap";
-					} else {
-
 					}
 
 					final JPanel temp = new JPanel();
@@ -334,9 +332,8 @@ public class SingleGameController implements Serializable {
 					String appendStr = "";
 					if(i==gameMap.getArrayCol()-1) {
 						appendStr = ", wrap";
-					} else {
+					} 
 
-					}
 					final JPanel temp = new JPanel();
 					temp.setName(k +""+ i);
 					temp.setBorder(BorderFactory.createEtchedBorder(1));
@@ -368,11 +365,11 @@ public class SingleGameController implements Serializable {
 			}
 		}
 	}
-/**
- * Load game and draw the tower
- * @param type type of tower
- * @param cell tower's placement area
- */
+	/**
+	 * Load game and draw the tower
+	 * @param type type of tower
+	 * @param cell tower's placement area
+	 */
 	private void drawTowerFromLoadGame(int type, JPanel cell) {
 
 		BufferedImage myPicture=null;
@@ -704,13 +701,10 @@ public class SingleGameController implements Serializable {
 			newTowerSelected=false;
 
 
-		} else if(gameMap.checkCritterExists(tempName))
-		{
+		} else if(gameMap.checkCritterExists(tempName)) {
 			selectedCritter = gameMap.getCritter(tempName);
 			gameDataModel.setSelectedTowerDescription(selectedCritter.getCritterDetails().toString());
-		}
-		else
-		{
+		} else {
 			if(newTowerSelected) {
 				if(gameMap.checkMapIsEmpty(tempName)) {
 					JList list = new JList(new String[] {"Nearest First", "Strongest First", "Weakest First", "Nearest to End Point"});
@@ -734,8 +728,7 @@ public class SingleGameController implements Serializable {
 	 * @param response to select new strategy
 	 * @return tower log
 	 */
-	public boolean setNewStrategy(int response)
-	{
+	public boolean setNewStrategy(int response) {
 		switch(response){
 		case 0: {
 			selectedTower.setStrategy(new StrategyNearest(),gameMap);
@@ -777,17 +770,17 @@ public class SingleGameController implements Serializable {
 
 		}
 	}
-/**
- * To get tower ID
- * @return tower
- */
+	/**
+	 * To get tower ID
+	 * @return tower
+	 */
 	private int getCurrentTowerID(){
 		return selectedTower.getTowerID();
 	}
-/**
- * To get name of current tower
- * @return name
- */
+	/**
+	 * To get name of current tower
+	 * @return name
+	 */
 	private String getCurrentTowerName(){
 		return selectedTower.getName();
 	}
@@ -797,8 +790,7 @@ public class SingleGameController implements Serializable {
 	 * @param panel map panel
 	 */
 	public void startWave(final Panel panel) {
-		if(this.numberOfCritters<1)
-		{
+		if(this.numberOfCritters<1) {
 			if(gameDataModel.getWave() < 5) {
 				this.numberOfCritters = gameDataModel.getWave()*5;
 			} else if(gameDataModel.getWave() >= 5 && gameDataModel.getWave() < 10) {
@@ -823,12 +815,11 @@ public class SingleGameController implements Serializable {
 			Util.logWave("Critter wave was started");
 	}
 
-/**
- * To pause the game in any stage
- * @param b boolean value
- */
-	public void pauseGame(boolean b)
-	{
+	/**
+	 * To pause the game in any stage
+	 * @param b boolean value
+	 */
+	public void pauseGame(boolean b) {
 		isGameStarted=b;
 		if(b)
 			Util.logWave("Game is resumed");
@@ -836,25 +827,22 @@ public class SingleGameController implements Serializable {
 			Util.logWave("Game is paused");
 	}
 
-/**
- * Notify observers
- */
-	public void notifyViewAboutEverything()
-	{
+	/**
+	 * Notify observers
+	 */
+	public void notifyViewAboutEverything() {
 		gameDataModel.notifyObservers();
 		gameMap.notifyObservers();
 
 	}
-/**
- * To save all the game data
- * @param panel for save game
- * @param file for game log
- * @param fileView for save game log
- */
-	public void saveGameData(Panel panel, File file, File fileView)
-	{
-		if(!file.exists())
-		{
+	/**
+	 * To save all the game data
+	 * @param panel for save game
+	 * @param file for game log
+	 * @param fileView for save game log
+	 */
+	public void saveGameData(Panel panel, File file, File fileView) {
+		if(!file.exists()) {
 			try {
 				file.createNewFile();
 			} catch (Exception e){
@@ -862,8 +850,7 @@ public class SingleGameController implements Serializable {
 			}
 		}
 
-		if(!fileView.exists())
-		{
+		if(!fileView.exists()) {
 			try {
 				fileView.createNewFile();
 			} catch (Exception e){
@@ -884,8 +871,7 @@ public class SingleGameController implements Serializable {
 			ooss.close();
 			foss.close();
 
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			//JOptionPane.showMessageDialog(null, "The game could not be saved at this time. please try again later.");
 
 		}
@@ -897,8 +883,7 @@ public class SingleGameController implements Serializable {
 	 */
 	public void incrementWave(Panel panel) {
 
-		if(saveGameFlag)
-		{
+		if(saveGameFlag) {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");
 			java.util.Date date = new java.util.Date();
 			File file = new File("SavedGames//"+dateFormat.format(date)+".gameData");
@@ -907,8 +892,7 @@ public class SingleGameController implements Serializable {
 			saveGameData(panel, file, fileView);
 			JOptionPane.showMessageDialog(null, "Game Saved !");
 		}
-		if(isGameStarted)
-		{
+		if(isGameStarted) {
 			if(!(numberOfCritters<1)){	
 				if(critterCreationInterval%2==0) {
 					if(gameDataModel.getWave() < 5) {
@@ -931,26 +915,21 @@ public class SingleGameController implements Serializable {
 				String key = entry.getKey();
 				Critter critter = (Critter) entry.getValue();
 				int loc = Integer.parseInt(key);
-				if(critter.getDamageTime()==1)
-				{
-					if(critter.getLastHitBy().equalsIgnoreCase("Castle Tower"))
-					{
+				if(critter.getDamageTime()==1) {
+					if(critter.getLastHitBy().equalsIgnoreCase("Castle Tower")) {
 						critter.setBackground("red");
 						critter.reduceHealth(10);
-					} else if(critter.getLastHitBy().equalsIgnoreCase("Imperial Tower"))
-					{
+					} else if(critter.getLastHitBy().equalsIgnoreCase("Imperial Tower")) {
 						critter.setBackground("blue");
 						critter.reduceSpeed(1);
 					}
 
-
 				} else if(critter.getDamageTime()==0){
 					critter.resetSpeed();
 					critter.setBackground("none");
-
 				}
-				if(critter.getDamageTime()>0)
-				{
+
+				if(critter.getDamageTime()>0) {
 					critter.setDamageTime(critter.getDamageTime()-1);
 				}
 				loc+=critter.getSpeed();
@@ -1001,9 +980,10 @@ public class SingleGameController implements Serializable {
 			}
 		}
 	}
-/**
- * To calculate and update the score
- */
+
+	/**
+	 * To calculate and update the score
+	 */
 	public void calculateAndUpdateScores() {
 		int money = gameDataModel.getAccountBalance();
 		int power = gameDataModel.getPlayerPower();
@@ -1012,6 +992,5 @@ public class SingleGameController implements Serializable {
 		Util.updateMapFile(mapModel);
 
 	}
-
 
 }

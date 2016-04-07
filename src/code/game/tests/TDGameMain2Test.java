@@ -22,7 +22,7 @@ public class TDGameMain2Test {
 	 * Test to check if when the game data model account balance is updated, 
 	 * the corresponding update is made on the account balance in view.
 	 */
-	
+
 	@Test
 	public void testObserverPtrn() {
 		GameData tstGmDat = new GameData();
@@ -31,7 +31,7 @@ public class TDGameMain2Test {
 
 		tstGmDat.addObserver(tstWindow);
 		tstGmDat.setAccountBalance(300);
-		
+
 		assertTrue(tstWindow.getAccBal().equals("300"));
 	}
 

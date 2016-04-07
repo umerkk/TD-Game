@@ -15,7 +15,7 @@ public class CritterFactory implements Serializable{
 	/**
 	 * empty constructor
 	 */
-	public CritterFactory(){}
+	public CritterFactory() { }
 
 	/**
 	 * returns the critter type based on the parameter passed
@@ -24,7 +24,7 @@ public class CritterFactory implements Serializable{
 	 *  
 	 * @return type of critter class
 	 */
-	public static Critter getCritter(int level, GameMap map){
+	public static Critter getCritter(int level, GameMap map) {
 		switch(level) {
 		case 1: {
 			return new CritterBasic(map);

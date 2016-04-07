@@ -13,17 +13,17 @@ import code.game.strategies.TowerStrategy;
  * @version 1.0.0.0
  */
 
-public class TowerModel extends Observable implements Serializable{
+public class TowerModel extends Observable implements Serializable {
 
 	private String towerName;
 	private int mCurrentLevel;
-	private int mcostoftower;
-	private int mupgradecost;
+	private int mCostOfTower;
+	private int mUpgradeCost;
 	private int mRefundValue;
-	private int mrangeinblocks; //Range of the tower per blocks
-	private float mpowerofbullet; //Rate of Health to deduct from the target
-	private int mrateoffire; // Interval between each fire
-	private int mhealth; //Tower health
+	private int mRangeInBlocks; //Range of the tower per blocks
+	private float mPowerOfBullet; //Rate of Health to deduct from the target
+	private int mRateOfFire; // Interval between each fire
+	private int mHealth; //Tower health
 	private TowerStrategy strategy;
 	private GameMap mapRefernce;
 	private String myLocationOnMap;
@@ -32,24 +32,24 @@ public class TowerModel extends Observable implements Serializable{
 	 * Constructor for defining an object of the tower model.
 	 *  
 	 * @param name Name of the tower.
-	 * @param costoftower Cost for buying the tower.
-	 * @param upgradecost Upgrading cost.
-	 * @param refundvalue Refund amount.
-	 * @param rangeinblocks Range of the tower in blocks.
-	 * @param powerofbullet Power of the bullets.
-	 * @param rateoffire Interval at which tower fires the bullet.
+	 * @param costOfTower Cost for buying the tower.
+	 * @param upgradeCost Upgrading cost.
+	 * @param refundValue Refund amount.
+	 * @param rangeInBlocks Range of the tower in blocks.
+	 * @param powerOfBullet Power of the bullets.
+	 * @param rateOfFire Interval at which tower fires the bullet.
 	 */
-	public TowerModel(String name, int costoftower, int upgradecost, int refundvalue, 
-			int rangeinblocks, float powerofbullet, int rateoffire){
+	public TowerModel(String name, int costOfTower, int upgradeCost, int refundValue, 
+			int rangeInBlocks, float powerOfBullet, int rateOfFire) {
 		mCurrentLevel = 1;
-		mhealth = 100;
+		mHealth = 100;
 		towerName = name;
-		mcostoftower = costoftower;
-		mupgradecost = upgradecost;
-		mRefundValue = refundvalue;
-		mrangeinblocks = rangeinblocks; 
-		mpowerofbullet = powerofbullet;
-		mrateoffire = rateoffire; 
+		mCostOfTower = costOfTower;
+		mUpgradeCost = upgradeCost;
+		mRefundValue = refundValue;
+		mRangeInBlocks = rangeInBlocks; 
+		mPowerOfBullet = powerOfBullet;
+		mRateOfFire = rateOfFire; 
 	}
 
 	/**
@@ -61,13 +61,13 @@ public class TowerModel extends Observable implements Serializable{
 		StringBuilder strBldrObj = new StringBuilder();
 		strBldrObj.append("Name : " + towerName);
 		strBldrObj.append("\nLevel : " + mCurrentLevel);
-		strBldrObj.append("\nCost of Tower : " + mcostoftower);
-		strBldrObj.append("\nUpgrade Cost : " + mupgradecost);
+		strBldrObj.append("\nCost of Tower : " + mCostOfTower);
+		strBldrObj.append("\nUpgrade Cost : " + mUpgradeCost);
 		strBldrObj.append("\nRefund Value : " + mRefundValue);
-		strBldrObj.append("\nRange : " + mrangeinblocks);
-		strBldrObj.append("\nPower : " + mpowerofbullet);
-		strBldrObj.append("\nRate of Fire : " + mrateoffire);
-		strBldrObj.append("\nHealth : " + mhealth);
+		strBldrObj.append("\nRange : " + mRangeInBlocks);
+		strBldrObj.append("\nPower : " + mPowerOfBullet);
+		strBldrObj.append("\nRate of Fire : " + mRateOfFire);
+		strBldrObj.append("\nHealth : " + mHealth);
 		if(strategy!=null)
 			strBldrObj.append("\nStrategy : " + strategy.getStrategyName());
 		else
@@ -135,10 +135,10 @@ public class TowerModel extends Observable implements Serializable{
 	 */
 	public void upgradeCurrentLevel() {
 		mCurrentLevel++;
-		mRefundValue += mupgradecost;
-		mrangeinblocks++;
-		mhealth = 100;
-		mpowerofbullet *= 1.1;
+		mRefundValue += mUpgradeCost;
+		mRangeInBlocks++;
+		mHealth = 100;
+		mPowerOfBullet *= 1.1;
 	}
 
 	/**
@@ -150,12 +150,12 @@ public class TowerModel extends Observable implements Serializable{
 	 * Method returns the cost of buying the tower.
 	 * @return cost of tower
 	 */
-	public int getCostOfTower() { return mcostoftower; }
+	public int getCostOfTower() { return mCostOfTower; }
 	/**
 	 * method returns the upgrading cost of the tower.
 	 * @return upgrade cost
 	 */
-	public int getUpgradeCost() { return mupgradecost; }
+	public int getUpgradeCost() { return mUpgradeCost; }
 	/**
 	 * method returns the refund amount while selling the tower.
 	 * @return refund value
@@ -165,28 +165,32 @@ public class TowerModel extends Observable implements Serializable{
 	 * method returns the range of the tower.
 	 * @return range of tower
 	 */
-	public int getRangeOfTower() { return mrangeinblocks; }
+	public int getRangeOfTower() { return mRangeInBlocks; }
 	/**
 	 * method returns the power of bullets of the tower.
 	 * @return power of bullets
 	 */
-	public float getPowerOfBullets() { return mpowerofbullet; }
+	public float getPowerOfBullets() { return mPowerOfBullet; }
 	/**
 	 * method returns the rate at which the tower fires bullets.
 	 * @return rate of fire
 	 */
-	public int getRateOfFire() { return mrateoffire; }
+	public int getRateOfFire() { return mRateOfFire; }
 
 	/**
 	 * method returns the current health of the tower.
 	 * @return helath
 	 */
-	public int getHealth() { return mhealth; }
+	public int getHealth() { return mHealth; }
 	/**
 	 * method to set the health of the tower. 
 	 * @param value new health of the tower.
 	 */
-	public void setHealth(int value) { mhealth = value; setChanged(); notifyObservers(); } 
+	public void setHealth(int value) { 
+		mHealth = value; 
+		setChanged(); 
+		notifyObservers(); 
+	} 
 
 	/**
 	 * returns a unique tower ID based on tower's name
@@ -204,4 +208,5 @@ public class TowerModel extends Observable implements Serializable{
 			return 1;
 		}
 	}
+	
 }

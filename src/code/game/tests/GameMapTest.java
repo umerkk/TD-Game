@@ -77,7 +77,7 @@ public class GameMapTest {
 	/**
 	 * Test to check if a tower can be successfully deleted from the map.
 	 */
-	
+
 	@Test
 	public void testDeleteTower() {
 		int[][] mapArray =  new int[][]{ { 0, 1, 0, 0 },
@@ -101,7 +101,7 @@ public class GameMapTest {
 	 * Test to check if critter exist at a particular location in map.
 	 */
 	@Test
-	public void testcheckCritrExist() {
+	public void testCheckCritrExist() {
 		int[][] mapArray =  new int[][]{ { 0, 1, 0, 0 },
 			{ 0, 2, -7, 0},
 			{ 0, 3, 4, 0},
@@ -126,29 +126,29 @@ public class GameMapTest {
 			{ 0, 0, 5, 0, 0, 0},
 			{ 0, 0, 6, 0, 0, 0},
 			{ 0, 0, 9999, 0, 0, 0}}; 
-		
-		GameMap tstGameMapObj = new GameMap();
-		tstGameMapObj.initialize("testmap", mapArray);
-		TowerModel tstTwr1 = new TowerCastle(); 
-		tstTwr1.setMyLocationOnMap("12");
-		tstTwr1.setStrategy(new StrategyNearest(), tstGameMapObj);
-		tstGameMapObj.addTower("12", tstTwr1);
-		tstTwr1.upgradeCurrentLevel();
-		TowerModel tstTwr2 = new TowerCastle(); 
-		tstTwr2.setStrategy(new StrategyNearest(), tstGameMapObj);
-		tstTwr2.setMyLocationOnMap("41");
-		tstGameMapObj.addTower("41", tstTwr2);
-		
-		Critter tstCrtr1 = CritterFactory.getCritter(1, tstGameMapObj);
-		tstCrtr1.setMyLocationOnMap("11");
-		Critter tstCrtr2 = CritterFactory.getCritter(2, tstGameMapObj);
-		tstCrtr2.setMyLocationOnMap("32");
-		Critter tstCrtr3 = CritterFactory.getCritter(2, tstGameMapObj);
-		tstCrtr3.setMyLocationOnMap("42");
-		tstGameMapObj.addCritter("11", tstCrtr1);
-		tstGameMapObj.addCritter("32", tstCrtr2);
-		tstGameMapObj.addCritter("42", tstCrtr3);
-		
-		assertTrue(tstGameMapObj.towerToShoot() == 2);
+
+			GameMap tstGameMapObj = new GameMap();
+			tstGameMapObj.initialize("testmap", mapArray);
+			TowerModel tstTwr1 = new TowerCastle(); 
+			tstTwr1.setMyLocationOnMap("12");
+			tstTwr1.setStrategy(new StrategyNearest(), tstGameMapObj);
+			tstGameMapObj.addTower("12", tstTwr1);
+			tstTwr1.upgradeCurrentLevel();
+			TowerModel tstTwr2 = new TowerCastle(); 
+			tstTwr2.setStrategy(new StrategyNearest(), tstGameMapObj);
+			tstTwr2.setMyLocationOnMap("41");
+			tstGameMapObj.addTower("41", tstTwr2);
+
+			Critter tstCrtr1 = CritterFactory.getCritter(1, tstGameMapObj);
+			tstCrtr1.setMyLocationOnMap("11");
+			Critter tstCrtr2 = CritterFactory.getCritter(2, tstGameMapObj);
+			tstCrtr2.setMyLocationOnMap("32");
+			Critter tstCrtr3 = CritterFactory.getCritter(2, tstGameMapObj);
+			tstCrtr3.setMyLocationOnMap("42");
+			tstGameMapObj.addCritter("11", tstCrtr1);
+			tstGameMapObj.addCritter("32", tstCrtr2);
+			tstGameMapObj.addCritter("42", tstCrtr3);
+
+			assertTrue(tstGameMapObj.towerToShoot() == 2);
 	}
 }

@@ -18,7 +18,7 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 	public String strategyName="Weakest First";
 	public Critter weakestCritter=null;
 	private GameMap mapReference=null;
-	
+
 	/**
 	 * Shoots critters by deciding, which critter is the weakest in the range.
 	 * if weak in the range, it open's fire and returns the confirmation if the intended critter has hit or not
@@ -32,7 +32,7 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		boolean isHit=false;
 		weakestCritter=null;
-		
+
 		for(int k=1;k<=tower.getRangeOfTower();k++){
 			try {
 				String xRight = String.valueOf(x+k);
@@ -43,8 +43,7 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 				if(map.checkCritterExists(xRight+nameExploded[1])){
 					if(weakestCritter==null){
 						weakestCritter = map.getCritter(xRight+nameExploded[1]);
-					} else if(weakestCritter.getHealth() > map.getCritter(xRight+nameExploded[1]).getHealth())
-					{
+					} else if(weakestCritter.getHealth() > map.getCritter(xRight+nameExploded[1]).getHealth()) {
 						weakestCritter = map.getCritter(xRight+nameExploded[1]);
 					}
 				} 
@@ -120,49 +119,49 @@ public class StrategyWeakest implements TowerStrategy, Serializable{
 		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
 		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		boolean isHit=false;
-		
-		
+
+
 		String xRight = String.valueOf(x+2);
 		String xLeft = String.valueOf(x-2);
 		String yUp = String.valueOf(y+2);
 		String yDown = String.valueOf(y-2);
-		
+
 		try {
 			if(map.checkCritterExists(xRight+nameExploded[1])){
-				
-					map.getCritter(xRight+nameExploded[1]).reduceHealth(10);
-					map.getCritter(xRight+nameExploded[1]).setBackground("black");
-				
+
+				map.getCritter(xRight+nameExploded[1]).reduceHealth(10);
+				map.getCritter(xRight+nameExploded[1]).setBackground("black");
+
 			} 
 
 			if(map.checkCritterExists(xLeft+nameExploded[1])){
-				
-					map.getCritter(xLeft+nameExploded[1]).reduceHealth(10);
-					map.getCritter(xLeft+nameExploded[1]).setBackground("black");
-				
+
+				map.getCritter(xLeft+nameExploded[1]).reduceHealth(10);
+				map.getCritter(xLeft+nameExploded[1]).setBackground("black");
+
 			} 
 
 			if(map.checkCritterExists(nameExploded[0]+yUp)){
-				
+
 				map.getCritter(nameExploded[0]+yUp).reduceHealth(10);
 				map.getCritter(nameExploded[0]+yUp).setBackground("black");
-				
+
 			} 
 
 			if(map.checkCritterExists(nameExploded[0]+yDown)){
-			
+
 				map.getCritter(nameExploded[0]+yDown).reduceHealth(10);
 				map.getCritter(nameExploded[0]+yDown).setBackground("black");
-				
-			
+
+
 			}
 
 		} catch (IndexOutOfBoundsException e){
 			//continue;
 		}
-		
+
 	}
-	
+
 	/**
 	 * @return return's strategy's name
 	 */

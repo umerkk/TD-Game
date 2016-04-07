@@ -195,3 +195,13 @@ Thu Apr 07 00:02:26 EDT 2016  ------  Strategy Nearest First was selected for Ca
 Thu Apr 07 00:02:26 EDT 2016  ------  Castle Tower was upgraded to level 2
 Thu Apr 07 00:02:26 EDT 2016  ------  Sample tower log from test case.
 Thu Apr 07 00:02:27 EDT 2016  ------  Sample individual tower log from test case.
+Thu Apr 07 13:25:41 EDT 2016  ------  Castle Tower was sold for 5
+Thu Apr 07 13:25:41 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
+Thu Apr 07 13:25:41 EDT 2016  ------  Castle Tower was upgraded to level 2
+Thu Apr 07 13:25:41 EDT 2016  ------  Sample tower log from test case.
+Thu Apr 07 13:25:47 EDT 2016  ------  Sample individual tower log from test case.
+Thu Apr 07 13:32:47 EDT 2016  ------  Castle Tower was sold for 5
+Thu Apr 07 13:32:47 EDT 2016  ------  Strategy Nearest First was selected for Castle Tower
+Thu Apr 07 13:32:47 EDT 2016  ------  Castle Tower was upgraded to level 2
+Thu Apr 07 13:32:47 EDT 2016  ------  Sample tower log from test case.
+Thu Apr 07 13:32:52 EDT 2016  ------  Sample individual tower log from test case.

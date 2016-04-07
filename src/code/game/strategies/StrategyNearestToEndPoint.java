@@ -41,57 +41,51 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 			String xLeft = String.valueOf(x-k);
 			String yUp = String.valueOf(y+k);
 			String yDown = String.valueOf(y-k);
-			
+
 			try {
-					if(lastPath<map.getValueFromMap(Integer.parseInt(xRight), y) && map.getValueFromMap(Integer.parseInt(xRight), y) != POINT_EXIT)
-					{
-						lastPath = map.getValueFromMap(Integer.parseInt(xRight), y);
-						lastIndex = xRight+nameExploded[1];
-						lockedCritter=map.getCritter(xRight+nameExploded[1]);
-					}
-				
+				if(lastPath<map.getValueFromMap(Integer.parseInt(xRight), y) 
+						&& map.getValueFromMap(Integer.parseInt(xRight), y) != POINT_EXIT) {
+					lastPath = map.getValueFromMap(Integer.parseInt(xRight), y);
+					lastIndex = xRight+nameExploded[1];
+					lockedCritter=map.getCritter(xRight+nameExploded[1]);
+				}
 
-					if(lastPath<map.getValueFromMap(Integer.parseInt(xLeft), y) && map.getValueFromMap(Integer.parseInt(xLeft), y) != POINT_EXIT)
-					{
-						lastPath = map.getValueFromMap(Integer.parseInt(xLeft), y);
-						lastIndex = xLeft+nameExploded[1];
-						lockedCritter=map.getCritter(xLeft+nameExploded[1]);
-					}
-				 
+				if(lastPath<map.getValueFromMap(Integer.parseInt(xLeft), y) 
+						&& map.getValueFromMap(Integer.parseInt(xLeft), y) != POINT_EXIT) {
+					lastPath = map.getValueFromMap(Integer.parseInt(xLeft), y);
+					lastIndex = xLeft+nameExploded[1];
+					lockedCritter=map.getCritter(xLeft+nameExploded[1]);
+				}
 
-					if(lastPath<map.getValueFromMap(x, Integer.parseInt(yUp)) && map.getValueFromMap(x, Integer.parseInt(yUp)) != POINT_EXIT)
-					{
-						lastPath = map.getValueFromMap(x, Integer.parseInt(yUp));
-						lastIndex = nameExploded[0]+yUp;
-						lockedCritter=map.getCritter(nameExploded[0]+yUp);
-					}
-				
-
-					if(lastPath<map.getValueFromMap(x, Integer.parseInt(yDown)) && map.getValueFromMap(x, Integer.parseInt(yDown)) != POINT_EXIT)
-					{
-						lastPath = map.getValueFromMap(x, Integer.parseInt(yDown));
-						lastIndex = nameExploded[0]+yDown;
-						lockedCritter=map.getCritter(nameExploded[0]+yDown);
-					}
-				
+				if(lastPath<map.getValueFromMap(x, Integer.parseInt(yUp)) 
+						&& map.getValueFromMap(x, Integer.parseInt(yUp)) != POINT_EXIT) {
+					lastPath = map.getValueFromMap(x, Integer.parseInt(yUp));
+					lastIndex = nameExploded[0]+yUp;
+					lockedCritter=map.getCritter(nameExploded[0]+yUp);
+				}
+				if(lastPath<map.getValueFromMap(x, Integer.parseInt(yDown))
+						&& map.getValueFromMap(x, Integer.parseInt(yDown)) != POINT_EXIT) {
+					lastPath = map.getValueFromMap(x, Integer.parseInt(yDown));
+					lastIndex = nameExploded[0]+yDown;
+					lockedCritter=map.getCritter(nameExploded[0]+yDown);
+				}
 
 			} catch (IndexOutOfBoundsException e){
 				continue;
 			}
-			
-			
+
+
 		}
-		
-		if(!(lastIndex.equalsIgnoreCase("")))
-		{
+
+		if(!(lastIndex.equalsIgnoreCase(""))) {
 			if(map.checkCritterExists(lastIndex)){
-				
+
 				map.getCritter(lastIndex).reduceHealth((int)tower.getPowerOfBullets());
 				setBackgroundOfCritter(tower,map.getCritter(lastIndex));
 				isHit=true;
 			}
 		}
-		
+
 		return isHit;
 	}
 
@@ -137,50 +131,50 @@ public class StrategyNearestToEndPoint implements TowerStrategy, Serializable  {
 		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
 		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		boolean isHit=false;
-		
-		
+
+
 		String xRight = String.valueOf(x+2);
 		String xLeft = String.valueOf(x-2);
 		String yUp = String.valueOf(y+2);
 		String yDown = String.valueOf(y-2);
-		
+
 		try {
 			if(map.checkCritterExists(xRight+nameExploded[1])){
-				
-					map.getCritter(xRight+nameExploded[1]).reduceHealth(10);
-					map.getCritter(xRight+nameExploded[1]).setBackground("black");
-				
+
+				map.getCritter(xRight+nameExploded[1]).reduceHealth(10);
+				map.getCritter(xRight+nameExploded[1]).setBackground("black");
+
 			} 
 
 			if(map.checkCritterExists(xLeft+nameExploded[1])){
-				
-					map.getCritter(xLeft+nameExploded[1]).reduceHealth(10);
-					map.getCritter(xLeft+nameExploded[1]).setBackground("black");
-				
+
+				map.getCritter(xLeft+nameExploded[1]).reduceHealth(10);
+				map.getCritter(xLeft+nameExploded[1]).setBackground("black");
+
 			} 
 
 			if(map.checkCritterExists(nameExploded[0]+yUp)){
-				
+
 				map.getCritter(nameExploded[0]+yUp).reduceHealth(10);
 				map.getCritter(nameExploded[0]+yUp).setBackground("black");
-				
+
 			} 
 
 			if(map.checkCritterExists(nameExploded[0]+yDown)){
-			
+
 				map.getCritter(nameExploded[0]+yDown).reduceHealth(10);
 				map.getCritter(nameExploded[0]+yDown).setBackground("black");
-				
-			
+
+
 			}
 
 		} catch (IndexOutOfBoundsException e){
 			//continue;
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * @return return's strategy's name
 	 */

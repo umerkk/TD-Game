@@ -22,7 +22,7 @@ import javax.swing.JTextArea;
 import code.game.models.MapModel;
 
 /**
- * Guys use the following methods for logging where appropriate
+ * The following methods for logging where appropriate
  * 
  * 
  *      Util.logGlobal(logText, addDate)  >> used to log global events
@@ -31,7 +31,6 @@ import code.game.models.MapModel;
 		Util.logWave(logText) >> used to log any wave related events
  * 
  * 
- * I have already used these in some places, you can see them working in their respective log files
  * 
  */
 
@@ -95,12 +94,6 @@ public class Util {
 	 */
 	public static String getLogDialogTitle(String title){
 		switch (title) {
-		//		case FILE_LOG_TOWER_1:
-		//			return "Castle Tower log";
-		//		case FILE_LOG_TOWER_2:
-		//			return "Imperial Tower log";
-		//		case FILE_LOG_TOWER_3:
-		//			return "Industrial Tower log";
 		case FILE_LOG_TOWER_COLLECTIVE:
 			return "Collective Tower log";
 		case FILE_LOG_WAVE:
@@ -173,7 +166,7 @@ public class Util {
 		logText = addDate(logText);
 		boolean wasWritten = false;
 		wasWritten = writeLog(getFilePath(towerName), logText);
-		wasWritten = logTowerCollective(logText, false);
+		wasWritten = wasWritten && logTowerCollective(logText, false);
 		return wasWritten;
 	}
 
@@ -197,7 +190,7 @@ public class Util {
 			logText = addDate(logText);
 		boolean wasWritten = false;
 		wasWritten = writeLog(getFilePath(FILE_LOG_TOWER_COLLECTIVE), logText);
-		wasWritten = logGlobal(logText, false);
+		wasWritten = wasWritten && logGlobal(logText, false);
 		return wasWritten;
 	}
 
@@ -217,7 +210,7 @@ public class Util {
 		logText = addDate(logText);
 		boolean wasWritten = false;
 		wasWritten = writeLog(getFilePath(FILE_LOG_WAVE), logText);
-		wasWritten =  logGlobal(logText, false);
+		wasWritten = wasWritten && logGlobal(logText, false);
 
 		return wasWritten;
 	}
@@ -263,7 +256,6 @@ public class Util {
 		InputStream inputStream;
 		InputStreamReader inputStreamReader;
 		BufferedReader bufferReader = null;
-
 
 		String logData = "";
 
@@ -419,17 +411,17 @@ public class Util {
 		}
 
 	}
-	
+
 	/**
 	 * 
-	 * @param EditHistory to save the game record 
+	 * @param editHistory to save the game record 
 	 * @return history
 	 */
-	public static String getEditHistory(ArrayList<String> EditHistory) {
-		if(EditHistory!=null && EditHistory.size()>0){
+	public static String getEditHistory(ArrayList<String> editHistory) {
+		if(editHistory!=null && editHistory.size()>0){
 			String history = "";
 			int i = 0;
-			for(String text : EditHistory){
+			for(String text : editHistory){
 				history += ++i + " - " + text + "\n";
 			}
 			return history;
@@ -493,12 +485,12 @@ public class Util {
 			int[][] map = mapModel.getMapArray();
 			for(int i = 0; i < map.length; i++) {
 				for(int j = 0; j < map[i].length; j++) {
-					if(map[i][j] <0 ) {
+					if(map[i][j] < 0) {
 						map[i][j] = 0;
 					}
 				}
 			}
-			
+
 			File file = mapModel.getFilePath();
 			FileOutputStream fos = new FileOutputStream(file);
 			ObjectOutputStream oos = new ObjectOutputStream(fos); 

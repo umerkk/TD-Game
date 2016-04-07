@@ -54,8 +54,7 @@ public class GameMap extends Observable implements Serializable {
 	 * @param y value2
 	 * @return array of map
 	 */
-	public int getValueFromMap(int x, int y)
-	{
+	public int getValueFromMap(int x, int y) {
 		return mapArray[x][y];
 	}
 
@@ -63,15 +62,15 @@ public class GameMap extends Observable implements Serializable {
 	 * returns map's name
 	 * @return map name
 	 */
-	public String getName(){
+	public String getName() {
 		return this.mapName;
 	}
-	
+
 	/**
 	 * returns only row's array 
 	 * @return row's array 
 	 */
-	public int getArrayRow(){
+	public int getArrayRow() {
 		return this.arrayRow;
 	}
 
@@ -79,7 +78,7 @@ public class GameMap extends Observable implements Serializable {
 	 * returns only column's array 
 	 * @return column's array 
 	 */
-	public int getArrayCol(){
+	public int getArrayCol() {
 		return this.arrayCol;
 	}
 
@@ -87,7 +86,7 @@ public class GameMap extends Observable implements Serializable {
 	 * returns grid of map
 	 * @return grid array of map
 	 */
-	public int[][] getMapArray(){
+	public int[][] getMapArray() {
 		return this.mapArray;
 	}
 
@@ -96,8 +95,8 @@ public class GameMap extends Observable implements Serializable {
 	 * @param location tower's coordinates
 	 * @return tower object
 	 */
-	public TowerModel getTower(String location){
-		if(towerCollection.containsKey(location)){
+	public TowerModel getTower(String location) {
+		if(towerCollection.containsKey(location)) {
 			return towerCollection.get(location);
 		} else {
 			return null;
@@ -108,9 +107,9 @@ public class GameMap extends Observable implements Serializable {
 	 * activates all the available towers to shoot at critters
 	 * @return total hit count of towers
 	 */
-	public int towerToShoot(){
+	public int towerToShoot() {
 		int totalHits=0;
-		for (Map.Entry<String, TowerModel> entry : towerCollection.entrySet()){
+		for (Map.Entry<String, TowerModel> entry : towerCollection.entrySet()) {
 			if(((TowerModel)entry.getValue()).executeStrategy())
 				totalHits++;
 		}
@@ -122,23 +121,20 @@ public class GameMap extends Observable implements Serializable {
 	 * @param location map's coordinates
 	 * @param tower the tower object to be placed on map
 	 */
-	public void addTower(String location,TowerModel tower){
+	public void addTower(String location,TowerModel tower) {
 		char[] nameExploded = location.toCharArray();
 		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
 		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
-		if(mapArray[x][y] == 0){
+		if(mapArray[x][y] == 0) {
 			towerCollection.put(location, tower);
-			if(tower.getName().equalsIgnoreCase("Castle Tower"))
-			{
+			if(tower.getName().equalsIgnoreCase("Castle Tower")) {
 				mapArray[x][y] = -7;	
-			} else if(tower.getName().equalsIgnoreCase("Imperial Tower"))
-			{
+			} else if(tower.getName().equalsIgnoreCase("Imperial Tower")) {
 				mapArray[x][y] = -8;	
-			} else if(tower.getName().equalsIgnoreCase("Industrial Tower"))
-			{
+			} else if(tower.getName().equalsIgnoreCase("Industrial Tower")) {
 				mapArray[x][y] = -9;	
 			}
-			
+
 			setChanged();
 			notifyObservers(this);
 		} 
@@ -150,11 +146,11 @@ public class GameMap extends Observable implements Serializable {
 	 * @param location item's location
 	 * @return true if the location doesn't contain any item
 	 */
-	public Boolean checkMapIsEmpty(String location){
+	public Boolean checkMapIsEmpty(String location) {
 		char[] nameExploded = location.toCharArray();
 		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
 		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
-		if(mapArray[x][y] == 0){
+		if(mapArray[x][y] == 0) {
 			return true;
 		} else
 			return false;
@@ -165,7 +161,7 @@ public class GameMap extends Observable implements Serializable {
 	 * @param location map's coordinates
 	 * @return true if the location does contain any tower
 	 */
-	public Boolean checkTowerExists(String location){
+	public Boolean checkTowerExists(String location) {
 		if(towerCollection.containsKey(location))
 			return true;
 		else{
@@ -184,15 +180,15 @@ public class GameMap extends Observable implements Serializable {
 	 * @param location tower's coordinates
 	 * @return true if the tower has been deleted, false otherwise
 	 */
-	public Boolean deleteTowerFromMap(String location){
+	public Boolean deleteTowerFromMap(String location) {
 		char[] nameExploded = location.toCharArray();
 		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
 		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
-		if(towerCollection.containsKey(location)){
+		if(towerCollection.containsKey(location)) {
 			towerCollection.remove(location);
 			mapArray[x][y] = 0;
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 
@@ -202,7 +198,7 @@ public class GameMap extends Observable implements Serializable {
 	 * returns all the tower's placed on map
 	 * @return a hashMap collection containing all the towers
 	 */
-	public HashMap<String,TowerModel> getTowerCollection(){
+	public HashMap<String,TowerModel> getTowerCollection() {
 		return towerCollection;
 	}
 
@@ -211,17 +207,17 @@ public class GameMap extends Observable implements Serializable {
 	 * @param location critter's coordinates
 	 * @return true if the critter is found on the provided location, false otherwise 
 	 */
-	public Boolean checkCritterExists(String location){
+	public Boolean checkCritterExists(String location) {
 		Boolean answer=false;
 		for (Map.Entry<String, Critter> entry : critterCollection.entrySet()) {
-			if(((Critter)entry.getValue()).getMyLocationOnMap().equalsIgnoreCase(location)){	
+			if(((Critter)entry.getValue()).getMyLocationOnMap().equalsIgnoreCase(location)) {	
 				answer =  true; break; 
 			}
 			else 
 				answer =  false;			
 		}
 		return answer;
-		
+
 	}
 
 
@@ -230,10 +226,10 @@ public class GameMap extends Observable implements Serializable {
 	 * @param location row/col of the required critter
 	 * @return the critter object
 	 */
-	public Critter getCritter(String location){
+	public Critter getCritter(String location) {
 		Critter answer=null;
 		for (Map.Entry<String, Critter> entry : critterCollection.entrySet()) {
-			if(((Critter)entry.getValue()).getMyLocationOnMap().equalsIgnoreCase(location)){	
+			if(((Critter)entry.getValue()).getMyLocationOnMap().equalsIgnoreCase(location)) {	
 				answer =  entry.getValue();
 				break;
 			}
@@ -248,10 +244,10 @@ public class GameMap extends Observable implements Serializable {
 	 * @param key key of the required critter
 	 * @return null if there is no critter available of provided key
 	 */
-	public Critter getCritterFromCollection(String key){
-		if(critterCollection.containsKey(key)){
+	public Critter getCritterFromCollection(String key) {
+		if(critterCollection.containsKey(key)) {
 			return critterCollection.get(key);
-		}else{
+		} else {
 			return null;
 		}
 	}
@@ -261,7 +257,7 @@ public class GameMap extends Observable implements Serializable {
 	 * @param location the location at which the critter is required
 	 * @param critter the critter object itself
 	 */
-	public void addCritter(String location,Critter critter){
+	public void addCritter(String location,Critter critter) {
 		critterCollection.put(location, critter);
 		setChanged();
 		notifyObservers(this);
@@ -271,8 +267,8 @@ public class GameMap extends Observable implements Serializable {
 	 * deletes the critter from a location provided
 	 * @param location location of the critter to be deleted
 	 */
-	public void removeCritter(String location){
-		if(critterCollection.containsKey(location)){
+	public void removeCritter(String location) {
+		if(critterCollection.containsKey(location)) {
 			critterCollection.remove(location);
 		}
 		setChanged();
@@ -283,8 +279,8 @@ public class GameMap extends Observable implements Serializable {
 	 * Checks if the critter's hashmap is empty
 	 * @return true/false
 	 */
-	public boolean isCritterCollectionEmpty(){
-		if(critterCollection.size()<1)
+	public boolean isCritterCollectionEmpty() {
+		if(critterCollection.size() < 1)
 			return true;
 		else 
 			return false;
@@ -336,19 +332,21 @@ public class GameMap extends Observable implements Serializable {
 	public Boolean addToMap(String type, int row, int col){
 		if(row > mapArray.length || col > mapArray[0].length){
 			return false;
-		}else{
+		} else {
 			switch (type){
 			case "1":{
 				mapArray[row][col] = 1;
 				setChanged();
 				notifyObservers(this);
 				return true;
-			}case "9999":{
+			}
+			case "9999":{
 				mapArray[row][col] = 9999;
 				setChanged();
 				notifyObservers(this);
 				return true;
-			}default :{
+			}
+			default :{
 				try {
 					mapArray[row][col] = Integer.parseInt(type);
 					setChanged();
@@ -368,10 +366,10 @@ public class GameMap extends Observable implements Serializable {
 	 * @param col column number of grid
 	 * @return the boolean value whether or the the item was deleted
 	 */
-	public Boolean deleteFromMap(int row, int col){
-		if(row > mapArray.length || col > mapArray[0].length){
+	public Boolean deleteFromMap(int row, int col) {
+		if(row > mapArray.length || col > mapArray[0].length) {
 			return false;
-		}else{
+		} else {
 			mapArray[row][col] = 0;
 			setChanged();
 			notifyObservers(this);

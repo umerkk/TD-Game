@@ -53,7 +53,7 @@ public class SingleGameControllerTest {
 	 * Test to check if SingleGameController is implementing Singleton design pattern.
 	 */
 	@Test
-	public void testcheckSingltn() {
+	public void testCheckSingltn() {
 		SingleGameController tstCntrlr1 = SingleGameController.getGameControllerInstance();
 		SingleGameController tstCntrlr2 = SingleGameController.getGameControllerInstance();
 

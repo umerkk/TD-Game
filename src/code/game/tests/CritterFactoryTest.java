@@ -25,14 +25,14 @@ public class CritterFactoryTest {
 			{ 0, 2, -5, 0},
 			{ 0, 3, 4, 0},
 			{ 0, 0, 9999, 0}}; 
-		
-		GameMap tstGameMapObj = new GameMap();
-		tstGameMapObj.initialize("testmap", mapArray);
-		
-		Critter tstCrtr1 = CritterFactory.getCritter(1, tstGameMapObj);
-		Critter tstCrtr2 = CritterFactory.getCritter(2, tstGameMapObj);
-		
-		assertTrue(tstCrtr1.getClass() != tstCrtr2.getClass());
+
+			GameMap tstGameMapObj = new GameMap();
+			tstGameMapObj.initialize("testmap", mapArray);
+
+			Critter tstCrtr1 = CritterFactory.getCritter(1, tstGameMapObj);
+			Critter tstCrtr2 = CritterFactory.getCritter(2, tstGameMapObj);
+
+			assertTrue(tstCrtr1.getClass() != tstCrtr2.getClass());
 	}
 
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 import code.game.controllers.SingleGameController;
+import code.game.models.GameMap;
 import code.game.models.MapModel;
 import code.game.utils.Util;
 
@@ -26,20 +27,18 @@ public class MapLoggerTest {
 	public void testMapPlayHistory() {
 
 		SingleGameController testController = SingleGameController.getGameControllerInstance();
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		ArrayList<String> playHistory1 = testController.getMapModel().getPlayHistory();
+		testController.setMap(new GameMap());
+		testController.readFromFile(new File(Util.getMapsDirectory() + "testmap2.map"));
 
 		String playHist = Util.getDate() + " -- Scores: 54 ";
 		testController.getMapModel().getPlayHistory().add(playHist);
-		
-		// Umer / Lokesh please have a look whats wrong with this method
+
 		Util.updateMapFile(testController.getMapModel());
 
 		SingleGameController testController2 = SingleGameController.getGameControllerInstance();
-		testController2.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		ArrayList<String> playHistory2 = testController2.getMapModel().getPlayHistory();
+		testController2.setMap(new GameMap());
+		testController2.readFromFile(new File(Util.getMapsDirectory() + "testmap2.map"));
 
-		// Umer / Lokesh please have a look whats wrong with this method
 		assertTrue(testController.getMapModel().getPlayHistory().contains(playHist));
 	}
 
@@ -51,16 +50,15 @@ public class MapLoggerTest {
 
 		String topScore = "";
 		SingleGameController testController = SingleGameController.getGameControllerInstance();
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		
+		testController.setMap(new GameMap());
+		testController.readFromFile(new File(Util.getMapsDirectory() + "testmap2.map"));
+
 		topScore = Util.getDate() + " -- Scores: 59 ";
 		testController.getMapModel().getTopFiveScores().add(topScore);
-		
-		// Umer / Lokesh please have a look whats wrong with this method
+
 		Util.updateMapFile(testController.getMapModel());
 
-		testController.readFromFile(new File(Util.getMapsDirectory() + "testMap2.map"));
-		ArrayList<String> topFiveScores2 = testController.getMapModel().getTopFiveScores();
+		testController.readFromFile(new File(Util.getMapsDirectory() + "testmap2.map"));
 
 		assertTrue(testController.getMapModel().getTopFiveScores().contains(topScore));
 	}

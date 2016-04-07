@@ -75,16 +75,17 @@ public class TDGameMain2 implements Observer {
 		lblAccBal.setText(String.valueOf(((GameData)arg0).getAccountBalance()));
 		powerLbl.setText(String.valueOf(((GameData)arg0).getPlayerPower()));
 		waveLbl.setText(String.valueOf(((GameData)arg0).getWave()));
-		if(String.valueOf(((GameData)arg0).getSelectedTowerDescription()).equalsIgnoreCase("null"))
-		{
+		if(String.valueOf(((GameData)arg0).getSelectedTowerDescription()).equalsIgnoreCase("null")) {
 			txtTwrDesc.setText("Nothing to display at the moment.");
-		}else {
+		}
+		else {
 			txtTwrDesc.setText(String.valueOf(((GameData)arg0).getSelectedTowerDescription()));
 		}
 		globalWaveCounter = ((GameData)arg0).getWave();
 		if(globalWaveCounter>1){
 			btnStrtGame.setText("Start Next Wave");
-		} else {
+		} 
+		else {
 			btnStrtGame.setText("Start Game");
 		}
 	}
@@ -95,7 +96,7 @@ public class TDGameMain2 implements Observer {
 		if(globalWaveCounter>1){
 			ArrayList<String> playHistory = myController.getMapModel().getPlayHistory();
 
-			if(playHistory==null || playHistory.size()<1){
+			if(playHistory==null || playHistory.size()<1) {
 				playHistory = new ArrayList<String>();
 			}
 			playHistory.add(Util.addDate("Played with score : 10"));
@@ -127,7 +128,8 @@ public class TDGameMain2 implements Observer {
 					//gamecntrlrobj.addObserver(window);
 					window.custmInitializeFrm();
 					window.frame.setVisible(true);
-				} catch (Exception e) {
+				} 
+				catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -145,8 +147,6 @@ public class TDGameMain2 implements Observer {
 
 		initialize();
 		custmInitializeFrm();
-
-
 	}
 
 	/**
@@ -169,11 +169,11 @@ public class TDGameMain2 implements Observer {
 	private void upgradeBtnHandlr(){
 		myController.upgradeSelectedTower();
 	}
-/**
- * To load the saved game
- * @param file save the game file
- * @return count the number of files
- */
+	/**
+	 * To load the saved game
+	 * @param file save the game file
+	 * @return count the number of files
+	 */
 	public SingleGameController loadSavedGame(File file) {
 
 		try {
@@ -243,7 +243,6 @@ public class TDGameMain2 implements Observer {
 		lblPower.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlHdrSub.add(lblPower);
 
-
 		powerLbl.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(powerLbl);
 
@@ -251,7 +250,6 @@ public class TDGameMain2 implements Observer {
 		lblWave.setHorizontalAlignment(SwingConstants.CENTER);
 		lblWave.setFont(new Font("Arial", Font.BOLD, 14));
 		pnlHdrSub.add(lblWave);
-
 
 		waveLbl.setFont(new Font("Arial", Font.PLAIN, 14));
 		pnlHdrSub.add(waveLbl);
@@ -273,7 +271,6 @@ public class TDGameMain2 implements Observer {
 			}
 		});
 		pnlHdrSub.add(btnMapLog);
-
 
 		frame.getContentPane().add(panel, BorderLayout.CENTER);
 
@@ -299,20 +296,17 @@ public class TDGameMain2 implements Observer {
 			}
 		});
 
-
-
 		panel1.add(saveGameBtn, BorderLayout.WEST);
-
 
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				//myController.incrementWave(panel);
 
-				if(btnNewButton.getText().equalsIgnoreCase("Pause"))
-				{
+				if(btnNewButton.getText().equalsIgnoreCase("Pause")) {
 					myController.pauseGame(false);
 					btnNewButton.setText("Resume");
-				} else {
+				} 
+				else {
 					myController.pauseGame(true);
 					btnNewButton.setText("Pause");
 				}
@@ -320,9 +314,6 @@ public class TDGameMain2 implements Observer {
 		});
 
 		btnNewButton.setEnabled(false);
-
-
-
 
 		panel1.add(btnNewButton, BorderLayout.SOUTH);
 		btnStrtGame.addActionListener(new ActionListener() {
@@ -444,7 +435,8 @@ public class TDGameMain2 implements Observer {
 
 				if(towerID==-1){
 					Util.showDialog("Please select a tower first.");
-				}else{
+				}
+				else{
 					Util.showLogTower(myController.getSelectedTower().getName());
 					Util.logGlobal(myController.getSelectedTower().getName() + "'s log was viewed", true);
 				}
@@ -483,7 +475,7 @@ public class TDGameMain2 implements Observer {
 				}
 			}
 		});
-		
+
 		mnGame.add(mItemOpenMap);
 
 		JSeparator separator = new JSeparator();
@@ -499,9 +491,7 @@ public class TDGameMain2 implements Observer {
 					File file = fileChooser.getSelectedFile();
 
 					myController = loadSavedGame(file);
-					//panel = serializedPanel;
-
-					//Serailizing the pnale but not working while deserializing;
+					
 					//Attach the Model to this class as it is being attached in StaticMain. 
 					//this is causing much problem.
 					myController.gameDataModel.addObserver(TDGameMain2.this);

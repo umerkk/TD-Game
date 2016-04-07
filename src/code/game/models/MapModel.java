@@ -8,10 +8,12 @@ import java.io.Serializable;
  * @author Armaghan
  * @version 1.0.0
  */
-public class MapModel extends MapLogger implements Serializable{
+public class MapModel extends MapLogger implements Serializable {
 	
 	/**
-	 * a unique ID used for serialization when reading writing a class object
+	 * a unique ID used for serialization when reading writing a class object.
+	 * This attribute does not need to comply with coding standard due to serialization
+	 * dependency.
 	 */
 	private static final long serialVersionUID = 8899;
 	private int[][] mapArray;

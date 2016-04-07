@@ -31,25 +31,25 @@ public class StrategyNearestToEndPointTest {
 			{ 0, 0, 5, 0, 0, 0},
 			{ 0, 0, 6, 0, 0, 0},
 			{ 0, 0, 9999, 0, 0, 0}}; 
-		
-		GameMap tstGameMapObj = new GameMap();
-		tstGameMapObj.initialize("testmap", mapArray);
-		TowerModel tstTwr = new TowerCastle(); 
-		tstTwr.setMyLocationOnMap("12");
-		tstTwr.upgradeCurrentLevel();
-		tstGameMapObj.addTower("12", tstTwr);
-		
-		Critter tstCrtr1 = CritterFactory.getCritter(1, tstGameMapObj);
-		tstCrtr1.setMyLocationOnMap("11");
-		Critter tstCrtr2 = CritterFactory.getCritter(2, tstGameMapObj);
-		tstCrtr2.setMyLocationOnMap("32");
-		tstGameMapObj.addCritter("11", tstCrtr1);
-		tstGameMapObj.addCritter("32", tstCrtr2);
-		
-		StrategyNearestToEndPoint tstStrtgy = new StrategyNearestToEndPoint();
-		tstStrtgy.shootCritters(tstGameMapObj, tstTwr);
-		
-		assertTrue(tstStrtgy.lockedCritter.getMyLocationOnMap().equals("32"));
+
+			GameMap tstGameMapObj = new GameMap();
+			tstGameMapObj.initialize("testmap", mapArray);
+			TowerModel tstTwr = new TowerCastle(); 
+			tstTwr.setMyLocationOnMap("12");
+			tstTwr.upgradeCurrentLevel();
+			tstGameMapObj.addTower("12", tstTwr);
+
+			Critter tstCrtr1 = CritterFactory.getCritter(1, tstGameMapObj);
+			tstCrtr1.setMyLocationOnMap("11");
+			Critter tstCrtr2 = CritterFactory.getCritter(2, tstGameMapObj);
+			tstCrtr2.setMyLocationOnMap("32");
+			tstGameMapObj.addCritter("11", tstCrtr1);
+			tstGameMapObj.addCritter("32", tstCrtr2);
+
+			StrategyNearestToEndPoint tstStrtgy = new StrategyNearestToEndPoint();
+			tstStrtgy.shootCritters(tstGameMapObj, tstTwr);
+
+			assertTrue(tstStrtgy.lockedCritter.getMyLocationOnMap().equals("32"));
 	}
 
 }

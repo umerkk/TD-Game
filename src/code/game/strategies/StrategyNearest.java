@@ -81,8 +81,8 @@ public class StrategyNearest implements TowerStrategy, Serializable {
 	 * @param tower type of tower
 	 * @param critter the critter to be updated
 	 */
-	public void setBackgroundOfCritter(TowerModel tower, Critter critter){
-		switch(tower.getName()){
+	public void setBackgroundOfCritter(TowerModel tower, Critter critter) {
+		switch(tower.getName()) {
 		case "Castle Tower":{
 			critter.setBackground("red");
 			critter.setDamageTime(2);
@@ -110,55 +110,54 @@ public class StrategyNearest implements TowerStrategy, Serializable {
 	 * It finds the critter in adjacent position and deduct 10 health from those critters,
 	 * making a soft damage to them.
 	 */
-	private void hitSplashToCritters(Critter baseCritter, GameMap map){
+	private void hitSplashToCritters(Critter baseCritter, GameMap map) {
 		char[] nameExploded = baseCritter.getMyLocationOnMap().toCharArray();
 		int x = Integer.parseInt(String.valueOf(nameExploded[0]));
 		int y = Integer.parseInt(String.valueOf(nameExploded[1]));
 		boolean isHit=false;
-		
-		
+
+
 		String xRight = String.valueOf(x+2);
 		String xLeft = String.valueOf(x-2);
 		String yUp = String.valueOf(y+2);
 		String yDown = String.valueOf(y-2);
-		
+
 		try {
 			if(map.checkCritterExists(xRight+nameExploded[1])){
-				
-					map.getCritter(xRight+nameExploded[1]).reduceHealth(10);
-					map.getCritter(xRight+nameExploded[1]).setBackground("black");
-				
+
+				map.getCritter(xRight+nameExploded[1]).reduceHealth(10);
+				map.getCritter(xRight+nameExploded[1]).setBackground("black");
+
 			} 
 
 			if(map.checkCritterExists(xLeft+nameExploded[1])){
-				
-					map.getCritter(xLeft+nameExploded[1]).reduceHealth(10);
-					map.getCritter(xLeft+nameExploded[1]).setBackground("black");
-				
+
+				map.getCritter(xLeft+nameExploded[1]).reduceHealth(10);
+				map.getCritter(xLeft+nameExploded[1]).setBackground("black");
+
 			} 
 
 			if(map.checkCritterExists(nameExploded[0]+yUp)){
-				
+
 				map.getCritter(nameExploded[0]+yUp).reduceHealth(10);
 				map.getCritter(nameExploded[0]+yUp).setBackground("black");
-				
+
 			} 
 
 			if(map.checkCritterExists(nameExploded[0]+yDown)){
-			
+
 				map.getCritter(nameExploded[0]+yDown).reduceHealth(10);
 				map.getCritter(nameExploded[0]+yDown).setBackground("black");
-				
-			
+
 			}
 
 		} catch (IndexOutOfBoundsException e){
 			//continue;
 		}
-		
+
 	}
-	
-	
+
+
 	/**
 	 * return's strategy's name
 	 */
