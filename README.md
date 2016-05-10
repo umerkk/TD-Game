@@ -3,7 +3,7 @@ Tower Defence Game
 # 					Coding Conventions
 
 1st Author: Muhammad Umer <br>
-2nd Author: Iftikhar
+2nd Author: Iftikhar<br>
 Reviewer: Lokesh
 
 # Purpose:
